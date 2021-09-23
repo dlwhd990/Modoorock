@@ -46,8 +46,7 @@
 
 .service_title {
   font-size: var(--font-size-title);
-  margin: 0;
-  margin-bottom: 20px;
+  margin-top: 0;
 }
 
 .service_desc_container {

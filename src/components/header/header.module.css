@@ -1,3 +1,10 @@
+ul,
+li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
 .header {
   width: 100%;
   height: 80px;
@@ -14,17 +21,30 @@
 
 .logo {
   font-size: 22px;
+  cursor: pointer;
 }
 
 .menu_list {
-  list-style: none;
   display: flex;
   flex-direction: row;
+  cursor: default;
 }
 
 .menu_item {
   margin: 0 15px;
+  width: 110px;
+  text-align: center;
   font-size: var(--font-size-normal);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.menu_item_title {
+  height: 80px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .login_container {
@@ -44,4 +64,39 @@
   border: none;
   background-color: transparent;
   font-size: var(--font-size-normal);
+}
+
+.drop_down_menu {
+  display: none;
+  margin: 0;
+  width: 140px;
+  position: absolute;
+  top: 80px;
+  background-color: white;
+  padding: 10px;
+  border-top: 3px solid skyblue;
+  box-shadow: 0 4px 2px -2px lightgray;
+  animation: appear 0.3s;
+}
+
+.on {
+  display: block;
+}
+
+.drop_down_menu_item {
+  margin: 24px 0;
+  cursor: pointer;
+}
+
+.drop_down_menu_item:hover {
+  color: skyblue;
+}
+
+@keyframes appear {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
