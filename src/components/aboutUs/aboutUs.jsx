@@ -1,7 +1,7 @@
 import React from "react";
-import styles from "./mainpage.module.css";
+import styles from "./aboutUs.module.css";
 
-const Mainpage = (props) => {
+const AboutUs = (props) => {
   return (
     <section className={styles.mainpage}>
       <section className={styles.about_us_container}>
@@ -40,4 +40,4 @@ const Mainpage = (props) => {
   );
 };
 
-export default Mainpage;
+export default AboutUs;
