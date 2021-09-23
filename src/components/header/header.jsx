@@ -17,9 +17,9 @@ const Header = (props) => {
       </nav>
       <div className={styles.login_container}>
         <img
-          src="../../public/images/default_profile_image.jpeg"
+          src="/images/default_profile_image.jpeg"
           alt="profile_image"
-          className={styles.user_image}
+          className={styles.profile_image}
         />
         <button className={styles.login_button}>Login</button>
       </div>
