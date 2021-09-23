@@ -4,7 +4,7 @@ import styles from "./loginPage.module.css";
 const LoginPage = (props) => {
   return (
     <section className={styles.login_page}>
-      <div className={styles.container}>
+      <section className={styles.container}>
         <p className={styles.title}>회원로그인</p>
         <div className={styles.main}>
           <div className={styles.input_container}>
@@ -25,7 +25,14 @@ const LoginPage = (props) => {
             <button className={styles.id_pw_find_button}>비밀번호찾기</button>
           </div>
         </div>
-      </div>
+        <div className={styles.sns_login_container}></div>
+        <div className={styles.signup_container}>
+          <span className={styles.signup_message}>
+            회원가입을 하시면 다양하고 특별한 혜택이 준비되어 있습니다.
+          </span>
+          <button className={styles.go_signup_button}>회원가입</button>
+        </div>
+      </section>
     </section>
   );
 };

@@ -8,9 +8,11 @@
   width: 500px;
   height: 500px;
   margin: auto;
-  border: 1px solid lightseagreen;
   margin-top: 200px;
   padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 0 7px lightgray;
+  border: 1px solid rgb(226, 225, 225);
 }
 
 .title {
@@ -51,6 +53,7 @@
   color: white;
   border: none;
   border-radius: 4px;
+  cursor: pointer;
 }
 
 .id_save_find_container {
@@ -81,4 +84,35 @@
 
 .left {
   border-right: 2px solid var(--color-light-border);
+}
+
+.sns_login_container {
+  height: 160px;
+}
+
+.signup_container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  position: relative;
+}
+
+.signup_message {
+  flex-basis: 65%;
+  color: var(--color-desc);
+  font-size: var(--font-size-small);
+}
+
+.go_signup_button {
+  width: 22%;
+  height: 25px;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  border: none;
+  outline: none;
+  background-color: var(--color-theme);
+  color: white;
+  cursor: pointer;
+  border-radius: 4px;
 }

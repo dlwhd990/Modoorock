@@ -105,6 +105,7 @@ const Header = (props) => {
               >
                 회사소개
               </li>
+              <li className={styles.drop_down_menu_item}>서비스 소개</li>
             </ul>
           </li>
           <li className={styles.menu_item} onMouseEnter={programDropDownOn}>

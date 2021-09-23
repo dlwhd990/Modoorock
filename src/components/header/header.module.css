@@ -76,6 +76,7 @@
   border-top: 3px solid lightgray;
   border-radius: 0 0 4px 4px;
   animation: appear 0.3s;
+  list-style: none;
 }
 
 .on {

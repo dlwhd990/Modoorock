@@ -16,7 +16,7 @@ const AboutUs = (props) => {
         </div>
       </section>
       <section className={styles.service_container}>
-        <p className={styles.service_title}>Programs</p>
+        <p className={styles.service_title}>Main Services</p>
         <div className={styles.service_desc_container}>
           <div className={styles.service_desc}>
             <img
@@ -24,6 +24,22 @@ const AboutUs = (props) => {
               alt="service_image"
               className={styles.service_image}
             />
+            <p className={styles.service_desc_title}>STORE FORM</p>
+            <p className={styles.service_desc_subtitle}>
+              게이미피케이션이 융합된 문화체험관광
+            </p>
+            <ul className={styles.service_desc_list}>
+              <li className={styles.service_desc_list_item}>
+                모두락의 다양한 상품을 만나볼수 있습니다.
+              </li>
+              <li className={styles.service_desc_list_item}>
+                보고, 맛보고, 만들고, 즐기는 문화체험 관광삼품을 제공합니다.
+              </li>
+              <li className={styles.service_desc_list_item}>
+                앱을 통해 특정 코스에서 다양한 미션을 즐길 수
+                있습니다(관광+게이미피케이션)
+              </li>
+            </ul>
           </div>
           <div className={styles.service_desc}>
             <img
@@ -31,6 +47,22 @@ const AboutUs = (props) => {
               alt="service_image"
               className={styles.service_image}
             />
+            <p className={styles.service_desc_title}>TTO VIEW</p>
+            <p className={styles.service_desc_subtitle}>
+              IoT 스마트 앨범 포토관광 기념카드
+            </p>
+            <ul className={styles.service_desc_list}>
+              <li className={styles.service_desc_list_item}>
+                모두락의 다양한 상품을 만나볼수 있습니다.
+              </li>
+              <li className={styles.service_desc_list_item}>
+                보고, 맛보고, 만들고, 즐기는 문화체험 관광삼품을 제공합니다.
+              </li>
+              <li className={styles.service_desc_list_item}>
+                앱을 통해 특정 코스에서 다양한 미션을 즐길 수
+                있습니다(관광+게이미피케이션)
+              </li>
+            </ul>
           </div>
         </div>
       </section>
