@@ -41,6 +41,13 @@ const Header = (props) => {
     setContactDropDown(true);
   };
 
+  const dropDownAllOff = () => {
+    setAboutDropDown(false);
+    setProgramDropDown(false);
+    setFnqDropDown(false);
+    setContactDropDown(false);
+  };
+
   useEffect(() => {
     if (!dropDownMouseEnter && !navbarMouseEnter) {
       setAboutDropDown(false);
@@ -88,7 +95,16 @@ const Header = (props) => {
                 setDropDownMouseEnter(false);
               }}
             >
-              <li className={styles.drop_down_menu_item}>회사소개</li>
+              <li
+                className={styles.drop_down_menu_item}
+                onClick={() => {
+                  dropDownAllOff();
+                  history.push("/about");
+                  window.scrollTo({ top: 0 });
+                }}
+              >
+                회사소개
+              </li>
             </ul>
           </li>
           <li className={styles.menu_item} onMouseEnter={programDropDownOn}>

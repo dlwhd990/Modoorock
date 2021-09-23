@@ -4,12 +4,16 @@ import styles from "./app.module.css";
 import Footer from "./components/footer/footer";
 import Header from "./components/header/header";
 import AboutUs from "./components/aboutUs/aboutUs";
+import Mainpage from "./components/mainpage/mainpage";
 
 const App = (props) => {
   return (
     <section className={styles.app}>
       <BrowserRouter>
         <Header />
+        <Route exact path="/">
+          <Mainpage />
+        </Route>
         <Route exact path="/about">
           <AboutUs />
         </Route>

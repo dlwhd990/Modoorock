@@ -18,8 +18,20 @@ const AboutUs = (props) => {
       <section className={styles.service_container}>
         <p className={styles.service_title}>Programs</p>
         <div className={styles.service_desc_container}>
-          <div className={styles.service_desc}>회사서비스 이미지</div>
-          <div className={styles.service_desc}>회사서비스 이미지</div>
+          <div className={styles.service_desc}>
+            <img
+              src="https://static.wixstatic.com/media/9e9163_0d65cbf903064b47872fb9fc8bc3428c~mv2.png/v1/fill/w_724,h_516,al_c,lg_1,q_90/%EC%A0%9C%EB%AA%A9%EC%9D%84%20%EC%9E%85%EB%A0%A5%ED%95%B4%EC%A3%BC%EC%84%B8%EC%9A%94_-002%20(1).webp"
+              alt="service_image"
+              className={styles.service_image}
+            />
+          </div>
+          <div className={styles.service_desc}>
+            <img
+              src="https://static.wixstatic.com/media/9e9163_20a2771344e84a0c8f1aede2d17b64c9~mv2.png/v1/fill/w_715,h_518,al_c,lg_1,q_90/%EB%98%90%EB%B7%B0_PNG.webp"
+              alt="service_image"
+              className={styles.service_image}
+            />
+          </div>
         </div>
       </section>
       <section className={styles.history_container}>

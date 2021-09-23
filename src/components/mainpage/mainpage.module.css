@@ -1,0 +1,79 @@
+.mainpage {
+  margin-top: 80px;
+}
+
+.about {
+  height: 550px;
+  background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)),
+    url("../../background_images/main_about_us_temp_image.jpeg");
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  padding: 0 20%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.about_title {
+  color: white;
+  font-size: var(--font-size-title);
+  font-weight: 700;
+}
+
+.about_desc {
+  color: white;
+  font-size: var(--font-size-big);
+  font-weight: 500;
+}
+
+.service_container {
+  min-height: 500px;
+  padding: 30px 3%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.service_title {
+  font-size: var(--font-size-title);
+  margin-top: 0;
+  margin-bottom: 50px;
+}
+
+.service_desc_container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.service_desc {
+  flex-basis: 46%;
+}
+
+.service_image {
+  width: 100%;
+  height: 350px;
+  border-radius: 8px;
+}
+
+.service_desc_title {
+  text-align: center;
+  font-size: var(--font-size-big);
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.service_desc_subtitle {
+  text-align: center;
+  font-size: var(--font-size-normal);
+  color: var(--color-desc);
+  margin-bottom: 30px;
+}
+
+.service_desc_list_item {
+  margin: 5px 0;
+}

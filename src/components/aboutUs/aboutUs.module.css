@@ -38,7 +38,6 @@
 .service_container {
   min-height: 400px;
   padding: 30px 3%;
-
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -47,6 +46,7 @@
 .service_title {
   font-size: var(--font-size-title);
   margin-top: 0;
+  margin-bottom: 50px;
 }
 
 .service_desc_container {
@@ -57,10 +57,13 @@
 }
 
 .service_desc {
-  border: 1px solid lightgray;
   flex-basis: 48%;
-  min-height: 180px;
-  background-color: white;
+}
+
+.service_image {
+  width: 100%;
+  height: 180px;
+  border-radius: 8px;
 }
 
 .history_container {
