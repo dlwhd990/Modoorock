@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter, Route } from "react-router-dom";
 import styles from "./app.module.css";
+import Footer from "./components/footer/footer";
 import Header from "./components/header/header";
 import Mainpage from "./components/mainpage/mainpage";
 
@@ -12,6 +13,7 @@ const App = (props) => {
         <Route exact path="/">
           <Mainpage />
         </Route>
+        <Footer />
       </BrowserRouter>
     </section>
   );

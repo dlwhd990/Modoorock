@@ -1,7 +1,8 @@
 :root {
-  --font-size-small: 12px;
+  --font-size-small: 14px;
   --font-size-normal: 16px;
   --font-size-big: 20px;
   --font-size-title: 28px;
+  --font-size-big-title: 36px;
   --color-smoke-white: #f8f9fa;
 }
