@@ -10,7 +10,7 @@ import LoginPage from "./components/loginPage/loginPage";
 const App = (props) => {
   return (
     <section className={styles.app}>
-      <BrowserRouter>
+      <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Header />
         <Route exact path="/">
           <Mainpage />
