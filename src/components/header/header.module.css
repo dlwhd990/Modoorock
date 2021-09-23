@@ -1,0 +1,40 @@
+.header {
+  width: 100%;
+  height: 80px;
+  background-color: white;
+  box-shadow: 0 0 10px lightgray;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.logo_container {
+  flex-basis: 40%;
+}
+
+.logo {
+  font-size: 22px;
+}
+
+.navbar {
+  flex-basis: 40%;
+}
+
+.menu_list {
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+}
+
+.menu_item {
+  margin: 0 15px;
+}
+
+.login_container {
+  flex-basis: 20%;
+}
+
+.login_button {
+  margin-left: 10px;
+}
