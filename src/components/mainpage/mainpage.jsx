@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./mainpage.module.css";
-
+// 디자인 확정 전 까지 보류
 const Mainpage = (props) => {
   return (
     <section className={styles.mainpage}>

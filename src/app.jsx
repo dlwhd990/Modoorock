@@ -5,6 +5,7 @@ import Footer from "./components/footer/footer";
 import Header from "./components/header/header";
 import AboutUs from "./components/aboutUs/aboutUs";
 import Mainpage from "./components/mainpage/mainpage";
+import LoginPage from "./components/loginPage/loginPage";
 
 const App = (props) => {
   return (
@@ -13,6 +14,9 @@ const App = (props) => {
         <Header />
         <Route exact path="/">
           <Mainpage />
+        </Route>
+        <Route exact path="/login">
+          <LoginPage />
         </Route>
         <Route exact path="/about">
           <AboutUs />

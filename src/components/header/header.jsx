@@ -172,7 +172,15 @@ const Header = (props) => {
           alt="profile_image"
           className={styles.profile_image}
         />
-        <button className={styles.login_button}>Login</button>
+        <button
+          className={styles.login_button}
+          onClick={() => {
+            history.push("/login");
+            window.scrollTo({ top: 0 });
+          }}
+        >
+          Login
+        </button>
       </div>
     </section>
   );
