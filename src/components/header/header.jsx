@@ -105,7 +105,16 @@ const Header = (props) => {
               >
                 회사소개
               </li>
-              <li className={styles.drop_down_menu_item}>서비스 소개</li>
+              <li
+                className={styles.drop_down_menu_item}
+                onClick={() => {
+                  dropDownAllOff();
+                  history.push("/service_intro");
+                  window.scrollTo({ top: 0 });
+                }}
+              >
+                서비스소개
+              </li>
             </ul>
           </li>
           <li className={styles.menu_item} onMouseEnter={programDropDownOn}>

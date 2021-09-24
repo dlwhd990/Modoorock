@@ -3,9 +3,10 @@ import { BrowserRouter, Route } from "react-router-dom";
 import styles from "./app.module.css";
 import Footer from "./components/footer/footer";
 import Header from "./components/header/header";
-import AboutUs from "./components/aboutUs/aboutUs";
+import AboutUs from "./components/about/aboutUs/aboutUs";
 import Mainpage from "./components/mainpage/mainpage";
 import LoginPage from "./components/loginPage/loginPage";
+import ServiceIntro from "./components/about/serviceIntro/serviceIntro";
 
 const App = (props) => {
   return (
@@ -20,6 +21,9 @@ const App = (props) => {
         </Route>
         <Route exact path="/about">
           <AboutUs />
+        </Route>
+        <Route exact path="/service_intro">
+          <ServiceIntro />
         </Route>
         <Footer />
       </BrowserRouter>

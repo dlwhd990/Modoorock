@@ -10,7 +10,7 @@
   min-height: 500px;
   padding: 30px;
   background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)),
-    url("../../background_images/main_about_us_temp_image.jpeg");
+    url("../../../background_images/main_about_us_temp_image.jpeg");
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -37,7 +37,7 @@
 
 .service_container {
   min-height: 500px;
-  padding: 30px 3%;
+  padding: 30px 10%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -57,7 +57,7 @@
 }
 
 .service_desc {
-  flex-basis: 46%;
+  flex-basis: 44%;
 }
 
 .service_image {
