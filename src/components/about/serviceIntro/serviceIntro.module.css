@@ -1,5 +1,5 @@
 .service_intro {
-  margin-top: 110px;
+  margin-top: 120px;
 }
 
 .our_service_container {
@@ -72,21 +72,34 @@
 
 .mission_video_container {
   width: 100%;
-}
-
-.mission_video_title {
-  margin-left: 105px;
-  font-size: var(--font-size-small);
+  margin-top: 20px;
 }
 
 .go_youtube_button {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
   border: none;
   outline: none;
   background-color: rgb(255, 0, 5);
   color: white;
   font-size: var(--font-size-big);
-  width: 150px;
-  height: 40px;
+  width: 160px;
+  height: 45px;
   border-radius: 8px;
   cursor: pointer;
+  transition: 120ms all ease-in;
+}
+
+.youtube_a_tag {
+  text-decoration: none;
+}
+.go_youtube_button_text {
+  margin-left: 4px;
+  font-weight: 700;
+}
+
+.go_youtube_button:hover {
+  transform: scale(1.05);
 }

@@ -1,0 +1,122 @@
+.signup {
+  min-height: 100vh;
+  margin-top: 130px;
+}
+
+.signup_form {
+  margin: auto;
+  padding: 30px 40px;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.signup_title {
+  margin-top: 10px;
+  margin-bottom: 16px;
+  font-size: var(--font-size-title);
+}
+
+.input_container {
+  width: 560px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 10px 0;
+  position: relative;
+}
+
+.input_title {
+  width: 125px;
+  font-size: 18px;
+}
+
+.input {
+  width: 435px;
+  height: 40px;
+  font-size: var(--font-size-normal);
+  border: 1px solid var(--color-light-border);
+  padding: 4px 6px;
+  outline: none;
+}
+
+.input:focus {
+  border: 1px solid var(--color-skyblue);
+}
+
+.id_input,
+.phone_num_input {
+  width: 280px;
+}
+
+.id_redup_check_button,
+.get_auth_num_button {
+  width: 135px;
+  position: absolute;
+  right: 0;
+  outline: none;
+  border: none;
+  background-color: var(--color-theme);
+  font-size: var(--font-size-normal);
+  color: white;
+  height: 40px;
+}
+
+.agree_part {
+  margin-top: 50px;
+}
+
+.all_agree {
+  margin-left: 4px;
+  margin-bottom: 10px;
+}
+
+.all_agree_desc {
+  font-weight: 500;
+}
+
+.separate_agree_container {
+  width: 560px;
+  margin-top: 12px;
+  padding: 20px 20px 20px 10px;
+  border-radius: 8px;
+  box-shadow: 0 0 5px var(--color-light-border);
+}
+
+.separate_agree_top {
+  margin-bottom: 12px;
+}
+
+.all_agree,
+.separate_agree {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  position: relative;
+}
+
+.agree_input {
+  width: 16px;
+  height: 16px;
+  margin: 2px 6px 0 8px;
+}
+
+.icon {
+  position: absolute;
+  right: 10px;
+  font-size: 14px;
+  color: var(--color-desc);
+}
+
+.submit_button {
+  margin-top: 20px;
+  margin-bottom: 50px;
+  width: 560px;
+  height: 60px;
+  border: none;
+  outline: none;
+  background-color: var(--color-theme);
+  color: white;
+  font-size: var(--font-size-mini-title);
+}

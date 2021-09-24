@@ -6,7 +6,6 @@ import "slick-carousel/slick/slick-theme.css";
 
 function NextArrow(props) {
   const { className, style, onClick } = props;
-  console.log(className);
   return (
     <div
       className={className}
@@ -26,7 +25,6 @@ function NextArrow(props) {
 
 function PrevArrow(props) {
   const { className, style, onClick } = props;
-  console.log(className);
   return (
     <div
       className={className}

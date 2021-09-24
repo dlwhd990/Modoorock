@@ -4,7 +4,6 @@
   position: relative;
   left: 0;
   padding: 0 100px;
-  background-color: var(--color-smoke-white);
   margin-bottom: 100px;
 }
 
@@ -16,6 +15,8 @@
   width: 90%;
   margin: auto;
   outline: none;
+  border-radius: 8px;
+  box-shadow: 0 0 10px lightgray;
 }
 
 .desc {

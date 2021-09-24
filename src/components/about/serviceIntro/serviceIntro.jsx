@@ -64,14 +64,19 @@ const ServiceIntro = (props) => {
           모두락 미션투어 홍보영상
         </p>
         <div className={styles.mission_main}>
-          <p className={styles.mission_video_title}>전체 동영상</p>
           <div className={styles.mission_video_container}>
             <SimpleSlider />
           </div>
         </div>
 
-        <a href="https://www.youtube.com/channel/UCdTY_FXXLbtdNXXN9H3pXrg">
-          <button className={styles.go_youtube_button}>YOUTUBE</button>
+        <a
+          href="https://www.youtube.com/channel/UCdTY_FXXLbtdNXXN9H3pXrg"
+          className={styles.youtube_a_tag}
+        >
+          <button className={styles.go_youtube_button}>
+            <i className="fab fa-youtube"></i>
+            <span className={styles.go_youtube_button_text}>YOUTUBE</span>
+          </button>
         </a>
       </section>
     </section>

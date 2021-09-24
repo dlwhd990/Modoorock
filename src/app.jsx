@@ -8,6 +8,7 @@ import Mainpage from "./components/mainpage/mainpage";
 import LoginPage from "./components/loginPage/loginPage";
 import ServiceIntro from "./components/about/serviceIntro/serviceIntro";
 import Slick from "./components/slick/slick";
+import Signup from "./components/signup/signup";
 
 const App = (props) => {
   return (
@@ -20,14 +21,14 @@ const App = (props) => {
         <Route exact path="/login">
           <LoginPage />
         </Route>
+        <Route exact path="/signup">
+          <Signup />
+        </Route>
         <Route exact path="/about">
           <AboutUs />
         </Route>
         <Route exact path="/service_intro">
           <ServiceIntro />
-        </Route>
-        <Route exact path="/test">
-          <Slick />
         </Route>
         <Footer />
       </BrowserRouter>
