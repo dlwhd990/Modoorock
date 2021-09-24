@@ -12,6 +12,10 @@
   align-items: center;
 }
 
+.signup_title_container {
+  width: 560px;
+}
+
 .signup_title {
   margin-top: 10px;
   margin-bottom: 16px;

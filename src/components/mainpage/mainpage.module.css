@@ -1,5 +1,6 @@
 .mainpage {
   margin-top: 80px;
+  min-height: 100vh;
 }
 
 .about {
@@ -19,7 +20,7 @@
 
 .about_title {
   color: white;
-  font-size: var(--font-size-title);
+  font-size: var(--font-size-big-title);
   font-weight: 700;
 }
 
@@ -27,4 +28,41 @@
   color: white;
   font-size: var(--font-size-big);
   font-weight: 500;
+}
+
+.event_container {
+  min-height: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 50px 0;
+}
+
+.search_input {
+  width: 500px;
+  height: 45px;
+  font-size: var(--font-size-big);
+  font-weight: 700;
+  padding: 2px 6px;
+  border: none;
+  border-bottom: 2px solid black;
+  background-color: transparent;
+  outline: none;
+}
+
+.search_icon {
+  flex-basis: 5%;
+  font-size: 24px;
+  color: var(--color-desc);
+  transition: 100ms all ease-in;
+  margin-left: 10px;
+}
+
+.search_icon:hover {
+  color: var(--color-skyblue);
+}
+
+.event_list {
+  width: 100%;
+  padding: 70px 0;
 }

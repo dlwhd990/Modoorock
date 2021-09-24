@@ -96,6 +96,7 @@ const Programs = (props) => {
             className={styles.search_input}
             onChange={inputChangeHandler}
             placeholder="찾으시는 상품을 검색해보세요"
+            spellCheck="false"
           />
           <i className={`${styles.search_icon} fas fa-search`}></i>
         </div>

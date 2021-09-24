@@ -34,26 +34,26 @@
   flex-direction: column;
   justify-content: space-between;
   flex-basis: 75%;
-  height: 75px;
+  height: 90px;
 }
 
 .input {
-  flex-basis: 45%;
+  height: 40px;
   border: 1px solid var(--color-light-border);
   outline-color: skyblue;
-  border-radius: 4px;
   padding: 4px 6px;
   font-size: 18px;
 }
 
 .submit_button {
   flex-basis: 23%;
-  height: 75px;
+  height: 90px;
   background-color: var(--color-theme);
   color: white;
   border: none;
-  border-radius: 4px;
   cursor: pointer;
+  font-size: var(--font-size-big);
+  font-weight: 500;
 }
 
 .id_save_find_container {
@@ -65,6 +65,9 @@
 .id_save_container {
   margin-right: 30px;
   margin-bottom: 15px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .id_save_checkbox {
@@ -105,7 +108,7 @@
 
 .go_signup_button {
   width: 22%;
-  height: 25px;
+  height: 40px;
   position: absolute;
   bottom: 0;
   right: 0;

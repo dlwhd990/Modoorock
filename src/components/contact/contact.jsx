@@ -30,16 +30,20 @@ const Contact = (props) => {
           <div className={styles.name_and_email_container}>
             <div className={styles.name_container}>
               <p className={styles.input_title}>What's Your Name</p>
-              <input type="text" className={styles.input} />
+              <input type="text" className={styles.input} spellCheck="false" />
             </div>
             <div className={styles.email_container}>
               <p className={styles.input_title}>Your Email</p>
-              <input type="text" className={styles.input} />
+              <input type="text" className={styles.input} spellCheck="false" />
             </div>
           </div>
           <div className={styles.project_container}>
             <p className={styles.input_title}>Tell Us About Your Project</p>
-            <input type="text" className={styles.long_input} />
+            <input
+              type="text"
+              className={styles.long_input}
+              spellCheck="false"
+            />
           </div>
           <button className={styles.submit_button}>SUBMIT</button>
         </div>

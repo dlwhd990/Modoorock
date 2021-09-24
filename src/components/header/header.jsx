@@ -141,8 +141,6 @@ const Header = (props) => {
               >
                 프로그램소개
               </li>
-              <li className={styles.drop_down_menu_item}>미정</li>
-              <li className={styles.drop_down_menu_item}>미정</li>
             </ul>
           </li>
           <li className={styles.menu_item} onMouseEnter={fnqDropDownOn}>
@@ -192,21 +190,15 @@ const Header = (props) => {
           </li>
         </ul>
       </nav>
-      <div className={styles.login_container}>
-        <img
-          src="/images/default_profile_image.jpeg"
-          alt="profile_image"
-          className={styles.profile_image}
-        />
-        <button
-          className={styles.login_button}
-          onClick={() => {
-            history.push("/login");
-            window.scrollTo({ top: 0 });
-          }}
-        >
-          Login
-        </button>
+      <div
+        className={styles.login_container}
+        onClick={() => {
+          history.push("/login");
+          window.scrollTo({ top: 0 });
+        }}
+      >
+        <i className={`${styles.login_icon} fas fa-sign-in-alt`}></i>
+        <span className={styles.login_text}>LOG IN</span>
       </div>
     </section>
   );

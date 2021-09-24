@@ -49,21 +49,17 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-}
-
-.profile_image {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-}
-
-.login_button {
-  margin-left: 10px;
-  border: none;
-  background-color: transparent;
-  font-size: var(--font-size-normal);
-  color: white;
   cursor: pointer;
+}
+
+.login_icon {
+  font-size: 22px;
+}
+
+.login_text {
+  font-size: var(--font-size-normal);
+  margin-left: 10px;
+  color: white;
 }
 
 .drop_down_menu {
