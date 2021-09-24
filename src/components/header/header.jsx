@@ -132,7 +132,15 @@ const Header = (props) => {
                 setDropDownMouseEnter(false);
               }}
             >
-              <li className={styles.drop_down_menu_item}>프로그램소개</li>
+              <li
+                className={styles.drop_down_menu_item}
+                onClick={() => {
+                  history.push("/programs");
+                  window.scrollTo({ top: 0 });
+                }}
+              >
+                프로그램소개
+              </li>
               <li className={styles.drop_down_menu_item}>미정</li>
               <li className={styles.drop_down_menu_item}>미정</li>
             </ul>
