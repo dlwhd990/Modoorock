@@ -179,7 +179,15 @@ const Header = (props) => {
                 setDropDownMouseEnter(false);
               }}
             >
-              <li className={styles.drop_down_menu_item}>연락처</li>
+              <li
+                className={styles.drop_down_menu_item}
+                onClick={() => {
+                  history.push("/contact");
+                  window.scrollTo({ top: 0 });
+                }}
+              >
+                연락처
+              </li>
             </ul>
           </li>
         </ul>

@@ -10,6 +10,7 @@ import ServiceIntro from "./components/about/serviceIntro/serviceIntro";
 import Slick from "./components/slick/slick";
 import Signup from "./components/signup/signup";
 import Programs from "./components/programs/programs";
+import Contact from "./components/contact/contact";
 
 const App = (props) => {
   return (
@@ -33,6 +34,9 @@ const App = (props) => {
         </Route>
         <Route exact path="/programs">
           <Programs />
+        </Route>
+        <Route exact path="/contact">
+          <Contact />
         </Route>
         <Footer />
       </BrowserRouter>
