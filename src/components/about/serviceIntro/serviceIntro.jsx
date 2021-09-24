@@ -1,7 +1,39 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./serviceIntro.module.css";
+import VideoItem from "./videoItem/videoItem";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import SimpleSlider from "../../slick/slick";
 
 const ServiceIntro = (props) => {
+  const [videoList, setVideoList] = useState([
+    {
+      id: 0,
+      thumbnail_url:
+        "https://static.wixstatic.com/media/9e9163_0d65cbf903064b47872fb9fc8bc3428c~mv2.png/v1/fill/w_724,h_516,al_c,lg_1,q_90/%EC%A0%9C%EB%AA%A9%EC%9D%84%20%EC%9E%85%EB%A0%A5%ED%95%B4%EC%A3%BC%EC%84%B8%EC%9A%94_-002%20(1).webp",
+      desc: "[응답하라 개항장]: 시간여행자의 미션투어",
+    },
+    {
+      id: 1,
+      thumbnail_url:
+        "https://static.wixstatic.com/media/9e9163_0d65cbf903064b47872fb9fc8bc3428c~mv2.png/v1/fill/w_724,h_516,al_c,lg_1,q_90/%EC%A0%9C%EB%AA%A9%EC%9D%84%20%EC%9E%85%EB%A0%A5%ED%95%B4%EC%A3%BC%EC%84%B8%EC%9A%94_-002%20(1).webp",
+      desc: "[응답하라 개항장]: 시간여행자의 미션투어",
+    },
+    {
+      id: 2,
+      thumbnail_url:
+        "https://static.wixstatic.com/media/9e9163_0d65cbf903064b47872fb9fc8bc3428c~mv2.png/v1/fill/w_724,h_516,al_c,lg_1,q_90/%EC%A0%9C%EB%AA%A9%EC%9D%84%20%EC%9E%85%EB%A0%A5%ED%95%B4%EC%A3%BC%EC%84%B8%EC%9A%94_-002%20(1).webp",
+      desc: "[응답하라 개항장]: 시간여행자의 미션투어",
+    },
+    {
+      id: 3,
+      thumbnail_url:
+        "https://static.wixstatic.com/media/9e9163_0d65cbf903064b47872fb9fc8bc3428c~mv2.png/v1/fill/w_724,h_516,al_c,lg_1,q_90/%EC%A0%9C%EB%AA%A9%EC%9D%84%20%EC%9E%85%EB%A0%A5%ED%95%B4%EC%A3%BC%EC%84%B8%EC%9A%94_-002%20(1).webp",
+      desc: "[응답하라 개항장]: 시간여행자의 미션투어",
+    },
+  ]);
+
   return (
     <section className={styles.service_intro}>
       <section className={styles.our_service_container}>
@@ -31,11 +63,16 @@ const ServiceIntro = (props) => {
         <p className={styles.mission_container_subtitle}>
           모두락 미션투어 홍보영상
         </p>
-        <div className={styles.mission_video_container}>
+        <div className={styles.mission_main}>
           <p className={styles.mission_video_title}>전체 동영상</p>
-          <p className="">여기에 비디오 슬라이드 메뉴 넣기</p>
+          <div className={styles.mission_video_container}>
+            <SimpleSlider />
+          </div>
         </div>
-        <button className={styles.go_youtube_button}>YOUTUBE</button>
+
+        <a href="https://www.youtube.com/channel/UCdTY_FXXLbtdNXXN9H3pXrg">
+          <button className={styles.go_youtube_button}>YOUTUBE</button>
+        </a>
       </section>
     </section>
   );

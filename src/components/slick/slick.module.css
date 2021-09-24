@@ -1,0 +1,25 @@
+.slick_container {
+  width: 100%;
+  outline: none;
+  position: relative;
+  left: 0;
+  padding: 0 100px;
+  background-color: var(--color-smoke-white);
+  margin-bottom: 100px;
+}
+
+.image_box {
+  width: 100%;
+}
+
+.image {
+  width: 90%;
+  margin: auto;
+  outline: none;
+}
+
+.desc {
+  text-align: center;
+  font-size: var(--font-size-small);
+  color: var(--color-desc);
+}

@@ -35,6 +35,8 @@
 .service_image {
   width: 100%;
   height: 240px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px lightgray;
 }
 
 .service_desc {
@@ -47,6 +49,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-bottom: 80px;
 }
 
 .mission_container_title {
@@ -63,10 +66,17 @@
   color: var(--color-desc);
 }
 
+.mission_main {
+  width: 100%;
+}
+
 .mission_video_container {
   width: 100%;
-  margin: 50px 0 80px 0;
-  padding: 0 30px;
+}
+
+.mission_video_title {
+  margin-left: 105px;
+  font-size: var(--font-size-small);
 }
 
 .go_youtube_button {
@@ -78,4 +88,5 @@
   width: 150px;
   height: 40px;
   border-radius: 8px;
+  cursor: pointer;
 }

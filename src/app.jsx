@@ -7,6 +7,7 @@ import AboutUs from "./components/about/aboutUs/aboutUs";
 import Mainpage from "./components/mainpage/mainpage";
 import LoginPage from "./components/loginPage/loginPage";
 import ServiceIntro from "./components/about/serviceIntro/serviceIntro";
+import Slick from "./components/slick/slick";
 
 const App = (props) => {
   return (
@@ -24,6 +25,9 @@ const App = (props) => {
         </Route>
         <Route exact path="/service_intro">
           <ServiceIntro />
+        </Route>
+        <Route exact path="/test">
+          <Slick />
         </Route>
         <Footer />
       </BrowserRouter>

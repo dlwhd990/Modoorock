@@ -1,0 +1,16 @@
+.video_item {
+  width: 250px;
+  margin: 10px;
+}
+
+.video_thumbnail {
+  width: 100%;
+  border-radius: 8px;
+  box-shadow: 0 0 10px lightgray;
+}
+
+.video_desc {
+  font-size: var(--font-size-small);
+  color: var(--color-desc);
+  text-align: center;
+}
