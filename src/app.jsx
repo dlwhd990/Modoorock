@@ -9,6 +9,7 @@ import LoginPage from "./components/loginPage/loginPage";
 import ServiceIntro from "./components/about/serviceIntro/serviceIntro";
 import Slick from "./components/slick/slick";
 import Signup from "./components/signup/signup";
+import Programs from "./components/programs/programs";
 
 const App = (props) => {
   return (
@@ -29,6 +30,9 @@ const App = (props) => {
         </Route>
         <Route exact path="/service_intro">
           <ServiceIntro />
+        </Route>
+        <Route exact path="/programs">
+          <Programs />
         </Route>
         <Footer />
       </BrowserRouter>
