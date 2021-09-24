@@ -1,0 +1,26 @@
+.program_item {
+  width: 250px;
+  text-align: center;
+  margin: 0 15px 40px 15px;
+}
+
+.item_image {
+  width: 100%;
+}
+
+.title {
+  font-size: var(--font-size-big);
+  font-weight: 500;
+  margin: 0;
+}
+
+.subtitle {
+  font-size: var(--font-size-small);
+  color: var(--color-desc);
+  margin: 3px 0 5px 0;
+}
+
+.location {
+  font-size: var(--font-size-normal);
+  margin: 0;
+}
