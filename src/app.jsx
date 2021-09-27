@@ -10,6 +10,8 @@ import ServiceIntro from "./components/about/serviceIntro/serviceIntro";
 import Signup from "./components/signup/signup";
 import Programs from "./components/programs/programs";
 import Contact from "./components/contact/contact";
+import FindId from "./components/find/findId/findId";
+import FindPw from "./components/find/findPw/findPw";
 
 const App = (props) => {
   const [mainPageSlick, setMainPageSlick] = useState([
@@ -177,6 +179,12 @@ const App = (props) => {
         </Route>
         <Route exact path="/signup">
           <Signup />
+        </Route>
+        <Route exact path="/findID">
+          <FindId />
+        </Route>
+        <Route exact path="/findPW">
+          <FindPw />
         </Route>
         <Route exact path="/about">
           <AboutUs />

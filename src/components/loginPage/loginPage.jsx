@@ -31,10 +31,22 @@ const LoginPage = (props) => {
             <span className={styles.id_save_text}>아이디 저장</span>
           </div>
           <div className={styles.id_pw_find_container}>
-            <button className={`${styles.id_pw_find_button} ${styles.left}`}>
+            <button
+              className={`${styles.id_pw_find_button} ${styles.left}`}
+              onClick={() => {
+                history.push("/findID");
+              }}
+            >
               아이디찾기
             </button>
-            <button className={styles.id_pw_find_button}>비밀번호찾기</button>
+            <button
+              className={styles.id_pw_find_button}
+              onClick={() => {
+                history.push("/findPW");
+              }}
+            >
+              비밀번호찾기
+            </button>
           </div>
         </div>
         <div className={styles.sns_login_container}></div>
