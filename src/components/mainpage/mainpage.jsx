@@ -1,8 +1,8 @@
 import React from "react";
 import SimpleSlider from "../slick/slick";
 import styles from "./mainpage.module.css";
-// 디자인 확정 전 까지 보류
-const Mainpage = (props) => {
+
+const Mainpage = ({ viewItems }) => {
   return (
     <section className={styles.mainpage}>
       <section className={styles.about}>
@@ -26,7 +26,7 @@ const Mainpage = (props) => {
           <i className={`${styles.search_icon} fas fa-search`}></i>
         </div>
         <div className={styles.event_list}>
-          <SimpleSlider />
+          <SimpleSlider viewItems={viewItems} />
         </div>
       </section>
     </section>
