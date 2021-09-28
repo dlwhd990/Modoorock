@@ -14,6 +14,50 @@ import FindId from "./components/find/findId/findId";
 import FindPw from "./components/find/findPw/findPw";
 
 const App = (props) => {
+  const [sixLatestProgramList, setSixLatestProgramList] = useState([
+    {
+      id: 0,
+      image_url:
+        "https://static.wixstatic.com/media/9e9163_dc64f2b4cbc941a5b6dd2a01ff9ac565~mv2.png/v1/crop/x_0,y_12,w_860,h_1076/fill/w_622,h_778,al_c,q_90,usm_0.66_1.00_0.01/%EC%8A%A4%ED%86%A0%EC%96%B4%ED%8C%9C%20%ED%91%9C%EC%A7%80_%EB%B3%B5%EC%82%AC%EB%B3%B8_013.webp",
+      title: "[월미도]2020 월림픽: 랭킹에 도전하라_★x3",
+      price: "25,000원",
+    },
+    {
+      id: 1,
+      image_url:
+        "https://static.wixstatic.com/media/9e9163_dc64f2b4cbc941a5b6dd2a01ff9ac565~mv2.png/v1/crop/x_0,y_12,w_860,h_1076/fill/w_622,h_778,al_c,q_90,usm_0.66_1.00_0.01/%EC%8A%A4%ED%86%A0%EC%96%B4%ED%8C%9C%20%ED%91%9C%EC%A7%80_%EB%B3%B5%EC%82%AC%EB%B3%B8_013.webp",
+      title: "[월미도]2021 월림픽: 랭킹에 도전하라_★x3",
+      price: "25,000원",
+    },
+    {
+      id: 2,
+      image_url:
+        "https://static.wixstatic.com/media/9e9163_dc64f2b4cbc941a5b6dd2a01ff9ac565~mv2.png/v1/crop/x_0,y_12,w_860,h_1076/fill/w_622,h_778,al_c,q_90,usm_0.66_1.00_0.01/%EC%8A%A4%ED%86%A0%EC%96%B4%ED%8C%9C%20%ED%91%9C%EC%A7%80_%EB%B3%B5%EC%82%AC%EB%B3%B8_013.webp",
+      title: "[월미도]2022 월림픽: 랭킹에 도전하라_★x3",
+      price: "25,000원",
+    },
+    {
+      id: 3,
+      image_url:
+        "https://static.wixstatic.com/media/9e9163_dc64f2b4cbc941a5b6dd2a01ff9ac565~mv2.png/v1/crop/x_0,y_12,w_860,h_1076/fill/w_622,h_778,al_c,q_90,usm_0.66_1.00_0.01/%EC%8A%A4%ED%86%A0%EC%96%B4%ED%8C%9C%20%ED%91%9C%EC%A7%80_%EB%B3%B5%EC%82%AC%EB%B3%B8_013.webp",
+      title: "[월미도]2023 월림픽: 랭킹에 도전하라_★x3",
+      price: "25,000원",
+    },
+    {
+      id: 4,
+      image_url:
+        "https://static.wixstatic.com/media/9e9163_dc64f2b4cbc941a5b6dd2a01ff9ac565~mv2.png/v1/crop/x_0,y_12,w_860,h_1076/fill/w_622,h_778,al_c,q_90,usm_0.66_1.00_0.01/%EC%8A%A4%ED%86%A0%EC%96%B4%ED%8C%9C%20%ED%91%9C%EC%A7%80_%EB%B3%B5%EC%82%AC%EB%B3%B8_013.webp",
+      title: "[월미도]2024 월림픽: 랭킹에 도전하라_★x3",
+      price: "25,000원",
+    },
+    {
+      id: 5,
+      image_url:
+        "https://static.wixstatic.com/media/9e9163_dc64f2b4cbc941a5b6dd2a01ff9ac565~mv2.png/v1/crop/x_0,y_12,w_860,h_1076/fill/w_622,h_778,al_c,q_90,usm_0.66_1.00_0.01/%EC%8A%A4%ED%86%A0%EC%96%B4%ED%8C%9C%20%ED%91%9C%EC%A7%80_%EB%B3%B5%EC%82%AC%EB%B3%B8_013.webp",
+      title: "[월미도]2025 월림픽: 랭킹에 도전하라_★x3",
+      price: "25,000원",
+    },
+  ]);
   const [mainPageSlick, setMainPageSlick] = useState([
     {
       id: 0,
@@ -172,7 +216,10 @@ const App = (props) => {
       <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Header />
         <Route exact path="/">
-          <Mainpage viewItems={mainPageSlick} />
+          <Mainpage
+            sixLatestProgramList={sixLatestProgramList}
+            viewItems={mainPageSlick}
+          />
         </Route>
         <Route exact path="/login">
           <LoginPage />

@@ -1,0 +1,34 @@
+.program_item {
+  width: 210px;
+  cursor: pointer;
+}
+
+.program_image {
+  width: 210px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px lightgray;
+}
+
+.program_data_container {
+  width: 210px;
+  box-shadow: 0 0 10px lightgray;
+  padding: 15px 10px;
+  transform: translateY(-50px);
+  background-color: white;
+  border-radius: 8px;
+  position: relative;
+}
+
+.program_title {
+  margin: 0;
+  margin-bottom: 30px;
+}
+
+.program_price {
+  margin: 0;
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  color: #0070c8;
+  font-weight: 500;
+}
