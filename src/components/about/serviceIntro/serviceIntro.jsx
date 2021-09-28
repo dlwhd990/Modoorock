@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import styles from "./serviceIntro.module.css";
-import VideoItem from "./videoItem/videoItem";
-import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import SimpleSlider from "../../slick/slick";
+import SimpleSliderThree from "../../slick/three/slickThree";
 
 const ServiceIntro = ({ viewItems }) => {
   return (
@@ -38,7 +36,7 @@ const ServiceIntro = ({ viewItems }) => {
         </p>
         <div className={styles.mission_main}>
           <div className={styles.mission_video_container}>
-            <SimpleSlider viewItems={viewItems} />
+            <SimpleSliderThree viewItems={viewItems} />
           </div>
         </div>
 

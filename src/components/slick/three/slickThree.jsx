@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
-import styles from "./slick.module.css";
+import styled from "styled-components";
+import "./slickThree.css";
 import "slick-carousel/slick/slick-theme.css";
 
 function NextArrow(props) {
@@ -12,10 +13,10 @@ function NextArrow(props) {
       style={{
         ...style,
         display: "block",
-        width: 100,
-        height: 100,
-        top: 130,
-        right: -120,
+        width: 20,
+        height: 20,
+        top: 115,
+        right: 250,
         zIndex: 2,
       }}
       onClick={onClick}
@@ -31,10 +32,10 @@ function PrevArrow(props) {
       style={{
         ...style,
         display: "block",
-        width: 100,
-        height: 100,
-        top: 130,
-        left: -40,
+        width: 20,
+        height: 20,
+        top: 115,
+        left: 250,
         zIndex: 2,
       }}
       onClick={onClick}
@@ -42,33 +43,34 @@ function PrevArrow(props) {
   );
 }
 
-export default class SimpleSlider extends Component {
+export default class SimpleSliderThree extends Component {
   render() {
     const { viewItems } = this.props;
     const settings = {
-      autoplay: true,
       autoplaySpeed: 3500,
+      autoplay: true,
       pauseOnHover: true,
-      dots: true,
+      dots: false,
       infinite: true,
       speed: 500,
+      focusOnSelect: true,
       slidesToShow: 3,
       slidesToScroll: 1,
       arrows: true,
+      centerMode: true,
+      centerPadding: "20px",
+      variableWIdth: true,
       nextArrow: <NextArrow />,
       prevArrow: <PrevArrow />,
     };
+
     return (
-      <div className={styles.slick_container}>
+      <div className="slick_container">
         <Slider {...settings}>
           {viewItems.map((item) => (
-            <div className={styles.image_box}>
-              <img
-                src={item.image_url}
-                alt="slide_image"
-                className={styles.image}
-              />
-              <p className={styles.desc}>{item.desc}</p>
+            <div key={item.id} className="image_box">
+              <img src={item.image_url} alt="slide_image" className="image" />
+              <p className="desc">{item.desc}</p>
             </div>
           ))}
         </Slider>
