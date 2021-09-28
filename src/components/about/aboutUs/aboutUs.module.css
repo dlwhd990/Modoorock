@@ -9,12 +9,8 @@
   width: 100%;
   min-height: 500px;
   padding: 30px;
-  background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)),
-    url("../../../background_images/main_about_us_temp_image.jpeg");
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
+  background: url("../../../background_images/main_top.png") center/cover
+    no-repeat;
   padding-top: 70px;
 }
 

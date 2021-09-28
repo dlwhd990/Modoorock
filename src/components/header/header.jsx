@@ -59,17 +59,16 @@ const Header = (props) => {
 
   return (
     <section className={styles.header}>
-      <div className={styles.logo_container}>
-        <span
-          className={styles.logo}
-          onClick={() => {
-            history.push("/");
-            window.scrollTo({ top: 0 });
-          }}
-        >
-          모두락
-        </span>
-      </div>
+      <img
+        src="/images/logo_dark.png"
+        alt="logo"
+        className={styles.logo}
+        onClick={() => {
+          history.push("/");
+          window.scrollTo({ top: 0 });
+        }}
+      />
+
       <nav
         className={styles.navbar}
         onMouseEnter={() => {
@@ -81,7 +80,7 @@ const Header = (props) => {
       >
         <ul className={styles.menu_list}>
           <li className={styles.menu_item} onMouseEnter={aboutDropDownOn}>
-            <div className={styles.menu_item_title}>About</div>
+            <div className={styles.menu_item_title}>소개</div>
             <ul
               className={`${
                 aboutDropDown
@@ -118,7 +117,7 @@ const Header = (props) => {
             </ul>
           </li>
           <li className={styles.menu_item} onMouseEnter={programDropDownOn}>
-            <div className={styles.menu_item_title}>Program</div>
+            <div className={styles.menu_item_title}>프로그램</div>
             <ul
               className={`${
                 programDropDown
@@ -144,7 +143,7 @@ const Header = (props) => {
             </ul>
           </li>
           <li className={styles.menu_item} onMouseEnter={fnqDropDownOn}>
-            <div className={styles.menu_item_title}>F&Q</div>
+            <div className={styles.menu_item_title}>고객센터</div>
             <ul
               className={`${
                 fnqDropDown
@@ -190,15 +189,17 @@ const Header = (props) => {
           </li>
         </ul>
       </nav>
-      <div
-        className={styles.login_container}
-        onClick={() => {
-          history.push("/login");
-          window.scrollTo({ top: 0 });
-        }}
-      >
-        <i className={`${styles.login_icon} fas fa-sign-in-alt`}></i>
-        <span className={styles.login_text}>LOG IN</span>
+      <div className={styles.login_container}>
+        <span
+          className={styles.login}
+          onClick={() => {
+            history.push("/login");
+            window.scrollTo({ top: 0 });
+          }}
+        >
+          로그인
+        </span>
+        <span className={styles.signup}>회원가입</span>
       </div>
     </section>
   );

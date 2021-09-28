@@ -7,15 +7,13 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 0 30px;
+  padding: 0 50px 0 30px;
   position: fixed;
   top: 0;
   z-index: 999;
 }
 
 .logo {
-  font-size: 22px;
-  font-weight: 900;
   cursor: pointer;
 }
 
@@ -52,14 +50,8 @@
   cursor: pointer;
 }
 
-.login_icon {
-  font-size: 22px;
-}
-
-.login_text {
-  font-size: var(--font-size-normal);
-  margin-left: 10px;
-  color: white;
+.login {
+  margin-right: 30px;
 }
 
 .drop_down_menu {

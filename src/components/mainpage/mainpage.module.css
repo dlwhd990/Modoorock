@@ -4,13 +4,8 @@
 }
 
 .about {
-  height: 550px;
-  background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)),
-    url("../../background_images/main_about_us_temp_image.jpeg");
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
+  height: 600px;
+  background: url("../../background_images/main_top.png") center/cover no-repeat;
   padding: 0 20%;
   display: flex;
   flex-direction: column;
@@ -18,24 +13,39 @@
   align-items: center;
 }
 
+.about_filter {
+  width: 100%;
+  height: 600px;
+  background-color: rgba(0, 0, 0, 0.3);
+  position: absolute;
+  top: 80px;
+  z-index: 1;
+}
+
 .about_title {
   color: white;
   font-size: var(--font-size-big-title);
-  font-weight: 700;
+  font-weight: 500;
+  text-align: center;
+  z-index: 2;
 }
 
 .about_desc {
   color: white;
   font-size: var(--font-size-big);
-  font-weight: 500;
+  font-weight: 300;
+  text-align: center;
+  z-index: 2;
 }
 
-.event_container {
+.program_container {
   min-height: 600px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 50px 0;
+  padding: 200px 0;
+  background: url("../../background_images/main_middle.png") center/cover
+    no-repeat;
 }
 
 .search_input {
@@ -62,7 +72,7 @@
   color: var(--color-skyblue);
 }
 
-.event_list {
+.program_list {
   width: 100%;
   padding: 70px 0;
 }
