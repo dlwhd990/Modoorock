@@ -199,7 +199,15 @@ const Header = (props) => {
         >
           로그인
         </span>
-        <span className={styles.signup}>회원가입</span>
+        <span
+          className={styles.signup}
+          onClick={() => {
+            history.push("/signup");
+            window.scrollTo({ top: 0 });
+          }}
+        >
+          회원가입
+        </span>
       </div>
     </section>
   );

@@ -47,11 +47,14 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  cursor: pointer;
 }
 
 .login {
   margin-right: 30px;
+  cursor: pointer;
+}
+.signup {
+  cursor: pointer;
 }
 
 .drop_down_menu {

@@ -17,10 +17,13 @@ const Mainpage = ({ viewItems }) => {
       </section>
       <section className={styles.program_container}>
         <div className={styles.program_intro_container}>
-          <p className={styles.program_intro_company_name}>MODOOROCK</p>
+          <p className={styles.program_intro_company_name}>최근 업데이트 된</p>
           <div className={styles.program_intro_title_container}>
             <span className={styles.program_intro_title_blue}>미션투어!</span>
-            <span className={styles.program_intro_title}>프로그램 상품</span>
+            <span className={styles.program_intro_title}>
+              액티비티 체험상품
+            </span>
+            <button className={styles.program_show_all_button}>전체보기</button>
           </div>
           <p className={styles.program_intro_desc}>
             게임화된 투어로 재미있고 액티비티 체험이 가득해요
