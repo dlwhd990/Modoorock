@@ -1,84 +1,221 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./aboutUs.module.css";
 
 const AboutUs = (props) => {
+  const [selected, setSelected] = useState("company");
+
+  const onSelectHandler = (e) => {
+    if (e.currentTarget.innerText === "회사 소개") {
+      setSelected("company");
+    } else {
+      setSelected("service");
+    }
+  };
   return (
-    <section className={styles.mainpage}>
+    <section className={styles.about_us}>
+      <section className={styles.about_us_top_banner}></section>
+      <section className={styles.select_bar_container}>
+        <div
+          className={
+            selected === "company"
+              ? `${styles.select_button} ${styles.on}`
+              : `${styles.select_button} ${styles.off}`
+          }
+          onClick={onSelectHandler}
+        >
+          회사 소개
+        </div>
+        <div
+          className={
+            selected === "service"
+              ? `${styles.select_button} ${styles.on}`
+              : `${styles.select_button} ${styles.off}`
+          }
+          onClick={onSelectHandler}
+        >
+          서비스 소개
+        </div>
+      </section>
       <section className={styles.about_us_container}>
-        <p className={styles.about_us_title}>ABOUT US</p>
-        <div className={styles.about_us_desc_container}>
-          <p className={styles.about_us_desc}>
-            모두락은 기존 관광지를 "관광게이미피케이션"을 결합하여 재 창조 하는
-            미션 투어 전문 기업 입니다. 모두락은 기존 관광지를
-            "관광게이미피케이션"을 결합하여 재 창조 하는 미션 투어 전문 기업
-            입니다.
+        <h1 className={styles.title}>회사소개</h1>
+        <div className={styles.route_button_container}>
+          <i class={`${styles.home_icon} fas fa-home`}></i>
+          <i class={`${styles.arrow_icon} fas fa-chevron-right`}></i>
+          <p className={styles.route_button}>소개</p>
+          <i class={`${styles.arrow_icon} fas fa-chevron-right`}></i>
+          <p className={styles.route_button}>회사소개</p>
+        </div>
+
+        <img
+          src="/images/about_middle_banner.png"
+          alt="banner"
+          className={styles.about_us_middle_banner}
+        />
+        <section className={styles.about_us_main_container}>
+          <div className={styles.about_us_main}>
+            <div className={styles.about_us_main_image_container}>
+              <img
+                src="/images/about_us_main_image.png"
+                alt="main_image"
+                className={styles.about_us_main_image}
+              />
+            </div>
+            <div className={styles.about_us_main_intro_container}>
+              <p className={styles.about_us_main_intro}>
+                모두락은 기존 관광지를
+              </p>
+              <p className={`${styles.about_us_main_intro} ${styles.blue}`}>
+                "관광게이미피케이션"을 결합하여 재 창조하는
+              </p>
+              <p className={styles.about_us_main_intro}>
+                미션 투어 전문 기업입니다.
+              </p>
+              <div className={styles.short_divide_line}></div>
+              <p className={styles.about_us_main_intro_desc}>
+                시설/콘텐츠의 과잉 투자, 기존 밋밋한 관광 자원에 게임화를
+                결합하여 <br></br> 재미있고 액티비티 체험이 가능한 고부가가치
+                관광 자원으로 재 탄생 시키고자 합니다.
+              </p>
+              <p className={styles.about_us_main_intro_desc}>
+                여행의 재미 문제 해결을 위해 ‘런닝맨’, ‘1박2일’ 과 같은 인기
+                방송프로그램에 융합된<br></br>게이미피케이션(게임화)을
+                효과적으로 결합하여 관광산업에 활력을 불어넣고자 합니다.
+              </p>
+              <p className={styles.about_us_main_intro_desc}>
+                국내외 관광객의 이용 편리성을 높이기 위해 ICT를 도구로 사용하며,
+                <br></br>이용만족도를 높이기 위해 미션가이드를 투입하여 일자리
+                창출에 기여 합니다.
+              </p>
+              <p className={styles.about_us_main_intro_desc}>
+                즐길거리+체험거리+먹거리 등을 결합하여 고부가가치 상품화 및
+                지속적인 운영을 목적으로 합니다.
+              </p>
+            </div>
+          </div>
+          <div className={styles.about_us_main_history_container}>
+            <h1 className={styles.about_us_main_history_title}>MODOOROCK</h1>
+            <h1 className={styles.about_us_main_history_title}>HISTORY</h1>
+            <div className={styles.short_divide_line_white}></div>
+            <div className={styles.about_us_main_history_content_container}>
+              <div className={styles.about_us_main_history_content}>
+                <div
+                  className={
+                    styles.about_us_main_history_content_text_container
+                  }
+                >
+                  <p className={styles.about_us_main_history_content_title}>
+                    2015
+                  </p>
+                  <p className={styles.about_us_main_history_content_text}>
+                    서울시 북촌한옥마을 IoT 실증 (도심관광활성화 분야) 지원 사업
+                    선정
+                  </p>
+                </div>
+                <div
+                  className={
+                    styles.about_us_main_history_content_text_container
+                  }
+                >
+                  <p className={styles.about_us_main_history_content_title}>
+                    2018
+                  </p>
+                  <p className={styles.about_us_main_history_content_text}>
+                    KTO, 관광벤처기업 지정
+                  </p>
+                </div>
+              </div>
+              <div className={styles.about_us_main_history_content}>
+                <div
+                  className={
+                    styles.about_us_main_history_content_text_container
+                  }
+                >
+                  <p className={styles.about_us_main_history_content_title}>
+                    2016
+                  </p>
+                  <p className={styles.about_us_main_history_content_text}>
+                    한국글로벌비즈협도조한 MOU 체결 ('또뷰' IoT 스마트 앨범사업)
+                    <br></br>
+                    마포구 외국인 팸투어 미션팜 & 또뷰 플랫폼 지원<br></br>
+                    예산 윤봉길의사 매헌학교 체험관광 게이미피케이션<br></br>
+                    미션팜 & 또뷰 플랫폼 공급<br></br>
+                    수제화 명장 전태수 작가 MOU체결 ('Q-mode' 객체광고사업)
+                    <br></br>
+                    서울시 자치구 IoT확대사업 참여 추진 (서대문구청, 마포구청
+                    <br></br>
+                    백화마을 6차산업 체험관광 게이미피케이션 미션팜&또뷰
+                    플랫폼공급
+                  </p>
+                </div>
+                <div
+                  className={
+                    styles.about_us_main_history_content_text_container
+                  }
+                >
+                  <p className={styles.about_us_main_history_content_title}>
+                    2019
+                  </p>
+                  <p className={styles.about_us_main_history_content_text}>
+                    KTO, MICE 육성기업 선정<br></br>
+                    문화체육관광부 DMZ투어 개발 <br></br>
+                    '남산골 런닝맨' 직영 <br></br>
+                    '청계천 진로체험' 운영 <br></br>
+                    수원 '전통시장' 미션투어 체험상품 개발 및 운영
+                  </p>
+                </div>
+              </div>
+              <div className={styles.about_us_main_history_content}>
+                <div
+                  className={
+                    styles.about_us_main_history_content_text_container
+                  }
+                >
+                  <p className={styles.about_us_main_history_content_title}>
+                    2017
+                  </p>
+                  <p className={styles.about_us_main_history_content_text}>
+                    관광게이미피케이션 ' 북촌런닝맨' 패키지 체험관광상품 런칭
+                  </p>
+                </div>
+                <div
+                  className={
+                    styles.about_us_main_history_content_text_container
+                  }
+                >
+                  <p className={styles.about_us_main_history_content_title}>
+                    2020
+                  </p>
+                  <p className={styles.about_us_main_history_content_text}>
+                    할로윈 축제 비대면 미션투어 개발 및 운영<br></br>
+                    생태관광거점 미션투어 상품 개발
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section className={styles.about_us_partners_container}>
+          <h1 className={styles.about_us_partners_title}>PARTNERS</h1>
+          <p className={styles.about_us_partners_subtitle}>
+            모두락과 함께하는 파트너입니다.
           </p>
-        </div>
-      </section>
-      <section className={styles.service_container}>
-        <p className={styles.service_title}>Main Services</p>
-        <div className={styles.service_desc_container}>
-          <div className={styles.service_desc}>
-            <img
-              src="https://static.wixstatic.com/media/9e9163_0d65cbf903064b47872fb9fc8bc3428c~mv2.png/v1/fill/w_724,h_516,al_c,lg_1,q_90/%EC%A0%9C%EB%AA%A9%EC%9D%84%20%EC%9E%85%EB%A0%A5%ED%95%B4%EC%A3%BC%EC%84%B8%EC%9A%94_-002%20(1).webp"
-              alt="service_image"
-              className={styles.service_image}
-            />
-            <p className={styles.service_desc_title}>STORE FORM</p>
-            <p className={styles.service_desc_subtitle}>
-              게이미피케이션이 융합된 문화체험관광
-            </p>
-            <ul className={styles.service_desc_list}>
-              <li className={styles.service_desc_list_item}>
-                모두락의 다양한 상품을 만나볼수 있습니다.
-              </li>
-              <li className={styles.service_desc_list_item}>
-                보고, 맛보고, 만들고, 즐기는 문화체험 관광삼품을 제공합니다.
-              </li>
-              <li className={styles.service_desc_list_item}>
-                앱을 통해 특정 코스에서 다양한 미션을 즐길 수
-                있습니다(관광+게이미피케이션)
-              </li>
-            </ul>
-          </div>
-          <div className={styles.service_desc}>
-            <img
-              src="https://static.wixstatic.com/media/9e9163_20a2771344e84a0c8f1aede2d17b64c9~mv2.png/v1/fill/w_715,h_518,al_c,lg_1,q_90/%EB%98%90%EB%B7%B0_PNG.webp"
-              alt="service_image"
-              className={styles.service_image}
-            />
-            <p className={styles.service_desc_title}>TTO VIEW</p>
-            <p className={styles.service_desc_subtitle}>
-              IoT 스마트 앨범 포토관광 기념카드
-            </p>
-            <ul className={styles.service_desc_list}>
-              <li className={styles.service_desc_list_item}>
-                모두락의 다양한 상품을 만나볼수 있습니다.
-              </li>
-              <li className={styles.service_desc_list_item}>
-                보고, 맛보고, 만들고, 즐기는 문화체험 관광삼품을 제공합니다.
-              </li>
-              <li className={styles.service_desc_list_item}>
-                앱을 통해 특정 코스에서 다양한 미션을 즐길 수
-                있습니다(관광+게이미피케이션)
-              </li>
-            </ul>
-          </div>
-        </div>
-      </section>
-      <section className={styles.history_container}>
-        <p className={styles.history_title}>MODOOROCK HISTORY</p>
-        <p className={styles.history_content}>예정</p>
-      </section>
-      <section className={styles.partner_companies_container}>
-        <p className={styles.partner_companies_title}>PARTNERS</p>
-        <div className={styles.partner_companies_list}>여기에 로고</div>
-      </section>
-      <section className={styles.company_location_container}>
-        <p className={styles.company_location_title}>LOCATION</p>
-        <div className={styles.company_location}>
-          <p>여기에 회사 위치 이미지</p>
-        </div>
+          <div className={styles.short_divide_line_under_title}></div>
+          <img
+            src="/images/about_partners.png"
+            alt="partners_image"
+            className={styles.about_us_partners_image}
+          />
+        </section>
+        <section className={styles.about_us_map_container}>
+          <h1 className={styles.about_us_map_title}>ADDRESS MAP</h1>
+          <p className={styles.about_us_map_subtitle}>오시는 길</p>
+          <div className={styles.short_divide_line_under_title}></div>
+          <img
+            src="/images/about_map.png"
+            alt="partners_image"
+            className={styles.about_us_map_image}
+          />
+        </section>
       </section>
     </section>
   );
