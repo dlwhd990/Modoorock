@@ -1,6 +1,11 @@
 .program_item {
   width: 210px;
   cursor: pointer;
+  transition: 170ms all ease-in;
+}
+
+.program_item:hover {
+  transform: scale(1.02);
 }
 
 .program_image {

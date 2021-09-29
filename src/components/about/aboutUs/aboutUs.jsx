@@ -2,40 +2,8 @@ import React, { useState } from "react";
 import styles from "./aboutUs.module.css";
 
 const AboutUs = (props) => {
-  const [selected, setSelected] = useState("company");
-
-  const onSelectHandler = (e) => {
-    if (e.currentTarget.innerText === "회사 소개") {
-      setSelected("company");
-    } else {
-      setSelected("service");
-    }
-  };
   return (
     <section className={styles.about_us}>
-      <section className={styles.about_us_top_banner}></section>
-      <section className={styles.select_bar_container}>
-        <div
-          className={
-            selected === "company"
-              ? `${styles.select_button} ${styles.on}`
-              : `${styles.select_button} ${styles.off}`
-          }
-          onClick={onSelectHandler}
-        >
-          회사 소개
-        </div>
-        <div
-          className={
-            selected === "service"
-              ? `${styles.select_button} ${styles.on}`
-              : `${styles.select_button} ${styles.off}`
-          }
-          onClick={onSelectHandler}
-        >
-          서비스 소개
-        </div>
-      </section>
       <section className={styles.about_us_container}>
         <h1 className={styles.title}>회사소개</h1>
         <div className={styles.route_button_container}>

@@ -98,7 +98,7 @@ const Header = (props) => {
                 className={styles.drop_down_menu_item}
                 onClick={() => {
                   dropDownAllOff();
-                  history.push("/about");
+                  history.push("/introduce/about");
                   window.scrollTo({ top: 0 });
                 }}
               >
@@ -108,7 +108,7 @@ const Header = (props) => {
                 className={styles.drop_down_menu_item}
                 onClick={() => {
                   dropDownAllOff();
-                  history.push("/service_intro");
+                  history.push("/introduce/service");
                   window.scrollTo({ top: 0 });
                 }}
               >

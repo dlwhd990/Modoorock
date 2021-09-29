@@ -3,7 +3,6 @@ import { BrowserRouter, Route } from "react-router-dom";
 import styles from "./app.module.css";
 import Footer from "./components/footer/footer";
 import Header from "./components/header/header";
-import AboutUs from "./components/about/aboutUs/aboutUs";
 import Mainpage from "./components/mainpage/mainpage";
 import LoginPage from "./components/loginPage/loginPage";
 import ServiceIntro from "./components/about/serviceIntro/serviceIntro";
@@ -12,6 +11,7 @@ import Programs from "./components/programs/programs";
 import Contact from "./components/contact/contact";
 import FindId from "./components/find/findId/findId";
 import FindPw from "./components/find/findPw/findPw";
+import Introduce from "./components/about/introduce";
 
 const App = (props) => {
   const [sixLatestProgramList, setSixLatestProgramList] = useState([
@@ -233,11 +233,8 @@ const App = (props) => {
         <Route exact path="/findPW">
           <FindPw />
         </Route>
-        <Route exact path="/about">
-          <AboutUs />
-        </Route>
-        <Route exact path="/service_intro">
-          <ServiceIntro viewItems={serviceVideoList} />
+        <Route exact path="/introduce/:path">
+          <Introduce viewItems={serviceVideoList} />
         </Route>
         <Route exact path="/programs">
           <Programs programList={programList} />

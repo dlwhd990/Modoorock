@@ -1,0 +1,36 @@
+.introduce {
+  min-height: 100vh;
+  margin-top: 78px;
+  background-color: white;
+}
+
+.about_us_top_banner {
+  min-height: 30vh;
+  background: url("../../background_images/about_top_banner.png") center/cover
+    no-repeat;
+}
+
+.select_bar_container {
+  height: 5vh;
+  background-color: var(--color-theme);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  box-shadow: 0 5px 10px lightgray;
+}
+
+.select_button {
+  width: 35%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  cursor: pointer;
+  animation: selected 1s;
+}
+
+.on {
+  color: black;
+  background-color: white;
+}
