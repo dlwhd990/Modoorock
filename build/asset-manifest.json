@@ -1,21 +1,27 @@
 {
   "files": {
-    "main.css": "/static/css/main.e60f46df.chunk.css",
-    "main.js": "/static/js/main.881c3e8d.chunk.js",
-    "main.js.map": "/static/js/main.881c3e8d.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.c2b27199.js",
-    "runtime-main.js.map": "/static/js/runtime-main.c2b27199.js.map",
-    "static/js/2.6ef908b4.chunk.js": "/static/js/2.6ef908b4.chunk.js",
-    "static/js/2.6ef908b4.chunk.js.map": "/static/js/2.6ef908b4.chunk.js.map",
-    "index.html": "/index.html",
-    "static/css/main.e60f46df.chunk.css.map": "/static/css/main.e60f46df.chunk.css.map",
-    "static/js/2.6ef908b4.chunk.js.LICENSE.txt": "/static/js/2.6ef908b4.chunk.js.LICENSE.txt",
-    "static/media/aboutUs.module.css": "/static/media/main_about_us_temp_image.da131daa.jpeg"
+    "main.css": "/modoorock-test/static/css/main.7a9dcc58.chunk.css",
+    "main.js": "/modoorock-test/static/js/main.b6be8c55.chunk.js",
+    "main.js.map": "/modoorock-test/static/js/main.b6be8c55.chunk.js.map",
+    "runtime-main.js": "/modoorock-test/static/js/runtime-main.5ad796ea.js",
+    "runtime-main.js.map": "/modoorock-test/static/js/runtime-main.5ad796ea.js.map",
+    "static/css/2.4f117f65.chunk.css": "/modoorock-test/static/css/2.4f117f65.chunk.css",
+    "static/js/2.736bba44.chunk.js": "/modoorock-test/static/js/2.736bba44.chunk.js",
+    "static/js/2.736bba44.chunk.js.map": "/modoorock-test/static/js/2.736bba44.chunk.js.map",
+    "index.html": "/modoorock-test/index.html",
+    "static/css/2.4f117f65.chunk.css.map": "/modoorock-test/static/css/2.4f117f65.chunk.css.map",
+    "static/css/main.7a9dcc58.chunk.css.map": "/modoorock-test/static/css/main.7a9dcc58.chunk.css.map",
+    "static/js/2.736bba44.chunk.js.LICENSE.txt": "/modoorock-test/static/js/2.736bba44.chunk.js.LICENSE.txt",
+    "static/media/introduce.module.css": "/modoorock-test/static/media/about_top_banner.e04dd856.png",
+    "static/media/aboutUs.module.css": "/modoorock-test/static/media/about_us_background.f8260a65.png",
+    "static/media/mainpage.module.css": "/modoorock-test/static/media/main_top.26528c74.png",
+    "static/media/slick-theme.css": "/modoorock-test/static/media/slick.c94f7671.ttf"
   },
   "entrypoints": [
-    "static/js/runtime-main.c2b27199.js",
-    "static/js/2.6ef908b4.chunk.js",
-    "static/css/main.e60f46df.chunk.css",
-    "static/js/main.881c3e8d.chunk.js"
+    "static/js/runtime-main.5ad796ea.js",
+    "static/css/2.4f117f65.chunk.css",
+    "static/js/2.736bba44.chunk.js",
+    "static/css/main.7a9dcc58.chunk.css",
+    "static/js/main.b6be8c55.chunk.js"
   ]
 }
