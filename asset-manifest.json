@@ -1,0 +1,27 @@
+{
+  "files": {
+    "main.css": "/modoorock/static/css/main.4c41d08b.chunk.css",
+    "main.js": "/modoorock/static/js/main.7d48c859.chunk.js",
+    "main.js.map": "/modoorock/static/js/main.7d48c859.chunk.js.map",
+    "runtime-main.js": "/modoorock/static/js/runtime-main.c4afc3b4.js",
+    "runtime-main.js.map": "/modoorock/static/js/runtime-main.c4afc3b4.js.map",
+    "static/css/2.2cfe91b4.chunk.css": "/modoorock/static/css/2.2cfe91b4.chunk.css",
+    "static/js/2.736bba44.chunk.js": "/modoorock/static/js/2.736bba44.chunk.js",
+    "static/js/2.736bba44.chunk.js.map": "/modoorock/static/js/2.736bba44.chunk.js.map",
+    "index.html": "/modoorock/index.html",
+    "static/css/2.2cfe91b4.chunk.css.map": "/modoorock/static/css/2.2cfe91b4.chunk.css.map",
+    "static/css/main.4c41d08b.chunk.css.map": "/modoorock/static/css/main.4c41d08b.chunk.css.map",
+    "static/js/2.736bba44.chunk.js.LICENSE.txt": "/modoorock/static/js/2.736bba44.chunk.js.LICENSE.txt",
+    "static/media/introduce.module.css": "/modoorock/static/media/about_top_banner.e04dd856.png",
+    "static/media/aboutUs.module.css": "/modoorock/static/media/about_us_background.f8260a65.png",
+    "static/media/mainpage.module.css": "/modoorock/static/media/main_top.26528c74.png",
+    "static/media/slick-theme.css": "/modoorock/static/media/slick.c94f7671.ttf"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.c4afc3b4.js",
+    "static/css/2.2cfe91b4.chunk.css",
+    "static/js/2.736bba44.chunk.js",
+    "static/css/main.4c41d08b.chunk.css",
+    "static/js/main.7d48c859.chunk.js"
+  ]
+}
