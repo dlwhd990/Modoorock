@@ -1,27 +1,27 @@
 {
   "files": {
-    "main.css": "/modoorock-test/static/css/main.7a9dcc58.chunk.css",
-    "main.js": "/modoorock-test/static/js/main.b6be8c55.chunk.js",
-    "main.js.map": "/modoorock-test/static/js/main.b6be8c55.chunk.js.map",
-    "runtime-main.js": "/modoorock-test/static/js/runtime-main.5ad796ea.js",
-    "runtime-main.js.map": "/modoorock-test/static/js/runtime-main.5ad796ea.js.map",
-    "static/css/2.4f117f65.chunk.css": "/modoorock-test/static/css/2.4f117f65.chunk.css",
-    "static/js/2.736bba44.chunk.js": "/modoorock-test/static/js/2.736bba44.chunk.js",
-    "static/js/2.736bba44.chunk.js.map": "/modoorock-test/static/js/2.736bba44.chunk.js.map",
-    "index.html": "/modoorock-test/index.html",
-    "static/css/2.4f117f65.chunk.css.map": "/modoorock-test/static/css/2.4f117f65.chunk.css.map",
-    "static/css/main.7a9dcc58.chunk.css.map": "/modoorock-test/static/css/main.7a9dcc58.chunk.css.map",
-    "static/js/2.736bba44.chunk.js.LICENSE.txt": "/modoorock-test/static/js/2.736bba44.chunk.js.LICENSE.txt",
-    "static/media/introduce.module.css": "/modoorock-test/static/media/about_top_banner.e04dd856.png",
-    "static/media/aboutUs.module.css": "/modoorock-test/static/media/about_us_background.f8260a65.png",
-    "static/media/mainpage.module.css": "/modoorock-test/static/media/main_top.26528c74.png",
-    "static/media/slick-theme.css": "/modoorock-test/static/media/slick.c94f7671.ttf"
+    "main.css": "/Modoorock/static/css/main.222cb147.chunk.css",
+    "main.js": "/Modoorock/static/js/main.d15573b0.chunk.js",
+    "main.js.map": "/Modoorock/static/js/main.d15573b0.chunk.js.map",
+    "runtime-main.js": "/Modoorock/static/js/runtime-main.b34af722.js",
+    "runtime-main.js.map": "/Modoorock/static/js/runtime-main.b34af722.js.map",
+    "static/css/2.2a5df868.chunk.css": "/Modoorock/static/css/2.2a5df868.chunk.css",
+    "static/js/2.736bba44.chunk.js": "/Modoorock/static/js/2.736bba44.chunk.js",
+    "static/js/2.736bba44.chunk.js.map": "/Modoorock/static/js/2.736bba44.chunk.js.map",
+    "index.html": "/Modoorock/index.html",
+    "static/css/2.2a5df868.chunk.css.map": "/Modoorock/static/css/2.2a5df868.chunk.css.map",
+    "static/css/main.222cb147.chunk.css.map": "/Modoorock/static/css/main.222cb147.chunk.css.map",
+    "static/js/2.736bba44.chunk.js.LICENSE.txt": "/Modoorock/static/js/2.736bba44.chunk.js.LICENSE.txt",
+    "static/media/introduce.module.css": "/Modoorock/static/media/about_top_banner.e04dd856.png",
+    "static/media/aboutUs.module.css": "/Modoorock/static/media/about_us_background.f8260a65.png",
+    "static/media/mainpage.module.css": "/Modoorock/static/media/main_top.26528c74.png",
+    "static/media/slick-theme.css": "/Modoorock/static/media/slick.c94f7671.ttf"
   },
   "entrypoints": [
-    "static/js/runtime-main.5ad796ea.js",
-    "static/css/2.4f117f65.chunk.css",
+    "static/js/runtime-main.b34af722.js",
+    "static/css/2.2a5df868.chunk.css",
     "static/js/2.736bba44.chunk.js",
-    "static/css/main.7a9dcc58.chunk.css",
-    "static/js/main.b6be8c55.chunk.js"
+    "static/css/main.222cb147.chunk.css",
+    "static/js/main.d15573b0.chunk.js"
   ]
 }
