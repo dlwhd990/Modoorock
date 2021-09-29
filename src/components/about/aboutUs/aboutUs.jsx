@@ -59,6 +59,11 @@ const AboutUs = (props) => {
                 alt="main_image"
                 className={styles.about_us_main_image}
               />
+              <img
+                src="/images/about_middle_circle.png"
+                alt=""
+                className={styles.about_us_main_circle}
+              />
             </div>
             <div className={styles.about_us_main_intro_container}>
               <p className={styles.about_us_main_intro}>

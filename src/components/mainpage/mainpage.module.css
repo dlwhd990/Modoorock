@@ -1,16 +1,15 @@
 .mainpage {
   margin-top: 80px;
-  min-height: 100vh;
 }
 
 .about {
-  height: 600px;
+  height: calc(100vh - 80px);
   background: url("../../background_images/main_top.png") center/cover no-repeat;
   padding: 0 20%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
 }
 
 .about_filter {

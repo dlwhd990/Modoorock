@@ -4,6 +4,18 @@ import styles from "./footer.module.css";
 const Footer = (props) => {
   return (
     <section className={styles.footer}>
+      <div className={styles.button_container}>
+        <div className={styles.button_container_absolute}>
+          <i
+            className={`${styles.icon} ${styles.facebook} fab fa-facebook-square`}
+          ></i>
+          <i
+            className={`${styles.icon} ${styles.instagram} fab fa-instagram`}
+          ></i>
+          <i className={`${styles.icon} ${styles.youtube} fab fa-youtube`}></i>
+        </div>
+      </div>
+
       <div className={styles.company_information}>
         <div className={styles.logo_container}>
           <img src="/images/logo_blue.png" alt="" className={styles.logo} />

@@ -1,10 +1,54 @@
 .footer {
   width: 100%;
   display: flex;
-  flex-direction: row;
-  align-items: center;
+  flex-direction: column;
+  justify-content: center;
   background-color: white;
   padding: 50px 0;
+  border-top: 1px solid lightgray;
+}
+
+.button_container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 0px;
+  position: relative;
+}
+
+.button_container_absolute {
+  position: absolute;
+  right: 200px;
+}
+
+.icon {
+  margin: 0 15px;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.facebook {
+  color: rgb(64, 97, 169);
+}
+
+.instagram {
+  border-radius: 4px;
+  color: white;
+  background: #d6249f;
+  background: radial-gradient(
+    circle at 30% 107%,
+    #fdf497 0%,
+    #fdf497 5%,
+    #fd5949 45%,
+    #d6249f 60%,
+    #285aeb 90%
+  );
+  -webkit-text-fill-color: transparent;
+  padding: 2px 0;
+}
+
+.youtube {
+  color: rgb(247, 0, 4);
 }
 
 .logo {
