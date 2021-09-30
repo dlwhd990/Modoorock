@@ -204,6 +204,14 @@
 }
 
 @media screen and (max-width: 780px) {
+  .about_title {
+    font-size: var(--font-size-mini-title);
+    margin-bottom: 6px;
+  }
+  .about_desc {
+    font-size: var(--font-size-normal);
+  }
+
   .program_intro_title_green,
   .video_top_intro_title_green,
   .program_intro_title_blue,
@@ -224,10 +232,17 @@
   .video_top_intro_title_blue {
     padding-right: 0;
   }
+  .video_top_intro_title_blue {
+    padding-left: 0;
+  }
 
   .program_intro_title,
   .video_top_intro_title {
     padding-left: 0;
+  }
+
+  .video_top_intro_title {
+    padding: 0;
   }
 
   .program_intro_title_blue,

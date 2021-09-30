@@ -3,13 +3,14 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   background-color: white;
   padding: 50px 0;
   border-top: 1px solid lightgray;
 }
 
 .button_container {
-  width: 100%;
+  margin-top: 50px;
   display: flex;
   flex-direction: row;
   margin-bottom: 0px;
@@ -23,7 +24,7 @@
 
 .icon {
   margin: 0 15px;
-  font-size: 30px;
+  font-size: 22px;
   cursor: pointer;
 }
 
@@ -66,7 +67,6 @@
 .logo_container {
   margin-right: 40px;
   text-align: center;
-  font-size: 36px;
 }
 
 .info {
@@ -77,4 +77,37 @@
 
 .copyright {
   margin-top: 25px;
+}
+
+@media screen and (max-width: 780px) {
+  .footer {
+    padding: 0 30px;
+  }
+  .button_container_absolute {
+    position: static;
+  }
+
+  .button_container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+
+  .company_information {
+    flex-direction: column;
+  }
+
+  .logo_container {
+    margin: 0;
+  }
+
+  .logo {
+    width: 150px;
+    padding: 30px 0;
+  }
+
+  .text_data_container {
+    font-size: var(--font-size-small);
+  }
 }
