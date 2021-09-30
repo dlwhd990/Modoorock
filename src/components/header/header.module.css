@@ -84,6 +84,10 @@
   color: skyblue;
 }
 
+.toggle_container {
+  display: none;
+}
+
 @keyframes appear {
   0% {
     opacity: 0;
@@ -98,6 +102,15 @@
     width: 100vw;
     height: auto;
     flex-direction: column;
+    padding: 0;
+  }
+
+  .toggle_container {
+    display: block;
+    position: absolute;
+    top: 17px;
+    right: 20px;
+    font-size: var(--font-size-title);
   }
 
   .logo_container {
@@ -107,12 +120,32 @@
     justify-content: center;
   }
 
-  .menu_list {
-    flex-direction: column;
-    display: none;
+  .logo {
+    width: 180px;
   }
 
+  .menu_list {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  .menu_item {
+    height: 40px;
+    margin: 10px 0;
+  }
+
+  .toggle_on {
+    width: 100%;
+    display: block;
+  }
   .login_container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 20px;
+  }
+  .toggle_off {
     display: none;
   }
 }

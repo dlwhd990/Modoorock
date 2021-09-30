@@ -56,7 +56,7 @@
 
 .about_us_main {
   height: 600px;
-  padding: 70px;
+  padding: 0 50px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -72,6 +72,11 @@
 
 .about_us_main_image {
   width: 550px;
+}
+
+.short_divide_line {
+  margin-top: 15px;
+  margin-bottom: 30px;
 }
 
 .about_us_main_circle {

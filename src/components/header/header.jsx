@@ -9,6 +9,7 @@ const Header = (props) => {
   const [contactDropDown, setContactDropDown] = useState(false);
   const [navbarMouseEnter, setNavbarMouseEnter] = useState(false);
   const [dropDownMouseEnter, setDropDownMouseEnter] = useState(false);
+  const [toggle, setToggle] = useState(false);
 
   const history = useHistory();
 
@@ -45,6 +46,12 @@ const Header = (props) => {
     setProgramDropDown(false);
     setFnqDropDown(false);
     setContactDropDown(false);
+    setToggle(false);
+  };
+
+  const onToggleHandler = () => {
+    setToggle(!toggle);
+    console.log("SD");
   };
 
   useEffect(() => {
@@ -58,6 +65,10 @@ const Header = (props) => {
 
   return (
     <section className={styles.header}>
+      <div className={styles.toggle_container} onClick={onToggleHandler}>
+        <i className={`${styles.toggle_button} fas fa-bars`}></i>
+      </div>
+
       <div className={styles.logo_container}>
         <img
           src="/Modoorock/images/logo_dark.png"
@@ -71,7 +82,11 @@ const Header = (props) => {
       </div>
 
       <nav
-        className={styles.navbar}
+        className={`${
+          toggle
+            ? `${styles.navbar} ${styles.toggle_on}`
+            : `${styles.navbar} ${styles.toggle_off}`
+        }`}
         onMouseEnter={() => {
           setNavbarMouseEnter(true);
         }}
@@ -190,7 +205,14 @@ const Header = (props) => {
           </li>
         </ul>
       </nav>
-      <div className={styles.login_container}>
+      <div
+        className={`${
+          toggle
+            ? `${styles.login_container} ${styles.toggle_on}`
+            : `${styles.login_container} ${styles.toggle_off}`
+        }`}
+        onClick={onToggleHandler}
+      >
         <span
           className={styles.login}
           onClick={() => {
