@@ -15,6 +15,7 @@
 
 .logo {
   cursor: pointer;
+  width: 180px;
 }
 
 .menu_list {
@@ -29,15 +30,16 @@
 .menu_item {
   margin: 0 15px;
   width: 110px;
+  height: 80px;
   text-align: center;
   font-size: var(--font-size-normal);
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 }
 
 .menu_item_title {
-  height: 80px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -65,7 +67,6 @@
   top: 80px;
   background-color: rgb(40, 40, 40);
   padding: 10px;
-  border-top: 3px solid lightgray;
   border-radius: 0 0 4px 4px;
   animation: appear 0.3s;
   list-style: none;
@@ -73,6 +74,7 @@
 
 .on {
   display: block;
+  border-top: 3px solid var(--color-skyblue);
 }
 
 .drop_down_menu_item {
@@ -108,43 +110,67 @@
   .toggle_container {
     display: block;
     position: absolute;
-    top: 17px;
+    top: 10px;
     right: 20px;
     font-size: var(--font-size-title);
   }
 
   .logo_container {
-    height: 80px;
+    height: 65px;
     display: flex;
     flex-direction: column;
     justify-content: center;
   }
 
   .logo {
-    width: 180px;
+    width: 160px;
   }
 
   .menu_list {
+    margin-top: 20px;
     flex-direction: column;
     align-items: center;
     width: 100%;
+    height: auto;
   }
 
   .menu_item {
-    height: 40px;
+    width: 100%;
+    height: auto;
     margin: 10px 0;
+    border-radius: 16px;
+    border: 3px solid lightgray;
+  }
+
+  .menu_item_title {
+    height: auto;
+    margin: 10px;
+  }
+
+  .drop_down_menu {
+    height: auto;
+    position: relative;
+    top: 0;
+    border-radius: 0;
+  }
+
+  .drop_down_menu_item {
+    margin: 10px 0 20px 0;
   }
 
   .toggle_on {
     width: 100%;
     display: block;
   }
+
   .login_container {
+    width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: center;
     padding: 20px;
   }
+
   .toggle_off {
     display: none;
   }

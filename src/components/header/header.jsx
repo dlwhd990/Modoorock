@@ -51,7 +51,6 @@ const Header = (props) => {
 
   const onToggleHandler = () => {
     setToggle(!toggle);
-    console.log("SD");
   };
 
   useEffect(() => {

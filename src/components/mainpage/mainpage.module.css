@@ -204,6 +204,19 @@
 }
 
 @media screen and (max-width: 780px) {
+  .mainpage {
+    margin-top: 65px;
+  }
+
+  .about {
+    height: calc(100vh - 65px);
+  }
+
+  .about_filter {
+    height: calc(100vh - 65px);
+    top: 65px;
+  }
+
   .about_title {
     font-size: var(--font-size-mini-title);
     margin-bottom: 6px;
