@@ -64,7 +64,7 @@ function PrevArrow(props) {
 }
 
 export default class SimpleSliderThree extends Component {
-  state = { slideNum: 3 };
+  state = { slideNum: window.innerWidth > 780 ? 3 : 1 };
   render() {
     const { viewItems } = this.props;
     const settings = {
