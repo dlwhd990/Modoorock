@@ -5,7 +5,6 @@ import Footer from "./components/footer/footer";
 import Header from "./components/header/header";
 import Mainpage from "./components/mainpage/mainpage";
 import LoginPage from "./components/loginPage/loginPage";
-import ServiceIntro from "./components/about/serviceIntro/serviceIntro";
 import Signup from "./components/signup/signup";
 import Programs from "./components/programs/programs";
 import Contact from "./components/contact/contact";

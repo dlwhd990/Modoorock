@@ -14,7 +14,7 @@
 
 .about_filter {
   width: 100%;
-  height: 600px;
+  height: calc(100vh - 80px);
   background-color: rgba(0, 0, 0, 0.3);
   position: absolute;
   top: 80px;
@@ -39,7 +39,7 @@
   animation: appear 0.6s;
 }
 
-.program_container {
+.program_and_video_container {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -54,7 +54,7 @@
   text-align: center;
 }
 
-.program_intro_company_name {
+.program_intro_title_green {
   font-size: var(--font-size-title);
   font-weight: 500;
   color: #40a208;
@@ -137,12 +137,10 @@
   width: 700px;
   padding: 70px 0;
   margin: auto;
-}
-
-.program_list {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 .video_top_filter {
@@ -154,7 +152,7 @@
   background-color: rgba(112, 112, 122, 0.1);
 }
 
-.video_top_intro_company_name {
+.video_top_intro_title_green {
   font-size: var(--font-size-title);
   font-weight: 500;
   color: #40a208;
@@ -202,5 +200,59 @@
   100% {
     transform: translateY(0);
     opacity: 1;
+  }
+}
+
+@media screen and (max-width: 780px) {
+  .program_intro_title_green,
+  .video_top_intro_title_green,
+  .program_intro_title_blue,
+  .video_top_intro_title_blue,
+  .program_intro_title,
+  .video_top_intro_title {
+    font-size: var(--font-size-mini-title);
+    padding: 0 30px;
+  }
+
+  .program_intro_desc,
+  .video_top_intro_desc {
+    font-size: var(--font-size-normal);
+    padding: 0 40px;
+  }
+
+  .program_intro_title_blue,
+  .video_top_intro_title_blue {
+    padding-right: 0;
+  }
+
+  .program_intro_title,
+  .video_top_intro_title {
+    padding-left: 0;
+  }
+
+  .program_intro_title_blue,
+  .video_top_intro_title_blue {
+    margin-right: 8px;
+  }
+
+  .program_intro_title_container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .program_show_all_button {
+    position: static;
+    margin-top: 20px;
+  }
+
+  .program_search_container {
+    width: 90%;
+    padding-left: 16px;
+  }
+
+  .program_list_container {
+    width: 90%;
+    justify-content: center;
   }
 }

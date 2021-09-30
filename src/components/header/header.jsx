@@ -1,6 +1,5 @@
-import React, { useState } from "react";
-import { useHistory } from "react-router";
-import { useEffect } from "react/cjs/react.development";
+import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import styles from "./header.module.css";
 
 const Header = (props) => {
@@ -59,15 +58,17 @@ const Header = (props) => {
 
   return (
     <section className={styles.header}>
-      <img
-        src="/images/logo_dark.png"
-        alt="logo"
-        className={styles.logo}
-        onClick={() => {
-          history.push("/");
-          window.scrollTo({ top: 0 });
-        }}
-      />
+      <div className={styles.logo_container}>
+        <img
+          src="/Modoorock/images/logo_dark.png"
+          alt="logo"
+          className={styles.logo}
+          onClick={() => {
+            history.push("/");
+            window.scrollTo({ top: 0 });
+          }}
+        />
+      </div>
 
       <nav
         className={styles.navbar}

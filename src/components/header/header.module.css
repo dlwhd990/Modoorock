@@ -92,3 +92,27 @@
     opacity: 1;
   }
 }
+
+@media screen and (max-width: 780px) {
+  .header {
+    width: 100vw;
+    height: auto;
+    flex-direction: column;
+  }
+
+  .logo_container {
+    height: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .menu_list {
+    flex-direction: column;
+    display: none;
+  }
+
+  .login_container {
+    display: none;
+  }
+}

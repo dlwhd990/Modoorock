@@ -18,7 +18,11 @@ const Footer = (props) => {
 
       <div className={styles.company_information}>
         <div className={styles.logo_container}>
-          <img src="/images/logo_blue.png" alt="" className={styles.logo} />
+          <img
+            src="/Modoorock/images/logo_blue.png"
+            alt=""
+            className={styles.logo}
+          />
         </div>
         <div className={styles.text_data_container}>
           <p className={styles.info}>(주)모두락 대표: 김은주</p>

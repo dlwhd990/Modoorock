@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useEffect, useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import styled from "styled-components";
@@ -7,6 +7,16 @@ import "slick-carousel/slick/slick-theme.css";
 
 function NextArrow(props) {
   const { className, style, onClick } = props;
+  const [arrowPosition, setArrowPosition] = useState(250);
+  useEffect(() => {
+    if (window.innerWidth > 1200) {
+      setArrowPosition(250);
+    } else if (window.innerWidth > 780) {
+      setArrowPosition(150);
+    } else {
+      setArrowPosition(0);
+    }
+  }, [window.innerWidth]);
   return (
     <div
       className={className}
@@ -16,7 +26,7 @@ function NextArrow(props) {
         width: 20,
         height: 20,
         top: 115,
-        right: 250,
+        right: arrowPosition,
         zIndex: 2,
       }}
       onClick={onClick}
@@ -26,6 +36,16 @@ function NextArrow(props) {
 
 function PrevArrow(props) {
   const { className, style, onClick } = props;
+  const [arrowPosition, setArrowPosition] = useState(250);
+  useEffect(() => {
+    if (window.innerWidth > 1200) {
+      setArrowPosition(250);
+    } else if (window.innerWidth > 780) {
+      setArrowPosition(150);
+    } else {
+      setArrowPosition(0);
+    }
+  }, [window.innerWidth]);
   return (
     <div
       className={className}
@@ -35,7 +55,7 @@ function PrevArrow(props) {
         width: 20,
         height: 20,
         top: 115,
-        left: 250,
+        left: arrowPosition,
         zIndex: 2,
       }}
       onClick={onClick}
@@ -44,6 +64,7 @@ function PrevArrow(props) {
 }
 
 export default class SimpleSliderThree extends Component {
+  state = { slideNum: 3 };
   render() {
     const { viewItems } = this.props;
     const settings = {
@@ -53,8 +74,7 @@ export default class SimpleSliderThree extends Component {
       dots: false,
       infinite: true,
       speed: 500,
-      focusOnSelect: true,
-      slidesToShow: 3,
+      slidesToShow: this.state.slideNum,
       slidesToScroll: 1,
       arrows: true,
       centerMode: true,
@@ -76,5 +96,15 @@ export default class SimpleSliderThree extends Component {
         </Slider>
       </div>
     );
+  }
+  updateDimensions = () => {
+    let num = window.innerWidth > 780 ? 3 : 1;
+    this.setState({ slideNum: num });
+  };
+  componentDidMount() {
+    window.addEventListener("resize", this.updateDimensions);
+  }
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.updateDimensions);
   }
 }

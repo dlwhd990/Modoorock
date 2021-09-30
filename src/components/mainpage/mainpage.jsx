@@ -4,10 +4,6 @@ import styles from "./mainpage.module.css";
 import MainpageProgramItem from "./mainpageProgramItem/mainpageProgramItem";
 
 const Mainpage = ({ sixLatestProgramList, viewItems }) => {
-  const topList = sixLatestProgramList.slice(0, 3);
-  const bottomList = sixLatestProgramList.slice(3);
-  console.log(topList);
-  console.log(bottomList);
   return (
     <section className={styles.mainpage}>
       <div className={styles.about_filter}></div>
@@ -20,14 +16,17 @@ const Mainpage = ({ sixLatestProgramList, viewItems }) => {
           창조하는 미션 투어 전문기업입니다.
         </p>
       </section>
-      <section className={styles.program_container}>
+      <section className={styles.program_and_video_container}>
         <div className={styles.program_intro_container}>
-          <p className={styles.program_intro_company_name}>최근 업데이트 된</p>
+          <p className={styles.program_intro_title_green}>최근 업데이트 된</p>
           <div className={styles.program_intro_title_container}>
-            <span className={styles.program_intro_title_blue}>미션투어!</span>
-            <span className={styles.program_intro_title}>
-              액티비티 체험상품
-            </span>
+            <div className={styles.program_intro_without_button}>
+              <span className={styles.program_intro_title_blue}>미션투어!</span>
+              <span className={styles.program_intro_title}>
+                액티비티 체험상품
+              </span>
+            </div>
+
             <button className={styles.program_show_all_button}>전체보기</button>
           </div>
           <p className={styles.program_intro_desc}>
@@ -44,19 +43,12 @@ const Mainpage = ({ sixLatestProgramList, viewItems }) => {
           <i className={`${styles.search_icon} fas fa-search`}></i>
         </div>
         <div className={styles.program_list_container}>
-          <div className={styles.program_list}>
-            {topList.map((item) => (
-              <MainpageProgramItem key={item.id} item={item} />
-            ))}
-          </div>
-          <div className={styles.program_list}>
-            {bottomList.map((item) => (
-              <MainpageProgramItem key={item.id} item={item} />
-            ))}
-          </div>
+          {sixLatestProgramList.map((item) => (
+            <MainpageProgramItem key={item.id} item={item} />
+          ))}
         </div>
         <div className={styles.video_top_filter}>
-          <p className={styles.video_top_intro_company_name}>MISSION TOUR</p>
+          <p className={styles.video_top_intro_title_green}>MISSION TOUR</p>
           <div className={styles.video_top_intro_title_container}>
             <span className={styles.video_top_intro_title_blue}>미션투어!</span>
             <span className={styles.video_top_intro_title}>홍/보/영/상</span>

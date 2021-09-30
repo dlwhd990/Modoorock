@@ -15,7 +15,7 @@ const AboutUs = (props) => {
         </div>
 
         <img
-          src="/images/about_middle_banner.png"
+          src="/Modoorock/images/about_middle_banner.png"
           alt="banner"
           className={styles.about_us_middle_banner}
         />
@@ -23,12 +23,12 @@ const AboutUs = (props) => {
           <div className={styles.about_us_main}>
             <div className={styles.about_us_main_image_container}>
               <img
-                src="/images/about_us_main_image.png"
+                src="/Modoorock/images/about_us_main_image.png"
                 alt="main_image"
                 className={styles.about_us_main_image}
               />
               <img
-                src="/images/about_middle_circle.png"
+                src="/Modoorock/images/about_middle_circle.png"
                 alt=""
                 className={styles.about_us_main_circle}
               />
@@ -174,7 +174,7 @@ const AboutUs = (props) => {
           </p>
           <div className={styles.short_divide_line_under_title}></div>
           <img
-            src="/images/about_partners.png"
+            src="/Modoorock/images/about_partners.png"
             alt="partners_image"
             className={styles.about_us_partners_image}
           />
@@ -184,7 +184,7 @@ const AboutUs = (props) => {
           <p className={styles.about_us_map_subtitle}>오시는 길</p>
           <div className={styles.short_divide_line_under_title}></div>
           <img
-            src="/images/about_map.png"
+            src="/Modoorock/images/about_map.png"
             alt="partners_image"
             className={styles.about_us_map_image}
           />
