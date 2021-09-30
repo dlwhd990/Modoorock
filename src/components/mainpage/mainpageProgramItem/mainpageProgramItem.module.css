@@ -37,3 +37,15 @@
   color: #0070c8;
   font-weight: 500;
 }
+
+@media screen and (max-width: 780px) {
+  .program_item {
+    width: 150px;
+  }
+  .program_image {
+    width: 150px;
+  }
+  .program_data_container {
+    width: 150px;
+  }
+}

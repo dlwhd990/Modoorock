@@ -13,18 +13,6 @@ const AboutUs = (props) => {
           <i className={`${styles.arrow_icon} fas fa-chevron-right`}></i>
           <p className={styles.route_button}>회사소개</p>
         </div>
-        <div className={styles.about_us_middle_banner_container}>
-          <img
-            src="/Modoorock/images/about_middle_left.png"
-            alt="banner"
-            className={styles.about_us_middle_banner_left}
-          />
-          <img
-            src="/Modoorock/images/about_middle_right.png"
-            alt="banner"
-            className={styles.about_us_middle_banner_right}
-          />
-        </div>
 
         <section className={styles.about_us_main_container}>
           <div className={styles.about_us_main}>

@@ -149,6 +149,7 @@ const Header = (props) => {
               <li
                 className={styles.drop_down_menu_item}
                 onClick={() => {
+                  dropDownAllOff();
                   history.push("/programs");
                   window.scrollTo({ top: 0 });
                 }}
@@ -194,6 +195,7 @@ const Header = (props) => {
               <li
                 className={styles.drop_down_menu_item}
                 onClick={() => {
+                  dropDownAllOff();
                   history.push("/contact");
                   window.scrollTo({ top: 0 });
                 }}
