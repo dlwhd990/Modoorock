@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from "./aboutUs.module.css";
 
 const AboutUs = (props) => {
@@ -7,18 +7,25 @@ const AboutUs = (props) => {
       <section className={styles.about_us_container}>
         <h1 className={styles.title}>회사소개</h1>
         <div className={styles.route_button_container}>
-          <i class={`${styles.home_icon} fas fa-home`}></i>
-          <i class={`${styles.arrow_icon} fas fa-chevron-right`}></i>
+          <i className={`${styles.home_icon} fas fa-home`}></i>
+          <i className={`${styles.arrow_icon} fas fa-chevron-right`}></i>
           <p className={styles.route_button}>소개</p>
-          <i class={`${styles.arrow_icon} fas fa-chevron-right`}></i>
+          <i className={`${styles.arrow_icon} fas fa-chevron-right`}></i>
           <p className={styles.route_button}>회사소개</p>
         </div>
+        <div className={styles.about_us_middle_banner_container}>
+          <img
+            src="/Modoorock/images/about_middle_left.png"
+            alt="banner"
+            className={styles.about_us_middle_banner_left}
+          />
+          <img
+            src="/Modoorock/images/about_middle_right.png"
+            alt="banner"
+            className={styles.about_us_middle_banner_right}
+          />
+        </div>
 
-        <img
-          src="/Modoorock/images/about_middle_banner.png"
-          alt="banner"
-          className={styles.about_us_middle_banner}
-        />
         <section className={styles.about_us_main_container}>
           <div className={styles.about_us_main}>
             <div className={styles.about_us_main_image_container}>
@@ -173,11 +180,61 @@ const AboutUs = (props) => {
             모두락과 함께하는 파트너입니다.
           </p>
           <div className={styles.short_divide_line_under_title}></div>
-          <img
-            src="/Modoorock/images/about_partners.png"
-            alt="partners_image"
-            className={styles.about_us_partners_image}
-          />
+          <div className={styles.about_us_partners_image_container}>
+            <div className={styles.about_us_partners_image_four_div}>
+              {" "}
+              <div className={styles.about_us_partners_image_box}>
+                <img
+                  src="/Modoorock/images/about_partners_1.png"
+                  alt="partners_image"
+                  className={styles.about_us_partners_image}
+                />
+                <img
+                  src="/Modoorock/images/about_partners_2.png"
+                  alt="partners_image"
+                  className={styles.about_us_partners_image}
+                />
+              </div>
+              <div className={styles.about_us_partners_image_box}>
+                <img
+                  src="/Modoorock/images/about_partners_3.png"
+                  alt="partners_image"
+                  className={styles.about_us_partners_image}
+                />
+                <img
+                  src="/Modoorock/images/about_partners_4.png"
+                  alt="partners_image"
+                  className={styles.about_us_partners_image}
+                />
+              </div>
+            </div>
+            <div className={styles.about_us_partners_image_four_div}>
+              <div className={styles.about_us_partners_image_box}>
+                <img
+                  src="/Modoorock/images/about_partners_5.png"
+                  alt="partners_image"
+                  className={styles.about_us_partners_image}
+                />
+                <img
+                  src="/Modoorock/images/about_partners_6.png"
+                  alt="partners_image"
+                  className={styles.about_us_partners_image}
+                />
+              </div>
+              <div className={styles.about_us_partners_image_box}>
+                <img
+                  src="/Modoorock/images/about_partners_7.png"
+                  alt="partners_image"
+                  className={styles.about_us_partners_image}
+                />
+                <img
+                  src="/Modoorock/images/about_partners_8.png"
+                  alt="partners_image"
+                  className={styles.about_us_partners_image}
+                />
+              </div>
+            </div>
+          </div>
         </section>
         <section className={styles.about_us_map_container}>
           <h1 className={styles.about_us_map_title}>ADDRESS MAP</h1>
