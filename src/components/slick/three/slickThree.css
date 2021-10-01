@@ -34,6 +34,12 @@
   color: white;
 }
 
+.arrow {
+  width: 40px;
+  height: 40px;
+  border-radius: 4px;
+}
+
 @media screen and (max-width: 780px) {
   .slick-center {
     transform: scale(1.15) translateY(50px);

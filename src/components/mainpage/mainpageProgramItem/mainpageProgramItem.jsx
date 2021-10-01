@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./mainpageProgramItem.module.css";
 
-const MainpageProgramItem = ({ item }) => {
+const MainpageProgramItem = React.memo(({ item }) => {
   return (
     <div className={styles.program_item}>
       <img
@@ -15,6 +15,6 @@ const MainpageProgramItem = ({ item }) => {
       </div>
     </div>
   );
-};
+});
 
 export default MainpageProgramItem;

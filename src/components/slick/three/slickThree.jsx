@@ -1,7 +1,6 @@
 import React, { Component, useEffect, useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
-import styled from "styled-components";
 import "./slickThree.css";
 import "slick-carousel/slick/slick-theme.css";
 
@@ -14,20 +13,23 @@ function NextArrow(props) {
     } else if (window.innerWidth > 780) {
       setArrowPosition(150);
     } else {
-      setArrowPosition(0);
+      setArrowPosition(-20);
     }
   }, [window.innerWidth]);
   return (
-    <div
-      className={className}
+    <img
+      src="/Modoorock/images/arrow_next.png"
+      alt="arrow"
+      className={`${className} arrow`}
       style={{
         ...style,
         display: "block",
-        width: 20,
-        height: 20,
+        width: 40,
+        height: 40,
         top: 115,
         right: arrowPosition,
         zIndex: 2,
+        backgroundColor: "transparent",
       }}
       onClick={onClick}
     />
@@ -43,20 +45,23 @@ function PrevArrow(props) {
     } else if (window.innerWidth > 780) {
       setArrowPosition(150);
     } else {
-      setArrowPosition(0);
+      setArrowPosition(-20);
     }
   }, [window.innerWidth]);
   return (
-    <div
-      className={className}
+    <img
+      src="/Modoorock/images/arrow_prev.png"
+      alt="arrow"
+      className={`${className} arrow`}
       style={{
         ...style,
         display: "block",
-        width: 20,
-        height: 20,
+        width: 40,
+        height: 40,
         top: 115,
         left: arrowPosition,
         zIndex: 2,
+        backgroundColor: "transparent",
       }}
       onClick={onClick}
     />

@@ -41,6 +41,7 @@
 @media screen and (max-width: 780px) {
   .program_item {
     width: 150px;
+    margin: 0 5px;
   }
   .program_image {
     width: 150px;
