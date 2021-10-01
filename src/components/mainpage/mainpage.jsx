@@ -44,7 +44,7 @@ const Mainpage = ({ sixLatestProgramList, viewItems }) => {
         </div>
         <div className={styles.program_list_container}>
           {sixLatestProgramList.map((item) => (
-            <MainpageProgramItem key={item.id} item={item} />
+            <MainpageProgramItem key={item.idx} item={item} />
           ))}
         </div>
         <div className={styles.video_top_filter}>

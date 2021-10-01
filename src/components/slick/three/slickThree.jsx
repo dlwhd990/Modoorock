@@ -88,14 +88,19 @@ export default class SimpleSliderThree extends Component {
       nextArrow: <NextArrow />,
       prevArrow: <PrevArrow />,
     };
-
     return (
       <div className="slick_container">
         <Slider {...settings}>
           {viewItems.map((item) => (
-            <div key={item.id} className="image_box">
-              <img src={item.image_url} alt="slide_image" className="image" />
-              <p className="desc">{item.desc}</p>
+            <div key={item.idx} className="image_box">
+              <a href={item.content} className="item_a_tag">
+                <img
+                  src={item.thumbnail}
+                  alt="thumbnail"
+                  className="thumbnail"
+                />
+                <p className="title">{item.title}</p>
+              </a>
             </div>
           ))}
         </Slider>

@@ -32,13 +32,22 @@ const Footer = (props) => {
         </div>
       </div>
       <div className={styles.button_container}>
-        <i
-          className={`${styles.icon} ${styles.facebook} fab fa-facebook-square`}
-        ></i>
-        <i
-          className={`${styles.icon} ${styles.instagram} fab fa-instagram`}
-        ></i>
-        <i className={`${styles.icon} ${styles.youtube} fab fa-youtube`}></i>
+        <a href="https://www.facebook.com/" className={styles.icon_a_tag}>
+          <i
+            className={`${styles.icon} ${styles.facebook} fab fa-facebook-square`}
+          ></i>
+        </a>
+        <a
+          href="https://www.instagram.com/?hl=ko"
+          className={styles.icon_a_tag}
+        >
+          <i
+            className={`${styles.icon} ${styles.instagram} fab fa-instagram`}
+          ></i>
+        </a>
+        <a href="https://www.youtube.com/" className={styles.icon_a_tag}>
+          <i className={`${styles.icon} ${styles.youtube} fab fa-youtube`}></i>
+        </a>
       </div>
     </section>
   );

@@ -110,23 +110,27 @@
 .about_us_main_history_content_container {
   width: 100%;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: center;
   margin-top: 60px;
 }
 
 .about_us_main_history_content {
-  width: 100%;
+  flex-basis: 42%;
   display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: flex-start;
+  flex-direction: column;
   margin: 10px 0;
 }
 
 .about_us_main_history_content_text_container {
-  flex-basis: 33%;
+  margin: auto;
+  height: 120px;
   text-align: center;
   color: white;
+}
+
+.long {
+  height: 270px;
 }
 
 .about_us_main_history_content_title {
@@ -277,14 +281,23 @@
   }
 
   .about_us_main_history_content_container {
+    flex-direction: column;
     margin: 0;
     font-size: var(--font-size-small);
   }
 
+  .long {
+    height: auto;
+  }
+
   .about_us_main_history_content {
-    flex-direction: column;
+    margin: 0;
     align-items: center;
     padding: 0 30px;
+  }
+
+  .about_us_main_history_content_text_container {
+    margin: 10px 0;
   }
 
   .about_us_partners_image_four_div {

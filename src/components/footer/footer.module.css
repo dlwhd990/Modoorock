@@ -22,9 +22,12 @@
   right: 200px;
 }
 
-.icon {
+.icon_a_tag {
   margin: 0 15px;
-  font-size: 22px;
+}
+
+.icon {
+  font-size: 24px;
   cursor: pointer;
 }
 

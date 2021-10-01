@@ -51,7 +51,7 @@ const Programs = ({ programList }) => {
         </div>
         <div className={styles.content_container}>
           {resultProgramList.map((item) => (
-            <ProgramItem key={item.id} program={item} />
+            <ProgramItem key={item.idx} program={item} />
           ))}
         </div>
       </section>

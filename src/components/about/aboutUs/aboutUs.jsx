@@ -80,23 +80,7 @@ const AboutUs = (props) => {
                   </p>
                 </div>
                 <div
-                  className={
-                    styles.about_us_main_history_content_text_container
-                  }
-                >
-                  <p className={styles.about_us_main_history_content_title}>
-                    2018
-                  </p>
-                  <p className={styles.about_us_main_history_content_text}>
-                    KTO, 관광벤처기업 지정
-                  </p>
-                </div>
-              </div>
-              <div className={styles.about_us_main_history_content}>
-                <div
-                  className={
-                    styles.about_us_main_history_content_text_container
-                  }
+                  className={`${styles.about_us_main_history_content_text_container} ${styles.long}`}
                 >
                   <p className={styles.about_us_main_history_content_title}>
                     2016
@@ -121,14 +105,10 @@ const AboutUs = (props) => {
                   }
                 >
                   <p className={styles.about_us_main_history_content_title}>
-                    2019
+                    2017
                   </p>
                   <p className={styles.about_us_main_history_content_text}>
-                    KTO, MICE 육성기업 선정<br></br>
-                    문화체육관광부 DMZ투어 개발 <br></br>
-                    '남산골 런닝맨' 직영 <br></br>
-                    '청계천 진로체험' 운영 <br></br>
-                    수원 '전통시장' 미션투어 체험상품 개발 및 운영
+                    관광게이미피케이션 ' 북촌런닝맨' 패키지 체험관광상품 런칭
                   </p>
                 </div>
               </div>
@@ -139,10 +119,24 @@ const AboutUs = (props) => {
                   }
                 >
                   <p className={styles.about_us_main_history_content_title}>
-                    2017
+                    2018
                   </p>
                   <p className={styles.about_us_main_history_content_text}>
-                    관광게이미피케이션 ' 북촌런닝맨' 패키지 체험관광상품 런칭
+                    KTO, 관광벤처기업 지정
+                  </p>
+                </div>
+                <div
+                  className={`${styles.about_us_main_history_content_text_container} ${styles.long}`}
+                >
+                  <p className={styles.about_us_main_history_content_title}>
+                    2019
+                  </p>
+                  <p className={styles.about_us_main_history_content_text}>
+                    KTO, MICE 육성기업 선정<br></br>
+                    문화체육관광부 DMZ투어 개발 <br></br>
+                    '남산골 런닝맨' 직영 <br></br>
+                    '청계천 진로체험' 운영 <br></br>
+                    수원 '전통시장' 미션투어 체험상품 개발 및 운영
                   </p>
                 </div>
                 <div
