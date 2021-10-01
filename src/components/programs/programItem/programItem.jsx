@@ -1,21 +1,26 @@
 import React from "react";
+import { useHistory } from "react-router";
 import styles from "./programItem.module.css";
 
-const ProgramItem = ({ program }) => {
+const ProgramItem = React.memo(({ item }) => {
+  const history = useHistory();
+  const onItemClickHandler = () => {
+    history.push("/programs");
+    window.scrollTo({ top: 0 });
+  };
   return (
-    <section className={styles.program_item}>
+    <div className={styles.program_item} onClick={onItemClickHandler}>
       <img
-        src={program.image_url}
+        src={item.photo}
         alt="program_image"
-        className={styles.item_image}
+        className={styles.program_image}
       />
-      <div className={styles.data_container}>
-        <p className={styles.title}>{program.title}</p>
-        <p className={styles.subtitle}>{program.subtitle}</p>
-        <p className={styles.location}>{program.location}</p>
+      <div className={styles.program_data_container}>
+        <p className={styles.program_title}>{item.title}</p>
+        <p className={styles.program_price}>{`${item.price}원`}</p>
       </div>
-    </section>
+    </div>
   );
-};
+});
 
 export default ProgramItem;

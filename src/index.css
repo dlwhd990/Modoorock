@@ -9,10 +9,12 @@
 body {
   margin: 0;
   font-family: "Noto Sans KR", sans-serif;
+  color: var(--color-black);
 }
 
 input {
   font-family: "Noto Sans KR", sans-serif;
+  color: var(--color-black);
 }
 
 code {

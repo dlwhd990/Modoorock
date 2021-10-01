@@ -1,9 +1,9 @@
 import React from "react";
+import ProgramItem from "../programs/programItem/programItem";
 import SimpleSliderThree from "../slick/three/slickThree";
 import styles from "./mainpage.module.css";
-import MainpageProgramItem from "./mainpageProgramItem/mainpageProgramItem";
 
-const Mainpage = ({ sixLatestProgramList, viewItems }) => {
+const Mainpage = ({ programList, viewItems }) => {
   const goUpButtonHandler = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
@@ -52,8 +52,8 @@ const Mainpage = ({ sixLatestProgramList, viewItems }) => {
           <i className={`${styles.search_icon} fas fa-search`}></i>
         </div>
         <div className={styles.program_list_container}>
-          {sixLatestProgramList.map((item) => (
-            <MainpageProgramItem key={item.idx} item={item} />
+          {programList.map((item) => (
+            <ProgramItem key={item.idx} item={item} />
           ))}
         </div>
         <div className={styles.video_top_filter}>

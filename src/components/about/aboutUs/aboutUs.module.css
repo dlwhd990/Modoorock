@@ -238,11 +238,11 @@
   }
 
   .title {
-    margin: 0 0 20px 0;
+    margin: 0 0 30px 0;
   }
 
   .about_us_main_container {
-    margin-top: 30px;
+    margin-top: 10px;
     height: 2200px;
   }
 
@@ -272,6 +272,7 @@
 
   .about_us_main_intro {
     font-size: 20px;
+    font-weight: 500;
   }
 
   .about_us_main_intro_desc {

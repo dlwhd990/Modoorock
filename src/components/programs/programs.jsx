@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import ProgramItem from "./programItem/programItem";
 import styles from "./programs.module.css";
 import { debounce } from "lodash";
@@ -51,7 +51,7 @@ const Programs = ({ programList }) => {
         </div>
         <div className={styles.content_container}>
           {resultProgramList.map((item) => (
-            <ProgramItem key={item.idx} program={item} />
+            <ProgramItem key={item.idx} item={item} />
           ))}
         </div>
       </section>

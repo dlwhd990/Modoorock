@@ -135,12 +135,12 @@
 }
 
 .program_list_container {
-  width: 700px;
+  width: 750px;
   padding: 70px 0;
   margin: auto;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
   flex-wrap: wrap;
 }
 
@@ -253,6 +253,7 @@
 
   .about {
     height: calc(100vh - 65px);
+    padding: 0 30px;
   }
 
   .about_filter {
@@ -261,7 +262,8 @@
   }
 
   .about_title {
-    font-size: var(--font-size-mini-title);
+    width: 100%;
+    font-size: 28px;
     margin-bottom: 6px;
   }
   .about_desc {

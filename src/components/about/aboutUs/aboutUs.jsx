@@ -7,7 +7,7 @@ const AboutUs = (props) => {
   return (
     <section className={styles.about_us}>
       <section className={styles.about_us_container}>
-        <h1 className={styles.title}>회사소개</h1>
+        <h1 className={styles.title}>회사 소개</h1>
         <div className={styles.route_button_container}>
           <div
             className={styles.home_icon_container}
