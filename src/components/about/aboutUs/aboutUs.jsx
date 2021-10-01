@@ -1,17 +1,44 @@
 import React from "react";
+import { useHistory } from "react-router";
 import styles from "./aboutUs.module.css";
 
 const AboutUs = (props) => {
+  const history = useHistory();
   return (
     <section className={styles.about_us}>
       <section className={styles.about_us_container}>
         <h1 className={styles.title}>회사소개</h1>
         <div className={styles.route_button_container}>
-          <i className={`${styles.home_icon} fas fa-home`}></i>
+          <div
+            className={styles.home_icon_container}
+            onClick={() => {
+              history.push("/");
+              window.scrollTo({ top: 0 });
+            }}
+          >
+            <i className={`${styles.home_icon} fas fa-home`}></i>
+          </div>
+
           <i className={`${styles.arrow_icon} fas fa-chevron-right`}></i>
-          <p className={styles.route_button}>소개</p>
+          <p
+            className={styles.route_button}
+            onClick={() => {
+              history.push("/introduce/about");
+              window.scrollTo({ top: 0 });
+            }}
+          >
+            소개
+          </p>
           <i className={`${styles.arrow_icon} fas fa-chevron-right`}></i>
-          <p className={styles.route_button}>회사소개</p>
+          <p
+            className={styles.route_button}
+            onClick={() => {
+              history.push("/introduce/about");
+              window.scrollTo({ top: 0 });
+            }}
+          >
+            회사소개
+          </p>
         </div>
 
         <section className={styles.about_us_main_container}>

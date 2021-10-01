@@ -38,14 +38,17 @@ const Footer = (props) => {
           ></i>
         </a>
         <a
-          href="https://www.instagram.com/?hl=ko"
+          href="https://www.instagram.com/modoorock_tour/"
           className={styles.icon_a_tag}
         >
           <i
             className={`${styles.icon} ${styles.instagram} fab fa-instagram`}
           ></i>
         </a>
-        <a href="https://www.youtube.com/" className={styles.icon_a_tag}>
+        <a
+          href="https://www.youtube.com/channel/UCdTY_FXXLbtdNXXN9H3pXrg"
+          className={styles.icon_a_tag}
+        >
           <i className={`${styles.icon} ${styles.youtube} fab fa-youtube`}></i>
         </a>
       </div>

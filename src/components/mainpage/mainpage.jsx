@@ -4,6 +4,15 @@ import styles from "./mainpage.module.css";
 import MainpageProgramItem from "./mainpageProgramItem/mainpageProgramItem";
 
 const Mainpage = ({ sixLatestProgramList, viewItems }) => {
+  const goUpButtonHandler = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const videoAllShowHandler = () => {
+    window.location.href =
+      "https://www.youtube.com/channel/UCdTY_FXXLbtdNXXN9H3pXrg";
+  };
+
   return (
     <section className={styles.mainpage}>
       <div className={styles.about_filter}></div>
@@ -58,6 +67,15 @@ const Mainpage = ({ sixLatestProgramList, viewItems }) => {
           <div className={styles.slick_container}>
             <SimpleSliderThree viewItems={viewItems} />
           </div>
+          <div className={styles.go_up_button} onClick={goUpButtonHandler}>
+            <i className={`${styles.go_up_icon} fas fa-arrow-up`}></i>
+          </div>
+          <button
+            className={styles.video_show_all_button}
+            onClick={videoAllShowHandler}
+          >
+            전체보기
+          </button>
         </div>
       </section>
     </section>

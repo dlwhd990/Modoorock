@@ -1,9 +1,15 @@
 import React from "react";
+import { useHistory } from "react-router";
 import styles from "./mainpageProgramItem.module.css";
 
 const MainpageProgramItem = React.memo(({ item }) => {
+  const history = useHistory();
+  const onItemClickHandler = () => {
+    history.push("/programs");
+    window.scrollTo({ top: 0 });
+  };
   return (
-    <div className={styles.program_item}>
+    <div className={styles.program_item} onClick={onItemClickHandler}>
       <img
         src={item.photo}
         alt="program_image"

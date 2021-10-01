@@ -29,7 +29,6 @@ function NextArrow(props) {
         top: 115,
         right: arrowPosition,
         zIndex: 2,
-        backgroundColor: "transparent",
       }}
       onClick={onClick}
     />
@@ -93,14 +92,15 @@ export default class SimpleSliderThree extends Component {
         <Slider {...settings}>
           {viewItems.map((item) => (
             <div key={item.idx} className="image_box">
-              <a href={item.content} className="item_a_tag">
-                <img
-                  src={item.thumbnail}
-                  alt="thumbnail"
-                  className="thumbnail"
-                />
-                <p className="title">{item.title}</p>
-              </a>
+              <img
+                src={item.thumbnail}
+                alt="thumbnail"
+                className="thumbnail"
+                onClick={() => {
+                  window.location.href = item.content;
+                }}
+              />
+              <p className="title">{item.title}</p>
             </div>
           ))}
         </Slider>

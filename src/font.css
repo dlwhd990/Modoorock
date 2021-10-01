@@ -1,0 +1,12 @@
+@font-face {
+  font-family: s-core-dream;
+  src: url("/src/fonts/SCDream1.otf") format("woff");
+  src: url("/src/fonts/SCDream2.otf") format("woff");
+  src: url("/src/fonts/SCDream3.otf") format("woff");
+  src: url("/src/fonts/SCDream4.otf") format("woff");
+  src: url("/src/fonts/SCDream5.otf") format("woff");
+  src: url("/src/fonts/SCDream6.otf") format("woff");
+  src: url("/src/fonts/SCDream7.otf") format("woff");
+  src: url("/src/fonts/SCDream8.otf") format("woff");
+  src: url("/src/fonts/SCDream9.otf") format("woff");
+}
