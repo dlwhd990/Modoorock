@@ -117,7 +117,7 @@ const Header = (props) => {
                   window.scrollTo({ top: 0 });
                 }}
               >
-                회사소개
+                회사 소개
               </li>
               <li
                 className={styles.drop_down_menu_item}
@@ -127,7 +127,7 @@ const Header = (props) => {
                   window.scrollTo({ top: 0 });
                 }}
               >
-                서비스소개
+                서비스 소개
               </li>
             </ul>
           </li>
@@ -154,7 +154,7 @@ const Header = (props) => {
                   window.scrollTo({ top: 0 });
                 }}
               >
-                프로그램소개
+                프로그램 소개
               </li>
             </ul>
           </li>

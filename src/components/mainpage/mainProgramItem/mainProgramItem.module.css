@@ -1,0 +1,67 @@
+.program_item {
+  width: 210px;
+  margin: 0 12px;
+  cursor: pointer;
+  transition: 170ms all ease-in;
+  animation: appear 0.5s;
+}
+
+.program_item:hover {
+  transform: scale(1.02);
+}
+
+.program_image {
+  width: 210px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px lightgray;
+}
+
+.program_data_container {
+  width: 210px;
+  height: 108px;
+  box-shadow: 0 0 10px lightgray;
+  padding: 15px 10px;
+  transform: translateY(-50px);
+  background-color: white;
+  border-radius: 8px;
+  position: relative;
+}
+
+.program_title {
+  margin: 0;
+  margin-bottom: 30px;
+}
+
+.program_price {
+  margin: 0;
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  color: #0070c8;
+  font-weight: 500;
+}
+
+@keyframes appear {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media screen and (max-width: 780px) {
+  .program_item {
+    width: 150px;
+    margin: 0 5px;
+  }
+  .program_image {
+    width: 150px;
+  }
+  .program_data_container {
+    width: 150px;
+  }
+}

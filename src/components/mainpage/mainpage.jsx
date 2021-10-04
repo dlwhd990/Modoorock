@@ -1,7 +1,7 @@
 import React from "react";
-import ProgramItem from "../programs/programItem/programItem";
 import SimpleSliderThree from "../slick/three/slickThree";
 import styles from "./mainpage.module.css";
+import MainProgramItem from "./mainProgramItem/mainProgramItem";
 
 const Mainpage = ({ programList, viewItems }) => {
   const goUpButtonHandler = () => {
@@ -53,7 +53,7 @@ const Mainpage = ({ programList, viewItems }) => {
         </div>
         <div className={styles.program_list_container}>
           {programList.map((item) => (
-            <ProgramItem key={item.idx} item={item} />
+            <MainProgramItem key={item.idx} item={item} />
           ))}
         </div>
         <div className={styles.video_top_filter}>

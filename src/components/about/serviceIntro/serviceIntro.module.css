@@ -1,10 +1,40 @@
 .service_intro {
   margin-top: 120px;
+
   animation: appear 1s;
+}
+
+.title {
+  text-align: center;
+  font-size: var(--font-size-title);
+  font-weight: 500;
+  margin-bottom: 40px;
+}
+
+.route_button_container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.home_icon,
+.home_icon_container,
+.arrow_icon,
+.route_button {
+  margin: 0 15px;
+  color: var(--color-desc);
+  font-weight: 300;
+}
+
+.home_icon_container,
+.route_button {
+  cursor: pointer;
 }
 
 .our_service_container {
   min-height: 500px;
+  margin-top: 150px;
 }
 
 .our_service_title {
@@ -26,31 +56,63 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  padding: 0 15%;
+  padding: 0 8%;
+  margin-top: 100px;
+  margin-bottom: 150px;
 }
 
-.our_service_content {
-  flex-basis: 45%;
-}
-
-.service_image {
-  width: 100%;
-  height: 240px;
+.service_content_left {
+  flex-basis: 47%;
+  height: 400px;
   border-radius: 8px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: white;
   box-shadow: 0 0 10px lightgray;
+  background: url("../../../background_images/service_left.jpeg") center/cover
+    no-repeat;
 }
 
-.service_desc {
-  text-align: center;
+.service_content_right {
+  flex-basis: 47%;
+  height: 400px;
+  border-radius: 8px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: white;
+  box-shadow: 0 0 10px lightgray;
+  background: url("../../../background_images/service_right.png") center/cover
+    no-repeat;
 }
 
+.content_top_text {
+  margin: 0;
+  font-weight: 700;
+  font-size: var(--font-size-big);
+}
+
+.content_title {
+  font-size: var(--font-size-mini-title);
+  font-weight: 500;
+  margin: 8px 0;
+}
+
+.content_desc {
+  font-size: var(--font-size-big);
+  font-weight: 300;
+}
 .mission_container {
-  background-color: var(--color-smoke-white);
-  min-height: 400px;
+  height: 830px;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding-bottom: 80px;
+  background: url("../../../background_images/service_middle.png") center/cover
+    no-repeat;
 }
 
 .mission_container_title {
@@ -74,35 +136,6 @@
 .mission_video_container {
   width: 100%;
   margin-top: 20px;
-}
-
-.go_youtube_button {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  border: none;
-  outline: none;
-  background-color: rgb(255, 0, 5);
-  color: white;
-  font-size: var(--font-size-big);
-  width: 160px;
-  height: 45px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: 120ms all ease-in;
-}
-
-.youtube_a_tag {
-  text-decoration: none;
-}
-.go_youtube_button_text {
-  margin-left: 4px;
-  font-weight: 700;
-}
-
-.go_youtube_button:hover {
-  transform: scale(1.05);
 }
 
 @keyframes appear {

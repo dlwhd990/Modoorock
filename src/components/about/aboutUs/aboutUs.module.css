@@ -218,6 +218,7 @@
 .about_us_map_image {
   margin: 40px 0;
   border-radius: 16px;
+  box-shadow: 0 0 10px lightgray;
 }
 
 @keyframes appear {
@@ -317,6 +318,6 @@
   }
 
   .about_us_map_image {
-    width: 95%;
+    width: 90%;
   }
 }

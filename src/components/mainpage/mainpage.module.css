@@ -1,9 +1,5 @@
-.mainpage {
-  margin-top: 80px;
-}
-
 .about {
-  height: calc(100vh - 80px);
+  height: calc(100vh);
   background: url("../../background_images/main_top.png") center/cover no-repeat;
   padding: 0 20%;
   display: flex;
@@ -14,10 +10,10 @@
 
 .about_filter {
   width: 100%;
-  height: calc(100vh - 80px);
+  height: calc(100vh);
   background-color: rgba(0, 0, 0, 0.3);
   position: absolute;
-  top: 80px;
+  top: 0;
   z-index: 1;
 }
 
@@ -101,7 +97,7 @@
 }
 
 .program_search_container {
-  width: 50%;
+  width: 680px;
   height: 50px;
   text-align: center;
   margin-top: 30px;
@@ -320,8 +316,12 @@
   }
 
   .program_search_container {
-    width: 90%;
+    width: 85%;
     padding-left: 16px;
+  }
+
+  .search_input {
+    font-size: var(--font-size-normal);
   }
 
   .program_list_container {

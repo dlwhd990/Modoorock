@@ -67,7 +67,7 @@ const App = (props) => {
   const [programList, setProgramList] = useState([
     {
       idx: 0,
-      title: "포켓동물원",
+      title: "포켓동물원 포켓동물원 포켓동물원",
       area: "[과천 - 서울대공원]",
       user_idx: "관리자(보류)",
       date: "보류",
