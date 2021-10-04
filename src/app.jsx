@@ -13,6 +13,8 @@ import FindPw from "./components/find/findPw/findPw";
 import Introduce from "./components/about/introduce";
 import ProgramDetail from "./components/programs/programDetail/programDetail";
 import CustomPaging from "./components/slick/customPaging/customPaging";
+import Notice from "./components/customerCenter/notice/notice";
+import CustomerCenter from "./components/customerCenter/customerCenter";
 
 const App = (props) => {
   const [mainPageSlick, setMainPageSlick] = useState([
@@ -158,12 +160,13 @@ const App = (props) => {
         <Route exact path="/programs/:path">
           <Programs programList={programList} />
         </Route>
+        <Route exact path="/customer/:path">
+          <CustomerCenter />
+        </Route>
         <Route exact path="/contact">
           <Contact />
         </Route>
-        <Route exact path="/test">
-          <CustomPaging />
-        </Route>
+
         <Footer />
       </BrowserRouter>
     </section>

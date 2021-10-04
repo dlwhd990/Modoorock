@@ -173,8 +173,26 @@ const Header = (props) => {
                 setDropDownMouseEnter(false);
               }}
             >
-              <li className={styles.drop_down_menu_item}>공지사항</li>
-              <li className={styles.drop_down_menu_item}>문의게시판</li>
+              <li
+                className={styles.drop_down_menu_item}
+                onClick={() => {
+                  dropDownAllOff();
+                  history.push("/customer/notice");
+                  window.scrollTo({ top: 0 });
+                }}
+              >
+                공지사항
+              </li>
+              <li
+                className={styles.drop_down_menu_item}
+                onClick={() => {
+                  dropDownAllOff();
+                  history.push("/customer/inquire");
+                  window.scrollTo({ top: 0 });
+                }}
+              >
+                문의게시판
+              </li>
             </ul>
           </li>
           <li className={styles.menu_item} onMouseEnter={contactDropDownOn}>

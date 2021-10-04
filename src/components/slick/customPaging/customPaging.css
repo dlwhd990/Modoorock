@@ -1,27 +1,32 @@
 .custom_paging_container .slick-slider,
 .custom_paging_container .slick-list,
 .custom_paging_container .slick-track {
-  width: 450px;
-  height: 530px;
+  width: 500px;
+  height: 570px;
 }
 
 .custom_paging_container .slick-slider {
   transform: translateY(-100px);
 }
 .custom_paging_container .slick-active .slick-current {
-  width: 450px;
-  height: 450px;
+  width: 500px;
+  height: 500px;
 }
 
 .slick-slide .image {
-  width: 430px;
-  height: 430px;
+  width: 500px;
+  height: 500px;
   margin: auto;
   margin-top: 10px;
 }
 
 .slick-dots .dot_image,
 .slick-dots li {
-  width: 70px;
-  height: 50px;
+  width: 100px;
+  height: 80px;
+  box-shadow: 0 0 5px lightgray;
+}
+
+.slick-dots {
+  transform: translateY(50px);
 }
