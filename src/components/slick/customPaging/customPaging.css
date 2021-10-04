@@ -1,0 +1,27 @@
+.custom_paging_container .slick-slider,
+.custom_paging_container .slick-list,
+.custom_paging_container .slick-track {
+  width: 450px;
+  height: 530px;
+}
+
+.custom_paging_container .slick-slider {
+  transform: translateY(-100px);
+}
+.custom_paging_container .slick-active .slick-current {
+  width: 450px;
+  height: 450px;
+}
+
+.slick-slide .image {
+  width: 430px;
+  height: 430px;
+  margin: auto;
+  margin-top: 10px;
+}
+
+.slick-dots .dot_image,
+.slick-dots li {
+  width: 70px;
+  height: 50px;
+}

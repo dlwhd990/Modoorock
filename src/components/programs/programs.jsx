@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import ProgramItem from "./programItem/programItem";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import styles from "./programs.module.css";
 import { debounce } from "lodash";
+import ProgramDetail from "./programDetail/programDetail";
 
 const Programs = ({ programList }) => {
   const history = useHistory();
+  const { path } = useParams();
   const [inputValue, setInputValue] = useState("");
   const [resultProgramList, setResultProgramList] = useState([]);
 
@@ -51,7 +53,7 @@ const Programs = ({ programList }) => {
           className={`${styles.select_button} ${styles.on}`}
           onClick={onSelectHandler}
         >
-          프로그램
+          프로그램 소개
         </div>
       </section>
       <section className={styles.programs_container}>
@@ -71,7 +73,7 @@ const Programs = ({ programList }) => {
           <p
             className={styles.route_button}
             onClick={() => {
-              history.push("/introduce/about");
+              history.push("/programs/main");
               window.scrollTo({ top: 0 });
             }}
           >
@@ -81,29 +83,37 @@ const Programs = ({ programList }) => {
           <p
             className={styles.route_button}
             onClick={() => {
-              history.push("/introduce/about");
+              history.push("/programs/main");
               window.scrollTo({ top: 0 });
             }}
           >
             프로그램 소개
           </p>
         </div>
-        <div className={styles.search_container}>
-          <input
-            type="text"
-            className={styles.search_input}
-            onChange={inputChangeHandler}
-            placeholder="찾으시는 상품을 검색해보세요"
-            spellCheck="false"
-          />
-          <i className={`${styles.search_icon} fas fa-search`}></i>
-        </div>
+        {path === "main" ? (
+          <section className={styles.main_container}>
+            <div className={styles.search_container}>
+              <input
+                type="text"
+                className={styles.search_input}
+                onChange={inputChangeHandler}
+                placeholder="찾으시는 상품을 검색해보세요"
+                spellCheck="false"
+              />
+              <i className={`${styles.search_icon} fas fa-search`}></i>
+            </div>
 
-        <section className={styles.program_list}>
-          {resultProgramList.map((item) => (
-            <ProgramItem key={item.idx} item={item} />
-          ))}
-        </section>
+            <section className={styles.program_list}>
+              {resultProgramList.map((item) => (
+                <ProgramItem key={item.idx} item={item} />
+              ))}
+            </section>
+          </section>
+        ) : (
+          <section className={styles.program_detail_container}>
+            <ProgramDetail item={programList[path]} />
+          </section>
+        )}
       </section>
     </section>
   );

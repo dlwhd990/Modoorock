@@ -104,3 +104,8 @@
   flex-wrap: wrap;
   justify-content: center;
 }
+
+.program_detail_container {
+  margin-top: 100px;
+  padding: 0 8%;
+}

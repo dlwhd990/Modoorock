@@ -38,6 +38,7 @@
   background-color: transparent;
   font-size: var(--font-size-normal);
   margin-top: 10px;
+  cursor: pointer;
 }
 
 @keyframes appear {
