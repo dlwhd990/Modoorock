@@ -5,7 +5,7 @@ import Inquire from "./inquire/inquire";
 import Notice from "./notice/notice";
 import Qna from "./qna/qna";
 
-const CustomerCenter = ({ noticeArticles }) => {
+const CustomerCenter = ({ noticeArticles, qnaArticles, inquireArticles }) => {
   const history = useHistory();
   const { path } = useParams();
 
@@ -101,9 +101,9 @@ const CustomerCenter = ({ noticeArticles }) => {
         {path === "notice" ? (
           <Notice articles={noticeArticles} />
         ) : path === "qna" ? (
-          <Qna />
+          <Qna articles={qnaArticles} />
         ) : (
-          <Inquire />
+          <Inquire articles={inquireArticles} />
         )}
       </section>
     </section>

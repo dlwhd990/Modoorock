@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import ArticlePreview from "./noticeArticle/noticeArticle";
+import NoticeArticle from "./noticeArticle/noticeArticle";
 import styles from "./notice.module.css";
 
 const Notice = ({ articles, user, loadArticlesAndReplies }) => {
@@ -235,7 +235,7 @@ const Notice = ({ articles, user, loadArticlesAndReplies }) => {
       </section>
       <section className={styles.body}>
         {pages[numbering].map((index) => (
-          <ArticlePreview
+          <NoticeArticle
             key={resultArticles[index].idx}
             article={resultArticles[index]}
             where="notice"

@@ -23,6 +23,22 @@
   text-align: center;
 }
 
+.division_box {
+  font-size: var(--font-size-small);
+  color: white;
+  width: 80%;
+  height: 23px;
+  margin: auto;
+}
+
+.complete {
+  background-color: rgb(157, 180, 214);
+}
+
+.incomplete {
+  background-color: rgb(242, 197, 166);
+}
+
 .title {
   margin-left: 50px;
   flex-basis: 60%;
