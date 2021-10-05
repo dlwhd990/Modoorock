@@ -45,17 +45,23 @@ const ServiceIntro = ({ viewItems }) => {
         <p className={styles.our_service_subtitle}>모두락의 주요 서비스 소개</p>
         <div className={styles.our_service_content_container}>
           <div className={styles.service_content_left}>
-            <p className={styles.content_top_text}>CITY</p>
+            <div className={styles.filter}></div>
+            <p className={styles.content_top_text}>TRAVEL</p>
             <div className={styles.content_bottom_text_container}>
-              <p className={styles.content_title}>제목</p>
-              <p className={styles.content_desc}>설명</p>
+              <p className={styles.content_title}>여행 가이드와 함께</p>
+              <p className={styles.content_desc}>
+                모두락의 가이드와 함께 여행을 즐겨보세요
+              </p>
             </div>
           </div>
           <div className={styles.service_content_right}>
-            <p className={styles.content_top_text}>TRAVEL</p>
+            <div className={styles.filter}></div>
+            <p className={styles.content_top_text}>GAME</p>
             <div className={styles.content_bottom_text_container}>
-              <p className={styles.content_title}>제목</p>
-              <p className={styles.content_desc}>설명</p>
+              <p className={styles.content_title}>게임과 함께</p>
+              <p className={styles.content_desc}>
+                게임과 함께 더 재밌게 여행하세요 (사진은 변경예정)
+              </p>
             </div>
           </div>
         </div>
@@ -63,7 +69,7 @@ const ServiceIntro = ({ viewItems }) => {
       <section className={styles.mission_container}>
         <p className={styles.mission_container_title}>MISSION TOUR</p>
         <p className={styles.mission_container_subtitle}>
-          모두락 미션투어 홍보영상
+          모두락 미션투어 소개영상
         </p>
         <div className={styles.mission_main}></div>
       </section>

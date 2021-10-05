@@ -60,7 +60,7 @@ const Mainpage = ({ programList, viewItems }) => {
           <p className={styles.video_top_intro_title_green}>MISSION TOUR</p>
           <div className={styles.video_top_intro_title_container}>
             <span className={styles.video_top_intro_title_blue}>미션투어!</span>
-            <span className={styles.video_top_intro_title}>홍/보/영/상</span>
+            <span className={styles.video_top_intro_title}>소/개/영/상</span>
           </div>
         </div>
         <div className={styles.video_main_container}>
