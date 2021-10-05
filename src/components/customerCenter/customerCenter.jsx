@@ -5,7 +5,7 @@ import Inquire from "./inquire/inquire";
 import Notice from "./notice/notice";
 import Qna from "./qna/qna";
 
-const CustomerCenter = (props) => {
+const CustomerCenter = ({ noticeArticles }) => {
   const history = useHistory();
   const { path } = useParams();
 
@@ -79,7 +79,14 @@ const CustomerCenter = (props) => {
         <p
           className={styles.route_button}
           onClick={() => {
-            history.push("/customer/notice");
+            if (path === "notice") {
+              history.push("/customer/notice");
+            } else if (path === "qna") {
+              history.push("/customer/qna");
+            } else if (path === "inquire") {
+              history.push("/customer/inquire");
+            }
+
             window.scrollTo({ top: 0 });
           }}
         >
@@ -92,7 +99,7 @@ const CustomerCenter = (props) => {
       </div>
       <section className={styles.main}>
         {path === "notice" ? (
-          <Notice />
+          <Notice articles={noticeArticles} />
         ) : path === "qna" ? (
           <Qna />
         ) : (

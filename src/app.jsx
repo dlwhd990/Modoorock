@@ -11,9 +11,6 @@ import Contact from "./components/contact/contact";
 import FindId from "./components/find/findId/findId";
 import FindPw from "./components/find/findPw/findPw";
 import Introduce from "./components/about/introduce";
-import ProgramDetail from "./components/programs/programDetail/programDetail";
-import CustomPaging from "./components/slick/customPaging/customPaging";
-import Notice from "./components/customerCenter/notice/notice";
 import CustomerCenter from "./components/customerCenter/customerCenter";
 
 const App = (props) => {
@@ -135,6 +132,366 @@ const App = (props) => {
     },
   ]);
 
+  const [noticeArticles, setNoticeArticles] = useState([
+    {
+      idx: 0,
+      type: "주문/배송/반품",
+      date: "2021/10/05",
+      title: "공지입니다.",
+      content: "공지내용",
+    },
+    {
+      idx: 1,
+      type: "멤버쉽",
+      date: "2021/10/05",
+      title: "공지니다.",
+      content: "공지내용",
+    },
+    {
+      idx: 2,
+      type: "사이트 이용",
+      date: "2021/10/05",
+      title: "공지입다.",
+      content: "공지내용",
+    },
+    {
+      idx: 3,
+      type: "주문/배송/반품",
+      date: "2021/10/05",
+      title: "공지입니다.",
+      content: "공지내용",
+    },
+    {
+      idx: 4,
+      type: "멤버쉽",
+      date: "2021/10/05",
+      title: "공지니다.",
+      content: "공지내용",
+    },
+    {
+      idx: 5,
+      type: "사이트 이용",
+      date: "2021/10/05",
+      title: "공지입다.",
+      content: "공지내용",
+    },
+    {
+      idx: 6,
+      type: "주문/배송/반품",
+      date: "2021/10/05",
+      title: "공지입니다.",
+      content: "공지내용",
+    },
+    {
+      idx: 7,
+      type: "멤버쉽",
+      date: "2021/10/05",
+      title: "공지니다.",
+      content: "공지내용",
+    },
+    {
+      idx: 8,
+      type: "사이트 이용",
+      date: "2021/10/05",
+      title: "공지입다.",
+      content: "공지내용",
+    },
+    {
+      idx: 9,
+      type: "주문/배송/반품",
+      date: "2021/10/05",
+      title: "공지입니다.",
+      content: "공지내용",
+    },
+    {
+      idx: 10,
+      type: "사이트 이용",
+      date: "2021/10/05",
+      title: "공지니다.",
+      content: "공지내용",
+    },
+    {
+      idx: 11,
+      type: "멤버쉽",
+      date: "2021/10/05",
+      title: "공지니다.",
+      content: "공지내용",
+    },
+    {
+      idx: 12,
+      type: "사이트 이용",
+      date: "2021/10/05",
+      title: "공지입다.",
+      content: "공지내용",
+    },
+    {
+      idx: 13,
+      type: "주문/배송/반품",
+      date: "2021/10/05",
+      title: "공지입니다.",
+      content: "공지내용",
+    },
+    {
+      idx: 14,
+      type: "멤버쉽",
+      date: "2021/10/05",
+      title: "공지니다.",
+      content: "공지내용",
+    },
+    {
+      idx: 15,
+      type: "사이트 이용",
+      date: "2021/10/05",
+      title: "공지입다.",
+      content: "공지내용",
+    },
+    {
+      idx: 16,
+      type: "주문/배송/반품",
+      date: "2021/10/05",
+      title: "공지입니다.",
+      content: "공지내용",
+    },
+    {
+      idx: 17,
+      type: "멤버쉽",
+      date: "2021/10/05",
+      title: "공지니다.",
+      content: "공지내용",
+    },
+    {
+      idx: 18,
+      type: "사이트 이용",
+      date: "2021/10/05",
+      title: "공지입다.",
+      content: "공지내용",
+    },
+    {
+      idx: 19,
+      type: "주문/배송/반품",
+      date: "2021/10/05",
+      title: "공지입니다.",
+      content: "공지내용",
+    },
+    {
+      idx: 20,
+      type: "상품",
+      date: "2021/10/05",
+      title: "공지니다.",
+      content: "공지내용",
+    },
+    {
+      idx: 21,
+      type: "멤버쉽",
+      date: "2021/10/05",
+      title: "공지니다.",
+      content: "공지내용",
+    },
+    {
+      idx: 22,
+      type: "사이트 이용",
+      date: "2021/10/05",
+      title: "공지입다.",
+      content: "공지내용",
+    },
+    {
+      idx: 23,
+      type: "주문/배송/반품",
+      date: "2021/10/05",
+      title: "공지입니다.",
+      content: "공지내용",
+    },
+    {
+      idx: 24,
+      type: "멤버쉽",
+      date: "2021/10/05",
+      title: "공지니다.",
+      content: "공지내용",
+    },
+    {
+      idx: 25,
+      type: "사이트 이용",
+      date: "2021/10/05",
+      title: "공지입다.",
+      content: "공지내용",
+    },
+    {
+      idx: 26,
+      type: "주문/배송/반품",
+      date: "2021/10/05",
+      title: "공지입니다.",
+      content: "공지내용",
+    },
+    {
+      idx: 27,
+      type: "멤버쉽",
+      date: "2021/10/05",
+      title: "공지니다.",
+      content: "공지내용",
+    },
+    {
+      idx: 28,
+      type: "사이트 이용",
+      date: "2021/10/05",
+      title: "공지입다.",
+      content: "공지내용",
+    },
+    {
+      idx: 29,
+      type: "주문/배송/반품",
+      date: "2021/10/05",
+      title: "공지입니다.",
+      content: "공지내용",
+    },
+    {
+      idx: 30,
+      type: "멤버쉽",
+      date: "2021/10/05",
+      title: "공지니다.",
+      content: "공지내용",
+    },
+    {
+      idx: 31,
+      type: "멤버쉽",
+      date: "2021/10/05",
+      title: "공지니다.",
+      content: "공지내용",
+    },
+    {
+      idx: 32,
+      type: "사이트 이용",
+      date: "2021/10/05",
+      title: "공지입다.",
+      content: "공지내용",
+    },
+    {
+      idx: 33,
+      type: "주문/배송/반품",
+      date: "2021/10/05",
+      title: "공지입니다.",
+      content: "공지내용",
+    },
+    {
+      idx: 34,
+      type: "멤버쉽",
+      date: "2021/10/05",
+      title: "공지니다.",
+      content: "공지내용",
+    },
+    {
+      idx: 35,
+      type: "사이트 이용",
+      date: "2021/10/05",
+      title: "공지입다.",
+      content: "공지내용",
+    },
+    {
+      idx: 36,
+      type: "주문/배송/반품",
+      date: "2021/10/05",
+      title: "공지입니다.",
+      content: "공지내용",
+    },
+    {
+      idx: 37,
+      type: "멤버쉽",
+      date: "2021/10/05",
+      title: "공지니다.",
+      content: "공지내용",
+    },
+    {
+      idx: 38,
+      type: "사이트 이용",
+      date: "2021/10/05",
+      title: "공지입다.",
+      content: "공지내용",
+    },
+    {
+      idx: 39,
+      type: "주문/배송/반품",
+      date: "2021/10/05",
+      title: "공지입니다.",
+      content: "공지내용",
+    },
+    {
+      idx: 40,
+      type: "사이트 이용",
+      date: "2021/10/05",
+      title: "공지니다.",
+      content: "공지내용",
+    },
+    {
+      idx: 41,
+      type: "멤버쉽",
+      date: "2021/10/05",
+      title: "공지니다.",
+      content: "공지내용",
+    },
+    {
+      idx: 42,
+      type: "사이트 이용",
+      date: "2021/10/05",
+      title: "공지입다.",
+      content: "공지내용",
+    },
+    {
+      idx: 43,
+      type: "주문/배송/반품",
+      date: "2021/10/05",
+      title: "공지입니다.",
+      content: "공지내용",
+    },
+    {
+      idx: 44,
+      type: "멤버쉽",
+      date: "2021/10/05",
+      title: "공지니다.",
+      content: "공지내용",
+    },
+    {
+      idx: 45,
+      type: "사이트 이용",
+      date: "2021/10/05",
+      title: "공지입다.",
+      content: "공지내용",
+    },
+    {
+      idx: 46,
+      type: "주문/배송/반품",
+      date: "2021/10/05",
+      title: "공지입니다.",
+      content: "공지내용",
+    },
+    {
+      idx: 47,
+      type: "멤버쉽",
+      date: "2021/10/05",
+      title: "공지니다.",
+      content: "공지내용",
+    },
+    {
+      idx: 48,
+      type: "사이트 이용",
+      date: "2021/10/05",
+      title: "공지입다.",
+      content: "공지내용",
+    },
+    {
+      idx: 49,
+      type: "주문/배송/반품",
+      date: "2021/10/05",
+      title: "공지입니다.",
+      content: "공지내용",
+    },
+    {
+      idx: 50,
+      type: "사이트 이용",
+      date: "2021/10/05",
+      title: "공지니다.",
+      content: "공지내용",
+    },
+  ]);
+
   return (
     <section className={styles.app}>
       <BrowserRouter basename={process.env.PUBLIC_URL}>
@@ -161,7 +518,7 @@ const App = (props) => {
           <Programs programList={programList} />
         </Route>
         <Route exact path="/customer/:path">
-          <CustomerCenter />
+          <CustomerCenter noticeArticles={noticeArticles} />
         </Route>
         <Route exact path="/contact">
           <Contact />

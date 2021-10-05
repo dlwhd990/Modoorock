@@ -187,6 +187,16 @@ const Header = (props) => {
                 className={styles.drop_down_menu_item}
                 onClick={() => {
                   dropDownAllOff();
+                  history.push("/customer/qna");
+                  window.scrollTo({ top: 0 });
+                }}
+              >
+                Q&A
+              </li>
+              <li
+                className={styles.drop_down_menu_item}
+                onClick={() => {
+                  dropDownAllOff();
                   history.push("/customer/inquire");
                   window.scrollTo({ top: 0 });
                 }}
