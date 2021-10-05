@@ -4,6 +4,7 @@ import QnaArticle from "./qnaArticle/qnaArticle";
 import styles from "./qna.module.css";
 
 const Qna = ({ articles, user, loadArticlesAndReplies }) => {
+  const [headerSelect, setHeaderSelect] = useState("All");
   const history = useHistory();
   const searchTypeRef = useRef();
   const searchInputRef = useRef();
@@ -47,6 +48,58 @@ const Qna = ({ articles, user, loadArticlesAndReplies }) => {
       pages[i].push(articleKeyList[j]);
     }
   }
+
+  const headerSelectHandler = (e) => {
+    setResultArticles([]);
+    if (e.target.tagName !== "P") {
+      return;
+    }
+    setHeaderSelect(e.target.innerText);
+    setNumbering(1);
+    if (e.target.innerText === "All") {
+      setTempArticles(articles);
+      setResultArticles(articles);
+      return;
+    }
+    const tmp = [];
+    for (let i = 0; i < articles.length; i++) {
+      if (articles[i].type === e.target.innerText) {
+        tmp.push(articles[i]);
+      }
+    }
+    setTempArticles(tmp);
+    const articleKeyList = Object.keys(tmp).reverse();
+    pagelength = 0;
+
+    if (articleKeyList.length % 10 === 0) {
+      pagelength = parseInt(articleKeyList.length / 10);
+    } else if (articleKeyList.length <= 10) {
+      pagelength = 1;
+    } else {
+      pagelength = parseInt(articleKeyList.length / 10) + 1;
+    }
+
+    list = [];
+    for (let i = 1; i <= pagelength; i++) {
+      list.push(i);
+    }
+
+    pages = [];
+    for (let i = 0; i <= pagelength; i++) {
+      pages[i] = new Array();
+    }
+
+    for (let i = 1; i <= pagelength; i++) {
+      for (let j = 10 * (i - 1); j < 10 * i; j++) {
+        if (articleKeyList[j] === undefined) {
+          break;
+        }
+        pages[i].push(articleKeyList[j]);
+      }
+    }
+    setResultArticles(tmp);
+    setSliceList(list.slice(cursor, cursor + 5));
+  };
 
   const pageNumberClick = (e) => {
     setNumbering(parseInt(e.target.textContent));
@@ -118,25 +171,14 @@ const Qna = ({ articles, user, loadArticlesAndReplies }) => {
   };
 
   return (
-    <section className={styles.qna}>
+    <section className={styles.notice}>
       <section className={styles.top}>
         <section className={styles.search}>
-          <select
-            ref={searchTypeRef}
-            name="search_type"
-            id="search_type"
-            className={styles.search_type_select}
-          >
-            <option value="all">전체</option>
-            <option value="title">제목</option>
-            <option value="writer">작성자</option>
-          </select>
-
           <input
             ref={searchInputRef}
             type="text"
             className={styles.search_text_input}
-            placeholder="검색어를 입력하세요"
+            placeholder="질문을 입력하세요"
             spellCheck="false"
           />
           <button className={styles.search_button} onClick={onSearchHandler}>
@@ -144,11 +186,52 @@ const Qna = ({ articles, user, loadArticlesAndReplies }) => {
           </button>
         </section>
       </section>
-      <section className={styles.header}>
-        <div className={styles.division}>구분</div>
-        <div className={styles.title}>제목</div>
-        <div className={styles.writer}>작성자</div>
-        <div className={styles.date}>작성일</div>
+      <section className={styles.header} onClick={headerSelectHandler}>
+        <p
+          className={`${
+            headerSelect === "All"
+              ? `${styles.header_item} ${styles.header_on}`
+              : `${styles.header_item} ${styles.header_off}`
+          }`}
+        >
+          All
+        </p>
+        <p
+          className={`${
+            headerSelect === "상품"
+              ? `${styles.header_item} ${styles.header_on}`
+              : `${styles.header_item} ${styles.header_off}`
+          }`}
+        >
+          상품
+        </p>
+        <p
+          className={`${
+            headerSelect === "주문/배송/반품"
+              ? `${styles.header_item} ${styles.header_on}`
+              : `${styles.header_item} ${styles.header_off}`
+          }`}
+        >
+          주문/배송/반품
+        </p>
+        <p
+          className={`${
+            headerSelect === "멤버쉽"
+              ? `${styles.header_item} ${styles.header_on}`
+              : `${styles.header_item} ${styles.header_off}`
+          }`}
+        >
+          멤버쉽
+        </p>
+        <p
+          className={`${
+            headerSelect === "사이트 이용"
+              ? `${styles.header_item} ${styles.header_on}`
+              : `${styles.header_item} ${styles.header_off}`
+          }`}
+        >
+          사이트 이용
+        </p>
       </section>
       <section className={styles.body}>
         {pages[numbering].map((index) => (

@@ -2,8 +2,8 @@ import React from "react";
 import { useHistory, useParams } from "react-router";
 import styles from "./customerCenter.module.css";
 import Inquire from "./inquire/inquire";
-import Notice from "./notice/notice";
 import Qna from "./qna/qna";
+import Notice from "./notice/notice";
 
 const CustomerCenter = ({ noticeArticles, qnaArticles, inquireArticles }) => {
   const history = useHistory();
@@ -53,7 +53,9 @@ const CustomerCenter = ({ noticeArticles, qnaArticles, inquireArticles }) => {
           문의게시판
         </div>
       </section>
-      <h1 className={styles.title}>고객센터</h1>
+      <h1 className={styles.title}>
+        {path === "notice" ? "공지사항" : path === "qna" ? "Q&A" : "문의게시판"}
+      </h1>
       <div className={styles.route_button_container}>
         <div
           className={styles.home_icon_container}

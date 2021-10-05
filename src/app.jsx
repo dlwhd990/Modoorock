@@ -132,7 +132,7 @@ const App = (props) => {
     },
   ]);
 
-  const [noticeArticles, setNoticeArticles] = useState([
+  const [qnaArticles, setQnaArticles] = useState([
     {
       idx: 0,
       type: "주문/배송/반품",
@@ -491,7 +491,7 @@ const App = (props) => {
       content: "공지내용",
     },
   ]);
-  const [qnaArticles, setQnaArticles] = useState([
+  const [noticeArticles, setNoticeArticles] = useState([
     {
       idx: 0,
       type: "주문/배송/반품",

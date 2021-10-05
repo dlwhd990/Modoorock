@@ -6,14 +6,14 @@ const NoticeArticle = ({ article }) => {
   const history = useHistory();
   const viewArticle = () => {
     window.scrollTo({ top: 0 });
-    history.push(`/customer/notice/${article.idx}`);
+    history.push(`/customer/qna/${article.idx}`);
   };
 
   return (
     <section className={styles.articlePreview} onClick={viewArticle}>
-      <div className={styles.q}>Q</div>
-      <div className={styles.type}>{article.type}</div>
+      <div className={styles.division}>공지</div>
       <div className={styles.title}>{article.title}</div>
+      <div className={styles.writer}>관리자</div>
       <div className={styles.date}>{article.date}</div>
     </section>
   );

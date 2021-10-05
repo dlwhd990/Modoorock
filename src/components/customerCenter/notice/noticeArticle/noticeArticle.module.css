@@ -1,11 +1,12 @@
 .articlePreview {
   display: flex;
   flex-direction: row;
-  padding: 1rem 1rem 1rem 1.5rem;
+  padding: 1rem;
   font-weight: bolder;
   color: rgb(77, 77, 77);
-
+  border-top: 2px solid rgb(235, 235, 235);
   border-bottom: 2px solid rgb(235, 235, 235);
+  margin: -2px 0;
   cursor: pointer;
   font-weight: 400;
   font-size: 16px;
@@ -17,20 +18,23 @@
   background-color: rgb(247, 247, 247);
 }
 
-.q {
-  flex-basis: 5%;
-}
-
-.type {
-  flex-basis: 25%;
+.division {
+  flex-basis: 10%;
+  text-align: center;
 }
 
 .title {
+  margin-left: 50px;
   flex-basis: 60%;
   text-overflow: ellipsis;
   white-space: nowrap;
   -moz-white-space: nowrap;
   overflow: hidden;
+}
+
+.writer {
+  flex-basis: 15%;
+  text-align: center;
 }
 
 .date {
