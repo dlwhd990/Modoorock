@@ -1,5 +1,5 @@
 .programs {
-  margin: 80px 0;
+  margin: 78px 0;
 }
 
 .programs_top_banner {
@@ -9,7 +9,7 @@
 }
 
 .select_bar_container {
-  height: 6vh;
+  height: 58px;
   background-color: var(--color-theme);
   display: flex;
   flex-direction: row;
@@ -66,8 +66,44 @@
   cursor: pointer;
 }
 
+.switch_button_container {
+  width: 45%;
+  margin: auto;
+  margin-top: 100px;
+}
+
+.switch_region_button {
+  width: 47%;
+  height: 45px;
+  outline: none;
+  border: none;
+  background-color: var(--color-theme);
+  color: white;
+  font-size: 18px;
+  margin-right: 3%;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.switch_theme_button {
+  width: 47%;
+  height: 45px;
+  outline: none;
+  border: none;
+  background-color: var(--color-theme);
+  color: white;
+  font-size: 18px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.switch_on {
+  background-color: #0b74c8;
+  transition: 120ms all ease-in;
+}
+
 .search_container {
-  width: 40%;
+  width: 58%;
   height: 50px;
   border: 1px solid var(--color-light-border);
   margin: auto;
@@ -97,6 +133,33 @@
   color: #2e9bd3;
 }
 
+.region_select_container {
+  width: 60%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: auto;
+  margin-bottom: 50px;
+}
+
+.region_select {
+  width: 140px;
+  height: 30px;
+  line-height: 30px;
+  border-radius: 32px;
+  background-color: rgb(248, 248, 248);
+  text-align: center;
+  margin: 10px 20px;
+  cursor: pointer;
+}
+
+.region_on {
+  background-color: #0b74c8;
+  color: white;
+  transition: 120ms all ease-in;
+}
+
 .program_list {
   padding: 0 100px;
   display: flex;
@@ -108,4 +171,29 @@
 .program_detail_container {
   margin-top: 100px;
   padding: 0 8%;
+}
+
+@media screen and (max-width: 780px) {
+  .programs {
+    margin-top: 63px;
+  }
+
+  .route_button,
+  .home_icon,
+  .arrow_icon {
+    margin: 0 8px;
+  }
+
+  .search_container {
+    width: 85%;
+    margin-bottom: 0px;
+  }
+
+  .search_input {
+    font-size: var(--font-size-normal);
+  }
+
+  .switch_button_container {
+    width: 85%;
+  }
 }

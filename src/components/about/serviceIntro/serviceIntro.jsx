@@ -2,6 +2,7 @@ import styles from "./serviceIntro.module.css";
 import { useHistory } from "react-router";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import ServiceVideo from "../../slick/serviceVideo/serviceVideo";
 
 const ServiceIntro = ({ viewItems }) => {
   const history = useHistory();
@@ -66,12 +67,14 @@ const ServiceIntro = ({ viewItems }) => {
           </div>
         </div>
       </section>
-      <section className={styles.mission_container}>
-        <p className={styles.mission_container_title}>MISSION TOUR</p>
-        <p className={styles.mission_container_subtitle}>
+      <section className={styles.video_container}>
+        <p className={styles.video_container_title}>MISSION TOUR</p>
+        <p className={styles.video_container_subtitle}>
           모두락 미션투어 소개영상
         </p>
-        <div className={styles.mission_main}></div>
+        <div className={styles.video_main}>
+          <ServiceVideo viewItems={viewItems} />
+        </div>
       </section>
     </section>
   );

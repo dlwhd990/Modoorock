@@ -37,7 +37,7 @@ const Qna = ({ articles, user, loadArticlesAndReplies }) => {
 
   let pages = [];
   for (let i = 0; i <= pagelength; i++) {
-    pages[i] = new Array();
+    pages[i] = [];
   }
 
   for (let i = 1; i <= pagelength; i++) {
@@ -50,10 +50,10 @@ const Qna = ({ articles, user, loadArticlesAndReplies }) => {
   }
 
   const headerSelectHandler = (e) => {
-    setResultArticles([]);
     if (e.target.tagName !== "P") {
       return;
     }
+    setResultArticles([]);
     setHeaderSelect(e.target.innerText);
     setNumbering(1);
     if (e.target.innerText === "All") {
@@ -86,7 +86,7 @@ const Qna = ({ articles, user, loadArticlesAndReplies }) => {
 
     pages = [];
     for (let i = 0; i <= pagelength; i++) {
-      pages[i] = new Array();
+      pages[i] = [];
     }
 
     for (let i = 1; i <= pagelength; i++) {

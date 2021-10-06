@@ -4,17 +4,29 @@ import { useHistory, useParams } from "react-router-dom";
 import styles from "./programs.module.css";
 import { debounce } from "lodash";
 import ProgramDetail from "./programDetail/programDetail";
+import AreaItem from "./areaItem/areaItem";
+import ThemeItem from "./themeItem/themeItem";
 
 const Programs = ({ programList }) => {
   const history = useHistory();
   const { path } = useParams();
   const [inputValue, setInputValue] = useState("");
   const [resultProgramList, setResultProgramList] = useState([]);
+  const [switchValue, setSwitchValue] = useState("지역");
+  const [regionValue, setRegionValue] = useState("전체");
 
   const onSelectHandler = (e) => {
     if (e.currentTarget.innerText === "프로그램") {
       history.push("/programs");
     }
+  };
+
+  const onSwitchHandler = (e) => {
+    setSwitchValue(e.currentTarget.innerText);
+  };
+
+  const regionChangeHandler = (e) => {
+    setRegionValue(e.currentTarget.innerText);
   };
 
   const inputChangeHandler = debounce((e) => {
@@ -92,7 +104,29 @@ const Programs = ({ programList }) => {
         </div>
         {path === "main" ? (
           <section className={styles.main_container}>
-            <div className={styles.search_container}>
+            <section className={styles.switch_button_container}>
+              <button
+                className={`${
+                  switchValue === "지역"
+                    ? `${styles.switch_region_button} ${styles.switch_on}`
+                    : `${styles.switch_region_button}`
+                }`}
+                onClick={onSwitchHandler}
+              >
+                지역
+              </button>
+              <button
+                className={`${
+                  switchValue === "테마"
+                    ? `${styles.switch_region_button} ${styles.switch_on}`
+                    : `${styles.switch_region_button}`
+                }`}
+                onClick={onSwitchHandler}
+              >
+                테마
+              </button>
+            </section>
+            <section className={styles.search_container}>
               <input
                 type="text"
                 className={styles.search_input}
@@ -101,11 +135,184 @@ const Programs = ({ programList }) => {
                 spellCheck="false"
               />
               <i className={`${styles.search_icon} fas fa-search`}></i>
-            </div>
+            </section>
+
+            <section className={styles.region_select_container}>
+              <div
+                className={`${
+                  regionValue === "전체"
+                    ? `${styles.region_select} ${styles.region_on}`
+                    : `${styles.region_select}`
+                }`}
+                onClick={regionChangeHandler}
+              >
+                전체
+              </div>
+              <div
+                className={`${
+                  regionValue === "서울"
+                    ? `${styles.region_select} ${styles.region_on}`
+                    : `${styles.region_select}`
+                }`}
+                onClick={regionChangeHandler}
+              >
+                서울
+              </div>
+              <div
+                className={`${
+                  regionValue === "경기"
+                    ? `${styles.region_select} ${styles.region_on}`
+                    : `${styles.region_select}`
+                }`}
+                onClick={regionChangeHandler}
+              >
+                경기
+              </div>
+              <div
+                className={`${
+                  regionValue === "강원"
+                    ? `${styles.region_select} ${styles.region_on}`
+                    : `${styles.region_select}`
+                }`}
+                onClick={regionChangeHandler}
+              >
+                강원
+              </div>
+              <div
+                className={`${
+                  regionValue === "부산"
+                    ? `${styles.region_select} ${styles.region_on}`
+                    : `${styles.region_select}`
+                }`}
+                onClick={regionChangeHandler}
+              >
+                부산
+              </div>
+              <div
+                className={`${
+                  regionValue === "인천"
+                    ? `${styles.region_select} ${styles.region_on}`
+                    : `${styles.region_select}`
+                }`}
+                onClick={regionChangeHandler}
+              >
+                인천
+              </div>
+              <div
+                className={`${
+                  regionValue === "충남"
+                    ? `${styles.region_select} ${styles.region_on}`
+                    : `${styles.region_select}`
+                }`}
+                onClick={regionChangeHandler}
+              >
+                충남
+              </div>
+              <div
+                className={`${
+                  regionValue === "충북"
+                    ? `${styles.region_select} ${styles.region_on}`
+                    : `${styles.region_select}`
+                }`}
+                onClick={regionChangeHandler}
+              >
+                충북
+              </div>
+              <div
+                className={`${
+                  regionValue === "대전"
+                    ? `${styles.region_select} ${styles.region_on}`
+                    : `${styles.region_select}`
+                }`}
+                onClick={regionChangeHandler}
+              >
+                대전
+              </div>
+              <div
+                className={`${
+                  regionValue === "경북"
+                    ? `${styles.region_select} ${styles.region_on}`
+                    : `${styles.region_select}`
+                }`}
+                onClick={regionChangeHandler}
+              >
+                경북
+              </div>
+              <div
+                className={`${
+                  regionValue === "대구"
+                    ? `${styles.region_select} ${styles.region_on}`
+                    : `${styles.region_select}`
+                }`}
+                onClick={regionChangeHandler}
+              >
+                대구
+              </div>
+              <div
+                className={`${
+                  regionValue === "경남"
+                    ? `${styles.region_select} ${styles.region_on}`
+                    : `${styles.region_select}`
+                }`}
+                onClick={regionChangeHandler}
+              >
+                경남
+              </div>
+              <div
+                className={`${
+                  regionValue === "전북"
+                    ? `${styles.region_select} ${styles.region_on}`
+                    : `${styles.region_select}`
+                }`}
+                onClick={regionChangeHandler}
+              >
+                전북
+              </div>
+              <div
+                className={`${
+                  regionValue === "전남"
+                    ? `${styles.region_select} ${styles.region_on}`
+                    : `${styles.region_select}`
+                }`}
+                onClick={regionChangeHandler}
+              >
+                전남
+              </div>
+              <div
+                className={`${
+                  regionValue === "광주"
+                    ? `${styles.region_select} ${styles.region_on}`
+                    : `${styles.region_select}`
+                }`}
+                onClick={regionChangeHandler}
+              >
+                광주
+              </div>
+              <div
+                className={`${
+                  regionValue === "울산"
+                    ? `${styles.region_select} ${styles.region_on}`
+                    : `${styles.region_select}`
+                }`}
+                onClick={regionChangeHandler}
+              >
+                울산
+              </div>
+              <div
+                className={`${
+                  regionValue === "제주"
+                    ? `${styles.region_select} ${styles.region_on}`
+                    : `${styles.region_select}`
+                }`}
+                onClick={regionChangeHandler}
+              >
+                제주
+              </div>
+            </section>
 
             <section className={styles.program_list}>
               {resultProgramList.map((item) => (
-                <ProgramItem key={item.idx} item={item} />
+                <AreaItem key={item.idx} item={item} />
               ))}
             </section>
           </section>
@@ -115,6 +322,7 @@ const Programs = ({ programList }) => {
           </section>
         )}
       </section>
+      <ThemeItem />
     </section>
   );
 };

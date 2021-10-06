@@ -1,5 +1,5 @@
 .contact {
-  min-height: 100vh;
+  min-height: 1800px;
   margin-top: 78px;
   background-color: white;
 }
@@ -36,7 +36,8 @@
   background-color: white;
 }
 
-.title {
+.title,
+.bottom_title {
   margin-top: 120px;
   text-align: center;
   font-size: var(--font-size-title);
@@ -63,4 +64,189 @@
 .home_icon_container,
 .route_button {
   cursor: pointer;
+}
+
+.contact_us_container {
+  width: 80%;
+  margin: auto;
+  margin-top: 150px;
+  color: #354e57;
+}
+
+.contact_us_title {
+  font-size: var(--font-size-big-title);
+  font-weight: 700;
+}
+
+.contact_us_ul {
+  padding-left: 20px;
+  margin: 30px 0;
+}
+
+.li {
+  font-weight: 500;
+  margin: 8px 0;
+}
+
+.link_blue {
+  color: #008fff;
+  cursor: pointer;
+}
+
+.contact_info_container {
+  width: 80%;
+  margin: auto;
+  margin-top: 70px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.email_title {
+  font-weight: 500;
+  color: #354e57;
+  margin-bottom: 8px;
+}
+
+.email {
+  color: #008fff;
+  margin-top: 0;
+  margin-bottom: 32px;
+}
+
+.office_image {
+  width: 300px;
+  border-radius: 8px;
+}
+
+.office_info_container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left: 210px;
+}
+
+.office_intro {
+  margin-left: 50px;
+  color: #354e57;
+}
+
+.office_title {
+  font-size: var(--font-size-big-title);
+  font-weight: 700;
+  margin: 0;
+}
+
+.office_location {
+  margin: 24px 0;
+}
+
+.bottom {
+  color: white;
+  min-height: 500px;
+  background-color: var(--color-theme);
+  margin-top: 80px;
+  padding-top: 40px;
+}
+
+.bottom_title {
+  margin: 0;
+}
+
+.bottom_main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 70px 0;
+}
+
+.name_and_email_container {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 50px;
+}
+
+.name_container {
+  margin-right: 40px;
+}
+
+.email_container {
+  margin-left: 40px;
+}
+
+.project_container {
+  width: 880px;
+}
+
+.input_title {
+  font-weight: 500;
+}
+
+.input {
+  width: 400px;
+  border: none;
+  height: 40px;
+  font-size: var(--font-size-big);
+  color: white;
+  border-bottom: 1px solid white;
+  background-color: transparent;
+  outline: none;
+}
+
+.project_input {
+  width: 880px;
+  height: 200px;
+  font-size: var(--font-size-big);
+  border: 1px solid white;
+  border-radius: 4px;
+  color: white;
+  background-color: transparent;
+  outline: none;
+  font-family: "Noto Sans KR", sans-serif;
+  padding: 4px 8px;
+}
+
+.submit_button {
+  width: 200px;
+  height: 50px;
+  margin-top: 60px;
+  outline: none;
+  border: none;
+  color: white;
+  background-color: #3d8ec9;
+  font-size: var(--font-size-big);
+  font-weight: 500;
+  cursor: pointer;
+  transition: 140ms all ease-in;
+}
+
+@media screen and (max-width: 780px) {
+  .contact {
+    margin-top: 63px;
+  }
+  .title {
+    margin-top: 40px;
+    margin-bottom: 30px;
+  }
+
+  .contact_us_container {
+    margin-top: 70px;
+  }
+  .contact_info_container {
+    flex-direction: column;
+  }
+
+  .office_info_container {
+    margin: 100px 0;
+    flex-direction: column;
+  }
+
+  .office_image {
+    margin-bottom: 50px;
+  }
+
+  .office_intro {
+    text-align: center;
+    margin: 0;
+  }
 }

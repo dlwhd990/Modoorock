@@ -36,7 +36,7 @@ const Inquire = ({ articles, user, loadArticlesAndReplies }) => {
 
   let pages = [];
   for (let i = 0; i <= pagelength; i++) {
-    pages[i] = new Array();
+    pages[i] = [];
   }
 
   for (let i = 1; i <= pagelength; i++) {

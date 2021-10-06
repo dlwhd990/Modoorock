@@ -1,9 +1,11 @@
 import React from "react";
+import { useHistory } from "react-router";
 import SimpleSliderThree from "../slick/three/slickThree";
 import styles from "./mainpage.module.css";
 import MainProgramItem from "./mainProgramItem/mainProgramItem";
 
 const Mainpage = ({ programList, viewItems }) => {
+  const history = useHistory();
   const goUpButtonHandler = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
@@ -36,7 +38,15 @@ const Mainpage = ({ programList, viewItems }) => {
               </span>
             </div>
 
-            <button className={styles.program_show_all_button}>전체보기</button>
+            <button
+              className={styles.program_show_all_button}
+              onClick={() => {
+                history.push("/programs/main");
+                window.scrollTo({ top: 0 });
+              }}
+            >
+              전체보기
+            </button>
           </div>
           <p className={styles.program_intro_desc}>
             게임화된 투어로 재미있고 액티비티 체험이 가득해요

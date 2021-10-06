@@ -123,4 +123,5 @@
   background-color: var(--color-theme);
   color: white;
   font-size: var(--font-size-mini-title);
+  cursor: pointer;
 }

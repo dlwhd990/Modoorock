@@ -5,7 +5,7 @@ import styles from "./mainProgramItem.module.css";
 const MainProgramItem = React.memo(({ item }) => {
   const history = useHistory();
   const onItemClickHandler = () => {
-    history.push("/programs");
+    history.push(`/programs/${item.idx}`);
     window.scrollTo({ top: 0 });
   };
   return (

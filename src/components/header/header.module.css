@@ -53,10 +53,12 @@
 
 .login {
   margin-right: 30px;
+  white-space: nowrap;
   cursor: pointer;
 }
 .signup {
   cursor: pointer;
+  white-space: nowrap;
 }
 
 .drop_down_menu {

@@ -53,7 +53,11 @@ export default class CustomPaging extends Component {
       customPaging: function (i) {
         return (
           <a>
-            <img src={`/Modoorock/images/${i + 1}.png`} className="dot_image" />
+            <img
+              src={`/Modoorock/images/${i + 1}.png`}
+              alt="select_image"
+              className="dot_image"
+            />
           </a>
         );
       },
@@ -73,16 +77,32 @@ export default class CustomPaging extends Component {
       <div className="custom_paging_container">
         <Slider {...settings}>
           <div>
-            <img src="/Modoorock/images/kakao.png" className="image" />
+            <img
+              src="/Modoorock/images/kakao.png"
+              alt="slide_image"
+              className="image"
+            />
           </div>
           <div>
-            <img src="/Modoorock/images/arrow.png" className="image" />
+            <img
+              src="/Modoorock/images/arrow.png"
+              alt="slide_image"
+              className="image"
+            />
           </div>
           <div>
-            <img src="/Modoorock/images/logo_blue.png" className="image" />
+            <img
+              src="/Modoorock/images/logo_blue.png"
+              alt="slide_image"
+              className="image"
+            />
           </div>
           <div>
-            <img src="/Modoorock/images/logo_dark.png" className="image" />
+            <img
+              src="/Modoorock/images/logo_dark.png"
+              alt="slide_image"
+              className="image"
+            />
           </div>
         </Slider>
       </div>
