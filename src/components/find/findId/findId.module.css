@@ -2,7 +2,6 @@
   margin-top: 80px;
   height: 70vh;
   display: flex;
-  flex-direction: row;
   align-items: center;
   justify-content: center;
 }
@@ -24,8 +23,7 @@
 }
 
 .name_input_container,
-.method_select_container,
-.method_data_container {
+.phone_num_container {
   height: 30px;
   margin: 15px 0;
   display: flex;
@@ -34,20 +32,43 @@
 }
 
 .name_input_text,
-.method_select_text,
-.method_data_text {
+.phone_num_text {
   width: 100px;
   margin: 0;
 }
 
 .name_input,
-.method_data_input {
+.phone_num_input {
   width: 200px;
   height: 30px;
   margin: 0;
+  padding: 2px 6px;
+  font-size: var(--font-size-normal);
   border: 1px solid var(--color-light-border);
 }
 
-.method_select_input_right {
-  margin-left: 20px;
+.submit_button_container {
+  width: 100%;
+  text-align: center;
+  margin-top: 40px;
+}
+
+.submit_button {
+  width: 50%;
+  border: none;
+  background-color: var(--color-theme);
+  color: white;
+  font-size: var(--font-size-normal);
+  padding: 8px 20px;
+}
+
+@media screen and (max-width: 780px) {
+  .find_id_form {
+    width: 90%;
+  }
+
+  .name_input,
+  .phone_num_input {
+    font-size: var(--font-size-small);
+  }
 }

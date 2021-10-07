@@ -11,6 +11,12 @@ const Signup = (props) => {
   const nameRef = useRef();
   const phoneRef = useRef();
 
+  async function callAPI(address, options) {
+    const response = await fetch(address, options);
+    const body = await response.json();
+    return body;
+  }
+
   const allAgreeHandler = (e) => {
     if (e.target.checked) {
       signupAgreeRef.current.checked = true;
@@ -45,26 +51,30 @@ const Signup = (props) => {
       return;
     }
 
-    const headers = {
-      "Content-Type": "application/x-www-form-urlencoded",
-      Accept: "*/*",
-    };
+    //callAPI("https://35.239.228.185/modoorock/user/register", {
+    //  method: "POST",
+    //  body: JSON.stringify({ id, password, name, phone }),
+    //  headers: {
+    //    "Content-Type": "application/json",
+    //  },
+    //})
+    //  .then((res) => {
+    //    console.log(res);
+    //  })
+    //  .catch((err) => console.error("error: ", err));
 
     axios
-      .post(
-        "https://35.239.228.185/modoorock/user/register",
-        {
-          id,
-          password,
-          name,
-          phone,
-        },
-        { headers }
-      )
-      .then((res) => console.log(res))
-      .catch((err) => console.error(err));
+      .post("http://35.239.228.185/modoorock/user/register", {
+        id,
+        password,
+        name,
+        phone,
+      })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => console.error(error));
   };
-
   return (
     <section className={styles.signup}>
       <form className={styles.signup_form}>

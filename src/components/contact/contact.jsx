@@ -38,8 +38,8 @@ const Contact = (props) => {
       <section className={styles.contact_us_container}>
         <p className={styles.contact_us_title}>Contact Us</p>
         <p className={styles.desc}>
-          문의하시기 전에 모두락의 유용한 정보들이 담겨있는 페이지들을
-          참고해주세요. <br></br>자주 문의 되는 사항들이 정리되어 있습니다.
+          문의하시기 전에 아래 페이지들을 참고해주세요. <br></br>자주 문의 되는
+          사항들이 정리되어 있습니다.
         </p>
         <ul className={styles.contact_us_ul}>
           <li className={styles.li}>
@@ -51,7 +51,7 @@ const Contact = (props) => {
               }}
             >
               Q&A
-            </span>
+            </span>{" "}
             읽어보기
           </li>
           <li className={styles.li}>
