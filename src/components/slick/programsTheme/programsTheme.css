@@ -1,0 +1,45 @@
+.slick_programs_container {
+  width: 100%;
+  height: 400px;
+  margin: auto;
+}
+
+.slick_programs_container .slick-slider,
+.slick_programs_container .slick-list,
+.slick_programs_container .slick-track {
+  width: 90%;
+  height: 400px;
+  margin: auto;
+  transform: translateY(-50px);
+}
+
+.slick_programs_container .slick-list {
+  width: 80%;
+}
+
+.slick_programs_container .thumbnail {
+  width: 100%;
+  outline: none;
+  border-radius: 8px;
+  border: 4px solid white;
+  cursor: pointer;
+  box-shadow: 1px 3px 3px 1px lightgray;
+}
+
+.slick_programs_container .arrow {
+  width: 40px;
+  height: 40px;
+  border-radius: 4px;
+}
+
+.slick_programs_container .title {
+  text-align: center;
+  font-size: var(--font-size-big);
+  color: black;
+}
+
+@media screen and (max-width: 800px) {
+  .slick_programs_container .slick-list {
+    width: 88%;
+  }
+}

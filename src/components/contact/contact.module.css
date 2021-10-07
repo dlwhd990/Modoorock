@@ -70,7 +70,7 @@
   width: 80%;
   margin: auto;
   margin-top: 150px;
-  color: #354e57;
+  color: var(--color-dark-green);
 }
 
 .contact_us_title {
@@ -104,7 +104,7 @@
 
 .email_title {
   font-weight: 500;
-  color: #354e57;
+  color: var(--color-dark-green);
   margin-bottom: 8px;
 }
 
@@ -128,7 +128,7 @@
 
 .office_intro {
   margin-left: 50px;
-  color: #354e57;
+  color: var(--color-dark-green);
 }
 
 .office_title {

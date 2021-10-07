@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import styles from "./themeItem.module.css";
+import styles from "./themeSlickItem.module.css";
 
-const ThemeItem = ({ item, areaList }) => {
+const ThemeSlickItem = ({ item, areaList }) => {
   const [areaData, setAreaData] = useState(null);
   useEffect(() => {
     for (let i = 0; i < areaList.length; i++) {
@@ -31,4 +31,4 @@ const ThemeItem = ({ item, areaList }) => {
   );
 };
 
-export default ThemeItem;
+export default ThemeSlickItem;

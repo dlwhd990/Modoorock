@@ -3,9 +3,8 @@ import ProgramItem from "./programItem/programItem";
 import { useHistory, useParams } from "react-router-dom";
 import styles from "./programs.module.css";
 import { debounce } from "lodash";
-import ProgramDetail from "./programDetail/programDetail";
 import AreaItem from "./areaItem/areaItem";
-import ThemeItem from "./themeItem/themeItem";
+import ProgramsThemeSlick from "../slick/programsTheme/programsTheme";
 
 const Programs = ({ areaList, programList }) => {
   const history = useHistory();
@@ -15,6 +14,32 @@ const Programs = ({ areaList, programList }) => {
   const [resultAreaList, setResultAreaList] = useState(areaList);
   const [switchValue, setSwitchValue] = useState("지역");
   const [regionValue, setRegionValue] = useState("전체");
+  const themeList = [
+    {
+      title: "농촌체험",
+      subtitle: "농촌을 체험해보세요",
+    },
+    {
+      title: "액티비티",
+      subtitle: "다양한 체험",
+    },
+    {
+      title: "단체",
+      subtitle: "다함께 즐기기 좋은",
+    },
+    {
+      title: "친구",
+      subtitle: "친구끼리 즐기기 좋은",
+    },
+    {
+      title: "가족",
+      subtitle: "가족끼리 사이좋게",
+    },
+    {
+      title: "연인",
+      subtitle: "연인을 위한 패키지",
+    },
+  ];
 
   const onSelectHandler = (e) => {
     if (e.currentTarget.innerText === "프로그램") {
@@ -332,12 +357,33 @@ const Programs = ({ areaList, programList }) => {
 
               <section className={styles.program_list}>
                 {resultAreaList.map((item) => (
-                  <AreaItem key={item.idx} item={item} />
+                  <AreaItem
+                    key={item.idx}
+                    item={item}
+                    programList={programList}
+                  />
                 ))}
               </section>
             </section>
           ) : (
-            <></>
+            <section className={styles.theme_main}>
+              {themeList.map((theme) => (
+                <section className={styles.theme_content_container}>
+                  <div className={styles.theme_title_container}>
+                    <span className={styles.theme_title}>{theme.title}</span>
+                    <span className={styles.theme_subtitle}>
+                      {theme.subtitle}
+                    </span>
+                  </div>
+                  <div className={styles.theme_slick_container}>
+                    <ProgramsThemeSlick
+                      viewItems={programList}
+                      areaList={areaList}
+                    />
+                  </div>
+                </section>
+              ))}
+            </section>
           )}
         </section>
       </section>

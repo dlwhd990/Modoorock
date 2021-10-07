@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { useHistory, useLocation, useParams } from "react-router";
+import { useHistory, useParams } from "react-router";
 import ThemeItem from "../themeItem/themeItem";
 import styles from "./attraction.module.css";
 
-const Attraction = ({ programList }) => {
+const Attraction = ({ programList, areaList }) => {
   const history = useHistory();
   const { path } = useParams();
-  const location = useLocation();
   const [attractionProgramList, setAttractionProgramList] = useState([]);
+  const [areaData, setAreaData] = useState(null);
 
   const onSelectHandler = (e) => {
     if (e.currentTarget.innerText === "프로그램") {
@@ -17,6 +17,12 @@ const Attraction = ({ programList }) => {
 
   useEffect(() => {
     const result = [];
+    for (let i = 0; i < areaList.length; i++) {
+      if (areaList[i].idx === parseInt(path)) {
+        setAreaData(areaList[i]);
+        break;
+      }
+    }
     programList.forEach((item) => {
       item.attraction === parseInt(path) && result.push(item);
     });
@@ -35,9 +41,9 @@ const Attraction = ({ programList }) => {
         </div>
       </section>
       <section className={styles.attraction_container}>
-        <p
-          className={styles.attraction_title}
-        >{`${location.state.name} 액티비티 상품`}</p>
+        <p className={styles.attraction_title}>
+          {areaData && `${areaData.name} 투어 패키지`}
+        </p>
         <div className={styles.route_button_container}>
           <div
             className={styles.home_icon_container}
@@ -53,7 +59,7 @@ const Attraction = ({ programList }) => {
           <p
             className={styles.route_button}
             onClick={() => {
-              history.push(`/programs/${path}`);
+              history.push(`/programs/area`);
               window.scrollTo({ top: 0 });
             }}
           >
@@ -63,7 +69,7 @@ const Attraction = ({ programList }) => {
           <p
             className={styles.route_button}
             onClick={() => {
-              history.push(`/programs/${path}`);
+              history.push(`/programs/area`);
               window.scrollTo({ top: 0 });
             }}
           >
@@ -76,13 +82,13 @@ const Attraction = ({ programList }) => {
               window.location.reload();
             }}
           >
-            {`${location.state.name} 액티비티 상품`}
+            {areaData && `${areaData.name} 투어 패키지`}
           </p>
         </div>
 
         <section className={styles.attraction_list_container}>
           {attractionProgramList.map((item) => (
-            <ThemeItem key={item.idx} item={item} areaData={location.state} />
+            <ThemeItem key={item.idx} item={item} areaList={areaList} />
           ))}
         </section>
       </section>

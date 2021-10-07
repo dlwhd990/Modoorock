@@ -72,6 +72,9 @@ const Signup = (props) => {
       })
       .then((response) => {
         console.log(response);
+        if (response.success) {
+          window.alert("회원가입이 완료되었습니다. 로그인을 해주세요.");
+        } // 핸드폰인증, 중복확인 등 작업 더 완료되면 추가
       })
       .catch((error) => console.error(error));
   };
@@ -92,7 +95,6 @@ const Signup = (props) => {
               placeholder="아이디 (영문, 숫자 조합의 4~12자리)"
               spellCheck="false"
             />
-            <button className={styles.id_redup_check_button}>중복확인</button>
           </div>
           <div className={styles.input_container}>
             <p className={styles.input_title}>비밀번호</p>

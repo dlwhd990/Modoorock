@@ -103,8 +103,7 @@ const App = (props) => {
       user_idx: "관리자(보류)",
       date: "보류",
       price: 25000,
-      photo:
-        "https://static.wixstatic.com/media/9e9163_dc64f2b4cbc941a5b6dd2a01ff9ac565~mv2.png/v1/crop/x_0,y_12,w_860,h_1076/fill/w_622,h_778,al_c,q_90,usm_0.66_1.00_0.01/%EC%8A%A4%ED%86%A0%EC%96%B4%ED%8C%9C%20%ED%91%9C%EC%A7%80_%EB%B3%B5%EC%82%AC%EB%B3%B8_013.webp",
+      photo: "/Modoorock/images/service_right.png",
       attraction: 0,
     },
     {
@@ -114,8 +113,7 @@ const App = (props) => {
       user_idx: "관리자(보류)",
       date: "보류",
       price: 25000,
-      photo:
-        "https://static.wixstatic.com/media/9e9163_dc64f2b4cbc941a5b6dd2a01ff9ac565~mv2.png/v1/crop/x_0,y_12,w_860,h_1076/fill/w_622,h_778,al_c,q_90,usm_0.66_1.00_0.01/%EC%8A%A4%ED%86%A0%EC%96%B4%ED%8C%9C%20%ED%91%9C%EC%A7%80_%EB%B3%B5%EC%82%AC%EB%B3%B8_013.webp",
+      photo: "/Modoorock/images/service_right.png",
       attraction: 1,
     },
     {
@@ -125,8 +123,7 @@ const App = (props) => {
       user_idx: "관리자(보류)",
       date: "보류",
       price: 20000,
-      photo:
-        "https://static.wixstatic.com/media/9e9163_dc64f2b4cbc941a5b6dd2a01ff9ac565~mv2.png/v1/crop/x_0,y_12,w_860,h_1076/fill/w_622,h_778,al_c,q_90,usm_0.66_1.00_0.01/%EC%8A%A4%ED%86%A0%EC%96%B4%ED%8C%9C%20%ED%91%9C%EC%A7%80_%EB%B3%B5%EC%82%AC%EB%B3%B8_013.webp",
+      photo: "/Modoorock/images/service_right.png",
       attraction: 1,
     },
     {
@@ -136,8 +133,7 @@ const App = (props) => {
       user_idx: "관리자(보류)",
       date: "보류",
       price: 25000,
-      photo:
-        "https://static.wixstatic.com/media/9e9163_dc64f2b4cbc941a5b6dd2a01ff9ac565~mv2.png/v1/crop/x_0,y_12,w_860,h_1076/fill/w_622,h_778,al_c,q_90,usm_0.66_1.00_0.01/%EC%8A%A4%ED%86%A0%EC%96%B4%ED%8C%9C%20%ED%91%9C%EC%A7%80_%EB%B3%B5%EC%82%AC%EB%B3%B8_013.webp",
+      photo: "/Modoorock/images/service_right.png",
       attraction: 0,
     },
     {
@@ -147,8 +143,7 @@ const App = (props) => {
       user_idx: "관리자(보류)",
       date: "보류",
       price: 1000,
-      photo:
-        "https://static.wixstatic.com/media/9e9163_dc64f2b4cbc941a5b6dd2a01ff9ac565~mv2.png/v1/crop/x_0,y_12,w_860,h_1076/fill/w_622,h_778,al_c,q_90,usm_0.66_1.00_0.01/%EC%8A%A4%ED%86%A0%EC%96%B4%ED%8C%9C%20%ED%91%9C%EC%A7%80_%EB%B3%B5%EC%82%AC%EB%B3%B8_013.webp",
+      photo: "/Modoorock/images/service_right.png",
       attraction: 2,
     },
     {
@@ -158,8 +153,7 @@ const App = (props) => {
       user_idx: "관리자(보류)",
       date: "보류",
       price: 25000,
-      photo:
-        "https://static.wixstatic.com/media/9e9163_dc64f2b4cbc941a5b6dd2a01ff9ac565~mv2.png/v1/crop/x_0,y_12,w_860,h_1076/fill/w_622,h_778,al_c,q_90,usm_0.66_1.00_0.01/%EC%8A%A4%ED%86%A0%EC%96%B4%ED%8C%9C%20%ED%91%9C%EC%A7%80_%EB%B3%B5%EC%82%AC%EB%B3%B8_013.webp",
+      photo: "/Modoorock/images/service_right.png",
       attraction: 0,
     },
   ]);
@@ -1423,7 +1417,7 @@ const App = (props) => {
           <Programs areaList={areaList} programList={programList} />
         </Route>
         <Route exact path="/programs/attraction/:path">
-          <Attraction programList={programList} />
+          <Attraction programList={programList} areaList={areaList} />
         </Route>
         <Route exact path="/customer/:path">
           <CustomerCenter

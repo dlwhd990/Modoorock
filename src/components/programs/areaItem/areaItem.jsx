@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import styles from "./areaItem.module.css";
 
-const AreaItem = ({ item }) => {
+const AreaItem = ({ item, programList }) => {
   const history = useHistory();
+  const [programCount, setProgramCount] = useState(0);
   const areaClickHandler = () => {
     history.push({
       pathname: `/programs/attraction/${item.idx}`,
@@ -11,6 +12,14 @@ const AreaItem = ({ item }) => {
     });
     window.scrollTo({ top: 0 });
   };
+
+  useEffect(() => {
+    let cnt = 0;
+    programList.forEach((program) => {
+      program.attraction === item.idx && cnt++;
+    });
+    setProgramCount(cnt);
+  }, []);
 
   return (
     <section className={styles.area_item} onClick={areaClickHandler}>
@@ -24,7 +33,9 @@ const AreaItem = ({ item }) => {
           <p className={styles.desc}>{item.content}</p>
         </div>
 
-        <p className={styles.number_of_programs}>45개의 상품</p>
+        <p
+          className={styles.number_of_programs}
+        >{`${programCount}개의 상품`}</p>
       </div>
     </section>
   );

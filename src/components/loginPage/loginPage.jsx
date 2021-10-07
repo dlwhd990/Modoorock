@@ -1,17 +1,28 @@
 import axios from "axios";
-import React from "react";
+import React, { useRef } from "react";
 import { useHistory } from "react-router-dom";
 import styles from "./loginPage.module.css";
 
 const LoginPage = (props) => {
   const history = useHistory();
+  const idRef = useRef();
+  const pwRef = useRef();
   const loginSubmitHandler = () => {
+    const id = idRef.current.value;
+    const password = pwRef.current.value;
     axios
       .post("http://35.239.228.185/modoorock/user/login", {
-        id: "dlwhd990",
-        password: "dd",
+        id,
+        password,
       })
-      .then((response) => console.log(response))
+      .then((response) => {
+        console.log(response);
+        if (response.data === "logined") {
+          window.alert("로그인 되었습니다.");
+        } else {
+          window.alert("아이디와 비밀번호를 다시 확인해주세요");
+        }
+      })
       .catch((err) => console.error(err));
   };
   return (
@@ -21,12 +32,14 @@ const LoginPage = (props) => {
         <div className={styles.main}>
           <div className={styles.input_container}>
             <input
+              ref={idRef}
               type="text"
               className={styles.input}
               placeholder="아이디"
               spellCheck="false"
             />
             <input
+              ref={pwRef}
               type="password"
               className={styles.input}
               placeholder="비밀번호"
