@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/Modoorock/static/css/main.440632ed.chunk.css",
+    "main.css": "/Modoorock/static/css/main.8cd884cc.chunk.css",
     "main.js": "/Modoorock/static/js/main.6f04fede.chunk.js",
     "main.js.map": "/Modoorock/static/js/main.6f04fede.chunk.js.map",
     "runtime-main.js": "/Modoorock/static/js/runtime-main.b34af722.js",
@@ -10,7 +10,7 @@
     "static/js/2.adfa8b3a.chunk.js.map": "/Modoorock/static/js/2.adfa8b3a.chunk.js.map",
     "index.html": "/Modoorock/index.html",
     "static/css/2.2a5df868.chunk.css.map": "/Modoorock/static/css/2.2a5df868.chunk.css.map",
-    "static/css/main.440632ed.chunk.css.map": "/Modoorock/static/css/main.440632ed.chunk.css.map",
+    "static/css/main.8cd884cc.chunk.css.map": "/Modoorock/static/css/main.8cd884cc.chunk.css.map",
     "static/js/2.adfa8b3a.chunk.js.LICENSE.txt": "/Modoorock/static/js/2.adfa8b3a.chunk.js.LICENSE.txt",
     "static/media/index.css": "/Modoorock/static/media/SCDream9.c8e7afd8.otf",
     "static/media/introduce.module.css": "/Modoorock/static/media/about_top_banner.e04dd856.png",
@@ -23,7 +23,7 @@
     "static/js/runtime-main.b34af722.js",
     "static/css/2.2a5df868.chunk.css",
     "static/js/2.adfa8b3a.chunk.js",
-    "static/css/main.440632ed.chunk.css",
+    "static/css/main.8cd884cc.chunk.css",
     "static/js/main.6f04fede.chunk.js"
   ]
 }
