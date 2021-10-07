@@ -12,6 +12,7 @@
 
 .program_image {
   width: 210px;
+  height: 210px;
   border-radius: 8px;
   box-shadow: 0 0 10px lightgray;
 }
@@ -21,7 +22,7 @@
   height: 108px;
   box-shadow: 0 0 10px lightgray;
   padding: 15px 10px;
-  transform: translateY(-50px);
+  transform: translateY(-20px);
   background-color: white;
   border-radius: 8px;
   position: relative;
