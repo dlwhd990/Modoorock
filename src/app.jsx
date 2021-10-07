@@ -12,6 +12,7 @@ import FindId from "./components/find/findId/findId";
 import FindPw from "./components/find/findPw/findPw";
 import Introduce from "./components/about/introduce";
 import CustomerCenter from "./components/customerCenter/customerCenter";
+import Attraction from "./components/programs/attraction/attraction";
 
 const App = (props) => {
   const [introVideos, setIntroVideos] = useState([
@@ -65,74 +66,101 @@ const App = (props) => {
     },
   ]);
 
-  const [areaList, setAreaList] = useState([]);
+  const [areaList, setAreaList] = useState([
+    {
+      idx: 0,
+      name: "월미도",
+      area: "인천",
+      photo: "/Modoorock/images/service_right.png",
+      user_idx: "보류(관리자)",
+      content:
+        "월미도는 서울특별시 종로구 건되어 정궁으로 이용된 궁궐, 정궁, 사적",
+    },
+    {
+      idx: 1,
+      name: "경복궁",
+      area: "서울",
+      photo: "/Modoorock/images/service_right.png",
+      user_idx: "보류(관리자)",
+      content:
+        "서울특별시 종로구 세종로에 있는 조선전기에 창건되어 정궁으로 이용된 궁궐, 정궁, 사적",
+    },
+    {
+      idx: 2,
+      name: "해운대",
+      area: "부산",
+      photo: "/Modoorock/images/service_right.png",
+      user_idx: "보류(관리자)",
+      content: "해운대는 서울특별시 종로구 세종로에 있는 조선전기",
+    },
+  ]);
 
   const [programList, setProgramList] = useState([
     {
       idx: 0,
       title: "2021 월림픽에 도전하라!",
-      area: "인천",
-      dest: "월미도",
+      content: "짧은설명 여기에&",
       user_idx: "관리자(보류)",
       date: "보류",
       price: 25000,
       photo:
         "https://static.wixstatic.com/media/9e9163_dc64f2b4cbc941a5b6dd2a01ff9ac565~mv2.png/v1/crop/x_0,y_12,w_860,h_1076/fill/w_622,h_778,al_c,q_90,usm_0.66_1.00_0.01/%EC%8A%A4%ED%86%A0%EC%96%B4%ED%8C%9C%20%ED%91%9C%EC%A7%80_%EB%B3%B5%EC%82%AC%EB%B3%B8_013.webp",
+      attraction: 0,
     },
     {
       idx: 1,
       title: "2021 경림픽에 도전하라!",
-      area: "서울",
-      dest: "경복궁",
+      content: "짧은설명 여기에^",
       user_idx: "관리자(보류)",
       date: "보류",
       price: 25000,
       photo:
         "https://static.wixstatic.com/media/9e9163_dc64f2b4cbc941a5b6dd2a01ff9ac565~mv2.png/v1/crop/x_0,y_12,w_860,h_1076/fill/w_622,h_778,al_c,q_90,usm_0.66_1.00_0.01/%EC%8A%A4%ED%86%A0%EC%96%B4%ED%8C%9C%20%ED%91%9C%EC%A7%80_%EB%B3%B5%EC%82%AC%EB%B3%B8_013.webp",
+      attraction: 1,
     },
     {
       idx: 2,
       title: "2021 경림픽에 도전하라!",
-      area: "서울",
-      dest: "경복궁",
+      content: "짧은설명 여기에$",
       user_idx: "관리자(보류)",
       date: "보류",
       price: 20000,
       photo:
         "https://static.wixstatic.com/media/9e9163_dc64f2b4cbc941a5b6dd2a01ff9ac565~mv2.png/v1/crop/x_0,y_12,w_860,h_1076/fill/w_622,h_778,al_c,q_90,usm_0.66_1.00_0.01/%EC%8A%A4%ED%86%A0%EC%96%B4%ED%8C%9C%20%ED%91%9C%EC%A7%80_%EB%B3%B5%EC%82%AC%EB%B3%B8_013.webp",
+      attraction: 1,
     },
     {
       idx: 3,
       title: "2021 월림픽에 도전하라!",
-      area: "인천",
-      dest: "월미도",
+      content: "짧은설명 여기에@",
       user_idx: "관리자(보류)",
       date: "보류",
       price: 25000,
       photo:
         "https://static.wixstatic.com/media/9e9163_dc64f2b4cbc941a5b6dd2a01ff9ac565~mv2.png/v1/crop/x_0,y_12,w_860,h_1076/fill/w_622,h_778,al_c,q_90,usm_0.66_1.00_0.01/%EC%8A%A4%ED%86%A0%EC%96%B4%ED%8C%9C%20%ED%91%9C%EC%A7%80_%EB%B3%B5%EC%82%AC%EB%B3%B8_013.webp",
+      attraction: 0,
     },
     {
       idx: 4,
       title: "2021 해림픽에 도전하라!",
-      area: "부산",
-      dest: "해운대",
+      content: "짧은설명 여기에!",
       user_idx: "관리자(보류)",
       date: "보류",
       price: 1000,
       photo:
         "https://static.wixstatic.com/media/9e9163_dc64f2b4cbc941a5b6dd2a01ff9ac565~mv2.png/v1/crop/x_0,y_12,w_860,h_1076/fill/w_622,h_778,al_c,q_90,usm_0.66_1.00_0.01/%EC%8A%A4%ED%86%A0%EC%96%B4%ED%8C%9C%20%ED%91%9C%EC%A7%80_%EB%B3%B5%EC%82%AC%EB%B3%B8_013.webp",
+      attraction: 2,
     },
     {
       idx: 5,
       title: "2021 월림픽에 도전하라!",
-      area: "인천",
-      dest: "월미도",
+      content: "짧은설명 여기에~",
       user_idx: "관리자(보류)",
       date: "보류",
       price: 25000,
       photo:
         "https://static.wixstatic.com/media/9e9163_dc64f2b4cbc941a5b6dd2a01ff9ac565~mv2.png/v1/crop/x_0,y_12,w_860,h_1076/fill/w_622,h_778,al_c,q_90,usm_0.66_1.00_0.01/%EC%8A%A4%ED%86%A0%EC%96%B4%ED%8C%9C%20%ED%91%9C%EC%A7%80_%EB%B3%B5%EC%82%AC%EB%B3%B8_013.webp",
+      attraction: 0,
     },
   ]);
 
@@ -1392,7 +1420,10 @@ const App = (props) => {
           <Introduce viewItems={introVideos} />
         </Route>
         <Route exact path="/programs/:path">
-          <Programs programList={programList} />
+          <Programs areaList={areaList} programList={programList} />
+        </Route>
+        <Route exact path="/programs/attraction/:path">
+          <Attraction programList={programList} />
         </Route>
         <Route exact path="/customer/:path">
           <CustomerCenter

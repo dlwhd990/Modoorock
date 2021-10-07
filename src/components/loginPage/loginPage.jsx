@@ -1,9 +1,19 @@
+import axios from "axios";
 import React from "react";
 import { useHistory } from "react-router-dom";
 import styles from "./loginPage.module.css";
 
 const LoginPage = (props) => {
   const history = useHistory();
+  const loginSubmitHandler = () => {
+    axios
+      .post("http://35.239.228.185/modoorock/user/login", {
+        id: "dlwhd990",
+        password: "dd",
+      })
+      .then((response) => console.log(response))
+      .catch((err) => console.error(err));
+  };
   return (
     <section className={styles.login_page}>
       <section className={styles.container}>
@@ -23,7 +33,9 @@ const LoginPage = (props) => {
               spellCheck="false"
             />
           </div>
-          <button className={styles.submit_button}>로그인</button>
+          <button className={styles.submit_button} onClick={loginSubmitHandler}>
+            로그인
+          </button>
         </div>
         <div className={styles.id_save_find_container}>
           <div className={styles.id_save_container}>

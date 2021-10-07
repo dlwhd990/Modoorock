@@ -133,6 +133,10 @@
   color: #2e9bd3;
 }
 
+.region_main {
+  animation: appear 0.6s;
+}
+
 .region_select_container {
   width: 60%;
   display: flex;
@@ -171,6 +175,17 @@
 .program_detail_container {
   margin-top: 100px;
   padding: 0 8%;
+}
+
+@keyframes appear {
+  0% {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 @media screen and (max-width: 780px) {

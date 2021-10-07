@@ -1,27 +1,23 @@
 import React from "react";
 import styles from "./themeItem.module.css";
 
-const ThemeItem = (props) => {
+const ThemeItem = ({ item, areaData }) => {
   return (
     <section className={styles.theme_item}>
       <div className={styles.image_container}>
-        <img
-          src="/Modoorock/images/service_right.png"
-          alt="area_image"
-          className={styles.image}
-        />
-        <div className={styles.area}>[서울] 경복궁</div>
+        <img src={item.photo} alt="area_image" className={styles.image} />
+        <div
+          className={styles.area}
+        >{`[${areaData.area}] ${areaData.name}`}</div>
       </div>
       <div className={styles.text_container}>
         <div className={styles.area_data_container}>
-          <p className={styles.name}>2021 월림픽에 도전하라!</p>
-          <p className={styles.desc}>
-            인천 월미도에서 2021 월림픽에 도전해보세요!
-          </p>
+          <p className={styles.name}>{item.title}</p>
+          <p className={styles.desc}>{item.content}</p>
           <p className={styles.rate}>여기에별점</p>
         </div>
 
-        <p className={styles.price}>15,000원</p>
+        <p className={styles.price}>{`${item.price}원`}</p>
       </div>
     </section>
   );

@@ -1,24 +1,27 @@
 import React from "react";
+import { useHistory } from "react-router";
 import styles from "./areaItem.module.css";
 
-const AreaItem = (props) => {
+const AreaItem = ({ item }) => {
+  const history = useHistory();
+  const areaClickHandler = () => {
+    history.push({
+      pathname: `/programs/attraction/${item.idx}`,
+      state: item,
+    });
+    window.scrollTo({ top: 0 });
+  };
+
   return (
-    <section className={styles.area_item}>
+    <section className={styles.area_item} onClick={areaClickHandler}>
       <div className={styles.image_container}>
-        <img
-          src="/Modoorock/images/service_right.png"
-          alt="area_image"
-          className={styles.image}
-        />
-        <div className={styles.region}>서울</div>
+        <img src={item.photo} alt="area_image" className={styles.image} />
+        <div className={styles.region}>{item.area}</div>
       </div>
       <div className={styles.text_container}>
         <div className={styles.area_data_container}>
-          <p className={styles.name}>경복궁</p>
-          <p className={styles.desc}>
-            서울특별시 종로구 세종로에 있는 조선전기에 창건되어 정궁으로 이용된
-            궁궐, 정궁, 사적
-          </p>
+          <p className={styles.name}>{item.name}</p>
+          <p className={styles.desc}>{item.content}</p>
         </div>
 
         <p className={styles.number_of_programs}>45개의 상품</p>

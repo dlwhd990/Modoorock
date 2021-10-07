@@ -150,7 +150,7 @@ const Header = (props) => {
                 className={styles.drop_down_menu_item}
                 onClick={() => {
                   dropDownAllOff();
-                  history.push("/programs/main");
+                  history.push("/programs/area");
                   window.scrollTo({ top: 0 });
                 }}
               >
