@@ -46,22 +46,20 @@ const Signup = (props) => {
     const name = nameRef.current.value;
     const phone = phoneRef.current.value;
 
+    if (
+      id.length === 0 ||
+      password.length === 0 ||
+      name.length === 0 ||
+      phone.length === 0
+    ) {
+      window.alert("입력되지 않은 정보가 있습니다. 다시 확인해주세요.");
+      return;
+    }
+
     if (password !== pwConfirm) {
       window.alert("비밀번호와 비밀번호 확인이 동일하지 않습니다.");
       return;
     }
-
-    //callAPI("https://35.239.228.185/modoorock/user/register", {
-    //  method: "POST",
-    //  body: JSON.stringify({ id, password, name, phone }),
-    //  headers: {
-    //    "Content-Type": "application/json",
-    //  },
-    //})
-    //  .then((res) => {
-    //    console.log(res);
-    //  })
-    //  .catch((err) => console.error("error: ", err));
 
     axios
       .post("http://35.239.228.185/modoorock/user/register", {
@@ -72,8 +70,17 @@ const Signup = (props) => {
       })
       .then((response) => {
         console.log(response);
-        if (response.success) {
+        const resData = response.data;
+        if (resData === "duplicate") {
+          window.alert(
+            "아이디 또는 핸드폰 번호가 중복됩니다. 다른 아이디로 회원가입 해주세요"
+          ); //두개 나눌 수 있을 지
+          return;
+        }
+
+        if (resData === "success") {
           window.alert("회원가입이 완료되었습니다. 로그인을 해주세요.");
+          window.location.href = "/";
         } // 핸드폰인증, 중복확인 등 작업 더 완료되면 추가
       })
       .catch((error) => console.error(error));

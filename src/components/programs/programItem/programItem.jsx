@@ -1,28 +1,55 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import styles from "./programItem.module.css";
+import StarRatingComponent from "react-star-rating-component";
 
-const ProgramItem = ({ item }) => {
+const ProgramItem = ({ item, areaList }) => {
+  const [areaData, setAreaData] = useState(null);
   const history = useHistory();
-  const goDetailHandler = (e) => {
-    history.push(`/programs/${e.target.value}`);
+
+  const onItemClick = () => {
+    history.push(`/programs/view/${item.idx}`);
   };
+
+  useEffect(() => {
+    for (let i = 0; i < areaList.length; i++) {
+      if (areaList[i].idx === item.attraction) {
+        setAreaData(areaList[i]);
+        return;
+      }
+    }
+  }, []);
   return (
-    <div className={styles.program_item}>
-      <img src={item.photo} alt="" className={styles.photo} />
-      <div className={styles.data_container}>
-        <p className={styles.title}>{item.title}</p>
-        <p className={styles.area}>{item.area}</p>
-        <p className={styles.price}>{`${item.price}원`}</p>
-        <button
-          className={styles.go_detail_button}
-          value={item.idx}
-          onClick={goDetailHandler}
-        >
-          상품 보기
-        </button>
+    <section className={styles.program_item} onClick={onItemClick}>
+      <div className={styles.image_container}>
+        <img src={item.photo} alt="area_image" className={styles.image} />
+        <div className={styles.area}>
+          {areaData && `[${areaData.area}] ${areaData.name}`}
+        </div>
       </div>
-    </div>
+      <div className={styles.text_container}>
+        <div className={styles.area_data_container}>
+          <p className={styles.name}>{item.title}</p>
+          <p className={styles.desc}>{item.content}</p>
+          <div className={styles.rate_container}>
+            <div className={styles.star_container}>
+              <StarRatingComponent
+                editing={false}
+                starCount={5}
+                value={item.total_rate / item.rate_count}
+              />
+              <span className={styles.rate_data}>{`${(
+                item.total_rate / item.rate_count
+              ).toFixed(1)}/5.0`}</span>
+            </div>
+            <span className={styles.review_count_text}>32개의 리뷰</span>
+          </div>
+          <p className={styles.price}>{`${item.price.toLocaleString(
+            "ko-KR"
+          )}원`}</p>
+        </div>
+      </div>
+    </section>
   );
 };
 

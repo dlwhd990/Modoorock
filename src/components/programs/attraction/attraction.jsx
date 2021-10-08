@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router";
-import ThemeItem from "../themeItem/themeItem";
+import ProgramItem from "../programItem/programItem";
 import styles from "./attraction.module.css";
 
 const Attraction = ({ programList, areaList }) => {
@@ -85,10 +85,9 @@ const Attraction = ({ programList, areaList }) => {
             {areaData && `${areaData.name} 투어 패키지`}
           </p>
         </div>
-
         <section className={styles.attraction_list_container}>
           {attractionProgramList.map((item) => (
-            <ThemeItem key={item.idx} item={item} areaList={areaList} />
+            <ProgramItem key={item.idx} item={item} areaList={areaList} />
           ))}
         </section>
       </section>

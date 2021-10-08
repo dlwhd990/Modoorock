@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import ProgramItem from "./programItem/programItem";
 import { useHistory, useParams } from "react-router-dom";
 import styles from "./programs.module.css";
 import { debounce } from "lodash";
@@ -16,26 +15,32 @@ const Programs = ({ areaList, programList }) => {
   const [regionValue, setRegionValue] = useState("전체");
   const themeList = [
     {
+      idx: 0,
       title: "농촌체험",
       subtitle: "농촌을 체험해보세요",
     },
     {
+      idx: 1,
       title: "액티비티",
       subtitle: "다양한 체험",
     },
     {
+      idx: 2,
       title: "단체",
       subtitle: "다함께 즐기기 좋은",
     },
     {
+      idx: 3,
       title: "친구",
       subtitle: "친구끼리 즐기기 좋은",
     },
     {
+      idx: 4,
       title: "가족",
       subtitle: "가족끼리 사이좋게",
     },
     {
+      idx: 5,
       title: "연인",
       subtitle: "연인을 위한 패키지",
     },
@@ -368,12 +373,23 @@ const Programs = ({ areaList, programList }) => {
           ) : (
             <section className={styles.theme_main}>
               {themeList.map((theme) => (
-                <section className={styles.theme_content_container}>
-                  <div className={styles.theme_title_container}>
-                    <span className={styles.theme_title}>{theme.title}</span>
-                    <span className={styles.theme_subtitle}>
-                      {theme.subtitle}
-                    </span>
+                <section
+                  key={theme.idx}
+                  className={styles.theme_content_container}
+                >
+                  <div className={styles.theme_content_top}>
+                    <div className={styles.theme_title_container}>
+                      <span className={styles.theme_title}>{theme.title}</span>
+                      <span className={styles.theme_subtitle}>
+                        {theme.subtitle}
+                      </span>
+                    </div>
+                    <button
+                      className={styles.theme_show_all_button}
+                      value={theme.title}
+                    >
+                      더보기
+                    </button>
                   </div>
                   <div className={styles.theme_slick_container}>
                     <ProgramsThemeSlick

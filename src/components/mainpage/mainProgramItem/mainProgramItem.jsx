@@ -5,7 +5,7 @@ import styles from "./mainProgramItem.module.css";
 const MainProgramItem = React.memo(({ item }) => {
   const history = useHistory();
   const onItemClickHandler = () => {
-    history.push(`/programs/${item.idx}`);
+    history.push(`/programs/view/${item.idx}`);
     window.scrollTo({ top: 0 });
   };
   return (
@@ -17,7 +17,9 @@ const MainProgramItem = React.memo(({ item }) => {
       />
       <div className={styles.program_data_container}>
         <p className={styles.program_title}>{item.title}</p>
-        <p className={styles.program_price}>{`${item.price}원`}</p>
+        <p className={styles.program_price}>{`${item.price.toLocaleString(
+          "ko-KR"
+        )}원`}</p>
       </div>
     </div>
   );

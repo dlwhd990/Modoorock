@@ -51,11 +51,20 @@
   margin: 0;
   font-size: var(--font-size-big);
   font-weight: 500;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  -moz-white-space: nowrap;
+  overflow: hidden;
 }
 
 .desc {
   font-size: var(--font-size-small);
+  color: var(--color-desc);
   margin: 8px 0 0 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  -moz-white-space: nowrap;
+  overflow: hidden;
 }
 
 .rate {
@@ -68,6 +77,29 @@
   color: #008fff;
   margin: 0;
   margin-top: 8px;
+}
+
+.rate_container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.star_container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.rate_data {
+  margin-left: 10px;
+  font-size: var(--font-size-small);
+  color: var(--color-desc);
+}
+
+.review_count_text {
+  font-size: var(--font-size-small);
 }
 
 @keyframes appear {

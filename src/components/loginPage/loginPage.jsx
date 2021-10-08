@@ -7,7 +7,8 @@ const LoginPage = (props) => {
   const history = useHistory();
   const idRef = useRef();
   const pwRef = useRef();
-  const loginSubmitHandler = () => {
+  const loginSubmitHandler = (e) => {
+    e.preventDefault();
     const id = idRef.current.value;
     const password = pwRef.current.value;
     axios
@@ -17,8 +18,9 @@ const LoginPage = (props) => {
       })
       .then((response) => {
         console.log(response);
-        if (response.data === "logined") {
+        if (response.data.response === "logined") {
           window.alert("로그인 되었습니다.");
+          window.location.href = "/";
         } else {
           window.alert("아이디와 비밀번호를 다시 확인해주세요");
         }
@@ -29,7 +31,7 @@ const LoginPage = (props) => {
     <section className={styles.login_page}>
       <section className={styles.container}>
         <p className={styles.title}>회원로그인</p>
-        <div className={styles.main}>
+        <form className={styles.main}>
           <div className={styles.input_container}>
             <input
               ref={idRef}
@@ -49,7 +51,7 @@ const LoginPage = (props) => {
           <button className={styles.submit_button} onClick={loginSubmitHandler}>
             로그인
           </button>
-        </div>
+        </form>
         <div className={styles.id_save_find_container}>
           <div className={styles.id_save_container}>
             <input type="checkbox" className={styles.id_save_checkbox} />

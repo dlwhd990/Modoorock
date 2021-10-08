@@ -13,6 +13,7 @@ import FindPw from "./components/find/findPw/findPw";
 import Introduce from "./components/about/introduce";
 import CustomerCenter from "./components/customerCenter/customerCenter";
 import Attraction from "./components/programs/attraction/attraction";
+import ProgramDetail from "./components/programs/programDetail/programDetail";
 
 const App = (props) => {
   const [introVideos, setIntroVideos] = useState([
@@ -98,63 +99,65 @@ const App = (props) => {
   const [programList, setProgramList] = useState([
     {
       idx: 0,
-      title: "2021 월림픽에 도전하라!",
-      content: "짧은설명 여기에&",
+      title:
+        "2021 월림픽에 도전하라! 2021 월림픽에 도전하라! 2021 월림픽에 도전하라!",
+      content:
+        "월미도에서 월림픽에 도전하라 월미도에서 월림픽에 도전하라 월미도에서 월림픽에 도전하라",
       user_idx: "관리자(보류)",
       date: "보류",
       price: 25000,
       photo: "/Modoorock/images/service_right.png",
       attraction: 0,
+      total_rate: 445,
+      rate_count: 89,
     },
     {
       idx: 1,
       title: "2021 경림픽에 도전하라!",
-      content: "짧은설명 여기에^",
+      content: "경복궁에서 경림픽에 도전하라",
       user_idx: "관리자(보류)",
       date: "보류",
       price: 25000,
       photo: "/Modoorock/images/service_right.png",
       attraction: 1,
+      total_rate: 321,
+      rate_count: 89,
     },
     {
       idx: 2,
       title: "2021 경림픽에 도전하라!",
-      content: "짧은설명 여기에$",
+      content: "경복궁에서 경림픽에 도전하라",
       user_idx: "관리자(보류)",
       date: "보류",
       price: 20000,
       photo: "/Modoorock/images/service_right.png",
       attraction: 1,
+      total_rate: 391,
+      rate_count: 89,
     },
     {
       idx: 3,
       title: "2021 월림픽에 도전하라!",
-      content: "짧은설명 여기에@",
+      content: "월미도에서 월림픽에 도전하라",
       user_idx: "관리자(보류)",
       date: "보류",
       price: 25000,
       photo: "/Modoorock/images/service_right.png",
       attraction: 0,
+      total_rate: 231,
+      rate_count: 89,
     },
     {
       idx: 4,
-      title: "2021 해림픽에 도전하라!",
+      title: "해운대에서 해림픽에 도전하라",
       content: "짧은설명 여기에!",
       user_idx: "관리자(보류)",
       date: "보류",
       price: 1000,
       photo: "/Modoorock/images/service_right.png",
       attraction: 2,
-    },
-    {
-      idx: 5,
-      title: "2021 월림픽에 도전하라!",
-      content: "짧은설명 여기에~",
-      user_idx: "관리자(보류)",
-      date: "보류",
-      price: 25000,
-      photo: "/Modoorock/images/service_right.png",
-      attraction: 0,
+      total_rate: 381,
+      rate_count: 89,
     },
   ]);
 
@@ -1412,6 +1415,9 @@ const App = (props) => {
         </Route>
         <Route exact path="/introduce/:path">
           <Introduce viewItems={introVideos} />
+        </Route>
+        <Route exact path="/programs/view/:path">
+          <ProgramDetail programList={programList} />
         </Route>
         <Route exact path="/programs/:path">
           <Programs areaList={areaList} programList={programList} />
