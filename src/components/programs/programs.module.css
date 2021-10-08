@@ -173,7 +173,7 @@
 }
 
 .program_list {
-  padding: 0 100px;
+  padding: 0 100px 150px 100px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -184,6 +184,7 @@
   width: 100%;
   margin: auto;
   padding-top: 30px;
+  animation: appear 0.6s;
 }
 
 .theme_content_top {
@@ -193,6 +194,7 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  animation: appear 0.6s;
 }
 
 .theme_title_container {
@@ -230,6 +232,11 @@
 .theme_slick_container {
   width: 100%;
   height: 400px;
+}
+
+.slick_arrow_icon_left,
+.slick_arrow_icon_right {
+  display: none;
 }
 
 @keyframes appear {
@@ -337,5 +344,25 @@
 
   .theme_show_all_button {
     margin-top: 40px;
+  }
+
+  .theme_slick_container {
+    position: relative;
+  }
+
+  .slick_arrow_icon_left,
+  .slick_arrow_icon_right {
+    display: block;
+    position: absolute;
+    top: 140px;
+    color: var(--color-lightgray);
+  }
+
+  .slick_arrow_icon_left {
+    left: 20px;
+  }
+
+  .slick_arrow_icon_right {
+    right: 20px;
   }
 }

@@ -83,11 +83,13 @@
 .rate_data {
   margin-left: 10px;
   font-size: var(--font-size-small);
+  font-weight: 500;
   color: var(--color-desc);
 }
 
 .review_count_text {
   font-size: var(--font-size-small);
+  color: var(--color-lightgray);
 }
 
 .price {

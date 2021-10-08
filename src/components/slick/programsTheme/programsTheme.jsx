@@ -8,6 +8,14 @@ import ThemeSlickItem from "../../programs/themeSlickItem/themeSlickItem";
 function NextArrow(props) {
   const { className, style, onClick } = props;
   const [arrowPosition, setArrowPosition] = useState(70);
+  const [arrowDisplay, setArrowDisplay] = useState("none");
+  useEffect(() => {
+    if (window.innerWidth > 500) {
+      setArrowDisplay("block");
+    } else {
+      setArrowDisplay("none");
+    }
+  }, [window.innerWidth]);
   useEffect(() => {
     if (window.innerWidth > 1150) {
       setArrowPosition(70);
@@ -25,7 +33,7 @@ function NextArrow(props) {
       className={`${className} arrow`}
       style={{
         ...style,
-        display: "block",
+        display: arrowDisplay,
         width: 40,
         height: 40,
         top: 200,
@@ -40,6 +48,14 @@ function NextArrow(props) {
 function PrevArrow(props) {
   const { className, style, onClick } = props;
   const [arrowPosition, setArrowPosition] = useState(70);
+  const [arrowDisplay, setArrowDisplay] = useState("none");
+  useEffect(() => {
+    if (window.innerWidth > 500) {
+      setArrowDisplay("block");
+    } else {
+      setArrowDisplay("none");
+    }
+  }, [window.innerWidth]);
   useEffect(() => {
     if (window.innerWidth > 1150) {
       setArrowPosition(100);
@@ -57,7 +73,7 @@ function PrevArrow(props) {
       className={`${className} arrow`}
       style={{
         ...style,
-        display: "block",
+        display: arrowDisplay,
         width: 40,
         height: 40,
         top: 200,

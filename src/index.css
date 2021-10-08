@@ -6,6 +6,11 @@
   box-sizing: border-box;
 }
 
+*:focus {
+  outline: 0;
+  outline: none;
+}
+
 body {
   margin: 0;
   font-family: "Noto Sans KR", sans-serif;

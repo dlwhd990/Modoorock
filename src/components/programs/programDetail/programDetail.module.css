@@ -110,12 +110,13 @@
 .rate_data {
   margin-left: 10px;
   font-size: var(--font-size-small);
+  font-weight: 500;
   color: var(--color-desc);
 }
 
 .review_count_text {
   font-size: var(--font-size-small);
-  color: var(--color-skyblue);
+  color: var(--color-lightgray);
   margin-left: 50px;
 }
 
@@ -213,6 +214,21 @@
 @media screen and (max-width: 780px) {
   .program_detail {
     margin-top: 63px;
+    background-color: var(--color-smoke-white);
+  }
+
+  .program_detail_main {
+    overflow-x: hidden;
+    box-shadow: none;
+    transform: translateY(-50px);
+    margin-bottom: 0;
+    padding-bottom: 100px;
+  }
+  .text_data_box {
+    width: 90%;
+  }
+  .button_container {
+    width: 100%;
   }
 }
 
@@ -252,10 +268,6 @@
   .text_container {
     padding: 0;
     padding-bottom: 50px;
-  }
-
-  .text_data_box {
-    width: 90%;
   }
 
   .content {

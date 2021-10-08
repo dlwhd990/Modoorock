@@ -94,6 +94,14 @@ const App = (props) => {
       user_idx: "보류(관리자)",
       content: "해운대는 서울특별시 종로구 세종로에 있는 조선전기",
     },
+    {
+      idx: 3,
+      name: "익산 교도소 세트장",
+      area: "전북",
+      photo: "/Modoorock/images/service_right.png",
+      user_idx: "보류(관리자)",
+      content: "해운대는 서울특별시 종로구 세종로에 있는 조선전기",
+    },
   ]);
 
   const [programList, setProgramList] = useState([
@@ -158,6 +166,18 @@ const App = (props) => {
       attraction: 2,
       total_rate: 381,
       rate_count: 89,
+    },
+    {
+      idx: 5,
+      title: "[익산 교도소 세트장] 교도소를 체험하라 - 슬기로운 빵탈출",
+      content: "교도소 세트장에서 탈출게임을 즐겨보세요",
+      user_idx: "관리자(보류)",
+      date: "보류",
+      price: 11000,
+      photo: "/Modoorock/images/service_right.png",
+      attraction: 3,
+      total_rate: 400,
+      rate_count: 100,
     },
   ]);
 

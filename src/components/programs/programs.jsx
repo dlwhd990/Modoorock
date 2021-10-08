@@ -410,6 +410,12 @@ const Programs = ({ areaList, programList }) => {
                     </button>
                   </div>
                   <div className={styles.theme_slick_container}>
+                    <i
+                      className={`${styles.slick_arrow_icon_left} fas fa-chevron-left`}
+                    ></i>
+                    <i
+                      className={`${styles.slick_arrow_icon_right} fas fa-chevron-right`}
+                    ></i>
                     <ProgramsThemeSlick
                       viewItems={programList}
                       areaList={areaList}
