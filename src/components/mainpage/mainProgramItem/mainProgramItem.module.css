@@ -62,10 +62,11 @@
 @media screen and (max-width: 780px) {
   .program_item {
     width: 150px;
-    margin: 0 5px;
+    margin: 8px 5px;
   }
   .program_image {
     width: 150px;
+    height: 150px;
   }
   .program_data_container {
     width: 150px;

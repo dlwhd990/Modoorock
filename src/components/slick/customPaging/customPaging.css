@@ -19,6 +19,7 @@
   margin: auto;
   margin-top: 10px;
   border-radius: 16px;
+  box-shadow: 0 0 10px lightgray;
 }
 
 .slick-dots .dot_image,

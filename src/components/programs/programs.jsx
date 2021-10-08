@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import styles from "./programs.module.css";
-import { debounce } from "lodash";
+import { debounce, set } from "lodash";
 import AreaItem from "./areaItem/areaItem";
 import ProgramsThemeSlick from "../slick/programsTheme/programsTheme";
 
@@ -13,6 +13,7 @@ const Programs = ({ areaList, programList }) => {
   const [resultAreaList, setResultAreaList] = useState(areaList);
   const [switchValue, setSwitchValue] = useState("지역");
   const [regionValue, setRegionValue] = useState("전체");
+  const [regionSelectOpen, setRegionSelectOpen] = useState(false);
   const themeList = [
     {
       idx: 0,
@@ -58,6 +59,7 @@ const Programs = ({ areaList, programList }) => {
 
   const regionChangeHandler = (e) => {
     setResultAreaList([]);
+    setRegionSelectOpen(false);
     const area = e.currentTarget.innerText;
     setRegionValue(area);
     if (area === "전체") {
@@ -93,6 +95,10 @@ const Programs = ({ areaList, programList }) => {
       }
     }
     setResultProgramList(result);
+  };
+
+  const regionSelectOpenHandler = () => {
+    setRegionSelectOpen(!regionSelectOpen);
   };
 
   useEffect(() => {
@@ -187,7 +193,19 @@ const Programs = ({ areaList, programList }) => {
           </section>
           {path === "area" ? (
             <section className={styles.region_main}>
-              <section className={styles.region_select_container}>
+              <button
+                className={styles.region_select_toggle}
+                onClick={regionSelectOpenHandler}
+              >
+                지역 선택
+              </button>
+              <section
+                className={
+                  regionSelectOpen
+                    ? `${styles.region_select_container} ${styles.region_select_on}`
+                    : `${styles.region_select_container} ${styles.region_select_off}`
+                }
+              >
                 <div
                   className={`${
                     regionValue === "전체"

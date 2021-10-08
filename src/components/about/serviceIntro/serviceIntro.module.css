@@ -172,6 +172,13 @@
     margin-bottom: 30px;
   }
 
+  .route_button,
+  .home_icon,
+  .arrow_icon {
+    font-size: var(--font-size-small);
+    margin: 0 8px;
+  }
+
   .our_service_container {
     margin-top: 70px;
   }

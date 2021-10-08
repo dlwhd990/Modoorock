@@ -242,6 +242,13 @@
     margin: 0 0 30px 0;
   }
 
+  .route_button,
+  .home_icon,
+  .arrow_icon {
+    font-size: var(--font-size-small);
+    margin: 0 8px;
+  }
+
   .about_us_main_container {
     margin-top: 10px;
     height: 2200px;

@@ -141,6 +141,10 @@
   animation: appear 0.6s;
 }
 
+.region_select_toggle {
+  display: none;
+}
+
 .region_select_container {
   width: 60%;
   display: flex;
@@ -217,7 +221,7 @@
   border: none;
   background-color: transparent;
   font-size: var(--font-size-normal);
-  color: var(--color-desc);
+  color: var(--color-skyblue);
   cursor: pointer;
   z-index: 1;
   transition: 180ms all ease-in;
@@ -255,6 +259,7 @@
   .route_button,
   .home_icon,
   .arrow_icon {
+    font-size: var(--font-size-small);
     margin: 0 8px;
   }
 
@@ -274,6 +279,32 @@
 
   .switch_button_container {
     width: 85%;
+  }
+
+  .region_select_toggle {
+    margin: auto;
+    display: block;
+    margin-bottom: 30px;
+    outline: none;
+    border: none;
+    background-color: var(--color-light-blue);
+    color: white;
+    width: 80%;
+    height: 40px;
+    font-size: 18px;
+    font-weight: 500;
+    border-radius: 4px;
+    box-shadow: 1px 3px 3px 1px lightgray;
+  }
+
+  .region_select_on {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .region_select_off {
+    display: none;
   }
 
   .region_select_container {

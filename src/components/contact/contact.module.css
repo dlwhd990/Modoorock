@@ -230,6 +230,13 @@
     margin-bottom: 30px;
   }
 
+  .route_button,
+  .home_icon,
+  .arrow_icon {
+    font-size: var(--font-size-small);
+    margin: 0 8px;
+  }
+
   .contact_us_container {
     margin-top: 70px;
   }
@@ -272,7 +279,7 @@
   }
 
   .project_container {
-    width: 70%;
+    width: 85%;
   }
 
   .project_input {
