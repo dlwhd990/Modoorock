@@ -1,10 +1,17 @@
-import React, { Component } from "react";
+import React, { Component, useEffect, useState } from "react";
 import Slider from "react-slick";
 import "./customPaging.css";
 
 function NextArrow(props) {
   const { className, style, onClick } = props;
-
+  const [arrow, setArrow] = useState("none");
+  useEffect(() => {
+    if (window.innerWidth > 640) {
+      setArrow("block");
+    } else {
+      setArrow("none");
+    }
+  }, [window.innerWidth]);
   return (
     <img
       src="/Modoorock/images/arrow-right.png"
@@ -12,7 +19,7 @@ function NextArrow(props) {
       className={`${className} arrow`}
       style={{
         ...style,
-        display: "block",
+        display: arrow,
         width: 40,
         height: 40,
         top: 350,
@@ -26,7 +33,14 @@ function NextArrow(props) {
 
 function PrevArrow(props) {
   const { className, style, onClick } = props;
-
+  const [arrow, setArrow] = useState("none");
+  useEffect(() => {
+    if (window.innerWidth > 640) {
+      setArrow("block");
+    } else {
+      setArrow("none");
+    }
+  }, [window.innerWidth]);
   return (
     <img
       src="/Modoorock/images/arrow-left.png"
@@ -34,7 +48,7 @@ function PrevArrow(props) {
       className={`${className} arrow`}
       style={{
         ...style,
-        display: "block",
+        display: arrow,
         width: 40,
         height: 40,
         top: 350,
@@ -107,5 +121,15 @@ export default class CustomPaging extends Component {
         </Slider>
       </div>
     );
+  }
+  updateDimensions = () => {
+    let num = window.innerWidth > 780 ? 3 : 1;
+    this.setState({ slideNum: num });
+  };
+  componentDidMount() {
+    window.addEventListener("resize", this.updateDimensions);
+  }
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.updateDimensions);
   }
 }

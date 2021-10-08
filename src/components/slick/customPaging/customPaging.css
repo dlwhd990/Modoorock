@@ -31,3 +31,111 @@
 .slick-dots {
   transform: translateY(75px);
 }
+
+@media screen and (max-width: 800px) {
+  .custom_paging_container .slick-slider,
+  .custom_paging_container .slick-list,
+  .custom_paging_container .slick-track {
+    width: 500px;
+    height: 500px;
+  }
+
+  .custom_paging_container .slick-slider {
+    transform: translateY(-110px);
+  }
+  .custom_paging_container .slick-active .slick-current {
+    width: 400px;
+    height: 400px;
+  }
+
+  .slick-slide .image {
+    width: 500px;
+    height: 450px;
+    margin: auto;
+    margin-top: 10px;
+    border-radius: 16px;
+  }
+
+  .slick-dots .dot_image,
+  .slick-dots li {
+    width: 112px;
+    height: 80px;
+    box-shadow: 0 0 5px lightgray;
+  }
+
+  .slick-dots {
+    transform: translateY(75px);
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .custom_paging_container .slick-slider,
+  .custom_paging_container .slick-list,
+  .custom_paging_container .slick-track {
+    width: 450px;
+    height: 425px;
+  }
+
+  .custom_paging_container .slick-slider {
+    transform: translateY(-110px);
+  }
+  .custom_paging_container .slick-active .slick-current {
+    width: 350px;
+    height: 300px;
+  }
+
+  .slick-slide .image {
+    width: 400px;
+    height: 350px;
+    margin: auto;
+    margin-top: 10px;
+    border-radius: 16px;
+  }
+
+  .slick-dots .dot_image,
+  .slick-dots li {
+    width: 70px;
+    height: 60px;
+    box-shadow: 0 0 5px lightgray;
+  }
+
+  .slick-dots {
+    transform: translateY(60px);
+  }
+}
+
+@media screen and (max-width: 440px) {
+  .custom_paging_container .slick-slider,
+  .custom_paging_container .slick-list,
+  .custom_paging_container .slick-track {
+    width: 450px;
+    height: 400px;
+  }
+
+  .custom_paging_container .slick-slider {
+    transform: translateY(-110px);
+  }
+  .custom_paging_container .slick-active .slick-current {
+    width: 350px;
+    height: 300px;
+  }
+
+  .slick-slide .image {
+    width: 350px;
+    height: 300px;
+    margin: auto;
+    margin-top: 10px;
+    border-radius: 16px;
+  }
+
+  .slick-dots .dot_image,
+  .slick-dots li {
+    width: 60px;
+    height: 60px;
+    box-shadow: 0 0 5px lightgray;
+  }
+
+  .slick-dots {
+    transform: translateY(35px);
+  }
+}
