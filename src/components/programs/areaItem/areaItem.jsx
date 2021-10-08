@@ -25,7 +25,7 @@ const AreaItem = ({ item, programList }) => {
     <section className={styles.area_item} onClick={areaClickHandler}>
       <div className={styles.image_container}>
         <img src={item.photo} alt="area_image" className={styles.image} />
-        <div className={styles.region}>{item.area}</div>
+        <div className={styles.region_badge}>{item.area}</div>
       </div>
       <div className={styles.text_container}>
         <div className={styles.area_data_container}>

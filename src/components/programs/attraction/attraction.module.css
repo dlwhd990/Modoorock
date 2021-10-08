@@ -1,5 +1,5 @@
 .attraction {
-  margin: 78px 0;
+  margin-top: 78px;
 }
 
 .attraction_top_banner {
@@ -50,6 +50,7 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .home_icon,
@@ -83,4 +84,21 @@
   flex-wrap: wrap;
   justify-content: center;
   margin-top: 50px;
+}
+
+@media screen and (max-width: 780px) {
+  .attraction {
+    margin-top: 63px;
+  }
+  .attraction_container {
+    margin: 60px 0;
+  }
+
+  .route_button_container {
+    display: none;
+  }
+
+  .attraction_list_container {
+    padding: 0;
+  }
 }

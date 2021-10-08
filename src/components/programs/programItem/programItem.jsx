@@ -24,7 +24,7 @@ const ProgramItem = ({ item, areaList }) => {
     <section className={styles.program_item} onClick={onItemClick}>
       <div className={styles.image_container}>
         <img src={item.photo} alt="area_image" className={styles.image} />
-        <div className={styles.area}>
+        <div className={styles.area_badge}>
           {areaData && `[${areaData.area}] ${areaData.name}`}
         </div>
       </div>

@@ -75,9 +75,9 @@ export default class CustomPaging extends Component {
           </a>
         );
       },
-      autoplaySpeed: 3500,
-      autoplay: true,
-      pauseOnHover: true,
+      //autoplaySpeed: 5000,
+      //autoplay: true,
+      //pauseOnHover: true,
       dots: true,
       dotsClass: "slick-dots slick-thumb",
       infinite: true,

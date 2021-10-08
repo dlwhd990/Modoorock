@@ -89,7 +89,7 @@
 }
 
 .link_blue {
-  color: #008fff;
+  color: var(--color-light-blue);
   cursor: pointer;
 }
 
@@ -109,7 +109,7 @@
 }
 
 .email {
-  color: #008fff;
+  color: var(--color-light-blue);
   margin-top: 0;
   margin-bottom: 32px;
 }

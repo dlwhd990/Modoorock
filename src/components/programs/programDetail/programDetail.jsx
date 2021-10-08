@@ -12,7 +12,7 @@ const ProgramDetail = ({ programList }) => {
   const { path } = useParams();
 
   const onSelectHandler = (e) => {
-    if (e.currentTarget.innerText === "프로그램 소개") {
+    if (e.currentTarget.innerText === "프로그램 상세") {
       window.location.reload();
     }
   };
@@ -31,45 +31,10 @@ const ProgramDetail = ({ programList }) => {
           className={`${styles.select_button} ${styles.on}`}
           onClick={onSelectHandler}
         >
-          프로그램 소개
+          프로그램 상세
         </div>
       </section>
-      <h1 className={styles.title}>프로그램 상세</h1>
-      <div className={styles.route_button_container}>
-        <div
-          className={styles.home_icon_container}
-          onClick={() => {
-            history.push("/");
-            window.scrollTo({ top: 0 });
-          }}
-        >
-          <i className={`${styles.home_icon} fas fa-home`}></i>
-        </div>
 
-        <i className={`${styles.arrow_icon} fas fa-chevron-right`}></i>
-
-        <p
-          className={styles.route_button}
-          onClick={() => {
-            history.push("/programs/area");
-            window.scrollTo({ top: 0 });
-          }}
-        >
-          프로그램 소개
-        </p>
-        <i className={`${styles.arrow_icon} fas fa-chevron-right`}></i>
-
-        <p
-          className={styles.route_button}
-          onClick={() => {
-            history.push(`/programs/view/${path}`);
-
-            window.scrollTo({ top: 0 });
-          }}
-        >
-          프로그램 상세
-        </p>
-      </div>
       <section className={styles.program_detail_main}>
         <div className={styles.image_container}>
           <CustomPaging />
@@ -77,6 +42,9 @@ const ProgramDetail = ({ programList }) => {
         <div className={styles.text_container}>
           <div className={styles.text_data_box}>
             <p className={styles.name}>{program && program.title}</p>
+            <p className={styles.price}>
+              {program && `${program.price.toLocaleString("ko-KR")}원`}
+            </p>
             <div className={styles.rate_container}>
               <div className={styles.star_container}>
                 <StarRatingComponent

@@ -44,9 +44,9 @@ function PrevArrow(props) {
     if (window.innerWidth > 1150) {
       setArrowPosition(100);
     } else if (window.innerWidth > 800) {
-      setArrowPosition(70);
+      setArrowPosition(60);
     } else {
-      setArrowPosition(30);
+      setArrowPosition(0);
     }
   }, [window.innerWidth]);
 

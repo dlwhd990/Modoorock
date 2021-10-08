@@ -73,7 +73,8 @@
   .custom_paging_container .slick-list,
   .custom_paging_container .slick-track {
     width: 450px;
-    height: 425px;
+    height: 420px;
+    transform: translateY(-30px);
   }
 
   .custom_paging_container .slick-slider {
