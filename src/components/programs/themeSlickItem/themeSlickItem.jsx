@@ -9,6 +9,7 @@ const ThemeSlickItem = ({ item, areaList }) => {
 
   const onItemClick = () => {
     history.push(`/programs/view/${item.idx}`);
+    window.scrollTo({ top: 0 });
   };
 
   useEffect(() => {
@@ -34,6 +35,7 @@ const ThemeSlickItem = ({ item, areaList }) => {
           <div className={styles.rate_container}>
             <div className={styles.star_container}>
               <StarRatingComponent
+                name="star"
                 editing={false}
                 starCount={5}
                 value={item.total_rate / item.rate_count}

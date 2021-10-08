@@ -1,12 +1,12 @@
 .custom_paging_container .slick-slider,
 .custom_paging_container .slick-list,
 .custom_paging_container .slick-track {
-  width: 500px;
-  height: 570px;
+  width: 600px;
+  height: 600px;
 }
 
 .custom_paging_container .slick-slider {
-  transform: translateY(-100px);
+  transform: translateY(-110px);
 }
 .custom_paging_container .slick-active .slick-current {
   width: 500px;
@@ -14,19 +14,20 @@
 }
 
 .slick-slide .image {
-  width: 500px;
-  height: 500px;
+  width: 600px;
+  height: 550px;
   margin: auto;
   margin-top: 10px;
+  border-radius: 16px;
 }
 
 .slick-dots .dot_image,
 .slick-dots li {
-  width: 100px;
+  width: 112px;
   height: 80px;
   box-shadow: 0 0 5px lightgray;
 }
 
 .slick-dots {
-  transform: translateY(50px);
+  transform: translateY(75px);
 }

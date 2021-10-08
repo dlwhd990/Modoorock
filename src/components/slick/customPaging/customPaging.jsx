@@ -78,28 +78,28 @@ export default class CustomPaging extends Component {
         <Slider {...settings}>
           <div>
             <img
-              src="/Modoorock/images/kakao.png"
+              src="/Modoorock/images/1.png"
               alt="slide_image"
               className="image"
             />
           </div>
           <div>
             <img
-              src="/Modoorock/images/arrow.png"
+              src="/Modoorock/images/2.png"
               alt="slide_image"
               className="image"
             />
           </div>
           <div>
             <img
-              src="/Modoorock/images/logo_blue.png"
+              src="/Modoorock/images/3.png"
               alt="slide_image"
               className="image"
             />
           </div>
           <div>
             <img
-              src="/Modoorock/images/logo_dark.png"
+              src="/Modoorock/images/4.png"
               alt="slide_image"
               className="image"
             />
