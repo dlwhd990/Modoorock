@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import styles from "./programs.module.css";
-import { debounce, set } from "lodash";
+import { debounce } from "lodash";
 import AreaItem from "./areaItem/areaItem";
 import ProgramsThemeSlick from "../slick/programsTheme/programsTheme";
 
@@ -9,7 +9,6 @@ const Programs = ({ areaList, programList }) => {
   const history = useHistory();
   const { path } = useParams();
   const [inputValue, setInputValue] = useState("");
-  const [resultProgramList, setResultProgramList] = useState([]);
   const [resultAreaList, setResultAreaList] = useState(areaList);
   const [switchValue, setSwitchValue] = useState("지역");
   const [regionValue, setRegionValue] = useState("전체");
@@ -74,7 +73,7 @@ const Programs = ({ areaList, programList }) => {
   };
 
   const inputChangeHandler = debounce((e) => {
-    setResultProgramList([]);
+    setResultAreaList([]);
     setInputValue(e.target.value);
   }, 200);
 
@@ -82,19 +81,23 @@ const Programs = ({ areaList, programList }) => {
     const result = [];
 
     if (inputValue === "") {
-      for (let i = 0; i < programList.length; i++) {
-        result.push(programList[i]);
+      for (let i = 0; i < areaList.length; i++) {
+        (regionValue === areaList[i].area || regionValue === "전체") &&
+          result.push(areaList[i]);
       }
-      setResultProgramList(result);
+      setResultAreaList(result);
       return;
     }
 
-    for (let i = 0; i < programList.length; i++) {
-      if (programList[i].title.includes(inputValue)) {
-        result.push(programList[i]);
+    for (let i = 0; i < areaList.length; i++) {
+      if (
+        areaList[i].name.includes(inputValue) &&
+        (regionValue === areaList[i].area || regionValue === "전체")
+      ) {
+        result.push(areaList[i]);
       }
     }
-    setResultProgramList(result);
+    setResultAreaList(result);
   };
 
   const regionSelectOpenHandler = () => {
@@ -103,7 +106,7 @@ const Programs = ({ areaList, programList }) => {
 
   useEffect(() => {
     onSearchHandler();
-  }, [inputValue]);
+  }, [inputValue, regionValue]);
 
   useEffect(() => {
     if (switchValue === "지역") {

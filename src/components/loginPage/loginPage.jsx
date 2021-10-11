@@ -18,9 +18,8 @@ const LoginPage = (props) => {
       })
       .then((response) => {
         console.log(response);
-        if (response.data.response === "logined") {
+        if (response.data === "logined") {
           window.alert("로그인 되었습니다.");
-          window.location.href = "/";
         } else {
           window.alert("아이디와 비밀번호를 다시 확인해주세요");
         }
@@ -29,6 +28,32 @@ const LoginPage = (props) => {
   };
   return (
     <section className={styles.login_page}>
+      <button
+        className={styles.test}
+        onClick={() => {
+          axios
+            .post("http://35.239.228.185/modoorock/user/session")
+            .then((response) => {
+              console.log(response);
+            })
+            .catch((err) => console.error(err));
+        }}
+      >
+        세션테스트
+      </button>
+      <button
+        className={styles.test}
+        onClick={() => {
+          axios
+            .post("http://35.239.228.185/modoorock/user/logout")
+            .then(() => {
+              console.log("로그아웃");
+            })
+            .catch((err) => console.error(err));
+        }}
+      >
+        로그아웃
+      </button>
       <section className={styles.container}>
         <p className={styles.title}>회원로그인</p>
         <form className={styles.main}>
@@ -66,6 +91,7 @@ const LoginPage = (props) => {
             >
               아이디찾기
             </button>
+            |
             <button
               className={styles.id_pw_find_button}
               onClick={() => {
@@ -76,7 +102,9 @@ const LoginPage = (props) => {
             </button>
           </div>
         </div>
-        <div className={styles.sns_login_container}></div>
+        <div className={styles.sns_login_container}>
+          여기에 SNS로그인 버튼들
+        </div>
         <div className={styles.signup_container}>
           <span className={styles.signup_message}>
             회원가입을 하시면 다양하고 특별한 혜택이 준비되어 있습니다.

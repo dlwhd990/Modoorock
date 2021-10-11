@@ -1,9 +1,9 @@
 .find_id {
-  margin-top: 80px;
-  height: 70vh;
+  margin-top: 300px;
+  min-height: 100vh;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
 }
 
 .find_id_form {
@@ -22,22 +22,19 @@
   margin-bottom: 50px;
 }
 
-.name_input_container,
 .phone_num_container {
   height: 30px;
-  margin: 15px 0;
+  margin: 70px 0;
   display: flex;
   flex-direction: row;
   align-items: center;
 }
 
-.name_input_text,
 .phone_num_text {
   width: 100px;
   margin: 0;
 }
 
-.name_input,
 .phone_num_input {
   width: 200px;
   height: 30px;
@@ -50,7 +47,7 @@
 .submit_button_container {
   width: 100%;
   text-align: center;
-  margin-top: 40px;
+  margin-top: 60px;
 }
 
 .submit_button {
@@ -60,6 +57,36 @@
   color: white;
   font-size: var(--font-size-normal);
   padding: 8px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.find_id_result_container {
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.find_id_result {
+  font-size: var(--font-size-big);
+  font-weight: 500;
+}
+
+.result_id {
+  color: var(--color-light-blue);
+}
+
+.go_login_button {
+  margin-top: 20px;
+  outline: none;
+  border: none;
+  background-color: var(--color-theme);
+  color: white;
+  padding: 10px 15px;
+  font-size: var(--font-size-normal);
+  border-radius: 4px;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 780px) {
@@ -67,7 +94,6 @@
     width: 90%;
   }
 
-  .name_input,
   .phone_num_input {
     font-size: var(--font-size-small);
   }

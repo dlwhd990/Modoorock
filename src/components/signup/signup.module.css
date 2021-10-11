@@ -64,6 +64,7 @@
   font-size: var(--font-size-normal);
   color: white;
   height: 40px;
+  cursor: pointer;
 }
 
 .agree_part {
@@ -110,6 +111,7 @@
   right: 10px;
   font-size: 14px;
   color: var(--color-desc);
+  cursor: pointer;
 }
 
 .submit_button {

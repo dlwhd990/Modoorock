@@ -79,7 +79,9 @@
   font-size: var(--font-size-little-big-title);
   font-weight: 500;
   width: 100%;
+  color: var(--color-black);
   overflow: hidden;
+  word-break: keep-all;
   text-overflow: ellipsis;
   display: -webkit-box;
   margin-bottom: 16px;
@@ -89,7 +91,7 @@
 
 .price {
   font-size: var(--font-size-title);
-  font-weight: 500;
+  font-weight: 700;
   color: var(--color-light-blue);
   margin-top: 0;
   margin-bottom: 16px;
@@ -115,14 +117,18 @@
 }
 
 .review_count_text {
+  text-decoration-line: underline;
   font-size: var(--font-size-small);
   color: var(--color-lightgray);
   margin-left: 50px;
+  cursor: pointer;
 }
 
 .content {
   margin: 50px 0;
   width: 100%;
+  color: var(--color-desc);
+  word-break: keep-all;
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;

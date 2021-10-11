@@ -107,10 +107,12 @@ export default class SimpleSliderThree extends Component {
       </div>
     );
   }
+
   updateDimensions = () => {
     let num = window.innerWidth > 780 ? 3 : 1;
     this.setState({ slideNum: num });
   };
+
   componentDidMount() {
     window.addEventListener("resize", this.updateDimensions);
   }

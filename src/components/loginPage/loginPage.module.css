@@ -10,9 +10,7 @@
   margin: auto;
   margin-top: 200px;
   padding: 30px;
-  border-radius: 8px;
-  box-shadow: 0 0 7px lightgray;
-  border: 1px solid rgb(226, 225, 225);
+  position: relative;
 }
 
 .title {
@@ -43,6 +41,7 @@
   outline-color: skyblue;
   padding: 4px 6px;
   font-size: 18px;
+  border-radius: 4px;
 }
 
 .submit_button {
@@ -54,6 +53,7 @@
   cursor: pointer;
   font-size: var(--font-size-big);
   font-weight: 500;
+  border-radius: 4px;
 }
 
 .id_save_find_container {
@@ -85,23 +85,21 @@
   cursor: pointer;
 }
 
-.left {
-  border-right: 2px solid var(--color-light-border);
-}
-
 .sns_login_container {
   height: 160px;
 }
 
 .signup_container {
+  width: 87%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  position: relative;
+  position: absolute;
+  bottom: 30px;
 }
 
 .signup_message {
-  flex-basis: 65%;
+  width: 65%;
   color: var(--color-desc);
   font-size: var(--font-size-small);
 }
@@ -109,9 +107,6 @@
 .go_signup_button {
   width: 22%;
   height: 40px;
-  position: absolute;
-  bottom: 0;
-  right: 0;
   border: none;
   outline: none;
   background-color: var(--color-theme);
