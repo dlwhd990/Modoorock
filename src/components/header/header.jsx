@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
+import LoadingSpinnerWhite from "../loadingSpinner/loadingSpinnerWhite/loadingSpinnerWhite";
 import styles from "./header.module.css";
 
-const Header = ({ userData, userLogout }) => {
+const Header = ({ loggedin, userLogout }) => {
   const [aboutDropDown, setAboutDropDown] = useState(false);
   const [programDropDown, setProgramDropDown] = useState(false);
   const [fnqDropDown, setFnqDropDown] = useState(false);
@@ -234,9 +235,17 @@ const Header = ({ userData, userLogout }) => {
           </li>
         </ul>
       </nav>
-      {!userData ? (
-        <div className={styles.login_container}></div>
-      ) : userData.id ? (
+      {loggedin === null ? (
+        <div
+          className={`${
+            toggle
+              ? `${styles.login_container} ${styles.toggle_on}`
+              : `${styles.login_container} ${styles.toggle_off}`
+          }`}
+        >
+          <LoadingSpinnerWhite />
+        </div>
+      ) : loggedin ? (
         <div
           className={`${
             toggle

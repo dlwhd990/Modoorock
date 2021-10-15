@@ -8,14 +8,17 @@ import LoginPage from "./components/loginPage/loginPage";
 import Signup from "./components/signup/signup";
 import Programs from "./components/programs/programs";
 import Contact from "./components/contact/contact";
-import FindId from "./components/find/findId/findId";
-import FindPw from "./components/find/findPw/findPw";
+import Find from "./components/find/find";
 import Introduce from "./components/about/introduce";
 import CustomerCenter from "./components/customerCenter/customerCenter";
 import Attraction from "./components/programs/attraction/attraction";
 import ProgramDetail from "./components/programs/programDetail/programDetail";
 import axios from "axios";
 import WriteMain from "./components/customerCenter/writeMain/writeMain";
+import LoadingPage from "./components/loadingPage/loadingPage";
+import Mypage from "./components/mypage/mypage";
+import SearchResultPage from "./components/customerCenter/searchResultPage/searchResultPage";
+import FindIdResult from "./components/find/findId/findIdResult/findIdResult";
 
 axios.defaults.withCredentials = true;
 
@@ -185,457 +188,6 @@ const App = (props) => {
       content: "공지내용",
       answer: "",
     },
-    {
-      idx: 1,
-      type: "멤버쉽",
-      date: "2021/10/05",
-      title: "공지니다.",
-      writer: "이종혁",
-      content: "공지내용",
-      answer: "",
-    },
-    {
-      idx: 2,
-      type: "사이트 이용",
-      date: "2021/10/05",
-      title: "공지입다.",
-      writer: "이종혁",
-      content: "공지내용",
-      answer: "",
-    },
-    {
-      idx: 3,
-      type: "주문/배송/반품",
-      date: "2021/10/05",
-      title: "공지입니다.",
-      writer: "이종혁",
-      content: "공지내용",
-      answer: "",
-    },
-    {
-      idx: 4,
-      type: "멤버쉽",
-      date: "2021/10/05",
-      title: "공지니다.",
-      writer: "이종혁",
-      content: "공지내용",
-      answer: "",
-    },
-    {
-      idx: 5,
-      type: "사이트 이용",
-      date: "2021/10/05",
-      title: "공지입다.",
-      writer: "이종혁",
-      content: "공지내용",
-      answer: "",
-    },
-    {
-      idx: 6,
-      type: "주문/배송/반품",
-      date: "2021/10/05",
-      title: "공지입니다.",
-      writer: "이종혁",
-      content: "공지내용",
-      answer: "",
-    },
-    {
-      idx: 7,
-      type: "멤버쉽",
-      date: "2021/10/05",
-      title: "공지니다.",
-      writer: "이종혁",
-      content: "공지내용",
-      answer: "",
-    },
-    {
-      idx: 8,
-      type: "사이트 이용",
-      date: "2021/10/05",
-      title: "공지입다.",
-      writer: "이종혁",
-      content: "공지내용",
-      answer: "",
-    },
-    {
-      idx: 9,
-      type: "주문/배송/반품",
-      date: "2021/10/05",
-      title: "공지입니다.",
-      writer: "이종혁",
-      content: "공지내용",
-      answer: "",
-    },
-    {
-      idx: 10,
-      type: "사이트 이용",
-      date: "2021/10/05",
-      title: "공지니다.",
-      writer: "이종혁",
-      content: "공지내용",
-      answer: "",
-    },
-    {
-      idx: 11,
-      type: "멤버쉽",
-      date: "2021/10/05",
-      title: "공지니다.",
-      writer: "이종혁",
-      content: "공지내용",
-      answer: "",
-    },
-    {
-      idx: 12,
-      type: "사이트 이용",
-      date: "2021/10/05",
-      title: "공지입다.",
-      writer: "이종혁",
-      content: "공지내용",
-      answer: "",
-    },
-    {
-      idx: 13,
-      type: "주문/배송/반품",
-      date: "2021/10/05",
-      title: "공지입니다.",
-      writer: "이종혁",
-      content: "공지내용",
-      answer: "",
-    },
-    {
-      idx: 14,
-      type: "멤버쉽",
-      date: "2021/10/05",
-      title: "공지니다.",
-      writer: "이종혁",
-      content: "공지내용",
-      answer: "",
-    },
-    {
-      idx: 15,
-      type: "사이트 이용",
-      date: "2021/10/05",
-      title: "공지입다.",
-      writer: "이종혁",
-      content: "공지내용",
-      answer: "",
-    },
-    {
-      idx: 16,
-      type: "주문/배송/반품",
-      date: "2021/10/05",
-      title: "공지입니다.",
-      writer: "이종혁",
-      content: "공지내용",
-      answer: "",
-    },
-    {
-      idx: 17,
-      type: "멤버쉽",
-      date: "2021/10/05",
-      title: "공지니다.",
-      writer: "이종혁",
-      content: "공지내용",
-      answer: "",
-    },
-    {
-      idx: 18,
-      type: "사이트 이용",
-      date: "2021/10/05",
-      title: "공지입다.",
-      writer: "이종혁",
-      content: "공지내용",
-      answer: "",
-    },
-    {
-      idx: 19,
-      type: "주문/배송/반품",
-      date: "2021/10/05",
-      title: "공지입니다.",
-      writer: "이종혁",
-      content: "공지내용",
-      answer: "",
-    },
-    {
-      idx: 20,
-      type: "상품",
-      date: "2021/10/05",
-      title: "공지니다.",
-      writer: "이종혁",
-      content: "공지내용",
-      answer: "",
-    },
-    {
-      idx: 21,
-      type: "멤버쉽",
-      date: "2021/10/05",
-      title: "공지니다.",
-      writer: "이종혁",
-      content: "공지내용",
-      answer: "",
-    },
-    {
-      idx: 22,
-      type: "사이트 이용",
-      date: "2021/10/05",
-      title: "공지입다.",
-      writer: "이종혁",
-      content: "공지내용",
-      answer: "",
-    },
-    {
-      idx: 23,
-      type: "주문/배송/반품",
-      date: "2021/10/05",
-      title: "공지입니다.",
-      writer: "이종혁",
-      content: "공지내용",
-      answer: "",
-    },
-    {
-      idx: 24,
-      type: "멤버쉽",
-      date: "2021/10/05",
-      title: "공지니다.",
-      writer: "이종혁",
-      content: "공지내용",
-      answer: "",
-    },
-    {
-      idx: 25,
-      type: "사이트 이용",
-      date: "2021/10/05",
-      title: "공지입다.",
-      writer: "이종혁",
-      content: "공지내용",
-      answer: "",
-    },
-    {
-      idx: 26,
-      type: "주문/배송/반품",
-      date: "2021/10/05",
-      title: "공지입니다.",
-      writer: "이종혁",
-      content: "공지내용",
-      answer: "",
-    },
-    {
-      idx: 27,
-      type: "멤버쉽",
-      date: "2021/10/05",
-      title: "공지니다.",
-      writer: "이종혁",
-      content: "공지내용",
-      answer: "",
-    },
-    {
-      idx: 28,
-      type: "사이트 이용",
-      date: "2021/10/05",
-      title: "공지입다.",
-      writer: "이종혁",
-      content: "공지내용",
-      answer: "",
-    },
-    {
-      idx: 29,
-      type: "주문/배송/반품",
-      date: "2021/10/05",
-      title: "공지입니다.",
-      writer: "이종혁",
-      content: "공지내용",
-      answer: "",
-    },
-    {
-      idx: 30,
-      type: "멤버쉽",
-      date: "2021/10/05",
-      title: "공지니다.",
-      writer: "이종혁",
-      content: "공지내용",
-      answer: "",
-    },
-    {
-      idx: 31,
-      type: "멤버쉽",
-      date: "2021/10/05",
-      title: "공지니다.",
-      writer: "이종혁",
-      content: "공지내용",
-      answer: "",
-    },
-    {
-      idx: 32,
-      type: "사이트 이용",
-      date: "2021/10/05",
-      title: "공지입다.",
-      writer: "이종혁",
-      content: "공지내용",
-      answer: "",
-    },
-    {
-      idx: 33,
-      type: "주문/배송/반품",
-      date: "2021/10/05",
-      title: "공지입니다.",
-      writer: "이종혁",
-      content: "공지내용",
-      answer: "",
-    },
-    {
-      idx: 34,
-      type: "멤버쉽",
-      date: "2021/10/05",
-      title: "공지니다.",
-      writer: "이종혁",
-      content: "공지내용",
-      answer: "",
-    },
-    {
-      idx: 35,
-      type: "사이트 이용",
-      date: "2021/10/05",
-      title: "공지입다.",
-      writer: "이종혁",
-      content: "공지내용",
-      answer: "",
-    },
-    {
-      idx: 36,
-      type: "주문/배송/반품",
-      date: "2021/10/05",
-      title: "공지입니다.",
-      writer: "이종혁",
-      content: "공지내용",
-      answer: "",
-    },
-    {
-      idx: 37,
-      type: "멤버쉽",
-      date: "2021/10/05",
-      title: "공지니다.",
-      writer: "이종혁",
-      content: "공지내용",
-      answer: "",
-    },
-    {
-      idx: 38,
-      type: "사이트 이용",
-      date: "2021/10/05",
-      title: "공지입다.",
-      writer: "이종혁",
-      content: "공지내용",
-      answer: "",
-    },
-    {
-      idx: 39,
-      type: "주문/배송/반품",
-      date: "2021/10/05",
-      title: "공지입니다.",
-      writer: "이종혁",
-      content: "공지내용",
-      answer: "",
-    },
-    {
-      idx: 40,
-      type: "사이트 이용",
-      date: "2021/10/05",
-      title: "공지니다.",
-      writer: "이종혁",
-      content: "공지내용",
-      answer: "ㅇㅂㅇㄴ",
-    },
-    {
-      idx: 41,
-      type: "멤버쉽",
-      date: "2021/10/05",
-      title: "공지니다.",
-      writer: "이종혁",
-      content: "공지내용",
-      answer: "ㅇㅇㅁㄴㅇㅁㅇㅁㅇㄴㅁ",
-    },
-    {
-      idx: 42,
-      type: "사이트 이용",
-      date: "2021/10/05",
-      title: "공지입다.",
-      writer: "이종혁",
-      content: "공지내용",
-      answer: "",
-    },
-    {
-      idx: 43,
-      type: "주문/배송/반품",
-      date: "2021/10/05",
-      title: "공지입니다.",
-      writer: "이종혁",
-      content: "공지내용",
-      answer: "ㅁ",
-    },
-    {
-      idx: 44,
-      type: "멤버쉽",
-      date: "2021/10/05",
-      title: "공지니다.",
-      writer: "이종혁",
-      content: "공지내용",
-      answer: "",
-    },
-    {
-      idx: 45,
-      type: "사이트 이용",
-      date: "2021/10/05",
-      title: "공지입다.",
-      writer: "이종혁",
-      content: "공지내용",
-      answer: "ㅇ",
-    },
-    {
-      idx: 46,
-      type: "주문/배송/반품",
-      date: "2021/10/05",
-      title: "공지입니다.",
-      writer: "이종혁",
-      content: "공지내용",
-      answer: "",
-    },
-    {
-      idx: 47,
-      type: "멤버쉽",
-      date: "2021/10/05",
-      title: "공지니다.",
-      writer: "이종혁",
-      content: "공지내용",
-      answer: "ㅋ",
-    },
-    {
-      idx: 48,
-      type: "사이트 이용",
-      date: "2021/10/05",
-      title:
-        "공지입다.공지입다.공지입다.공지입다.공지입다.공지입다.공지입다.공지입다.공지입다.공지입다.공지입다.공지입다.공지입다.공지입다.",
-      writer: "이종혁",
-      content: "공지내용",
-      answer: "ㅋㅋ",
-    },
-    {
-      idx: 49,
-      type: "주문/배송/반품",
-      date: "2021/10/05",
-      title: "공지입니다.",
-      writer: "이종혁",
-      content: "공지내용",
-      answer: "",
-    },
-    {
-      idx: 50,
-      type: "사이트 이용",
-      date: "2021/10/05",
-      title: "공지니다.",
-      writer: "이종혁",
-      content: "공지내용",
-      answer: "ㅋㅋ",
-    },
   ]);
 
   const [reviewList, setReviewList] = useState([
@@ -770,27 +322,16 @@ const App = (props) => {
     },
   ]);
 
-  const noUser = {
-    id: null,
-    idType: null,
-    idx: null,
-    informPush: null,
-    name: null,
-    password: null,
-    phone: null,
-    sns: null,
-    totalPoint: null,
-  };
-
-  const [userData, setUserData] = useState(null);
+  const [loggedin, setLoggedin] = useState(null);
 
   const sessionCheck = () => {
     axios
       .post(`${process.env.REACT_APP_BASEURL}/user/session`)
       .then((response) => {
-        console.log(response.data);
         if (response.data !== "") {
-          setUserData(response.data);
+          setLoggedin(true);
+        } else {
+          setLoggedin(false);
         }
       })
       .catch((err) => console.error(err));
@@ -800,7 +341,7 @@ const App = (props) => {
     axios
       .post(`${process.env.REACT_APP_BASEURL}/user/logout`)
       .then(() => {
-        setUserData(noUser);
+        setLoggedin(false);
         window.alert("안전하게 로그아웃 되었습니다.");
       })
       .catch((err) => console.error(err));
@@ -813,7 +354,6 @@ const App = (props) => {
       })
       .then((response) => {
         setNoticeArticles(response.data);
-        console.log(response.data);
       })
       .catch((err) => console.error(err));
   };
@@ -835,7 +375,7 @@ const App = (props) => {
         type: "전체",
       })
       .then((response) => {
-        //setInquireArticles(response.data);
+        setInquireArticles(response.data);
         console.log(response.data);
       })
       .catch((err) => console.error(err));
@@ -845,13 +385,14 @@ const App = (props) => {
     sessionCheck();
     getNoticeList();
     getFaqList();
-    getInquireList();
+    //getInquireList();
+    //자신의 문의 글만 볼 수 있는건지?
   }, []);
 
   return (
     <section className={styles.app}>
       <BrowserRouter basename={process.env.PUBLIC_URL}>
-        <Header userData={userData} userLogout={userLogout} />
+        <Header loggedin={loggedin} userLogout={userLogout} />
         <Route exact path="/">
           <Mainpage programList={programList} viewItems={introVideos} />
         </Route>
@@ -861,11 +402,11 @@ const App = (props) => {
         <Route exact path="/signup">
           <Signup />
         </Route>
-        <Route exact path="/findID">
-          <FindId />
+        <Route exact path="/find">
+          <Find />
         </Route>
-        <Route exact path="/findPW">
-          <FindPw />
+        <Route exact path="/find/id/:phone">
+          <FindIdResult />
         </Route>
         <Route exact path="/introduce/:path">
           <Introduce viewItems={introVideos} />
@@ -888,7 +429,7 @@ const App = (props) => {
           />
         </Route>
         <Route exact path="/customer/:path">
-          {noticeArticles && faqArticles && inquireArticles && (
+          {noticeArticles && faqArticles && inquireArticles ? (
             <CustomerCenter
               noticeArticles={noticeArticles}
               faqArticles={faqArticles}
@@ -897,15 +438,26 @@ const App = (props) => {
               getFaqList={getFaqList}
               getInquireList={getInquireList}
             />
+          ) : (
+            <LoadingPage />
           )}
         </Route>
         <Route exact path="/customer/:path/write">
-          <WriteMain />
+          <WriteMain loggedin={loggedin} />
+        </Route>
+        <Route exact path="/customer/:path/search/:type/:query">
+          <SearchResultPage
+            noticeArticles={noticeArticles}
+            faqArticles={faqArticles}
+            inquireArticles={inquireArticles}
+          />
         </Route>
         <Route exact path="/contact">
           <Contact />
         </Route>
-
+        <Route exact path="/mypage/:path">
+          <Mypage loggedin={loggedin} />
+        </Route>
         <Footer />
       </BrowserRouter>
     </section>

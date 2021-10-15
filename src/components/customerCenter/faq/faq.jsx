@@ -2,8 +2,9 @@ import React, { useState, useRef, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import FaqArticle from "./faqArticle/faqArticle";
 import styles from "./faq.module.css";
+import axios from "axios";
 
-const Faq = ({ articles, user, getFaqList }) => {
+const Faq = ({ articles, getFaqList }) => {
   const [headerSelect, setHeaderSelect] = useState("All");
   const history = useHistory();
   const searchTypeRef = useRef();
@@ -117,9 +118,17 @@ const Faq = ({ articles, user, getFaqList }) => {
   };
 
   const goWrite = () => {
-    //로그인 여부 확인 코드 나중에 작성
-    history.push("/customer/faq/write");
-    window.scrollTo({ top: 0 });
+    axios
+      .post(`${process.env.REACT_APP_BASEURL}/user/session`)
+      .then((response) => {
+        if (!response.data === "" || response.data.userType !== 2) {
+          window.alert("관리자만 작성이 가능합니다.");
+          return;
+        }
+        history.push("/customer/faq/write");
+        window.scrollTo({ top: 0 });
+      })
+      .catch((err) => console.error(err));
   };
 
   const onSearchHandler = () => {
@@ -136,7 +145,7 @@ const Faq = ({ articles, user, getFaqList }) => {
       return;
     }
     searchInputRef.current.value = "";
-    history.push(`/bbs/search/${type}/${query}`); //추후변경
+    history.push(`/customer/faq/search/${type}/${query}`); //추후변경
     window.scrollTo({ top: 0 });
     getFaqList();
   };

@@ -3,27 +3,38 @@ import styles from "./faqWrite.module.css";
 import axios from "axios";
 import { useHistory } from "react-router";
 
-const FaqWrite = (props) => {
+const FaqWrite = () => {
   const history = useHistory();
   const typeRef = useRef();
   const titleRef = useRef();
   const contentRef = useRef();
   const writeSubmitHandler = (e) => {
     e.preventDefault();
-    const type = typeRef.current.value;
-    const title = titleRef.current.value;
-    const content = contentRef.current.value;
+
     axios
-      .post(`${process.env.REACT_APP_BASEURL}/faq/insertfaq`, {
-        type,
-        title,
-        content,
+      .post(`${process.env.REACT_APP_BASEURL}/user/session`)
+      .then((response) => {
+        if (!response.data === "" || response.data.userType !== 2) {
+          window.alert("관리자만 작성이 가능합니다.");
+          return;
+        }
+
+        const type = typeRef.current.value;
+        const title = titleRef.current.value;
+        const content = contentRef.current.value;
+        axios
+          .post(`${process.env.REACT_APP_BASEURL}/faq/insertfaq`, {
+            type,
+            title,
+            content,
+          })
+          .then((response) => {
+            console.log(response);
+            history.push("/customer/faq");
+            window.scrollTo({ top: 0 });
+          })
+          .catch((err) => console.error(err));
       })
-      .then((response) =>
-        response.data === "success"
-          ? history.push("/customer/faq")
-          : window.alert("에러발생")
-      )
       .catch((err) => console.error(err));
   };
   return (

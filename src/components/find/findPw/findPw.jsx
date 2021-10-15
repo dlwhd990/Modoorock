@@ -6,6 +6,7 @@ const FindPw = (props) => {
     e.preventDefault();
     console.log("아직");
   };
+
   return (
     <section className={styles.find_pw}>
       <form className={styles.find_pw_form}>

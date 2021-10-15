@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import InquireArticle from "./inquireArticle/inquireArticle";
 import styles from "./inquire.module.css";
+import axios from "axios";
 
 const Inquire = ({ articles, loadArticlesAndReplies }) => {
   const history = useHistory();
@@ -13,10 +14,6 @@ const Inquire = ({ articles, loadArticlesAndReplies }) => {
   const [tempArticles, setTempArticles] = useState(articles);
   const [cursor, setCursor] = useState(0);
   const articleKeyList = Object.keys(tempArticles).reverse();
-
-  //useEffect(() => {
-  //  loadArticlesAndReplies();
-  //}, []);
 
   let pagelength = 0;
 
@@ -53,7 +50,18 @@ const Inquire = ({ articles, loadArticlesAndReplies }) => {
   };
 
   const goWrite = () => {
-    //로그인 후에만 작성 가능하게 변경
+    axios
+      .post(`${process.env.REACT_APP_BASEURL}/user/session`)
+      .then((response) => {
+        if (!response.data === "") {
+          window.alert("로그인 후에 글 작성이 가능합니다.");
+          return;
+        }
+        history.push("/customer/inquire/write");
+        window.scrollTo({ top: 0 });
+      })
+      .catch((err) => console.error(err));
+
     history.push("/customer/inquire/write");
     window.scrollTo({ top: 0 });
   };

@@ -76,6 +76,13 @@
   cursor: pointer;
 }
 
+.no_permission {
+  text-align: center;
+  margin-top: 80px;
+  font-size: var(--font-size-mini-title);
+  font-weight: 700;
+}
+
 @keyframes appear {
   0% {
     transform: translateY(-20px);

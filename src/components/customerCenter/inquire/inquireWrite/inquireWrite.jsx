@@ -1,20 +1,38 @@
 import { React, useRef } from "react";
 import styles from "./inquireWrite.module.css";
 import axios from "axios";
+import { useHistory } from "react-router";
 
-const InquireWrite = (props) => {
+const InquireWrite = () => {
+  const history = useHistory();
   const titleRef = useRef();
   const contentRef = useRef();
   const writeSubmitHandler = (e) => {
     e.preventDefault();
-    const title = titleRef.current.value;
-    const content = contentRef.current.value;
+
     axios
-      .post(`${process.env.REACT_APP_BASEURL}/qna/insertqna`, {
-        title,
-        content, //user id도 함께 넣어보내야함
+      .post(`${process.env.REACT_APP_BASEURL}/user/session`)
+      .then((response) => {
+        if (!response.data === "") {
+          window.alert("로그인 후에 글 작성이 가능합니다.");
+          return;
+        }
+        const title = titleRef.current.value;
+        const content = contentRef.current.value;
+        const userIdx = response.data.idx;
+        axios
+          .post(`${process.env.REACT_APP_BASEURL}/qna/insertqna`, {
+            title,
+            content,
+            userIdx,
+          })
+          .then((response) => {
+            console.log(response);
+            history.push("/customer/inquire");
+            window.scrollTo({ top: 0 });
+          })
+          .catch((err) => console.error(err));
       })
-      .then((response) => console.log(response))
       .catch((err) => console.error(err));
   };
   return (

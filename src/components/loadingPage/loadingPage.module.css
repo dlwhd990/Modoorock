@@ -1,0 +1,14 @@
+.loading_page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--color-smoke-white);
+}
+
+.title {
+  font-size: 28px;
+  color: var(--color-theme);
+  font-weight: 700;
+}

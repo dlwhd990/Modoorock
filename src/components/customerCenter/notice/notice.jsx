@@ -2,8 +2,9 @@ import React, { useState, useRef, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import NoticeArticle from "./noticeArticle/noticeArticle";
 import styles from "./notice.module.css";
+import axios from "axios";
 
-const Notice = ({ articles, user, getNoticeList }) => {
+const Notice = ({ articles, getNoticeList }) => {
   const history = useHistory();
   const searchTypeRef = useRef();
   const searchInputRef = useRef();
@@ -12,13 +13,10 @@ const Notice = ({ articles, user, getNoticeList }) => {
   const [numbering, setNumbering] = useState(1);
   const [sliceList, setSliceList] = useState([]);
   const [resultArticles, setResultArticles] = useState(articles);
-  const [tempArticles, setTempArticles] = useState(articles);
   const [cursor, setCursor] = useState(0);
-  const articleKeyList = Object.keys(tempArticles).reverse();
 
   useEffect(() => {
     getNoticeList();
-    console.log("AA");
   }, []);
 
   useEffect(() => {
@@ -62,9 +60,17 @@ const Notice = ({ articles, user, getNoticeList }) => {
   };
 
   const goWrite = () => {
-    //로그인 확인 과정 나중에 추가
-    history.push("/customer/notice/write");
-    window.scrollTo({ top: 0 });
+    axios
+      .post(`${process.env.REACT_APP_BASEURL}/user/session`)
+      .then((response) => {
+        if (!response.data === "" || response.data.userType !== 2) {
+          window.alert("관리자만 작성이 가능합니다.");
+          return;
+        }
+        history.push("/customer/notice/write");
+        window.scrollTo({ top: 0 });
+      })
+      .catch((err) => console.error(err));
   };
 
   const onSearchHandler = () => {
@@ -81,7 +87,7 @@ const Notice = ({ articles, user, getNoticeList }) => {
       return;
     }
     searchInputRef.current.value = "";
-    history.push(`/bbs/search/${type}/${query}`);
+    history.push(`/customer/notice/search/${type}/${query}`);
     window.scrollTo({ top: 0 });
     getNoticeList();
   };

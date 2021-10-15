@@ -114,3 +114,16 @@
   cursor: pointer;
   border-radius: 4px;
 }
+
+@media screen and (max-width: 780px) {
+  .container {
+    margin-top: 80px;
+  }
+  .input_container {
+    flex-basis: 60%;
+  }
+
+  .submit_button {
+    flex-basis: 30%;
+  }
+}

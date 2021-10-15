@@ -3,27 +3,37 @@ import styles from "./noticeWrite.module.css";
 import axios from "axios";
 import { useHistory } from "react-router";
 
-const NoticeWrite = (props) => {
+const NoticeWrite = () => {
   const history = useHistory();
   const typeRef = useRef();
   const titleRef = useRef();
   const contentRef = useRef();
   const writeSubmitHandler = (e) => {
     e.preventDefault();
-    const type = typeRef.current.value;
-    const title = titleRef.current.value;
-    const content = contentRef.current.value;
+
     axios
-      .post(`${process.env.REACT_APP_BASEURL}/notice/insertnotice`, {
-        type,
-        title,
-        content,
+      .post(`${process.env.REACT_APP_BASEURL}/user/session`)
+      .then((response) => {
+        if (!response.data === "" || response.data.userType !== 2) {
+          window.alert("관리자만 작성이 가능합니다.");
+          return;
+        }
+        const type = typeRef.current.value;
+        const title = titleRef.current.value;
+        const content = contentRef.current.value;
+        axios
+          .post(`${process.env.REACT_APP_BASEURL}/notice/insertnotice`, {
+            type,
+            title,
+            content,
+          })
+          .then((response) => {
+            console.log(response);
+            history.push("/customer/notice");
+            window.scrollTo({ top: 0 });
+          })
+          .catch((err) => console.error(err));
       })
-      .then((response) =>
-        response.data === "success"
-          ? history.push("/customer/notice")
-          : window.alert("에러발생")
-      )
       .catch((err) => console.error(err));
   };
   return (

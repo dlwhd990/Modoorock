@@ -1,0 +1,66 @@
+.mypage {
+  min-height: 100vh;
+  margin-top: 78px;
+  background-color: white;
+}
+
+.customer_top_banner {
+  min-height: 30vh;
+  background: url("../../background_images/about_top_banner.png") center/cover
+    no-repeat;
+}
+
+.select_bar_container {
+  height: 6vh;
+  background-color: var(--color-theme);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  box-shadow: 0 5px 10px lightgray;
+}
+
+.select_button {
+  width: 28%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 500;
+  cursor: pointer;
+  animation: selected 1s;
+}
+
+.on {
+  color: black;
+  background-color: white;
+}
+
+.title {
+  margin-top: 120px;
+  text-align: center;
+  font-size: var(--font-size-title);
+  font-weight: 500;
+  margin-bottom: 40px;
+}
+
+.route_button_container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.home_icon,
+.home_icon_container,
+.arrow_icon,
+.route_button {
+  margin: 0 15px;
+  color: var(--color-desc);
+  font-weight: 300;
+}
+
+.home_icon_container,
+.route_button {
+  cursor: pointer;
+}

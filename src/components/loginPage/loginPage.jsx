@@ -19,9 +19,16 @@ const LoginPage = () => {
 
   const loginSubmitHandler = async (e) => {
     e.preventDefault();
-    setLoadingOn(true);
+
     const id = idRef.current.value;
     const password = pwRef.current.value;
+
+    if (id === "" || password === "") {
+      window.alert("아이디와 비밀번호를 입력해주세요");
+      return;
+    }
+
+    setLoadingOn(true);
 
     await axios
       .post(
@@ -82,7 +89,7 @@ const LoginPage = () => {
             <button
               className={`${styles.id_pw_find_button} ${styles.left}`}
               onClick={() => {
-                history.push("/findID");
+                history.push("/find");
               }}
             >
               아이디찾기
@@ -91,7 +98,7 @@ const LoginPage = () => {
             <button
               className={styles.id_pw_find_button}
               onClick={() => {
-                history.push("/findPW");
+                history.push("/find");
               }}
             >
               비밀번호찾기
