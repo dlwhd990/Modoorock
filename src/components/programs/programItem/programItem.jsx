@@ -3,8 +3,10 @@ import { useHistory } from "react-router";
 import styles from "./programItem.module.css";
 import StarRatingComponent from "react-star-rating-component";
 
-const ProgramItem = ({ item, areaList }) => {
+const ProgramItem = ({ item, areaList, reviewList }) => {
   const [areaData, setAreaData] = useState(null);
+  const [reviewCount, setReviewCount] = useState(0);
+  const [reviewStarAvg, setReviewStarAvg] = useState((0).toFixed(1));
   const history = useHistory();
 
   const onItemClick = () => {
@@ -13,12 +15,22 @@ const ProgramItem = ({ item, areaList }) => {
   };
 
   useEffect(() => {
+    let count = 0;
+    let total = 0;
+
     for (let i = 0; i < areaList.length; i++) {
       if (areaList[i].idx === item.attraction) {
         setAreaData(areaList[i]);
-        return;
+        break;
       }
     }
+    reviewList.forEach((reviewItem) => {
+      reviewItem.exp_idx === item.idx &&
+        (count += 1) &&
+        (total += reviewItem.stars);
+    });
+    setReviewCount(count);
+    count > 0 && setReviewStarAvg((total / count).toFixed(1));
   }, []);
   return (
     <section className={styles.program_item} onClick={onItemClick}>
@@ -38,13 +50,13 @@ const ProgramItem = ({ item, areaList }) => {
                 name="star"
                 editing={false}
                 starCount={5}
-                value={item.total_rate / item.rate_count}
+                value={parseFloat(reviewStarAvg)}
               />
-              <span className={styles.rate_data}>{`${(
-                item.total_rate / item.rate_count
-              ).toFixed(1)}/5.0`}</span>
+              <span className={styles.rate_data}>{`${reviewStarAvg}/5.0`}</span>
             </div>
-            <span className={styles.review_count_text}>32개의 리뷰</span>
+            <span
+              className={styles.review_count_text}
+            >{`${reviewCount}개의 리뷰`}</span>
           </div>
           <p className={styles.price}>{`${item.price.toLocaleString(
             "ko-KR"

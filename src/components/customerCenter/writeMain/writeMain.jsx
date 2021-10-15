@@ -1,31 +1,29 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useHistory, useParams } from "react-router";
-import styles from "./customerCenter.module.css";
-import Inquire from "./inquire/inquire";
-import Faq from "./faq/faq";
-import Notice from "./notice/notice";
+import FaqWrite from "../faq/faqWrite/faqWrite";
+import InquireWrite from "../inquire/inquireWrite/inquireWrite";
+import NoticeWrite from "../notice/noticeWrite/noticeWrite";
+import styles from "./writeMain.module.css";
 
-const CustomerCenter = ({
-  noticeArticles,
-  faqArticles,
-  inquireArticles,
-  getNoticeList,
-  getFaqList,
-  getInquireList,
-}) => {
+const WriteMain = () => {
   const history = useHistory();
   const { path } = useParams();
 
   const onSelectHandler = (e) => {
+    const confirm = window.confirm(
+      "이 페이지에서 벗어나게 되면 현재까지 작성하신 내용이 모두 사라집니다. 정말로 이동하시겠습니까?"
+    );
+    if (!confirm) {
+      return;
+    }
     if (e.currentTarget.innerText === "공지사항") {
-      history.push("/customer/notice");
+      history.push("/customer/notice/write");
     } else if (e.currentTarget.innerText === "문의게시판") {
-      history.push("/customer/inquire");
+      history.push("/customer/inquire/write");
     } else if (e.currentTarget.innerText === "FAQ") {
-      history.push("/customer/faq");
+      history.push("/customer/faq/write");
     }
   };
-
   return (
     <section className={styles.customer_center}>
       <section className={styles.customer_top_banner}></section>
@@ -62,7 +60,11 @@ const CustomerCenter = ({
         </div>
       </section>
       <h1 className={styles.title}>
-        {path === "notice" ? "공지사항" : path === "faq" ? "FAQ" : "문의게시판"}
+        {path === "notice"
+          ? "공지사항 글쓰기"
+          : path === "faq"
+          ? "FAQ 글쓰기"
+          : "문의게시판 글쓰기"}
       </h1>
       <div className={styles.route_button_container}>
         <div
@@ -101,23 +103,23 @@ const CustomerCenter = ({
           }}
         >
           {path === "notice"
-            ? "공지사항"
+            ? "공지사항 글쓰기"
             : path === "faq"
-            ? "FAQ"
-            : "문의게시판"}
+            ? "FAQ 글쓰기"
+            : "문의게시판 글쓰기"}
         </p>
       </div>
       <section className={styles.main}>
-        {path === "notice" ? (
-          <Notice articles={noticeArticles} getNoticeList={getNoticeList} />
-        ) : path === "faq" ? (
-          <Faq articles={faqArticles} getFaqList={getFaqList} />
+        {path === "faq" ? (
+          <FaqWrite />
+        ) : path === "notice" ? (
+          <NoticeWrite />
         ) : (
-          <Inquire articles={inquireArticles} getInquireList={getInquireList} />
+          <InquireWrite />
         )}
       </section>
     </section>
   );
 };
 
-export default CustomerCenter;
+export default WriteMain;

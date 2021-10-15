@@ -13,7 +13,7 @@ const FindId = (props) => {
     setResultId(false);
     const phone = phoneRef.current.value;
     axios
-      .post("http://35.239.228.185/modoorock/user/findid", {
+      .post(`${process.env.REACT_APP_BASEURL}/user/findid`, {
         phone,
       })
       .then((response) => {
@@ -65,7 +65,9 @@ const FindId = (props) => {
           </button>
         </section>
       ) : resultId === false ? (
-        <LoadingSpinner />
+        <section className={styles.loading_spinner_container}>
+          <LoadingSpinner />
+        </section>
       ) : (
         <></>
       )}

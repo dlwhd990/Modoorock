@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import styles from "./header.module.css";
 
-const Header = (props) => {
+const Header = ({ userData, userLogout }) => {
   const [aboutDropDown, setAboutDropDown] = useState(false);
   const [programDropDown, setProgramDropDown] = useState(false);
   const [fnqDropDown, setFnqDropDown] = useState(false);
@@ -187,11 +187,11 @@ const Header = (props) => {
                 className={styles.drop_down_menu_item}
                 onClick={() => {
                   dropDownAllOff();
-                  history.push("/customer/qna");
+                  history.push("/customer/faq");
                   window.scrollTo({ top: 0 });
                 }}
               >
-                Q&A
+                FAQ
               </li>
               <li
                 className={styles.drop_down_menu_item}
@@ -234,33 +234,64 @@ const Header = (props) => {
           </li>
         </ul>
       </nav>
-      <div
-        className={`${
-          toggle
-            ? `${styles.login_container} ${styles.toggle_on}`
-            : `${styles.login_container} ${styles.toggle_off}`
-        }`}
-        onClick={onToggleHandler}
-      >
-        <span
-          className={styles.login}
-          onClick={() => {
-            history.push("/login");
-            window.scrollTo({ top: 0 });
-          }}
+      {!userData ? (
+        <div className={styles.login_container}></div>
+      ) : userData.id ? (
+        <div
+          className={`${
+            toggle
+              ? `${styles.login_container} ${styles.toggle_on}`
+              : `${styles.login_container} ${styles.toggle_off}`
+          }`}
+          onClick={onToggleHandler}
         >
-          로그인
-        </span>
-        <span
-          className={styles.signup}
-          onClick={() => {
-            history.push("/signup");
-            window.scrollTo({ top: 0 });
-          }}
+          <span
+            className={styles.login}
+            onClick={() => {
+              userLogout();
+            }}
+          >
+            로그아웃
+          </span>
+          <span
+            className={styles.signup}
+            onClick={() => {
+              history.push("/mypage");
+              window.scrollTo({ top: 0 });
+            }}
+          >
+            마이페이지
+          </span>
+        </div>
+      ) : (
+        <div
+          className={`${
+            toggle
+              ? `${styles.login_container} ${styles.toggle_on}`
+              : `${styles.login_container} ${styles.toggle_off}`
+          }`}
+          onClick={onToggleHandler}
         >
-          회원가입
-        </span>
-      </div>
+          <span
+            className={styles.login}
+            onClick={() => {
+              history.push("/login");
+              window.scrollTo({ top: 0 });
+            }}
+          >
+            로그인
+          </span>
+          <span
+            className={styles.signup}
+            onClick={() => {
+              history.push("/signup");
+              window.scrollTo({ top: 0 });
+            }}
+          >
+            회원가입
+          </span>
+        </div>
+      )}
     </section>
   );
 };

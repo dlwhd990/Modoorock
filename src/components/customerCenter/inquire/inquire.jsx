@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import InquireArticle from "./inquireArticle/inquireArticle";
 import styles from "./inquire.module.css";
 
-const Inquire = ({ articles, user, loadArticlesAndReplies }) => {
+const Inquire = ({ articles, loadArticlesAndReplies }) => {
   const history = useHistory();
   const searchTypeRef = useRef();
   const searchInputRef = useRef();
@@ -53,11 +53,8 @@ const Inquire = ({ articles, user, loadArticlesAndReplies }) => {
   };
 
   const goWrite = () => {
-    if (!user) {
-      window.alert("로그인 하신 후에 글 작성이 가능합니다.");
-      return;
-    }
-    history.push("/bbs/write");
+    //로그인 후에만 작성 가능하게 변경
+    history.push("/customer/inquire/write");
     window.scrollTo({ top: 0 });
   };
 
@@ -185,6 +182,9 @@ const Inquire = ({ articles, user, loadArticlesAndReplies }) => {
             </li>
           )}
         </ul>
+        <button className={styles.write_button} onClick={goWrite}>
+          글쓰기
+        </button>
       </section>
     </section>
   );

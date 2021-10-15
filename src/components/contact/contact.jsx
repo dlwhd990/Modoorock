@@ -46,11 +46,11 @@ const Contact = (props) => {
             <span
               className={styles.link_blue}
               onClick={() => {
-                history.push("/customer/qna");
+                history.push("/customer/faq");
                 window.scrollTo({ top: 0 });
               }}
             >
-              Q&A
+              FAQ
             </span>{" "}
             읽어보기
           </li>

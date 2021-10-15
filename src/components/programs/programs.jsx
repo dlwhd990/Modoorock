@@ -5,7 +5,7 @@ import { debounce } from "lodash";
 import AreaItem from "./areaItem/areaItem";
 import ProgramsThemeSlick from "../slick/programsTheme/programsTheme";
 
-const Programs = ({ areaList, programList }) => {
+const Programs = ({ areaList, programList, reviewList }) => {
   const history = useHistory();
   const { path } = useParams();
   const [inputValue, setInputValue] = useState("");
@@ -422,6 +422,7 @@ const Programs = ({ areaList, programList }) => {
                     <ProgramsThemeSlick
                       viewItems={programList}
                       areaList={areaList}
+                      reviewList={reviewList}
                     />
                   </div>
                 </section>

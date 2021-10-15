@@ -3,10 +3,12 @@ import { useHistory } from "react-router-dom";
 import NoticeArticle from "./noticeArticle/noticeArticle";
 import styles from "./notice.module.css";
 
-const Notice = ({ articles, user, loadArticlesAndReplies }) => {
+const Notice = ({ articles, user, getNoticeList }) => {
   const history = useHistory();
   const searchTypeRef = useRef();
   const searchInputRef = useRef();
+  const [pageList, setPageList] = useState([]);
+  const [listList, setListList] = useState([]);
   const [numbering, setNumbering] = useState(1);
   const [sliceList, setSliceList] = useState([]);
   const [resultArticles, setResultArticles] = useState(articles);
@@ -14,50 +16,54 @@ const Notice = ({ articles, user, loadArticlesAndReplies }) => {
   const [cursor, setCursor] = useState(0);
   const articleKeyList = Object.keys(tempArticles).reverse();
 
-  //useEffect(() => {
-  //  loadArticlesAndReplies();
-  //}, []);
+  useEffect(() => {
+    getNoticeList();
+    console.log("AA");
+  }, []);
 
-  let pagelength = 0;
-
-  if (articleKeyList.length % 10 === 0) {
-    pagelength = parseInt(articleKeyList.length / 10);
-  } else if (articleKeyList.length <= 10) {
-    pagelength = 1;
-  } else {
-    pagelength = parseInt(articleKeyList.length / 10) + 1;
-  }
-
-  let list = [];
-
-  for (let i = 1; i <= pagelength; i++) {
-    list.push(i);
-  }
-
-  let pages = [];
-  for (let i = 0; i <= pagelength; i++) {
-    pages[i] = [];
-  }
-
-  for (let i = 1; i <= pagelength; i++) {
-    for (let j = 10 * (i - 1); j < 10 * i; j++) {
-      if (articleKeyList[j] === undefined) {
-        break;
-      }
-      pages[i].push(articleKeyList[j]);
+  useEffect(() => {
+    let pagelength = 0;
+    const articleKeyList = Object.keys(articles).reverse();
+    if (articleKeyList.length % 10 === 0) {
+      pagelength = parseInt(articleKeyList.length / 10);
+    } else if (articleKeyList.length <= 10) {
+      pagelength = 1;
+    } else {
+      pagelength = parseInt(articleKeyList.length / 10) + 1;
     }
-  }
+
+    let list = [];
+
+    for (let i = 1; i <= pagelength; i++) {
+      list.push(i);
+    }
+
+    let pages = [];
+    for (let i = 0; i <= pagelength; i++) {
+      pages[i] = [];
+    }
+
+    for (let i = 1; i <= pagelength; i++) {
+      for (let j = 10 * (i - 1); j < 10 * i; j++) {
+        if (articleKeyList[j] === undefined) {
+          break;
+        }
+        pages[i].push(articleKeyList[j]);
+      }
+    }
+    setPageList(pages);
+    setListList(list);
+    setResultArticles(articles);
+    setSliceList(list.slice(0, 5));
+  }, [articles]);
 
   const pageNumberClick = (e) => {
     setNumbering(parseInt(e.target.textContent));
   };
 
   const goWrite = () => {
-    if (!user) {
-      window.alert("로그인 하신 후에 글 작성이 가능합니다.");
-      return;
-    }
-    history.push("/bbs/write");
+    //로그인 확인 과정 나중에 추가
+    history.push("/customer/notice/write");
     window.scrollTo({ top: 0 });
   };
 
@@ -77,7 +83,7 @@ const Notice = ({ articles, user, loadArticlesAndReplies }) => {
     searchInputRef.current.value = "";
     history.push(`/bbs/search/${type}/${query}`);
     window.scrollTo({ top: 0 });
-    loadArticlesAndReplies();
+    getNoticeList();
   };
 
   const keyHandler = (e) => {
@@ -99,7 +105,7 @@ const Notice = ({ articles, user, loadArticlesAndReplies }) => {
   }, [searchInputRef]);
 
   useEffect(() => {
-    setSliceList(list.slice(cursor, cursor + 5));
+    setSliceList(listList.slice(cursor, cursor + 5));
     setNumbering(cursor + 1);
   }, [cursor]);
 
@@ -111,7 +117,7 @@ const Notice = ({ articles, user, loadArticlesAndReplies }) => {
   };
 
   const moveBackward = () => {
-    if (cursor + 5 > list.length - 1) {
+    if (cursor + 5 > listList.length - 1) {
       return;
     }
     setCursor(cursor + 5);
@@ -151,17 +157,18 @@ const Notice = ({ articles, user, loadArticlesAndReplies }) => {
         <div className={styles.date}>작성일</div>
       </section>
       <section className={styles.body}>
-        {pages[numbering].map((index) => (
-          <NoticeArticle
-            key={resultArticles[index].idx}
-            article={resultArticles[index]}
-            where="notice"
-          />
-        ))}
+        {pageList.length > 1 &&
+          pageList[numbering].map((index) => (
+            <NoticeArticle
+              key={resultArticles[index].idx}
+              article={resultArticles[index]}
+              where="notice"
+            />
+          ))}
       </section>
       <section className={styles.bottom}>
         <ul className={styles.page_numbers}>
-          {list.length >= 5 && (
+          {listList.length > 5 && (
             <li className={styles.arrow} onClick={moveForward}>
               <i className="fas fa-chevron-left"></i>
             </li>
@@ -179,12 +186,15 @@ const Notice = ({ articles, user, loadArticlesAndReplies }) => {
               {num}
             </li>
           ))}
-          {list.length >= 5 && (
+          {listList.length > 5 && (
             <li className={styles.arrow} onClick={moveBackward}>
               <i className="fas fa-chevron-right"></i>
             </li>
           )}
         </ul>
+        <button className={styles.write_button} onClick={goWrite}>
+          글쓰기
+        </button>
       </section>
     </section>
   );

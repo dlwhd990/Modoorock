@@ -6,7 +6,7 @@ const NoticeArticle = ({ article }) => {
   const history = useHistory();
   const viewArticle = () => {
     window.scrollTo({ top: 0 });
-    history.push(`/customer/qna/${article.idx}`);
+    history.push(`/customer/notice/${article.idx}`);
   };
 
   return (

@@ -125,9 +125,9 @@
   position: relative;
 }
 
-.write_btn {
-  background-color: #377dff;
-  border: 1px solid #377dff;
+.write_button {
+  background-color: #39a2e8;
+  border: none;
   border-radius: 4px;
   width: 5.2rem;
   height: 2.2rem;
@@ -138,10 +138,12 @@
   right: 1.5rem;
   transition: all 100ms ease-in;
   color: white;
+  position: absolute;
+  right: 30px;
 }
 
-.write_btn:hover {
-  transform: scale(1.04);
+.write_button:hover {
+  transform: scale(1.03);
 }
 
 .write_a {

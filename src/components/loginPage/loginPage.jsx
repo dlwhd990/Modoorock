@@ -1,59 +1,55 @@
 import axios from "axios";
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { useHistory } from "react-router-dom";
+import LoadingSpinnerWhite from "../loadingSpinner/loadingSpinnerWhite/loadingSpinnerWhite";
 import styles from "./loginPage.module.css";
 
-const LoginPage = (props) => {
+axios.defaults.withCredentials = true;
+
+const LoginPage = () => {
   const history = useHistory();
   const idRef = useRef();
   const pwRef = useRef();
-  const loginSubmitHandler = (e) => {
+  const [loadingOn, setLoadingOn] = useState(false);
+
+  const refresh = () => {
+    window.location.href = "/";
+    return;
+  };
+
+  const loginSubmitHandler = async (e) => {
     e.preventDefault();
+    setLoadingOn(true);
     const id = idRef.current.value;
     const password = pwRef.current.value;
-    axios
-      .post("http://35.239.228.185/modoorock/user/login", {
-        id,
-        password,
-      })
+
+    await axios
+      .post(
+        `${process.env.REACT_APP_BASEURL}/user/login`,
+        {
+          id,
+          password,
+        },
+        { withCredentials: true }
+      )
       .then((response) => {
         console.log(response);
-        if (response.data === "logined") {
+        if (response.data === "loggedin") {
+          console.log(response);
           window.alert("로그인 되었습니다.");
+          refresh();
         } else {
           window.alert("아이디와 비밀번호를 다시 확인해주세요");
         }
+        setLoadingOn(false);
       })
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        setLoadingOn(false);
+        console.error(err);
+      });
   };
   return (
     <section className={styles.login_page}>
-      <button
-        className={styles.test}
-        onClick={() => {
-          axios
-            .post("http://35.239.228.185/modoorock/user/session")
-            .then((response) => {
-              console.log(response);
-            })
-            .catch((err) => console.error(err));
-        }}
-      >
-        세션테스트
-      </button>
-      <button
-        className={styles.test}
-        onClick={() => {
-          axios
-            .post("http://35.239.228.185/modoorock/user/logout")
-            .then(() => {
-              console.log("로그아웃");
-            })
-            .catch((err) => console.error(err));
-        }}
-      >
-        로그아웃
-      </button>
       <section className={styles.container}>
         <p className={styles.title}>회원로그인</p>
         <form className={styles.main}>
@@ -74,7 +70,7 @@ const LoginPage = (props) => {
             />
           </div>
           <button className={styles.submit_button} onClick={loginSubmitHandler}>
-            로그인
+            {loadingOn ? <LoadingSpinnerWhite /> : "로그인"}
           </button>
         </form>
         <div className={styles.id_save_find_container}>

@@ -1,12 +1,13 @@
-.spinner {
-  width: 100px;
+.spinner_white {
+  width: 80px;
   text-align: center;
+  margin: auto;
 }
 
-.spinner > div {
-  width: 18px;
-  height: 18px;
-  background-color: var(--color-theme);
+.spinner_white > div {
+  width: 14px;
+  height: 14px;
+  background-color: white;
   margin: 0 5px;
   border-radius: 100%;
   display: inline-block;
@@ -14,12 +15,12 @@
   animation: sk-bouncedelay 1.4s infinite ease-in-out both;
 }
 
-.spinner .bounce1 {
+.spinner_white .bounce1_white {
   -webkit-animation-delay: -0.32s;
   animation-delay: -0.32s;
 }
 
-.spinner .bounce2 {
+.spinner_white .bounce2_white {
   -webkit-animation-delay: -0.16s;
   animation-delay: -0.16s;
 }

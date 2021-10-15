@@ -1,12 +1,12 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
-import styles from "./qnaArticle.module.css";
+import styles from "./faqArticle.module.css";
 
-const QnaArticle = ({ article }) => {
+const FaqArticle = ({ article }) => {
   const history = useHistory();
   const viewArticle = () => {
     window.scrollTo({ top: 0 });
-    history.push(`/customer/notice/${article.idx}`);
+    history.push(`/customer/faq/${article.idx}`);
   };
 
   return (
@@ -19,4 +19,4 @@ const QnaArticle = ({ article }) => {
   );
 };
 
-export default QnaArticle;
+export default FaqArticle;

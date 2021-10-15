@@ -1,76 +1,27 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import QnaArticle from "./qnaArticle/qnaArticle";
-import styles from "./qna.module.css";
+import FaqArticle from "./faqArticle/faqArticle";
+import styles from "./faq.module.css";
 
-const Qna = ({ articles, user, loadArticlesAndReplies }) => {
+const Faq = ({ articles, user, getFaqList }) => {
   const [headerSelect, setHeaderSelect] = useState("All");
   const history = useHistory();
   const searchTypeRef = useRef();
   const searchInputRef = useRef();
+  const [pageList, setPageList] = useState([]);
+  const [listList, setListList] = useState([]);
   const [numbering, setNumbering] = useState(1);
   const [sliceList, setSliceList] = useState([]);
   const [resultArticles, setResultArticles] = useState(articles);
-  const [tempArticles, setTempArticles] = useState(articles);
   const [cursor, setCursor] = useState(0);
-  const articleKeyList = Object.keys(tempArticles).reverse();
 
-  //useEffect(() => {
-  //  loadArticlesAndReplies();
-  //}, []);
+  useEffect(() => {
+    getFaqList();
+  }, []);
 
-  let pagelength = 0;
-
-  if (articleKeyList.length % 10 === 0) {
-    pagelength = parseInt(articleKeyList.length / 10);
-  } else if (articleKeyList.length <= 10) {
-    pagelength = 1;
-  } else {
-    pagelength = parseInt(articleKeyList.length / 10) + 1;
-  }
-
-  let list = [];
-
-  for (let i = 1; i <= pagelength; i++) {
-    list.push(i);
-  }
-
-  let pages = [];
-  for (let i = 0; i <= pagelength; i++) {
-    pages[i] = [];
-  }
-
-  for (let i = 1; i <= pagelength; i++) {
-    for (let j = 10 * (i - 1); j < 10 * i; j++) {
-      if (articleKeyList[j] === undefined) {
-        break;
-      }
-      pages[i].push(articleKeyList[j]);
-    }
-  }
-
-  const headerSelectHandler = (e) => {
-    if (e.target.tagName !== "P") {
-      return;
-    }
-    setResultArticles([]);
-    setHeaderSelect(e.target.innerText);
-    setNumbering(1);
-    if (e.target.innerText === "All") {
-      setTempArticles(articles);
-      setResultArticles(articles);
-      return;
-    }
-    const tmp = [];
-    for (let i = 0; i < articles.length; i++) {
-      if (articles[i].type === e.target.innerText) {
-        tmp.push(articles[i]);
-      }
-    }
-    setTempArticles(tmp);
-    const articleKeyList = Object.keys(tmp).reverse();
-    pagelength = 0;
-
+  useEffect(() => {
+    let pagelength = 0;
+    const articleKeyList = Object.keys(articles).reverse();
     if (articleKeyList.length % 10 === 0) {
       pagelength = parseInt(articleKeyList.length / 10);
     } else if (articleKeyList.length <= 10) {
@@ -79,12 +30,13 @@ const Qna = ({ articles, user, loadArticlesAndReplies }) => {
       pagelength = parseInt(articleKeyList.length / 10) + 1;
     }
 
-    list = [];
+    let list = [];
+
     for (let i = 1; i <= pagelength; i++) {
       list.push(i);
     }
 
-    pages = [];
+    let pages = [];
     for (let i = 0; i <= pagelength; i++) {
       pages[i] = [];
     }
@@ -97,8 +49,67 @@ const Qna = ({ articles, user, loadArticlesAndReplies }) => {
         pages[i].push(articleKeyList[j]);
       }
     }
+    setPageList(pages);
+    setListList(list);
+    setResultArticles(articles);
+    setSliceList(list.slice(0, 5));
+  }, [articles]);
+
+  const headerSelectHandler = (e) => {
+    if (e.target.tagName !== "P") {
+      return;
+    }
+    setHeaderSelect(e.target.innerText);
+    setNumbering(1);
+    const tmp = [];
+    if (e.target.innerText === "All") {
+      for (let i = 0; i < articles.length; i++) {
+        tmp.push(articles[i]);
+      }
+    } else {
+      for (let i = 0; i < articles.length; i++) {
+        if (articles[i].type === e.target.innerText) {
+          tmp.push(articles[i]);
+        }
+      }
+    }
+
+    const articleKeyList = Object.keys(tmp).reverse();
+    let pagelength = 0;
+
+    if (articleKeyList.length % 10 === 0) {
+      pagelength = parseInt(articleKeyList.length / 10);
+    } else if (articleKeyList.length <= 10) {
+      pagelength = 1;
+    } else {
+      pagelength = parseInt(articleKeyList.length / 10) + 1;
+    }
+
+    const list = [];
+    for (let i = 1; i <= pagelength; i++) {
+      list.push(i);
+    }
+
+    const pages = [];
+    for (let i = 0; i <= pagelength; i++) {
+      pages[i] = [];
+    }
+
+    for (let i = 1; i <= pagelength; i++) {
+      for (let j = 10 * (i - 1); j < 10 * i; j++) {
+        if (articleKeyList[j] === undefined) {
+          break;
+        }
+        pages[i].push(articleKeyList[j]);
+      }
+    }
+
+    setCursor(0);
+    setPageList(pages);
+    setListList(list);
     setResultArticles(tmp);
-    setSliceList(list.slice(cursor, cursor + 5));
+
+    setSliceList(list.slice(0, 5));
   };
 
   const pageNumberClick = (e) => {
@@ -106,11 +117,8 @@ const Qna = ({ articles, user, loadArticlesAndReplies }) => {
   };
 
   const goWrite = () => {
-    if (!user) {
-      window.alert("로그인 하신 후에 글 작성이 가능합니다.");
-      return;
-    }
-    history.push("/bbs/write");
+    //로그인 여부 확인 코드 나중에 작성
+    history.push("/customer/faq/write");
     window.scrollTo({ top: 0 });
   };
 
@@ -128,9 +136,9 @@ const Qna = ({ articles, user, loadArticlesAndReplies }) => {
       return;
     }
     searchInputRef.current.value = "";
-    history.push(`/bbs/search/${type}/${query}`);
+    history.push(`/bbs/search/${type}/${query}`); //추후변경
     window.scrollTo({ top: 0 });
-    loadArticlesAndReplies();
+    getFaqList();
   };
 
   const keyHandler = (e) => {
@@ -152,7 +160,10 @@ const Qna = ({ articles, user, loadArticlesAndReplies }) => {
   }, [searchInputRef]);
 
   useEffect(() => {
-    setSliceList(list.slice(cursor, cursor + 5));
+    if (listList.length === 0) {
+      return;
+    }
+    setSliceList(listList.slice(cursor, cursor + 5));
     setNumbering(cursor + 1);
   }, [cursor]);
 
@@ -164,7 +175,10 @@ const Qna = ({ articles, user, loadArticlesAndReplies }) => {
   };
 
   const moveBackward = () => {
-    if (cursor + 5 > list.length - 1) {
+    if (listList.length === 0) {
+      return;
+    }
+    if (cursor + 5 > listList.length - 1) {
       return;
     }
     setCursor(cursor + 5);
@@ -232,19 +246,28 @@ const Qna = ({ articles, user, loadArticlesAndReplies }) => {
         >
           사이트 이용
         </p>
+        <p
+          className={`${
+            headerSelect === "test"
+              ? `${styles.header_item} ${styles.header_on}`
+              : `${styles.header_item} ${styles.header_off}`
+          }`}
+        >
+          test
+        </p>
       </section>
       <section className={styles.body}>
-        {pages[numbering].map((index) => (
-          <QnaArticle
-            key={resultArticles[index].idx}
-            article={resultArticles[index]}
-            where="notice"
-          />
-        ))}
+        {pageList.length > 1 &&
+          pageList[numbering].map((index) => (
+            <FaqArticle
+              key={resultArticles[index].idx}
+              article={resultArticles[index]}
+            />
+          ))}
       </section>
       <section className={styles.bottom}>
         <ul className={styles.page_numbers}>
-          {list.length >= 5 && (
+          {listList.length > 5 && (
             <li className={styles.arrow} onClick={moveForward}>
               <i className="fas fa-chevron-left"></i>
             </li>
@@ -262,15 +285,19 @@ const Qna = ({ articles, user, loadArticlesAndReplies }) => {
               {num}
             </li>
           ))}
-          {list.length >= 5 && (
+          {listList.length > 5 && (
             <li className={styles.arrow} onClick={moveBackward}>
               <i className="fas fa-chevron-right"></i>
             </li>
           )}
         </ul>
+
+        <button className={styles.write_button} onClick={goWrite}>
+          글쓰기
+        </button>
       </section>
     </section>
   );
 };
 
-export default Qna;
+export default Faq;

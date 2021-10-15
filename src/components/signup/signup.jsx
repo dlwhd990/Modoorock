@@ -62,7 +62,7 @@ const Signup = (props) => {
     }
 
     axios
-      .post("http://35.239.228.185/modoorock/user/register", {
+      .post(`${process.env.REACT_APP_BASEURL}/user/register`, {
         id,
         password,
         name,

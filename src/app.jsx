@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter, Route } from "react-router-dom";
 import styles from "./app.module.css";
 import Footer from "./components/footer/footer";
@@ -14,6 +14,10 @@ import Introduce from "./components/about/introduce";
 import CustomerCenter from "./components/customerCenter/customerCenter";
 import Attraction from "./components/programs/attraction/attraction";
 import ProgramDetail from "./components/programs/programDetail/programDetail";
+import axios from "axios";
+import WriteMain from "./components/customerCenter/writeMain/writeMain";
+
+axios.defaults.withCredentials = true;
 
 const App = (props) => {
   const [introVideos, setIntroVideos] = useState([
@@ -116,8 +120,6 @@ const App = (props) => {
       price: 25000,
       photo: "/Modoorock/images/service_right.png",
       attraction: 0,
-      total_rate: 445,
-      rate_count: 89,
     },
     {
       idx: 1,
@@ -128,8 +130,6 @@ const App = (props) => {
       price: 25000,
       photo: "/Modoorock/images/service_right.png",
       attraction: 1,
-      total_rate: 321,
-      rate_count: 89,
     },
     {
       idx: 2,
@@ -140,8 +140,6 @@ const App = (props) => {
       price: 20000,
       photo: "/Modoorock/images/service_right.png",
       attraction: 1,
-      total_rate: 391,
-      rate_count: 89,
     },
     {
       idx: 3,
@@ -152,8 +150,6 @@ const App = (props) => {
       price: 25000,
       photo: "/Modoorock/images/service_right.png",
       attraction: 0,
-      total_rate: 231,
-      rate_count: 89,
     },
     {
       idx: 4,
@@ -164,8 +160,6 @@ const App = (props) => {
       price: 1000,
       photo: "/Modoorock/images/service_right.png",
       attraction: 2,
-      total_rate: 381,
-      rate_count: 89,
     },
     {
       idx: 5,
@@ -176,781 +170,11 @@ const App = (props) => {
       price: 11000,
       photo: "/Modoorock/images/service_right.png",
       attraction: 3,
-      total_rate: 400,
-      rate_count: 100,
     },
   ]);
 
-  const [qnaArticles, setQnaArticles] = useState([
-    {
-      idx: 0,
-      type: "주문/배송/반품",
-      date: "2021/10/05",
-      title: "공지입니다.",
-      content: "공지내용",
-    },
-    {
-      idx: 1,
-      type: "멤버쉽",
-      date: "2021/10/05",
-      title: "공지니다.",
-      content: "공지내용",
-    },
-    {
-      idx: 2,
-      type: "사이트 이용",
-      date: "2021/10/05",
-      title: "공지입다.",
-      content: "공지내용",
-    },
-    {
-      idx: 3,
-      type: "주문/배송/반품",
-      date: "2021/10/05",
-      title: "공지입니다.",
-      content: "공지내용",
-    },
-    {
-      idx: 4,
-      type: "멤버쉽",
-      date: "2021/10/05",
-      title: "공지니다.",
-      content: "공지내용",
-    },
-    {
-      idx: 5,
-      type: "사이트 이용",
-      date: "2021/10/05",
-      title: "공지입다.",
-      content: "공지내용",
-    },
-    {
-      idx: 6,
-      type: "주문/배송/반품",
-      date: "2021/10/05",
-      title: "공지입니다.",
-      content: "공지내용",
-    },
-    {
-      idx: 7,
-      type: "멤버쉽",
-      date: "2021/10/05",
-      title: "공지니다.",
-      content: "공지내용",
-    },
-    {
-      idx: 8,
-      type: "사이트 이용",
-      date: "2021/10/05",
-      title: "공지입다.",
-      content: "공지내용",
-    },
-    {
-      idx: 9,
-      type: "주문/배송/반품",
-      date: "2021/10/05",
-      title: "공지입니다.",
-      content: "공지내용",
-    },
-    {
-      idx: 10,
-      type: "사이트 이용",
-      date: "2021/10/05",
-      title: "공지니다.",
-      content: "공지내용",
-    },
-    {
-      idx: 11,
-      type: "멤버쉽",
-      date: "2021/10/05",
-      title: "공지니다.",
-      content: "공지내용",
-    },
-    {
-      idx: 12,
-      type: "사이트 이용",
-      date: "2021/10/05",
-      title: "공지입다.",
-      content: "공지내용",
-    },
-    {
-      idx: 13,
-      type: "주문/배송/반품",
-      date: "2021/10/05",
-      title: "공지입니다.",
-      content: "공지내용",
-    },
-    {
-      idx: 14,
-      type: "멤버쉽",
-      date: "2021/10/05",
-      title: "공지니다.",
-      content: "공지내용",
-    },
-    {
-      idx: 15,
-      type: "사이트 이용",
-      date: "2021/10/05",
-      title: "공지입다.",
-      content: "공지내용",
-    },
-    {
-      idx: 16,
-      type: "주문/배송/반품",
-      date: "2021/10/05",
-      title: "공지입니다.",
-      content: "공지내용",
-    },
-    {
-      idx: 17,
-      type: "멤버쉽",
-      date: "2021/10/05",
-      title: "공지니다.",
-      content: "공지내용",
-    },
-    {
-      idx: 18,
-      type: "사이트 이용",
-      date: "2021/10/05",
-      title: "공지입다.",
-      content: "공지내용",
-    },
-    {
-      idx: 19,
-      type: "주문/배송/반품",
-      date: "2021/10/05",
-      title: "공지입니다.",
-      content: "공지내용",
-    },
-    {
-      idx: 20,
-      type: "상품",
-      date: "2021/10/05",
-      title: "공지니다.",
-      content: "공지내용",
-    },
-    {
-      idx: 21,
-      type: "멤버쉽",
-      date: "2021/10/05",
-      title: "공지니다.",
-      content: "공지내용",
-    },
-    {
-      idx: 22,
-      type: "사이트 이용",
-      date: "2021/10/05",
-      title: "공지입다.",
-      content: "공지내용",
-    },
-    {
-      idx: 23,
-      type: "주문/배송/반품",
-      date: "2021/10/05",
-      title: "공지입니다.",
-      content: "공지내용",
-    },
-    {
-      idx: 24,
-      type: "멤버쉽",
-      date: "2021/10/05",
-      title: "공지니다.",
-      content: "공지내용",
-    },
-    {
-      idx: 25,
-      type: "사이트 이용",
-      date: "2021/10/05",
-      title: "공지입다.",
-      content: "공지내용",
-    },
-    {
-      idx: 26,
-      type: "주문/배송/반품",
-      date: "2021/10/05",
-      title: "공지입니다.",
-      content: "공지내용",
-    },
-    {
-      idx: 27,
-      type: "멤버쉽",
-      date: "2021/10/05",
-      title: "공지니다.",
-      content: "공지내용",
-    },
-    {
-      idx: 28,
-      type: "사이트 이용",
-      date: "2021/10/05",
-      title: "공지입다.",
-      content: "공지내용",
-    },
-    {
-      idx: 29,
-      type: "주문/배송/반품",
-      date: "2021/10/05",
-      title: "공지입니다.",
-      content: "공지내용",
-    },
-    {
-      idx: 30,
-      type: "멤버쉽",
-      date: "2021/10/05",
-      title: "공지니다.",
-      content: "공지내용",
-    },
-    {
-      idx: 31,
-      type: "멤버쉽",
-      date: "2021/10/05",
-      title: "공지니다.",
-      content: "공지내용",
-    },
-    {
-      idx: 32,
-      type: "사이트 이용",
-      date: "2021/10/05",
-      title: "공지입다.",
-      content: "공지내용",
-    },
-    {
-      idx: 33,
-      type: "주문/배송/반품",
-      date: "2021/10/05",
-      title: "공지입니다.",
-      content: "공지내용",
-    },
-    {
-      idx: 34,
-      type: "멤버쉽",
-      date: "2021/10/05",
-      title: "공지니다.",
-      content: "공지내용",
-    },
-    {
-      idx: 35,
-      type: "사이트 이용",
-      date: "2021/10/05",
-      title: "공지입다.",
-      content: "공지내용",
-    },
-    {
-      idx: 36,
-      type: "주문/배송/반품",
-      date: "2021/10/05",
-      title: "공지입니다.",
-      content: "공지내용",
-    },
-    {
-      idx: 37,
-      type: "멤버쉽",
-      date: "2021/10/05",
-      title: "공지니다.",
-      content: "공지내용",
-    },
-    {
-      idx: 38,
-      type: "사이트 이용",
-      date: "2021/10/05",
-      title: "공지입다.",
-      content: "공지내용",
-    },
-    {
-      idx: 39,
-      type: "주문/배송/반품",
-      date: "2021/10/05",
-      title: "공지입니다.",
-      content: "공지내용",
-    },
-    {
-      idx: 40,
-      type: "사이트 이용",
-      date: "2021/10/05",
-      title: "공지니다.",
-      content: "공지내용",
-    },
-    {
-      idx: 41,
-      type: "멤버쉽",
-      date: "2021/10/05",
-      title: "공지니다.",
-      content: "공지내용",
-    },
-    {
-      idx: 42,
-      type: "사이트 이용",
-      date: "2021/10/05",
-      title: "공지입다.",
-      content: "공지내용",
-    },
-    {
-      idx: 43,
-      type: "주문/배송/반품",
-      date: "2021/10/05",
-      title: "공지입니다.",
-      content: "공지내용",
-    },
-    {
-      idx: 44,
-      type: "멤버쉽",
-      date: "2021/10/05",
-      title: "공지니다.",
-      content: "공지내용",
-    },
-    {
-      idx: 45,
-      type: "사이트 이용",
-      date: "2021/10/05",
-      title: "공지입다.",
-      content: "공지내용",
-    },
-    {
-      idx: 46,
-      type: "주문/배송/반품",
-      date: "2021/10/05",
-      title: "공지입니다.",
-      content: "공지내용",
-    },
-    {
-      idx: 47,
-      type: "멤버쉽",
-      date: "2021/10/05",
-      title: "공지니다.",
-      content: "공지내용",
-    },
-    {
-      idx: 48,
-      type: "사이트 이용",
-      date: "2021/10/05",
-      title: "공지입다.",
-      content: "공지내용",
-    },
-    {
-      idx: 49,
-      type: "주문/배송/반품",
-      date: "2021/10/05",
-      title: "공지입니다.",
-      content: "공지내용",
-    },
-    {
-      idx: 50,
-      type: "사이트 이용",
-      date: "2021/10/05",
-      title: "공지니다.",
-      content: "공지내용",
-    },
-  ]);
-  const [noticeArticles, setNoticeArticles] = useState([
-    {
-      idx: 0,
-      type: "주문/배송/반품",
-      date: "2021/10/05",
-      title: "공지입니다.",
-      writer: "이종혁",
-      content: "공지내용",
-    },
-    {
-      idx: 1,
-      type: "멤버쉽",
-      date: "2021/10/05",
-      title: "공지니다.",
-      writer: "이종혁",
-      content: "공지내용",
-    },
-    {
-      idx: 2,
-      type: "사이트 이용",
-      date: "2021/10/05",
-      title: "공지입다.",
-      writer: "이종혁",
-      content: "공지내용",
-    },
-    {
-      idx: 3,
-      type: "주문/배송/반품",
-      date: "2021/10/05",
-      title: "공지입니다.",
-      writer: "이종혁",
-      content: "공지내용",
-    },
-    {
-      idx: 4,
-      type: "멤버쉽",
-      date: "2021/10/05",
-      title: "공지니다.",
-      writer: "이종혁",
-      content: "공지내용",
-    },
-    {
-      idx: 5,
-      type: "사이트 이용",
-      date: "2021/10/05",
-      title: "공지입다.",
-      writer: "이종혁",
-      content: "공지내용",
-    },
-    {
-      idx: 6,
-      type: "주문/배송/반품",
-      date: "2021/10/05",
-      title: "공지입니다.",
-      writer: "이종혁",
-      content: "공지내용",
-    },
-    {
-      idx: 7,
-      type: "멤버쉽",
-      date: "2021/10/05",
-      title: "공지니다.",
-      writer: "이종혁",
-      content: "공지내용",
-    },
-    {
-      idx: 8,
-      type: "사이트 이용",
-      date: "2021/10/05",
-      title: "공지입다.",
-      writer: "이종혁",
-      content: "공지내용",
-    },
-    {
-      idx: 9,
-      type: "주문/배송/반품",
-      date: "2021/10/05",
-      title: "공지입니다.",
-      writer: "이종혁",
-      content: "공지내용",
-    },
-    {
-      idx: 10,
-      type: "사이트 이용",
-      date: "2021/10/05",
-      title: "공지니다.",
-      writer: "이종혁",
-      content: "공지내용",
-    },
-    {
-      idx: 11,
-      type: "멤버쉽",
-      date: "2021/10/05",
-      title: "공지니다.",
-      writer: "이종혁",
-      content: "공지내용",
-    },
-    {
-      idx: 12,
-      type: "사이트 이용",
-      date: "2021/10/05",
-      title: "공지입다.",
-      writer: "이종혁",
-      content: "공지내용",
-    },
-    {
-      idx: 13,
-      type: "주문/배송/반품",
-      date: "2021/10/05",
-      title: "공지입니다.",
-      writer: "이종혁",
-      content: "공지내용",
-    },
-    {
-      idx: 14,
-      type: "멤버쉽",
-      date: "2021/10/05",
-      title: "공지니다.",
-      writer: "이종혁",
-      content: "공지내용",
-    },
-    {
-      idx: 15,
-      type: "사이트 이용",
-      date: "2021/10/05",
-      title: "공지입다.",
-      writer: "이종혁",
-      content: "공지내용",
-    },
-    {
-      idx: 16,
-      type: "주문/배송/반품",
-      date: "2021/10/05",
-      title: "공지입니다.",
-      writer: "이종혁",
-      content: "공지내용",
-    },
-    {
-      idx: 17,
-      type: "멤버쉽",
-      date: "2021/10/05",
-      title: "공지니다.",
-      writer: "이종혁",
-      content: "공지내용",
-    },
-    {
-      idx: 18,
-      type: "사이트 이용",
-      date: "2021/10/05",
-      title: "공지입다.",
-      writer: "이종혁",
-      content: "공지내용",
-    },
-    {
-      idx: 19,
-      type: "주문/배송/반품",
-      date: "2021/10/05",
-      title: "공지입니다.",
-      writer: "이종혁",
-      content: "공지내용",
-    },
-    {
-      idx: 20,
-      type: "상품",
-      date: "2021/10/05",
-      title: "공지니다.",
-      writer: "이종혁",
-      content: "공지내용",
-    },
-    {
-      idx: 21,
-      type: "멤버쉽",
-      date: "2021/10/05",
-      title: "공지니다.",
-      writer: "이종혁",
-      content: "공지내용",
-    },
-    {
-      idx: 22,
-      type: "사이트 이용",
-      date: "2021/10/05",
-      title: "공지입다.",
-      writer: "이종혁",
-      content: "공지내용",
-    },
-    {
-      idx: 23,
-      type: "주문/배송/반품",
-      date: "2021/10/05",
-      title: "공지입니다.",
-      writer: "이종혁",
-      content: "공지내용",
-    },
-    {
-      idx: 24,
-      type: "멤버쉽",
-      date: "2021/10/05",
-      title: "공지니다.",
-      writer: "이종혁",
-      content: "공지내용",
-    },
-    {
-      idx: 25,
-      type: "사이트 이용",
-      date: "2021/10/05",
-      title: "공지입다.",
-      writer: "이종혁",
-      content: "공지내용",
-    },
-    {
-      idx: 26,
-      type: "주문/배송/반품",
-      date: "2021/10/05",
-      title: "공지입니다.",
-      writer: "이종혁",
-      content: "공지내용",
-    },
-    {
-      idx: 27,
-      type: "멤버쉽",
-      date: "2021/10/05",
-      title: "공지니다.",
-      writer: "이종혁",
-      content: "공지내용",
-    },
-    {
-      idx: 28,
-      type: "사이트 이용",
-      date: "2021/10/05",
-      title: "공지입다.",
-      writer: "이종혁",
-      content: "공지내용",
-    },
-    {
-      idx: 29,
-      type: "주문/배송/반품",
-      date: "2021/10/05",
-      title: "공지입니다.",
-      writer: "이종혁",
-      content: "공지내용",
-    },
-    {
-      idx: 30,
-      type: "멤버쉽",
-      date: "2021/10/05",
-      title: "공지니다.",
-      writer: "이종혁",
-      content: "공지내용",
-    },
-    {
-      idx: 31,
-      type: "멤버쉽",
-      date: "2021/10/05",
-      title: "공지니다.",
-      writer: "이종혁",
-      content: "공지내용",
-    },
-    {
-      idx: 32,
-      type: "사이트 이용",
-      date: "2021/10/05",
-      title: "공지입다.",
-      writer: "이종혁",
-      content: "공지내용",
-    },
-    {
-      idx: 33,
-      type: "주문/배송/반품",
-      date: "2021/10/05",
-      title: "공지입니다.",
-      writer: "이종혁",
-      content: "공지내용",
-    },
-    {
-      idx: 34,
-      type: "멤버쉽",
-      date: "2021/10/05",
-      title: "공지니다.",
-      writer: "이종혁",
-      content: "공지내용",
-    },
-    {
-      idx: 35,
-      type: "사이트 이용",
-      date: "2021/10/05",
-      title: "공지입다.",
-      writer: "이종혁",
-      content: "공지내용",
-    },
-    {
-      idx: 36,
-      type: "주문/배송/반품",
-      date: "2021/10/05",
-      title: "공지입니다.",
-      writer: "이종혁",
-      content: "공지내용",
-    },
-    {
-      idx: 37,
-      type: "멤버쉽",
-      date: "2021/10/05",
-      title: "공지니다.",
-      writer: "이종혁",
-      content: "공지내용",
-    },
-    {
-      idx: 38,
-      type: "사이트 이용",
-      date: "2021/10/05",
-      title: "공지입다.",
-      writer: "이종혁",
-      content: "공지내용",
-    },
-    {
-      idx: 39,
-      type: "주문/배송/반품",
-      date: "2021/10/05",
-      title: "공지입니다.",
-      writer: "이종혁",
-      content: "공지내용",
-    },
-    {
-      idx: 40,
-      type: "사이트 이용",
-      date: "2021/10/05",
-      title: "공지니다.",
-      writer: "이종혁",
-      content: "공지내용",
-    },
-    {
-      idx: 41,
-      type: "멤버쉽",
-      date: "2021/10/05",
-      title: "공지니다.",
-      writer: "이종혁",
-      content: "공지내용",
-    },
-    {
-      idx: 42,
-      type: "사이트 이용",
-      date: "2021/10/05",
-      title: "공지입다.",
-      writer: "이종혁",
-      content: "공지내용",
-    },
-    {
-      idx: 43,
-      type: "주문/배송/반품",
-      date: "2021/10/05",
-      title: "공지입니다.",
-      writer: "이종혁",
-      content: "공지내용",
-    },
-    {
-      idx: 44,
-      type: "멤버쉽",
-      date: "2021/10/05",
-      title: "공지니다.",
-      writer: "이종혁",
-      content: "공지내용",
-    },
-    {
-      idx: 45,
-      type: "사이트 이용",
-      date: "2021/10/05",
-      title: "공지입다.",
-      writer: "이종혁",
-      content: "공지내용",
-    },
-    {
-      idx: 46,
-      type: "주문/배송/반품",
-      date: "2021/10/05",
-      title: "공지입니다.",
-      writer: "이종혁",
-      content: "공지내용",
-    },
-    {
-      idx: 47,
-      type: "멤버쉽",
-      date: "2021/10/05",
-      title: "공지니다.",
-      writer: "이종혁",
-      content: "공지내용",
-    },
-    {
-      idx: 48,
-      type: "사이트 이용",
-      date: "2021/10/05",
-      title:
-        "공지입다.공지입다.공지입다.공지입다.공지입다.공지입다.공지입다.공지입다.공지입다.공지입다.공지입다.공지입다.공지입다.공지입다.",
-      writer: "이종혁",
-      content: "공지내용",
-    },
-    {
-      idx: 49,
-      type: "주문/배송/반품",
-      date: "2021/10/05",
-      title: "공지입니다.",
-      writer: "이종혁",
-      content: "공지내용",
-    },
-    {
-      idx: 50,
-      type: "사이트 이용",
-      date: "2021/10/05",
-      title: "공지니다.",
-      writer: "이종혁",
-      content: "공지내용",
-    },
-  ]);
+  const [faqArticles, setFaqArticles] = useState(null);
+  const [noticeArticles, setNoticeArticles] = useState(null);
   const [inquireArticles, setInquireArticles] = useState([
     {
       idx: 0,
@@ -1414,10 +638,220 @@ const App = (props) => {
     },
   ]);
 
+  const [reviewList, setReviewList] = useState([
+    {
+      idx: 0,
+      user_idx: "보류",
+      exp_idx: 1,
+      stars: 3,
+      comment:
+        "너무재밌습니다너무재밌습니다너무재밌습니다너무재밌습니다너무재밌습니다너무재밌습니다너무재밌습니다너무재밌습니다너무재밌습니다너무재밌습니다너무재밌습니다너무재밌습니다너무재밌습니다너무재밌습니다너무재밌습니다너무재밌습니다너무재밌습니다너무재밌습니다너무재밌습니다너무재밌습니다너무재밌습니다너무재밌습니다너무재밌습니다너무재밌습니다너무재밌습니다너무재밌습니다",
+      date: "2021/06/10",
+    },
+    {
+      idx: 1,
+      user_idx: "보류",
+      exp_idx: 1,
+      stars: 4,
+      comment: "너무재밌습니다",
+      date: "2021/03/23",
+    },
+    {
+      idx: 2,
+      user_idx: "보류",
+      exp_idx: 2,
+      stars: 3,
+      comment: "너무재밌습니다",
+      date: "2021/04/13",
+    },
+    {
+      idx: 3,
+      user_idx: "보류",
+      exp_idx: 5,
+      stars: 5,
+      comment: "너무재밌습니다",
+      date: "2021/08/12",
+    },
+    {
+      idx: 4,
+      user_idx: "보류",
+      exp_idx: 3,
+      stars: 3,
+      comment: "너무재밌습니다",
+      date: "2021/07/17",
+    },
+    {
+      idx: 5,
+      user_idx: "보류",
+      exp_idx: 1,
+      stars: 4,
+      comment: "너무재밌습니다",
+      date: "2021/10/11",
+    },
+    {
+      idx: 6,
+      user_idx: "보류",
+      exp_idx: 4,
+      stars: 1,
+      comment: "너무재밌습니다",
+      date: "2021/10/13",
+    },
+    {
+      idx: 7,
+      user_idx: "보류",
+      exp_idx: 2,
+      stars: 2,
+      comment: "너무재밌습니다",
+      date: "2021/10/11",
+    },
+    {
+      idx: 8,
+      user_idx: "보류",
+      exp_idx: 3,
+      stars: 3,
+      comment: "너무재밌습니다",
+      date: "2021/10/13",
+    },
+    {
+      idx: 9,
+      user_idx: "보류",
+      exp_idx: 1,
+      stars: 4,
+      comment: "너무재밌습니다",
+      date: "2021/10/12",
+    },
+    {
+      idx: 10,
+      user_idx: "보류",
+      exp_idx: 5,
+      stars: 2,
+      comment: "너무재밌습니다",
+      date: "2021/10/13",
+    },
+    {
+      idx: 11,
+      user_idx: "보류",
+      exp_idx: 4,
+      stars: 5,
+      comment: "너무재밌습니다",
+      date: "2021/01/13",
+    },
+    {
+      idx: 12,
+      user_idx: "보류",
+      exp_idx: 1,
+      stars: 3,
+      comment: "너무재밌습니다",
+      date: "2021/10/01",
+    },
+    {
+      idx: 13,
+      user_idx: "보류",
+      exp_idx: 4,
+      stars: 5,
+      comment: "너무재밌습니다",
+      date: "2021/07/13",
+    },
+    {
+      idx: 14,
+      user_idx: "보류",
+      exp_idx: 3,
+      stars: 1,
+      comment: "너무재밌습니다",
+      date: "2021/09/13",
+    },
+    {
+      idx: 15,
+      user_idx: "보류",
+      exp_idx: 2,
+      stars: 4,
+      comment: "너무재밌습니다",
+      date: "2021/10/12",
+    },
+  ]);
+
+  const noUser = {
+    id: null,
+    idType: null,
+    idx: null,
+    informPush: null,
+    name: null,
+    password: null,
+    phone: null,
+    sns: null,
+    totalPoint: null,
+  };
+
+  const [userData, setUserData] = useState(null);
+
+  const sessionCheck = () => {
+    axios
+      .post(`${process.env.REACT_APP_BASEURL}/user/session`)
+      .then((response) => {
+        console.log(response.data);
+        if (response.data !== "") {
+          setUserData(response.data);
+        }
+      })
+      .catch((err) => console.error(err));
+  };
+
+  const userLogout = () => {
+    axios
+      .post(`${process.env.REACT_APP_BASEURL}/user/logout`)
+      .then(() => {
+        setUserData(noUser);
+        window.alert("안전하게 로그아웃 되었습니다.");
+      })
+      .catch((err) => console.error(err));
+  };
+
+  const getNoticeList = () => {
+    axios
+      .post(`${process.env.REACT_APP_BASEURL}/notice/getnoticelist`, {
+        type: "전체",
+      })
+      .then((response) => {
+        setNoticeArticles(response.data);
+        console.log(response.data);
+      })
+      .catch((err) => console.error(err));
+  };
+
+  const getFaqList = () => {
+    axios
+      .post(`${process.env.REACT_APP_BASEURL}/faq/getfaqlist`, {
+        type: "전체",
+      })
+      .then((response) => {
+        setFaqArticles(response.data);
+      })
+      .catch((err) => console.error(err));
+  };
+
+  const getInquireList = () => {
+    axios
+      .post(`${process.env.REACT_APP_BASEURL}/qna/getqnalist`, {
+        type: "전체",
+      })
+      .then((response) => {
+        //setInquireArticles(response.data);
+        console.log(response.data);
+      })
+      .catch((err) => console.error(err));
+  };
+
+  useEffect(() => {
+    sessionCheck();
+    getNoticeList();
+    getFaqList();
+    getInquireList();
+  }, []);
+
   return (
     <section className={styles.app}>
       <BrowserRouter basename={process.env.PUBLIC_URL}>
-        <Header />
+        <Header userData={userData} userLogout={userLogout} />
         <Route exact path="/">
           <Mainpage programList={programList} viewItems={introVideos} />
         </Route>
@@ -1437,20 +871,36 @@ const App = (props) => {
           <Introduce viewItems={introVideos} />
         </Route>
         <Route exact path="/programs/view/:path">
-          <ProgramDetail programList={programList} />
+          <ProgramDetail programList={programList} reviewList={reviewList} />
         </Route>
         <Route exact path="/programs/:path">
-          <Programs areaList={areaList} programList={programList} />
+          <Programs
+            areaList={areaList}
+            programList={programList}
+            reviewList={reviewList}
+          />
         </Route>
         <Route exact path="/programs/attraction/:path">
-          <Attraction programList={programList} areaList={areaList} />
+          <Attraction
+            programList={programList}
+            areaList={areaList}
+            reviewList={reviewList}
+          />
         </Route>
         <Route exact path="/customer/:path">
-          <CustomerCenter
-            noticeArticles={noticeArticles}
-            qnaArticles={qnaArticles}
-            inquireArticles={inquireArticles}
-          />
+          {noticeArticles && faqArticles && inquireArticles && (
+            <CustomerCenter
+              noticeArticles={noticeArticles}
+              faqArticles={faqArticles}
+              inquireArticles={inquireArticles}
+              getNoticeList={getNoticeList}
+              getFaqList={getFaqList}
+              getInquireList={getInquireList}
+            />
+          )}
+        </Route>
+        <Route exact path="/customer/:path/write">
+          <WriteMain />
         </Route>
         <Route exact path="/contact">
           <Contact />

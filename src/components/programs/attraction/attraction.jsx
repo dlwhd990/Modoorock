@@ -4,18 +4,23 @@ import { debounce } from "lodash";
 import ProgramItem from "../programItem/programItem";
 import styles from "./attraction.module.css";
 
-const Attraction = ({ programList, areaList }) => {
+const Attraction = ({ programList, areaList, reviewList }) => {
   const history = useHistory();
   const { path } = useParams();
   const [attractionProgramList, setAttractionProgramList] = useState(null);
   const [inputValue, setInputValue] = useState("");
   const [resultProgramList, setResultProgramList] = useState([]);
   const [areaData, setAreaData] = useState(null);
+  const [sortValue, setSortValue] = useState("최신순");
 
   const onSelectHandler = (e) => {
     if (e.currentTarget.innerText === "프로그램") {
       history.push(`/programs/area`);
     }
+  };
+
+  const sortChangeHandler = (e) => {
+    setSortValue(e.currentTarget.innerText);
   };
 
   const onSearchHandler = () => {
@@ -114,11 +119,7 @@ const Attraction = ({ programList, areaList }) => {
             {areaData && `${areaData.name} 투어 패키지`}
           </p>
         </div>
-        <ul className={styles.sort_button_container}>
-          <li className={styles.sort_button}>최신순</li>
-          <li className={styles.sort_button}>인기순</li>
-          <li className={styles.sort_button}>평점높은순</li>
-        </ul>
+
         <section className={styles.search_container}>
           <input
             type="text"
@@ -129,9 +130,46 @@ const Attraction = ({ programList, areaList }) => {
           />
           <i className={`${styles.search_icon} fas fa-search`}></i>
         </section>
+        <ul className={styles.sort_button_container}>
+          <li
+            className={
+              sortValue === "최신순"
+                ? `${styles.sort_button} ${styles.sort_on}`
+                : `${styles.sort_button}`
+            }
+            onClick={sortChangeHandler}
+          >
+            최신순
+          </li>
+          <li
+            className={
+              sortValue === "인기순"
+                ? `${styles.sort_button} ${styles.sort_on}`
+                : `${styles.sort_button}`
+            }
+            onClick={sortChangeHandler}
+          >
+            인기순
+          </li>
+          <li
+            className={
+              sortValue === "평점높은순"
+                ? `${styles.sort_button} ${styles.sort_on}`
+                : `${styles.sort_button}`
+            }
+            onClick={sortChangeHandler}
+          >
+            평점높은순
+          </li>
+        </ul>
         <section className={styles.attraction_list_container}>
           {resultProgramList.map((item) => (
-            <ProgramItem key={item.idx} item={item} areaList={areaList} />
+            <ProgramItem
+              key={item.idx}
+              item={item}
+              areaList={areaList}
+              reviewList={reviewList}
+            />
           ))}
         </section>
       </section>

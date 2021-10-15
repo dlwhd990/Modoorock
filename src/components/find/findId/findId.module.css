@@ -89,6 +89,10 @@
   cursor: pointer;
 }
 
+.loading_spinner_container {
+  margin-top: 70px;
+}
+
 @media screen and (max-width: 780px) {
   .find_id_form {
     width: 90%;
