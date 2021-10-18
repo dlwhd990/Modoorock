@@ -19,6 +19,7 @@ import LoadingPage from "./components/loadingPage/loadingPage";
 import Mypage from "./components/mypage/mypage";
 import SearchResultPage from "./components/customerCenter/searchResultPage/searchResultPage";
 import FindIdResult from "./components/find/findId/findIdResult/findIdResult";
+import AdminMain from "./components/adminPages/adminMain/adminMain";
 
 axios.defaults.withCredentials = true;
 
@@ -176,19 +177,11 @@ const App = (props) => {
     },
   ]);
 
+  const [userIdx, setUserIdx] = useState(null);
+
   const [faqArticles, setFaqArticles] = useState(null);
   const [noticeArticles, setNoticeArticles] = useState(null);
-  const [inquireArticles, setInquireArticles] = useState([
-    {
-      idx: 0,
-      type: "주문/배송/반품",
-      date: "2021/10/05",
-      title: "공지입니다.",
-      writer: "이종혁",
-      content: "공지내용",
-      answer: "",
-    },
-  ]);
+  const [inquireArticles, setInquireArticles] = useState(null);
 
   const [reviewList, setReviewList] = useState([
     {
@@ -330,8 +323,10 @@ const App = (props) => {
       .then((response) => {
         if (response.data !== "") {
           setLoggedin(true);
+          setUserIdx(response.data.idx);
         } else {
           setLoggedin(false);
+          setUserIdx(null);
         }
       })
       .catch((err) => console.error(err));
@@ -372,7 +367,7 @@ const App = (props) => {
   const getInquireList = () => {
     axios
       .post(`${process.env.REACT_APP_BASEURL}/qna/getqnalist`, {
-        type: "전체",
+        userIdx,
       })
       .then((response) => {
         setInquireArticles(response.data);
@@ -385,9 +380,12 @@ const App = (props) => {
     sessionCheck();
     getNoticeList();
     getFaqList();
-    //getInquireList();
-    //자신의 문의 글만 볼 수 있는건지?
   }, []);
+
+  useEffect(() => {
+    userIdx && getInquireList();
+    //게시판 방식 notice와 FAQ처럼 바꾸어야함
+  }, [userIdx]);
 
   return (
     <section className={styles.app}>
@@ -457,6 +455,9 @@ const App = (props) => {
         </Route>
         <Route exact path="/mypage/:path">
           <Mypage loggedin={loggedin} />
+        </Route>
+        <Route exact path="/admin">
+          <AdminMain />
         </Route>
         <Footer />
       </BrowserRouter>

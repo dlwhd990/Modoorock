@@ -4,46 +4,57 @@ import InquireArticle from "./inquireArticle/inquireArticle";
 import styles from "./inquire.module.css";
 import axios from "axios";
 
-const Inquire = ({ articles, loadArticlesAndReplies }) => {
+const Inquire = ({ articles, getInquireList }) => {
   const history = useHistory();
   const searchTypeRef = useRef();
   const searchInputRef = useRef();
+  const [pageList, setPageList] = useState([]);
+  const [listList, setListList] = useState([]);
   const [numbering, setNumbering] = useState(1);
   const [sliceList, setSliceList] = useState([]);
   const [resultArticles, setResultArticles] = useState(articles);
-  const [tempArticles, setTempArticles] = useState(articles);
+  const [isAdmin, setIsAdmin] = useState(false);
   const [cursor, setCursor] = useState(0);
-  const articleKeyList = Object.keys(tempArticles).reverse();
 
-  let pagelength = 0;
+  useEffect(() => {
+    getInquireList();
+  }, []);
 
-  if (articleKeyList.length % 10 === 0) {
-    pagelength = parseInt(articleKeyList.length / 10);
-  } else if (articleKeyList.length <= 10) {
-    pagelength = 1;
-  } else {
-    pagelength = parseInt(articleKeyList.length / 10) + 1;
-  }
-
-  let list = [];
-
-  for (let i = 1; i <= pagelength; i++) {
-    list.push(i);
-  }
-
-  let pages = [];
-  for (let i = 0; i <= pagelength; i++) {
-    pages[i] = [];
-  }
-
-  for (let i = 1; i <= pagelength; i++) {
-    for (let j = 10 * (i - 1); j < 10 * i; j++) {
-      if (articleKeyList[j] === undefined) {
-        break;
-      }
-      pages[i].push(articleKeyList[j]);
+  useEffect(() => {
+    let pagelength = 0;
+    const articleKeyList = Object.keys(articles).reverse();
+    if (articleKeyList.length % 10 === 0) {
+      pagelength = parseInt(articleKeyList.length / 10);
+    } else if (articleKeyList.length <= 10) {
+      pagelength = 1;
+    } else {
+      pagelength = parseInt(articleKeyList.length / 10) + 1;
     }
-  }
+
+    let list = [];
+
+    for (let i = 1; i <= pagelength; i++) {
+      list.push(i);
+    }
+
+    let pages = [];
+    for (let i = 0; i <= pagelength; i++) {
+      pages[i] = [];
+    }
+
+    for (let i = 1; i <= pagelength; i++) {
+      for (let j = 10 * (i - 1); j < 10 * i; j++) {
+        if (articleKeyList[j] === undefined) {
+          break;
+        }
+        pages[i].push(articleKeyList[j]);
+      }
+    }
+    setPageList(pages);
+    setListList(list);
+    setResultArticles(articles);
+    setSliceList(list.slice(0, 5));
+  }, [articles]);
 
   const pageNumberClick = (e) => {
     setNumbering(parseInt(e.target.textContent));
@@ -54,16 +65,13 @@ const Inquire = ({ articles, loadArticlesAndReplies }) => {
       .post(`${process.env.REACT_APP_BASEURL}/user/session`)
       .then((response) => {
         if (!response.data === "") {
-          window.alert("로그인 후에 글 작성이 가능합니다.");
+          window.alert("회원만 작성이 가능합니다.");
           return;
         }
         history.push("/customer/inquire/write");
         window.scrollTo({ top: 0 });
       })
       .catch((err) => console.error(err));
-
-    history.push("/customer/inquire/write");
-    window.scrollTo({ top: 0 });
   };
 
   const onSearchHandler = () => {
@@ -80,9 +88,9 @@ const Inquire = ({ articles, loadArticlesAndReplies }) => {
       return;
     }
     searchInputRef.current.value = "";
-    history.push(`/bbs/search/${type}/${query}`);
+    history.push(`/customer/inquire/search/${type}/${query}`);
     window.scrollTo({ top: 0 });
-    loadArticlesAndReplies();
+    getInquireList();
   };
 
   const keyHandler = (e) => {
@@ -104,7 +112,7 @@ const Inquire = ({ articles, loadArticlesAndReplies }) => {
   }, [searchInputRef]);
 
   useEffect(() => {
-    setSliceList(list.slice(cursor, cursor + 5));
+    setSliceList(listList.slice(cursor, cursor + 5));
     setNumbering(cursor + 1);
   }, [cursor]);
 
@@ -116,12 +124,11 @@ const Inquire = ({ articles, loadArticlesAndReplies }) => {
   };
 
   const moveBackward = () => {
-    if (cursor + 5 > list.length - 1) {
+    if (cursor + 5 > listList.length - 1) {
       return;
     }
     setCursor(cursor + 5);
   };
-
   return (
     <section className={styles.inquire}>
       <section className={styles.top}>
@@ -156,17 +163,17 @@ const Inquire = ({ articles, loadArticlesAndReplies }) => {
         <div className={styles.date}>작성일</div>
       </section>
       <section className={styles.body}>
-        {pages[numbering].map((index) => (
-          <InquireArticle
-            key={resultArticles[index].idx}
-            article={resultArticles[index]}
-            where="notice"
-          />
-        ))}
+        {pageList.length > 1 &&
+          pageList[numbering].map((index) => (
+            <InquireArticle
+              key={resultArticles[index].idx}
+              article={resultArticles[index]}
+            />
+          ))}
       </section>
       <section className={styles.bottom}>
         <ul className={styles.page_numbers}>
-          {list.length >= 5 && (
+          {listList.length >= 5 && (
             <li className={styles.arrow} onClick={moveForward}>
               <i className="fas fa-chevron-left"></i>
             </li>
@@ -184,7 +191,7 @@ const Inquire = ({ articles, loadArticlesAndReplies }) => {
               {num}
             </li>
           ))}
-          {list.length >= 5 && (
+          {listList.length >= 5 && (
             <li className={styles.arrow} onClick={moveBackward}>
               <i className="fas fa-chevron-right"></i>
             </li>

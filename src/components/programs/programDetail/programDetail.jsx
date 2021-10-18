@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import CustomPaging from "../../slick/customPaging/customPaging";
 import styles from "./programDetail.module.css";
-import StarRatingComponent from "react-star-rating-component";
 import ProgramReview from "./programReview/programReview";
 import ReactStars from "react-rating-stars-component";
 
@@ -17,7 +16,7 @@ const ProgramDetail = ({ programList, reviewList }) => {
 
   const onSelectHandler = (e) => {
     if (e.currentTarget.innerText === "프로그램 상세") {
-      window.location.reload();
+      console.log("nothing to change");
     }
   };
 

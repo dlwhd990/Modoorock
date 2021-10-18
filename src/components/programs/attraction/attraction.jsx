@@ -113,7 +113,7 @@ const Attraction = ({ programList, areaList, reviewList }) => {
           <p
             className={styles.route_button}
             onClick={() => {
-              window.location.reload();
+              history.push(`/programs/attraction/${path}`);
             }}
           >
             {areaData && `${areaData.name} 투어 패키지`}

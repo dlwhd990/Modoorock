@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import LoadingSpinner from "../loadingSpinner/loadingSpinner";
 import styles from "./loadingPage.module.css";
 
