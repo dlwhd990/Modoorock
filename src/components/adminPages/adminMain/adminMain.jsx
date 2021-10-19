@@ -2,12 +2,14 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router";
 import AdminAttractionPage from "../adminAttractionPage/adminAttractionPage";
+import AdminAttractionUploadPage from "../adminAttractionPage/adminAttractionUploadPage/adminAttractionUploadPage";
 import AdminFirstPage from "../adminFirstPage/adminFirstPage";
 import styles from "./adminMain.module.css";
 
 const AdminMain = (props) => {
   const history = useHistory();
-  const { path } = useParams();
+  const params = useParams();
+
   const [user, setUser] = useState({
     name: "이종혁",
   });
@@ -49,6 +51,71 @@ const AdminMain = (props) => {
     },
     {
       idx: 4,
+      name: "익산 교도소 세트장 제목 오버플로우 테스트합니다",
+      area: "전북",
+      photo: "/Modoorock/images/service_right.png",
+      user_idx: "보류(관리자)",
+      content: "해운대는 서울특별시 종로구 세종로에 있는 조선전기",
+    },
+    {
+      idx: 5,
+      name: "익산 교도소 세트장 제목 오버플로우 테스트합니다",
+      area: "전북",
+      photo: "/Modoorock/images/service_right.png",
+      user_idx: "보류(관리자)",
+      content: "해운대는 서울특별시 종로구 세종로에 있는 조선전기",
+    },
+
+    {
+      idx: 6,
+      name: "익산 교도소 세트장 제목 오버플로우 테스트합니다",
+      area: "전북",
+      photo: "/Modoorock/images/service_right.png",
+      user_idx: "보류(관리자)",
+      content: "해운대는 서울특별시 종로구 세종로에 있는 조선전기",
+    },
+    {
+      idx: 7,
+      name: "익산 교도소 세트장 제목 오버플로우 테스트합니다",
+      area: "전북",
+      photo: "/Modoorock/images/service_right.png",
+      user_idx: "보류(관리자)",
+      content: "해운대는 서울특별시 종로구 세종로에 있는 조선전기",
+    },
+    {
+      idx: 8,
+      name: "익산 교도소 세트장 제목 오버플로우 테스트합니다",
+      area: "전북",
+      photo: "/Modoorock/images/service_right.png",
+      user_idx: "보류(관리자)",
+      content: "해운대는 서울특별시 종로구 세종로에 있는 조선전기",
+    },
+    {
+      idx: 9,
+      name: "익산 교도소 세트장 제목 오버플로우 테스트합니다",
+      area: "전북",
+      photo: "/Modoorock/images/service_right.png",
+      user_idx: "보류(관리자)",
+      content: "해운대는 서울특별시 종로구 세종로에 있는 조선전기",
+    },
+    {
+      idx: 10,
+      name: "익산 교도소 세트장 제목 오버플로우 테스트합니다",
+      area: "전북",
+      photo: "/Modoorock/images/service_right.png",
+      user_idx: "보류(관리자)",
+      content: "해운대는 서울특별시 종로구 세종로에 있는 조선전기",
+    },
+    {
+      idx: 11,
+      name: "익산 교도소 세트장 제목 오버플로우 테스트합니다",
+      area: "전북",
+      photo: "/Modoorock/images/service_right.png",
+      user_idx: "보류(관리자)",
+      content: "해운대는 서울특별시 종로구 세종로에 있는 조선전기",
+    },
+    {
+      idx: 12,
       name: "익산 교도소 세트장 제목 오버플로우 테스트합니다",
       area: "전북",
       photo: "/Modoorock/images/service_right.png",
@@ -120,7 +187,7 @@ const AdminMain = (props) => {
     },
   ]);
 
-  const [menuSelected, setMenuSelected] = useState(path);
+  const [menuSelected, setMenuSelected] = useState(params.path);
 
   const onButtonClickHandler = (e) => {
     const value = e.currentTarget.dataset.value;
@@ -242,15 +309,17 @@ const AdminMain = (props) => {
               </div>
             </header>
             <section className={styles.content_container}>
-              {menuSelected === "main" ? (
+              {params.path_two === "add" && params.path === "attraction" && (
+                <AdminAttractionUploadPage />
+              )}
+              {params.path === "main" && (
                 <AdminFirstPage
                   myAttractionList={myAttractionList}
                   myInquireList={myInquireList}
                 />
-              ) : menuSelected === "attraction" ? (
+              )}
+              {params.path === "attraction" && (
                 <AdminAttractionPage myAttractionList={myAttractionList} />
-              ) : (
-                <></>
               )}
             </section>
           </section>

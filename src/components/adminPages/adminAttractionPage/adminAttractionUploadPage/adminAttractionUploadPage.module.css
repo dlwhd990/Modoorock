@@ -1,10 +1,11 @@
-.attraction_page {
+.attraction_upload_page {
   height: calc(100vh - 70px);
   animation: appear 1s;
   display: flex;
   flex-direction: column;
   padding: 60px 8.2%;
   overflow-y: scroll;
+  animation: appear 1s;
 }
 
 .attraction_top {
@@ -16,6 +17,7 @@
   background-color: white;
   border: 1.5px solid var(--color-light-divide-line);
   padding: 16px;
+  margin-bottom: 20px;
 }
 
 .title_container {
@@ -46,29 +48,58 @@
   margin-right: 20px;
 }
 
-.subtitle {
-  margin: 0;
-  margin-top: 4px;
-  font-size: var(--font-size-small);
-  color: var(--color-desc);
-}
-
-.add_button {
-  width: 130px;
-  outline: none;
-  border: none;
-  font-size: var(--font-size-normal);
-  background-color: var(--color-admin-theme);
-  color: white;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.main_list {
+.main {
+  width: 96%;
+  border: 1.5px solid var(--color-light-divide-line);
+  background-color: white;
+  padding: 20px 40px;
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
-  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.form_content {
+  flex-basis: 60%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.form_content_textarea {
+  display: flex;
+  flex-direction: row;
+}
+
+.form_text {
+  width: 120px;
+  margin: 0;
+}
+
+.form_input,
+.area_select {
+  width: 300px;
+  height: 32px;
+  outline: none;
+  border: 1px solid var(--color-light-border);
+  border-radius: 4px;
+  padding: 2px 6px;
+  font-size: var(--font-size-normal);
+}
+
+.form_textarea {
+  width: 300px;
+  height: 200px;
+  outline: none;
+  border: 1px solid var(--color-light-border);
+  border-radius: 4px;
+  resize: none;
+  font-size: var(--font-size-normal);
+  padding: 6px;
+}
+
+.image_preview_container {
+  flex-basis: 37%;
 }
 
 @keyframes appear {

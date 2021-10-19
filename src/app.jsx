@@ -20,6 +20,7 @@ import Mypage from "./components/mypage/mypage";
 import SearchResultPage from "./components/customerCenter/searchResultPage/searchResultPage";
 import FindIdResult from "./components/find/findId/findIdResult/findIdResult";
 import AdminMain from "./components/adminPages/adminMain/adminMain";
+import LoadingSpinner from "./components/loadingSpinner/loadingSpinner";
 
 axios.defaults.withCredentials = true;
 
@@ -321,7 +322,7 @@ const App = (props) => {
     axios
       .post(`${process.env.REACT_APP_BASEURL}/user/session`)
       .then((response) => {
-        //console.log(response);
+        console.log(response);
         if (response.data !== "") {
           setLoggedin(true);
           setUserIdx(response.data.idx);
@@ -394,6 +395,19 @@ const App = (props) => {
         <Route exact path="/">
           <Header loggedin={loggedin} userLogout={userLogout} />
           <Mainpage programList={programList} viewItems={introVideos} />
+          <button
+            className=""
+            onClick={() => {
+              axios
+                .post(`${process.env.REACT_APP_BASEURL}/user/updateauth`, {
+                  idx: userIdx,
+                  idType: 2,
+                })
+                .then((response) => console.log(response));
+            }}
+          >
+            dasdas
+          </button>
           <Footer />
         </Route>
         <Route exact path="/login">
@@ -486,6 +500,9 @@ const App = (props) => {
           <Footer />
         </Route>
         <Route exact path="/admin/:path">
+          <AdminMain />
+        </Route>
+        <Route exact path="/admin/:path/:path_two">
           <AdminMain />
         </Route>
       </BrowserRouter>
