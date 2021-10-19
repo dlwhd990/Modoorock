@@ -6,6 +6,7 @@ import Faq from "./faq/faq";
 import Notice from "./notice/notice";
 
 const CustomerCenter = ({
+  loggedin,
   noticeArticles,
   faqArticles,
   inquireArticles,
@@ -113,7 +114,11 @@ const CustomerCenter = ({
         ) : path === "faq" ? (
           <Faq articles={faqArticles} getFaqList={getFaqList} />
         ) : (
-          <Inquire articles={inquireArticles} getInquireList={getInquireList} />
+          <Inquire
+            loggedin={loggedin}
+            articles={inquireArticles}
+            getInquireList={getInquireList}
+          />
         )}
       </section>
     </section>

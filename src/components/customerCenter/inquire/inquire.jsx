@@ -4,7 +4,7 @@ import InquireArticle from "./inquireArticle/inquireArticle";
 import styles from "./inquire.module.css";
 import axios from "axios";
 
-const Inquire = ({ articles, getInquireList }) => {
+const Inquire = ({ articles, getInquireList, loggedin }) => {
   const history = useHistory();
   const searchTypeRef = useRef();
   const searchInputRef = useRef();
@@ -13,14 +13,16 @@ const Inquire = ({ articles, getInquireList }) => {
   const [numbering, setNumbering] = useState(1);
   const [sliceList, setSliceList] = useState([]);
   const [resultArticles, setResultArticles] = useState(articles);
-  const [isAdmin, setIsAdmin] = useState(false);
   const [cursor, setCursor] = useState(0);
-
+  console.log(loggedin);
   useEffect(() => {
     getInquireList();
   }, []);
 
   useEffect(() => {
+    if (!loggedin) {
+      return;
+    }
     let pagelength = 0;
     const articleKeyList = Object.keys(articles).reverse();
     if (articleKeyList.length % 10 === 0) {
@@ -101,6 +103,9 @@ const Inquire = ({ articles, getInquireList }) => {
   };
 
   useEffect(() => {
+    if (!loggedin) {
+      return;
+    }
     window.addEventListener("keydown", keyHandler);
     return () => {
       window.removeEventListener("keydown", keyHandler);
@@ -108,10 +113,16 @@ const Inquire = ({ articles, getInquireList }) => {
   }, []);
 
   useEffect(() => {
+    if (!loggedin) {
+      return;
+    }
     searchInputRef && searchInputRef.current.focus();
   }, [searchInputRef]);
 
   useEffect(() => {
+    if (!loggedin) {
+      return;
+    }
     setSliceList(listList.slice(cursor, cursor + 5));
     setNumbering(cursor + 1);
   }, [cursor]);
@@ -129,80 +140,89 @@ const Inquire = ({ articles, getInquireList }) => {
     }
     setCursor(cursor + 5);
   };
-  return (
-    <section className={styles.inquire}>
-      <section className={styles.top}>
-        <section className={styles.search}>
-          <select
-            ref={searchTypeRef}
-            name="search_type"
-            id="search_type"
-            className={styles.search_type_select}
-          >
-            <option value="all">전체</option>
-            <option value="title">제목</option>
-            <option value="writer">작성자</option>
-          </select>
 
-          <input
-            ref={searchInputRef}
-            type="text"
-            className={styles.search_text_input}
-            placeholder="검색어를 입력하세요"
-            spellCheck="false"
-          />
-          <button className={styles.search_button} onClick={onSearchHandler}>
-            검색
+  if (loggedin) {
+    return (
+      <section className={styles.inquire}>
+        <section className={styles.top}>
+          <section className={styles.search}>
+            <select
+              ref={searchTypeRef}
+              name="search_type"
+              id="search_type"
+              className={styles.search_type_select}
+            >
+              <option value="all">전체</option>
+              <option value="title">제목</option>
+              <option value="writer">작성자</option>
+            </select>
+
+            <input
+              ref={searchInputRef}
+              type="text"
+              className={styles.search_text_input}
+              placeholder="검색어를 입력하세요"
+              spellCheck="false"
+            />
+            <button className={styles.search_button} onClick={onSearchHandler}>
+              검색
+            </button>
+          </section>
+        </section>
+        <section className={styles.header}>
+          <div className={styles.division}>구분</div>
+          <div className={styles.title}>제목</div>
+          <div className={styles.writer}>작성자</div>
+          <div className={styles.date}>작성일</div>
+        </section>
+        <section className={styles.body}>
+          {pageList.length > 1 &&
+            pageList[numbering].map((index) => (
+              <InquireArticle
+                key={resultArticles[index].idx}
+                article={resultArticles[index]}
+              />
+            ))}
+        </section>
+        <section className={styles.bottom}>
+          <ul className={styles.page_numbers}>
+            {listList.length >= 5 && (
+              <li className={styles.arrow} onClick={moveForward}>
+                <i className="fas fa-chevron-left"></i>
+              </li>
+            )}
+            {sliceList.map((num) => (
+              <li
+                key={num}
+                className={
+                  numbering === num
+                    ? `${styles.page_number} ${styles.page_on}`
+                    : `${styles.page_number} ${styles.page_off}`
+                }
+                onClick={pageNumberClick}
+              >
+                {num}
+              </li>
+            ))}
+            {listList.length >= 5 && (
+              <li className={styles.arrow} onClick={moveBackward}>
+                <i className="fas fa-chevron-right"></i>
+              </li>
+            )}
+          </ul>
+          <button className={styles.write_button} onClick={goWrite}>
+            글쓰기
           </button>
         </section>
       </section>
-      <section className={styles.header}>
-        <div className={styles.division}>구분</div>
-        <div className={styles.title}>제목</div>
-        <div className={styles.writer}>작성자</div>
-        <div className={styles.date}>작성일</div>
+    );
+  } else {
+    return (
+      <section className={styles.not_loggedin}>
+        로그인 후에 확인해주세요
       </section>
-      <section className={styles.body}>
-        {pageList.length > 1 &&
-          pageList[numbering].map((index) => (
-            <InquireArticle
-              key={resultArticles[index].idx}
-              article={resultArticles[index]}
-            />
-          ))}
-      </section>
-      <section className={styles.bottom}>
-        <ul className={styles.page_numbers}>
-          {listList.length >= 5 && (
-            <li className={styles.arrow} onClick={moveForward}>
-              <i className="fas fa-chevron-left"></i>
-            </li>
-          )}
-          {sliceList.map((num) => (
-            <li
-              key={num}
-              className={
-                numbering === num
-                  ? `${styles.page_number} ${styles.page_on}`
-                  : `${styles.page_number} ${styles.page_off}`
-              }
-              onClick={pageNumberClick}
-            >
-              {num}
-            </li>
-          ))}
-          {listList.length >= 5 && (
-            <li className={styles.arrow} onClick={moveBackward}>
-              <i className="fas fa-chevron-right"></i>
-            </li>
-          )}
-        </ul>
-        <button className={styles.write_button} onClick={goWrite}>
-          글쓰기
-        </button>
-      </section>
-    </section>
-  );
+    );
+  }
 };
 
 export default Inquire;

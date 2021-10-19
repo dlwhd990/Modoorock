@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { BrowserRouter, Route } from "react-router-dom";
 import styles from "./app.module.css";
 import Footer from "./components/footer/footer";
@@ -384,51 +384,70 @@ const App = (props) => {
 
   useEffect(() => {
     userIdx && getInquireList();
-    //게시판 방식 notice와 FAQ처럼 바꾸어야함
   }, [userIdx]);
 
+  // 방법 찾을 때  까지 header+footer 모두에게 붙임 (admin 페이지에서는 안떠야하기 때문에)
   return (
     <section className={styles.app}>
       <BrowserRouter basename={process.env.PUBLIC_URL}>
-        <Header loggedin={loggedin} userLogout={userLogout} />
         <Route exact path="/">
+          <Header loggedin={loggedin} userLogout={userLogout} />
           <Mainpage programList={programList} viewItems={introVideos} />
+          <Footer />
         </Route>
         <Route exact path="/login">
+          <Header loggedin={loggedin} userLogout={userLogout} />
           <LoginPage />
+          <Footer />
         </Route>
         <Route exact path="/signup">
+          <Header loggedin={loggedin} userLogout={userLogout} />
           <Signup />
+          <Footer />
         </Route>
         <Route exact path="/find">
+          <Header loggedin={loggedin} userLogout={userLogout} />
           <Find />
+          <Footer />
         </Route>
         <Route exact path="/find/id/:phone">
+          <Header loggedin={loggedin} userLogout={userLogout} />
           <FindIdResult />
+          <Footer />
         </Route>
         <Route exact path="/introduce/:path">
+          <Header loggedin={loggedin} userLogout={userLogout} />
           <Introduce viewItems={introVideos} />
+          <Footer />
         </Route>
         <Route exact path="/programs/view/:path">
+          <Header loggedin={loggedin} userLogout={userLogout} />
           <ProgramDetail programList={programList} reviewList={reviewList} />
+          <Footer />
         </Route>
         <Route exact path="/programs/:path">
+          <Header loggedin={loggedin} userLogout={userLogout} />
           <Programs
             areaList={areaList}
             programList={programList}
             reviewList={reviewList}
           />
+          <Footer />
         </Route>
         <Route exact path="/programs/attraction/:path">
+          <Header loggedin={loggedin} userLogout={userLogout} />
           <Attraction
             programList={programList}
             areaList={areaList}
             reviewList={reviewList}
           />
+          <Footer />
         </Route>
         <Route exact path="/customer/:path">
-          {noticeArticles && faqArticles && inquireArticles ? (
+          <Header loggedin={loggedin} userLogout={userLogout} />
+          {noticeArticles && faqArticles && (inquireArticles || !loggedin) ? (
             <CustomerCenter
+              loggedin={loggedin}
               noticeArticles={noticeArticles}
               faqArticles={faqArticles}
               inquireArticles={inquireArticles}
@@ -439,27 +458,35 @@ const App = (props) => {
           ) : (
             <LoadingPage />
           )}
+          <Footer />
         </Route>
         <Route exact path="/customer/:path/write">
+          <Header loggedin={loggedin} userLogout={userLogout} />
           <WriteMain loggedin={loggedin} />
+          <Footer />
         </Route>
         <Route exact path="/customer/:path/search/:type/:query">
+          <Header loggedin={loggedin} userLogout={userLogout} />
           <SearchResultPage
             noticeArticles={noticeArticles}
             faqArticles={faqArticles}
             inquireArticles={inquireArticles}
           />
+          <Footer />
         </Route>
         <Route exact path="/contact">
+          <Header loggedin={loggedin} userLogout={userLogout} />
           <Contact />
+          <Footer />
         </Route>
         <Route exact path="/mypage/:path">
+          <Header loggedin={loggedin} userLogout={userLogout} />
           <Mypage loggedin={loggedin} />
+          <Footer />
         </Route>
         <Route exact path="/admin">
           <AdminMain />
         </Route>
-        <Footer />
       </BrowserRouter>
     </section>
   );
