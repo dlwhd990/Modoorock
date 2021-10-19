@@ -2,6 +2,9 @@ import React from "react";
 import styles from "./adminAttractionUploadPage.module.css";
 
 const AdminAttractionUploadPage = (props) => {
+  const onFileInputChangeHandler = (e) => {
+    console.log(e.target);
+  };
   return (
     <section className={styles.attraction_upload_page}>
       <section className={styles.attraction_top}>
@@ -16,7 +19,11 @@ const AdminAttractionUploadPage = (props) => {
         <form className={styles.main_form}>
           <div className={styles.form_content}>
             <p className={styles.form_text}>관광지 이미지</p>
-            <input type="file" className={styles.form_input_file} />
+            <input
+              type="file"
+              className={styles.form_input_file}
+              onChange={onFileInputChangeHandler}
+            />
           </div>
           <div className={styles.form_content}>
             <p className={styles.form_text}>관광지 명</p>

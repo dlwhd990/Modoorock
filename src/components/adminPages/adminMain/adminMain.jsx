@@ -318,7 +318,7 @@ const AdminMain = (props) => {
                   myInquireList={myInquireList}
                 />
               )}
-              {params.path === "attraction" && (
+              {!params.path_two && params.path === "attraction" && (
                 <AdminAttractionPage myAttractionList={myAttractionList} />
               )}
             </section>
