@@ -1,0 +1,51 @@
+.attraction_page {
+  animation: appear 1s;
+  display: flex;
+  flex-direction: column;
+  padding: 60px 8.2%;
+}
+
+.attraction_top {
+  width: 96%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: white;
+  border: 1.5px solid var(--color-light-divide-line);
+  padding: 16px;
+}
+
+.title {
+  font-size: var(--font-size-big);
+  font-weight: 500;
+  margin: 0;
+}
+
+.add_button {
+  width: 130px;
+  outline: none;
+  border: none;
+  font-size: var(--font-size-normal);
+  background-color: var(--color-admin-theme);
+  color: white;
+  border-radius: 4px;
+}
+
+.main_list {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+@keyframes appear {
+  0% {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

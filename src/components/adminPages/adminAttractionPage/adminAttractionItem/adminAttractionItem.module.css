@@ -1,0 +1,83 @@
+.item {
+  width: 31%;
+  height: 25vh;
+  margin: 1.5%;
+  padding: 1%;
+  margin-left: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  border: 1.5px solid var(--color-light-divide-line);
+  border-radius: 8px;
+}
+
+.photo_container {
+  flex-basis: 30%;
+}
+
+.photo {
+  width: 15.5vh;
+  height: 15.5vh;
+  border-radius: 8px;
+  box-shadow: 0 0 5px lightgray;
+}
+
+.data_and_button_container {
+  flex-basis: 50%;
+  margin-left: 5%;
+  height: 15.5vh;
+  position: relative;
+}
+
+.name {
+  font-size: var(--font-size-big);
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+
+.area {
+  margin: 8px 0;
+  color: var(--color-desc);
+}
+
+.button_container {
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  flex-direction: row;
+}
+
+.button_edit {
+  width: 3vw;
+  height: 25px;
+  font-size: var(--font-size-normal);
+  line-height: 25px;
+  outline: none;
+  border: none;
+  background-color: rgb(56, 188, 129);
+  color: white;
+  margin-right: 10px;
+  border-radius: 4px;
+  box-shadow: 0 2px 3px lightgray;
+  cursor: pointer;
+}
+
+.button_delete {
+  width: 3vw;
+  height: 25px;
+  font-size: var(--font-size-normal);
+  line-height: 25px;
+  outline: none;
+  border: none;
+  background-color: rgb(243, 66, 66);
+  color: white;
+  border-radius: 4px;
+  box-shadow: 0 2px 3px lightgray;
+  cursor: pointer;
+}

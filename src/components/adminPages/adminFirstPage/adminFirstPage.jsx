@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./adminFirstPage.module.css";
+import AdminFirstPageAttractionItem from "./adminFirstPageAttractionItem/adminFirstPageAttractionItem";
+import AdminFirstPageInquireItem from "./adminFirstPageInquireItem/adminFirstPageInquireItem";
 
-const AdminFirstPage = (props) => {
+const AdminFirstPage = ({ myAttractionList, myInquireList }) => {
   return (
     <section className={styles.first_page}>
       <section className={styles.top}>
@@ -12,10 +14,17 @@ const AdminFirstPage = (props) => {
             </div>
 
             <p className={styles.head_text}>
-              <span className={styles.head_text_big}>6</span> 개의 관광지
+              <span className={styles.head_text_big}>
+                {myAttractionList.length}
+              </span>{" "}
+              개의 관광지
             </p>
           </div>
-          <div className={styles.top_item_main}></div>
+          <div className={styles.top_item_main}>
+            {myAttractionList.map((item) => (
+              <AdminFirstPageAttractionItem key={item.idx} item={item} />
+            ))}
+          </div>
         </div>
         <div className={styles.top_item}>
           <div className={styles.top_item_head}>
@@ -24,10 +33,17 @@ const AdminFirstPage = (props) => {
             </div>
 
             <p className={styles.head_text}>
-              <span className={styles.head_text_big}>2</span> 개의 문의
+              <span className={styles.head_text_big}>
+                {myInquireList.length}
+              </span>{" "}
+              개의 문의
             </p>
           </div>
-          <div className={styles.top_item_main}></div>
+          <div className={styles.top_item_main}>
+            {myInquireList.map((item) => (
+              <AdminFirstPageInquireItem key={item.idx} item={item} />
+            ))}
+          </div>
         </div>
         <div className={styles.top_item}>
           <div className={styles.top_item_head}>

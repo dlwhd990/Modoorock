@@ -1,36 +1,161 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useHistory, useParams } from "react-router";
+import AdminAttractionPage from "../adminAttractionPage/adminAttractionPage";
 import AdminFirstPage from "../adminFirstPage/adminFirstPage";
 import styles from "./adminMain.module.css";
 
 const AdminMain = (props) => {
+  const history = useHistory();
+  const { path } = useParams();
   const [user, setUser] = useState({
     name: "이종혁",
   });
 
-  const [menuSelected, setMenuSelected] = useState("메인페이지");
+  const [myAttractionList, setMyAttractionList] = useState([
+    {
+      idx: 0,
+      name: "월미도",
+      area: "인천",
+      photo: "/Modoorock/images/service_right.png",
+      user_idx: "보류(관리자)",
+      content:
+        "월미도는 서울특별시 종로구 건되어 정궁으로 이용된 궁궐, 정궁, 사적",
+    },
+    {
+      idx: 1,
+      name: "경복궁",
+      area: "서울",
+      photo: "/Modoorock/images/service_right.png",
+      user_idx: "보류(관리자)",
+      content:
+        "서울특별시 종로구 세종로에 있는 조선전기에 창건되어 정궁으로 이용된 궁궐, 정궁, 사적",
+    },
+    {
+      idx: 2,
+      name: "해운대",
+      area: "부산",
+      photo: "/Modoorock/images/service_right.png",
+      user_idx: "보류(관리자)",
+      content: "해운대는 서울특별시 종로구 세종로에 있는 조선전기",
+    },
+    {
+      idx: 3,
+      name: "익산 교도소 세트장",
+      area: "전북",
+      photo: "/Modoorock/images/service_right.png",
+      user_idx: "보류(관리자)",
+      content: "해운대는 서울특별시 종로구 세종로에 있는 조선전기",
+    },
+    {
+      idx: 4,
+      name: "익산 교도소 세트장 제목 오버플로우 테스트합니다",
+      area: "전북",
+      photo: "/Modoorock/images/service_right.png",
+      user_idx: "보류(관리자)",
+      content: "해운대는 서울특별시 종로구 세종로에 있는 조선전기",
+    },
+  ]);
+
+  const [myInquireList, setMyInquireList] = useState([
+    {
+      idx: 0,
+      expIdx: 0,
+      type: "주문/배송/반품",
+      date: "2021-10-05 01:23:45",
+      title: "공지입니다.",
+      user_idx: 7,
+      content: "공지내용",
+      answer: null,
+    },
+    {
+      idx: 1,
+      expIdx: 0,
+      type: "멤버쉽",
+      date: "2021-10-05 01:23:46",
+      title: "공지니다.",
+      user_idx: 7,
+      content: "공지내용",
+      answer: null,
+    },
+    {
+      idx: 2,
+      expIdx: 0,
+      type: "사이트 이용",
+      date: "2021-10-05 01:21:45",
+      title: "공지입다.",
+      user_idx: 7,
+      content: "공지내용",
+      answer: null,
+    },
+    {
+      idx: 3,
+      expIdx: 0,
+      type: "주문/배송/반품",
+      date: "2021-10-05 01:23:49",
+      title: "공지입니다.",
+      user_idx: 7,
+      content: "공지내용",
+      answer: null,
+    },
+    {
+      idx: 4,
+      expIdx: 0,
+      type: "멤버쉽",
+      date: "2021-10-11 01:22:23",
+      title: "공지니다.",
+      user_idx: 7,
+      content: "공지내용",
+      answer: null,
+    },
+    {
+      idx: 5,
+      expIdx: 0,
+      type: "사이트 이용",
+      date: "2021-10-06 01:29:42",
+      title: "공지입다.",
+      user_idx: 7,
+      content: "공지내용",
+      answer: null,
+    },
+  ]);
+
+  const [menuSelected, setMenuSelected] = useState(path);
 
   const onButtonClickHandler = (e) => {
+    const value = e.currentTarget.dataset.value;
     setMenuSelected(e.currentTarget.dataset.value);
+    history.push(`/admin/${value}`);
   };
 
-  useEffect(() => {
-    axios
-      .post(`${process.env.REACT_APP_BASEURL}/user/session`)
-      .then((response) => {
-        console.log(response);
-        console.log(response.data);
-        setUser(response.data);
-      })
-      .catch((err) => console.error(err));
-  }, []);
+  //useEffect(() => {
+  //  axios
+  //    .post(`${process.env.REACT_APP_BASEURL}/user/session`)
+  //    .then((response) => {
+  //      console.log(response);
+  //      console.log(response.data);
+  //      if (response.data === "") {
+  //        setUser(false);
+  //      } else {
+  //        setUser(response.data);
+  //      }
+  //      //나의 관광지리스트, 문의리스트 등 정보 setState하는 과정 추가
+  //    })
+  //    .catch((err) => console.error(err));
+  //}, []);
 
   return (
     <section className={styles.admin_main}>
       {user ? (
         <section className={styles.user_on_container}>
           <section className={styles.side_menu}>
-            <div className={styles.logo_container}>
+            <div
+              className={styles.logo_container}
+              onClick={() => {
+                window.location.reload();
+                window.scrollTo({ top: 0 });
+              }}
+            >
               <img
                 src="/Modoorock/images/modoorock.png"
                 alt="logo"
@@ -42,11 +167,11 @@ const AdminMain = (props) => {
               <div className={styles.menu_title}>기능</div>
               <div
                 className={`${
-                  menuSelected === "메인페이지"
+                  menuSelected === "main"
                     ? `${styles.menu_item} ${styles.menu_item_on}`
                     : `${styles.menu_item} ${styles.menu_item_off}`
                 }`}
-                data-value="메인페이지"
+                data-value="main"
                 onClick={onButtonClickHandler}
               >
                 <div className={styles.menu_icon_container}>
@@ -56,11 +181,11 @@ const AdminMain = (props) => {
               </div>
               <div
                 className={`${
-                  menuSelected === "관광지 관리"
+                  menuSelected === "attraction"
                     ? `${styles.menu_item} ${styles.menu_item_on}`
                     : `${styles.menu_item} ${styles.menu_item_off}`
                 }`}
-                data-value="관광지 관리"
+                data-value="attraction"
                 onClick={onButtonClickHandler}
               >
                 <div className={styles.menu_icon_container}>
@@ -72,11 +197,11 @@ const AdminMain = (props) => {
               </div>
               <div
                 className={`${
-                  menuSelected === "문의 관리"
+                  menuSelected === "inquire"
                     ? `${styles.menu_item} ${styles.menu_item_on}`
                     : `${styles.menu_item} ${styles.menu_item_off}`
                 }`}
-                data-value="문의 관리"
+                data-value="inquire"
                 onClick={onButtonClickHandler}
               >
                 <div className={styles.menu_icon_container}>
@@ -86,11 +211,11 @@ const AdminMain = (props) => {
               </div>
               <div
                 className={`${
-                  menuSelected === "포인트 관리"
+                  menuSelected === "point"
                     ? `${styles.menu_item} ${styles.menu_item_on}`
                     : `${styles.menu_item} ${styles.menu_item_off}`
                 }`}
-                data-value="포인트 관리"
+                data-value="point"
                 onClick={onButtonClickHandler}
               >
                 <div className={styles.menu_icon_container}>
@@ -117,7 +242,16 @@ const AdminMain = (props) => {
               </div>
             </header>
             <section className={styles.content_container}>
-              <AdminFirstPage />
+              {menuSelected === "main" ? (
+                <AdminFirstPage
+                  myAttractionList={myAttractionList}
+                  myInquireList={myInquireList}
+                />
+              ) : menuSelected === "attraction" ? (
+                <AdminAttractionPage myAttractionList={myAttractionList} />
+              ) : (
+                <></>
+              )}
             </section>
           </section>
         </section>

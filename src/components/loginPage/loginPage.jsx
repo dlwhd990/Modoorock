@@ -44,7 +44,7 @@ const LoginPage = () => {
         if (response.data === "loggedin") {
           console.log(response);
           window.alert("로그인 되었습니다.");
-          refresh();
+          //refresh();
         } else {
           window.alert("아이디와 비밀번호를 다시 확인해주세요");
         }
