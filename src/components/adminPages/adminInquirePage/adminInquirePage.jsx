@@ -1,7 +1,8 @@
 import React from "react";
+import AdminInquireItem from "./adminInquireItem/adminInquireItem";
 import styles from "./adminInquirePage.module.css";
 
-const AdminInquirePage = ({ myInquireList }) => {
+const AdminInquirePage = ({ myInquireList, loadMyInquireList, user }) => {
   return (
     <section className={styles.inquire_page}>
       <section className={styles.inquire_top}>
@@ -15,7 +16,16 @@ const AdminInquirePage = ({ myInquireList }) => {
           >{`${myInquireList.length} 개의 문의`}</p>
         </div>
       </section>
-      <section className={styles.main_list}></section>
+      <section className={styles.main_list}>
+        {myInquireList.map((article) => (
+          <AdminInquireItem
+            key={article.idx}
+            article={article}
+            loadMyInquireList={loadMyInquireList}
+            user={user}
+          />
+        ))}
+      </section>
     </section>
   );
 };

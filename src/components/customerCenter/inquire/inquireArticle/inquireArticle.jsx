@@ -33,10 +33,20 @@ const InquireArticle = ({ article }) => {
         }
       >
         <div className={styles.content_container}>
-          <div className={styles.tag_container}>
-            <div className={styles.tag}>문의내용</div>
+          <div className={styles.inquire_container}>
+            <div className={styles.tag_container}>
+              <div className={styles.tag}>문의내용</div>
+            </div>
+            <p className={styles.content}>{article.content}</p>
           </div>
-          <p className={styles.content}>{article.content}</p>
+          {article.answer && (
+            <div className={styles.answer_container}>
+              <div className={styles.tag_container}>
+                <div className={styles.tag}>답변내용</div>
+              </div>
+              <p className={styles.content}>{article.answer}</p>
+            </div>
+          )}
         </div>
       </section>
     </section>

@@ -17,68 +17,7 @@ const AdminMain = ({ userLogout }) => {
 
   const [myAttractionList, setMyAttractionList] = useState(null);
 
-  const [myInquireList, setMyInquireList] = useState([
-    {
-      idx: 0,
-      expIdx: 0,
-      type: "주문/배송/반품",
-      date: "2021-10-05 01:23:45",
-      title: "공지입니다.",
-      user_idx: 7,
-      content: "공지내용",
-      answer: null,
-    },
-    {
-      idx: 1,
-      expIdx: 0,
-      type: "멤버쉽",
-      date: "2021-10-05 01:23:46",
-      title: "공지니다.",
-      user_idx: 7,
-      content: "공지내용",
-      answer: null,
-    },
-    {
-      idx: 2,
-      expIdx: 0,
-      type: "사이트 이용",
-      date: "2021-10-05 01:21:45",
-      title: "공지입다.",
-      user_idx: 7,
-      content: "공지내용",
-      answer: null,
-    },
-    {
-      idx: 3,
-      expIdx: 0,
-      type: "주문/배송/반품",
-      date: "2021-10-05 01:23:49",
-      title: "공지입니다.",
-      user_idx: 7,
-      content: "공지내용",
-      answer: null,
-    },
-    {
-      idx: 4,
-      expIdx: 0,
-      type: "멤버쉽",
-      date: "2021-10-11 01:22:23",
-      title: "공지니다.",
-      user_idx: 7,
-      content: "공지내용",
-      answer: null,
-    },
-    {
-      idx: 5,
-      expIdx: 0,
-      type: "사이트 이용",
-      date: "2021-10-06 01:29:42",
-      title: "공지입다.",
-      user_idx: 7,
-      content: "공지내용",
-      answer: null,
-    },
-  ]);
+  const [myInquireList, setMyInquireList] = useState(null);
 
   const [myPointList, setMyPointList] = useState([]);
 
@@ -110,12 +49,14 @@ const AdminMain = ({ userLogout }) => {
 
   const loadMyInquireList = (expIdx) => {
     axios
-      .post(`${process.env.REACT_APP_BASEURL}/qna/getqnaexplist`, {
-        expIdx,
+      .post(`${process.env.REACT_APP_BASEURL}/qna/getqnalist`, {
+        userIdx: user.idx,
       }) // 이후에 exp 추가 기능 완성되면
       //관리자의 모든 expIdx 리스트 만들어서 forEach로 QNA 리스트 완성시킨 후 이것을 setState
       //하면 체험 상품 개수만큼 통신해야하니 비효율적인가?
-      .then((response) => console.log(response))
+
+      //일단 테스트를 위해 임시로 내가 쓴 문의글들을 내가 답변하게 만들어놓음
+      .then((response) => setMyInquireList(response.data.reverse()))
       .catch((err) => console.error(err));
   };
 
@@ -134,6 +75,7 @@ const AdminMain = ({ userLogout }) => {
 
   useEffect(() => {
     user && loadMyAttractionList();
+    user && loadMyInquireList();
   }, [user]);
 
   return (
@@ -241,12 +183,15 @@ const AdminMain = ({ userLogout }) => {
               {params.path_two === "add" && params.path === "attraction" && (
                 <AdminAttractionUploadPage user={user} />
               )}
-              {params.path === "main" && myAttractionList && (
-                <AdminFirstPage
-                  myAttractionList={myAttractionList}
-                  myInquireList={myInquireList}
-                />
-              )}
+              {params.path === "main" &&
+                myAttractionList &&
+                myInquireList &&
+                myPointList && (
+                  <AdminFirstPage
+                    myAttractionList={myAttractionList}
+                    myInquireList={myInquireList}
+                  />
+                )}
               {!params.path_two &&
                 params.path === "attraction" &&
                 myAttractionList && (
@@ -255,7 +200,11 @@ const AdminMain = ({ userLogout }) => {
               {!params.path_two &&
                 params.path === "inquire" &&
                 myInquireList && (
-                  <AdminInquirePage myInquireList={myInquireList} />
+                  <AdminInquirePage
+                    myInquireList={myInquireList}
+                    loadMyInquireList={loadMyInquireList}
+                    user={user}
+                  />
                 )}
               {!params.path_two && params.path === "point" && myPointList && (
                 <AdminPointPage myPointList={myPointList} />
