@@ -5,15 +5,17 @@ import LoadingPage from "../../loadingPage/loadingPage";
 import AdminAttractionPage from "../adminAttractionPage/adminAttractionPage";
 import AdminAttractionUploadPage from "../adminAttractionPage/adminAttractionUploadPage/adminAttractionUploadPage";
 import AdminFirstPage from "../adminFirstPage/adminFirstPage";
+import AdminInquirePage from "../adminInquirePage/adminInquirePage";
+import AdminPointPage from "../adminPointPage/adminPointPage";
 import styles from "./adminMain.module.css";
 
-const AdminMain = (props) => {
+const AdminMain = ({ userLogout }) => {
   const history = useHistory();
   const params = useParams();
 
   const [user, setUser] = useState(null);
 
-  const [myAttractionList, setMyAttractionList] = useState([]);
+  const [myAttractionList, setMyAttractionList] = useState(null);
 
   const [myInquireList, setMyInquireList] = useState([
     {
@@ -78,6 +80,8 @@ const AdminMain = (props) => {
     },
   ]);
 
+  const [myPointList, setMyPointList] = useState([]);
+
   const [menuSelected, setMenuSelected] = useState(params.path);
 
   const onButtonClickHandler = (e) => {
@@ -101,6 +105,17 @@ const AdminMain = (props) => {
         console.log(result);
         setMyAttractionList(result);
       })
+      .catch((err) => console.error(err));
+  };
+
+  const loadMyInquireList = (expIdx) => {
+    axios
+      .post(`${process.env.REACT_APP_BASEURL}/qna/getqnaexplist`, {
+        expIdx,
+      }) // 이후에 exp 추가 기능 완성되면
+      //관리자의 모든 expIdx 리스트 만들어서 forEach로 QNA 리스트 완성시킨 후 이것을 setState
+      //하면 체험 상품 개수만큼 통신해야하니 비효율적인가?
+      .then((response) => console.log(response))
       .catch((err) => console.error(err));
   };
 
@@ -217,21 +232,33 @@ const AdminMain = (props) => {
               </div>
               <div className={styles.logout_container}>
                 <p className={styles.user_name}>{`${user.name} 님`}</p>
-                <p className={styles.logout_button}>로그아웃</p>
+                <p className={styles.logout_button} onClick={userLogout}>
+                  로그아웃
+                </p>
               </div>
             </header>
             <section className={styles.content_container}>
               {params.path_two === "add" && params.path === "attraction" && (
                 <AdminAttractionUploadPage user={user} />
               )}
-              {params.path === "main" && (
+              {params.path === "main" && myAttractionList && (
                 <AdminFirstPage
                   myAttractionList={myAttractionList}
                   myInquireList={myInquireList}
                 />
               )}
-              {!params.path_two && params.path === "attraction" && (
-                <AdminAttractionPage myAttractionList={myAttractionList} />
+              {!params.path_two &&
+                params.path === "attraction" &&
+                myAttractionList && (
+                  <AdminAttractionPage myAttractionList={myAttractionList} />
+                )}
+              {!params.path_two &&
+                params.path === "inquire" &&
+                myInquireList && (
+                  <AdminInquirePage myInquireList={myInquireList} />
+                )}
+              {!params.path_two && params.path === "point" && myPointList && (
+                <AdminPointPage myPointList={myPointList} />
               )}
             </section>
           </section>

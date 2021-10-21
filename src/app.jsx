@@ -316,6 +316,7 @@ const App = (props) => {
       .then(() => {
         setLoggedin(false);
         window.alert("안전하게 로그아웃 되었습니다.");
+        window.location.href = "/";
       })
       .catch((err) => console.error(err));
   };
@@ -348,6 +349,7 @@ const App = (props) => {
         userIdx,
       })
       .then((response) => {
+        console.log(response.data);
         setInquireArticles(response.data);
       })
       .catch((err) => console.error(err));
@@ -476,10 +478,10 @@ const App = (props) => {
           <Footer />
         </Route>
         <Route exact path="/admin/:path">
-          <AdminMain />
+          <AdminMain userLogout={userLogout} />
         </Route>
         <Route exact path="/admin/:path/:path_two">
-          <AdminMain />
+          <AdminMain userLogout={userLogout} />
         </Route>
       </BrowserRouter>
     </section>
