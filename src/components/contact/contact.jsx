@@ -128,6 +128,7 @@ const Contact = (props) => {
               name="project"
               id="project"
               className={styles.project_input}
+              spellCheck="false"
             ></textarea>
           </div>
           <button className={styles.submit_button}>SUBMIT</button>

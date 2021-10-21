@@ -89,7 +89,7 @@ const App = (props) => {
       date: "보류",
       price: 25000,
       photo: "/Modoorock/images/service_right.png",
-      attraction: 0,
+      attraction: 2,
     },
     {
       idx: 1,
@@ -119,7 +119,7 @@ const App = (props) => {
       date: "보류",
       price: 25000,
       photo: "/Modoorock/images/service_right.png",
-      attraction: 0,
+      attraction: 3,
     },
     {
       idx: 4,
@@ -139,7 +139,7 @@ const App = (props) => {
       date: "보류",
       price: 11000,
       photo: "/Modoorock/images/service_right.png",
-      attraction: 3,
+      attraction: 8,
     },
     {
       idx: 6,
@@ -151,7 +151,7 @@ const App = (props) => {
       date: "보류",
       price: 1000,
       photo: "/Modoorock/images/service_right.png",
-      attraction: 9,
+      attraction: 5,
     },
   ]);
 

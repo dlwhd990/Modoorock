@@ -54,7 +54,13 @@ const NoticeWrite = () => {
         </div>
         <div className={styles.title_input_container}>
           <p className={styles.title_text}>제목</p>
-          <input ref={titleRef} type="text" className={styles.title_input} />
+          <input
+            ref={titleRef}
+            type="text"
+            className={styles.title_input}
+            spellCheck="false"
+            placeholder="제목"
+          />
         </div>
         <div className={styles.content_input_container}>
           <p className={styles.content_text}>내용</p>
@@ -63,6 +69,8 @@ const NoticeWrite = () => {
             name="content"
             id="content"
             className={styles.content_input}
+            spellCheck="false"
+            placeholder="내용"
           ></textarea>
         </div>
         <button className={styles.submit_button} onClick={writeSubmitHandler}>
