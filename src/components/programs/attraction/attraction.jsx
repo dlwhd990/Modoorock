@@ -40,6 +40,9 @@ const Attraction = ({ programList, areaList, reviewList }) => {
   };
 
   useEffect(() => {
+    if (!areaList) {
+      return;
+    }
     const result = [];
     for (let i = 0; i < areaList.length; i++) {
       if (areaList[i].idx === parseInt(path)) {
@@ -52,7 +55,7 @@ const Attraction = ({ programList, areaList, reviewList }) => {
     });
     setAttractionProgramList(result);
     setResultProgramList(result);
-  }, []);
+  }, [areaList]);
 
   const inputChangeHandler = debounce((e) => {
     setResultProgramList([]);

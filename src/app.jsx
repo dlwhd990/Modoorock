@@ -76,42 +76,7 @@ const App = (props) => {
     },
   ]);
 
-  const [areaList, setAreaList] = useState([
-    {
-      idx: 0,
-      name: "월미도",
-      area: "인천",
-      photo: "/Modoorock/images/service_right.png",
-      user_idx: "보류(관리자)",
-      content:
-        "월미도는 서울특별시 종로구 건되어 정궁으로 이용된 궁궐, 정궁, 사적",
-    },
-    {
-      idx: 1,
-      name: "경복궁",
-      area: "서울",
-      photo: "/Modoorock/images/service_right.png",
-      user_idx: "보류(관리자)",
-      content:
-        "서울특별시 종로구 세종로에 있는 조선전기에 창건되어 정궁으로 이용된 궁궐, 정궁, 사적",
-    },
-    {
-      idx: 2,
-      name: "해운대",
-      area: "부산",
-      photo: "/Modoorock/images/service_right.png",
-      user_idx: "보류(관리자)",
-      content: "해운대는 서울특별시 종로구 세종로에 있는 조선전기",
-    },
-    {
-      idx: 3,
-      name: "익산 교도소 세트장",
-      area: "전북",
-      photo: "/Modoorock/images/service_right.png",
-      user_idx: "보류(관리자)",
-      content: "해운대는 서울특별시 종로구 세종로에 있는 조선전기",
-    },
-  ]);
+  const [areaList, setAreaList] = useState(null);
 
   const [programList, setProgramList] = useState([
     {
@@ -164,7 +129,7 @@ const App = (props) => {
       date: "보류",
       price: 1000,
       photo: "/Modoorock/images/service_right.png",
-      attraction: 2,
+      attraction: 9,
     },
     {
       idx: 5,
@@ -175,6 +140,18 @@ const App = (props) => {
       price: 11000,
       photo: "/Modoorock/images/service_right.png",
       attraction: 3,
+    },
+    {
+      idx: 6,
+      title:
+        "English test English test English test English test English test English test",
+      content:
+        "English test English test English test English test English test English test English test English test",
+      user_idx: "관리자(보류)",
+      date: "보류",
+      price: 1000,
+      photo: "/Modoorock/images/service_right.png",
+      attraction: 9,
     },
   ]);
 
@@ -322,7 +299,6 @@ const App = (props) => {
     axios
       .post(`${process.env.REACT_APP_BASEURL}/user/session`)
       .then((response) => {
-        console.log(response);
         if (response.data !== "") {
           setLoggedin(true);
           setUserIdx(response.data.idx);
@@ -373,15 +349,26 @@ const App = (props) => {
       })
       .then((response) => {
         setInquireArticles(response.data);
-        console.log(response.data);
       })
       .catch((err) => console.error(err));
+  };
+
+  const getAttractionList = () => {
+    axios
+      .post(`${process.env.REACT_APP_BASEURL}/attraction/getattractionlist`, {
+        area: "전체",
+      })
+      .then((response) => setAreaList(response.data))
+      .catch((err) => {
+        console.error(err);
+      });
   };
 
   useEffect(() => {
     sessionCheck();
     getNoticeList();
     getFaqList();
+    getAttractionList();
   }, []);
 
   useEffect(() => {
@@ -395,19 +382,6 @@ const App = (props) => {
         <Route exact path="/">
           <Header loggedin={loggedin} userLogout={userLogout} />
           <Mainpage programList={programList} viewItems={introVideos} />
-          <button
-            className=""
-            onClick={() => {
-              axios
-                .post(`${process.env.REACT_APP_BASEURL}/user/updateauth`, {
-                  idx: userIdx,
-                  idType: 2,
-                })
-                .then((response) => console.log(response));
-            }}
-          >
-            dasdas
-          </button>
           <Footer />
         </Route>
         <Route exact path="/login">
@@ -442,11 +416,13 @@ const App = (props) => {
         </Route>
         <Route exact path="/programs/:path">
           <Header loggedin={loggedin} userLogout={userLogout} />
-          <Programs
-            areaList={areaList}
-            programList={programList}
-            reviewList={reviewList}
-          />
+          {programList && areaList && reviewList && (
+            <Programs
+              areaList={areaList}
+              programList={programList}
+              reviewList={reviewList}
+            />
+          )}
           <Footer />
         </Route>
         <Route exact path="/programs/attraction/:path">

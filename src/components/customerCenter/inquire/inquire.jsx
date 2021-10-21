@@ -14,7 +14,7 @@ const Inquire = ({ articles, getInquireList, loggedin }) => {
   const [sliceList, setSliceList] = useState([]);
   const [resultArticles, setResultArticles] = useState(articles);
   const [cursor, setCursor] = useState(0);
-  console.log(loggedin);
+
   useEffect(() => {
     getInquireList();
   }, []);

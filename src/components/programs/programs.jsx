@@ -382,13 +382,17 @@ const Programs = ({ areaList, programList, reviewList }) => {
               </section>
 
               <section className={styles.program_list}>
-                {resultAreaList.map((item) => (
-                  <AreaItem
-                    key={item.idx}
-                    item={item}
-                    programList={programList}
-                  />
-                ))}
+                {resultAreaList.length === 0 ? (
+                  <p className={styles.no_attraction}>관광지가 없습니다.</p>
+                ) : (
+                  resultAreaList.map((item) => (
+                    <AreaItem
+                      key={item.idx}
+                      item={item}
+                      programList={programList}
+                    />
+                  ))
+                )}
               </section>
             </section>
           ) : (

@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router";
+import LoadingPage from "../../loadingPage/loadingPage";
 import AdminAttractionPage from "../adminAttractionPage/adminAttractionPage";
 import AdminAttractionUploadPage from "../adminAttractionPage/adminAttractionUploadPage/adminAttractionUploadPage";
 import AdminFirstPage from "../adminFirstPage/adminFirstPage";
@@ -10,119 +11,9 @@ const AdminMain = (props) => {
   const history = useHistory();
   const params = useParams();
 
-  const [user, setUser] = useState({
-    name: "이종혁",
-  });
+  const [user, setUser] = useState(null);
 
-  const [myAttractionList, setMyAttractionList] = useState([
-    {
-      idx: 0,
-      name: "월미도",
-      area: "인천",
-      photo: "/Modoorock/images/service_right.png",
-      user_idx: "보류(관리자)",
-      content:
-        "월미도는 서울특별시 종로구 건되어 정궁으로 이용된 궁궐, 정궁, 사적",
-    },
-    {
-      idx: 1,
-      name: "경복궁",
-      area: "서울",
-      photo: "/Modoorock/images/service_right.png",
-      user_idx: "보류(관리자)",
-      content:
-        "서울특별시 종로구 세종로에 있는 조선전기에 창건되어 정궁으로 이용된 궁궐, 정궁, 사적",
-    },
-    {
-      idx: 2,
-      name: "해운대",
-      area: "부산",
-      photo: "/Modoorock/images/service_right.png",
-      user_idx: "보류(관리자)",
-      content: "해운대는 서울특별시 종로구 세종로에 있는 조선전기",
-    },
-    {
-      idx: 3,
-      name: "익산 교도소 세트장",
-      area: "전북",
-      photo: "/Modoorock/images/service_right.png",
-      user_idx: "보류(관리자)",
-      content: "해운대는 서울특별시 종로구 세종로에 있는 조선전기",
-    },
-    {
-      idx: 4,
-      name: "익산 교도소 세트장 제목 오버플로우 테스트합니다",
-      area: "전북",
-      photo: "/Modoorock/images/service_right.png",
-      user_idx: "보류(관리자)",
-      content: "해운대는 서울특별시 종로구 세종로에 있는 조선전기",
-    },
-    {
-      idx: 5,
-      name: "익산 교도소 세트장 제목 오버플로우 테스트합니다",
-      area: "전북",
-      photo: "/Modoorock/images/service_right.png",
-      user_idx: "보류(관리자)",
-      content: "해운대는 서울특별시 종로구 세종로에 있는 조선전기",
-    },
-
-    {
-      idx: 6,
-      name: "익산 교도소 세트장 제목 오버플로우 테스트합니다",
-      area: "전북",
-      photo: "/Modoorock/images/service_right.png",
-      user_idx: "보류(관리자)",
-      content: "해운대는 서울특별시 종로구 세종로에 있는 조선전기",
-    },
-    {
-      idx: 7,
-      name: "익산 교도소 세트장 제목 오버플로우 테스트합니다",
-      area: "전북",
-      photo: "/Modoorock/images/service_right.png",
-      user_idx: "보류(관리자)",
-      content: "해운대는 서울특별시 종로구 세종로에 있는 조선전기",
-    },
-    {
-      idx: 8,
-      name: "익산 교도소 세트장 제목 오버플로우 테스트합니다",
-      area: "전북",
-      photo: "/Modoorock/images/service_right.png",
-      user_idx: "보류(관리자)",
-      content: "해운대는 서울특별시 종로구 세종로에 있는 조선전기",
-    },
-    {
-      idx: 9,
-      name: "익산 교도소 세트장 제목 오버플로우 테스트합니다",
-      area: "전북",
-      photo: "/Modoorock/images/service_right.png",
-      user_idx: "보류(관리자)",
-      content: "해운대는 서울특별시 종로구 세종로에 있는 조선전기",
-    },
-    {
-      idx: 10,
-      name: "익산 교도소 세트장 제목 오버플로우 테스트합니다",
-      area: "전북",
-      photo: "/Modoorock/images/service_right.png",
-      user_idx: "보류(관리자)",
-      content: "해운대는 서울특별시 종로구 세종로에 있는 조선전기",
-    },
-    {
-      idx: 11,
-      name: "익산 교도소 세트장 제목 오버플로우 테스트합니다",
-      area: "전북",
-      photo: "/Modoorock/images/service_right.png",
-      user_idx: "보류(관리자)",
-      content: "해운대는 서울특별시 종로구 세종로에 있는 조선전기",
-    },
-    {
-      idx: 12,
-      name: "익산 교도소 세트장 제목 오버플로우 테스트합니다",
-      area: "전북",
-      photo: "/Modoorock/images/service_right.png",
-      user_idx: "보류(관리자)",
-      content: "해운대는 서울특별시 종로구 세종로에 있는 조선전기",
-    },
-  ]);
+  const [myAttractionList, setMyAttractionList] = useState([]);
 
   const [myInquireList, setMyInquireList] = useState([
     {
@@ -195,25 +86,46 @@ const AdminMain = (props) => {
     history.push(`/admin/${value}`);
   };
 
-  //useEffect(() => {
-  //  axios
-  //    .post(`${process.env.REACT_APP_BASEURL}/user/session`)
-  //    .then((response) => {
-  //      console.log(response);
-  //      console.log(response.data);
-  //      if (response.data === "") {
-  //        setUser(false);
-  //      } else {
-  //        setUser(response.data);
-  //      }
-  //      //나의 관광지리스트, 문의리스트 등 정보 setState하는 과정 추가
-  //    })
-  //    .catch((err) => console.error(err));
-  //}, []);
+  const loadMyAttractionList = () => {
+    axios
+      .post(`${process.env.REACT_APP_BASEURL}/attraction/getattractionlist`, {
+        area: "전체",
+      })
+      .then((response) => {
+        const result = [];
+        response.data.forEach((attraction) => {
+          if (attraction.userIdx === user.idx) {
+            result.push(attraction);
+          }
+        });
+        console.log(result);
+        setMyAttractionList(result);
+      })
+      .catch((err) => console.error(err));
+  };
+
+  useEffect(() => {
+    axios
+      .post(`${process.env.REACT_APP_BASEURL}/user/session`)
+      .then((response) => {
+        if (response.data === "") {
+          setUser(false);
+        } else {
+          setUser(response.data);
+        }
+      })
+      .catch((err) => console.error(err));
+  }, []);
+
+  useEffect(() => {
+    user && loadMyAttractionList();
+  }, [user]);
 
   return (
     <section className={styles.admin_main}>
-      {user ? (
+      {user === null ? (
+        <LoadingPage />
+      ) : user ? (
         <section className={styles.user_on_container}>
           <section className={styles.side_menu}>
             <div
@@ -310,7 +222,7 @@ const AdminMain = (props) => {
             </header>
             <section className={styles.content_container}>
               {params.path_two === "add" && params.path === "attraction" && (
-                <AdminAttractionUploadPage />
+                <AdminAttractionUploadPage user={user} />
               )}
               {params.path === "main" && (
                 <AdminFirstPage

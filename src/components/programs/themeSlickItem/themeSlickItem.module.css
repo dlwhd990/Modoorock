@@ -54,6 +54,8 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   -moz-white-space: nowrap;
+  word-wrap: break-word;
+  word-break: break-all;
   overflow: hidden;
 }
 
@@ -64,6 +66,8 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   -moz-white-space: nowrap;
+  word-wrap: break-word;
+  word-break: break-all;
   overflow: hidden;
 }
 

@@ -239,6 +239,11 @@
   display: none;
 }
 
+.no_attraction {
+  font-size: var(--font-size-big);
+  font-weight: 500;
+}
+
 @keyframes appear {
   0% {
     transform: translateY(-20px);
