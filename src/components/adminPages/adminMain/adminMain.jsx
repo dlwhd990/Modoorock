@@ -7,6 +7,8 @@ import AdminAttractionUploadPage from "../adminAttractionPage/adminAttractionUpl
 import AdminFirstPage from "../adminFirstPage/adminFirstPage";
 import AdminInquirePage from "../adminInquirePage/adminInquirePage";
 import AdminPointPage from "../adminPointPage/adminPointPage";
+import AdminProgramPage from "../adminProgramPage/adminProgramPage";
+import AdminProgramUploadPage from "../adminProgramPage/adminProgramUploadPage/adminProgramUploadPage";
 import styles from "./adminMain.module.css";
 
 const AdminMain = ({ userLogout }) => {
@@ -49,14 +51,13 @@ const AdminMain = ({ userLogout }) => {
 
   const loadMyInquireList = (expIdx) => {
     axios
-      .post(`${process.env.REACT_APP_BASEURL}/qna/getqnalist`, {
+      .post(`${process.env.REACT_APP_BASEURL}/qna/getqnaexpuserlist`, {
         userIdx: user.idx,
-      }) // 이후에 exp 추가 기능 완성되면
-      //관리자의 모든 expIdx 리스트 만들어서 forEach로 QNA 리스트 완성시킨 후 이것을 setState
-      //하면 체험 상품 개수만큼 통신해야하니 비효율적인가?
-
-      //일단 테스트를 위해 임시로 내가 쓴 문의글들을 내가 답변하게 만들어놓음
-      .then((response) => setMyInquireList(response.data.reverse()))
+      })
+      .then((response) => {
+        console.log(response.data.reverse());
+        setMyInquireList(response.data.reverse());
+      })
       .catch((err) => console.error(err));
   };
 
@@ -180,6 +181,13 @@ const AdminMain = ({ userLogout }) => {
               </div>
             </header>
             <section className={styles.content_container}>
+              {params.path_four && params.path_four === "add" && (
+                <AdminProgramUploadPage user={user} />
+              )}
+              {!params.path_four &&
+                params.path_three &&
+                params.path_two === "view" &&
+                params.path === "attraction" && <AdminProgramPage />}
               {params.path_two === "add" && params.path === "attraction" && (
                 <AdminAttractionUploadPage user={user} />
               )}
@@ -195,7 +203,10 @@ const AdminMain = ({ userLogout }) => {
               {!params.path_two &&
                 params.path === "attraction" &&
                 myAttractionList && (
-                  <AdminAttractionPage myAttractionList={myAttractionList} />
+                  <AdminAttractionPage
+                    myAttractionList={myAttractionList}
+                    loadMyAttractionList={loadMyAttractionList}
+                  />
                 )}
               {!params.path_two &&
                 params.path === "inquire" &&

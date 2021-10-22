@@ -1,14 +1,28 @@
 import axios from "axios";
-import React, { useState } from "react";
-import { useHistory } from "react-router";
-import styles from "./adminAttractionUploadPage.module.css";
+import React, { useEffect, useState } from "react";
+import { useHistory, useParams } from "react-router";
+import styles from "./adminProgramUploadPage.module.css";
 
-const AdminAttractionUploadPage = ({ user }) => {
+const AdminProgramUploadPage = ({ user }) => {
   const history = useHistory();
+  const params = useParams();
   const [previewImage, setPreviewImage] = useState(null);
   const [name, setName] = useState("");
   const [content, setContent] = useState("");
   const [area, setArea] = useState("");
+  const [attractionInfo, setAttractionInfo] = useState(null);
+
+  const loadAttractionInfo = () => {
+    axios
+      .post(`${process.env.REACT_APP_BASEURL}/attraction/getattractioninfo`, {
+        idx: parseInt(params.path_three),
+      })
+      .then((response) => {
+        console.log(response);
+        setAttractionInfo(response.data);
+      })
+      .catch((err) => console.error(err));
+  };
 
   const onFileInputChangeHandler = (e) => {
     let reader = new FileReader();
@@ -76,20 +90,28 @@ const AdminAttractionUploadPage = ({ user }) => {
     setContent(e.target.value);
   };
 
+  useEffect(() => {
+    loadAttractionInfo();
+  }, []);
+
   return (
-    <section className={styles.attraction_upload_page}>
-      <section className={styles.attraction_top}>
+    <section className={styles.upload_page}>
+      <section className={styles.upload_top}>
         <div className={styles.title_container}>
           <div className={styles.icon_container_one}>
             <i className={`${styles.head_icon} fas fa-map-marker-alt`}></i>
           </div>
-          <p className={styles.title}>관광지 추가</p>
+          {attractionInfo && (
+            <p
+              className={styles.title}
+            >{`체험상품 추가 - ${attractionInfo.name}`}</p>
+          )}
         </div>
       </section>
       <section className={styles.main}>
         <form className={styles.main_form}>
           <div className={styles.form_content}>
-            <p className={styles.form_text}>관광지 이미지</p>
+            <p className={styles.form_text}>상품 이미지</p>
             <input
               type="file"
               accept="image/jpg,image/png,image/jpeg"
@@ -98,84 +120,59 @@ const AdminAttractionUploadPage = ({ user }) => {
             />
           </div>
           <div className={styles.form_content}>
-            <p className={styles.form_text}>관광지 명</p>
+            <p className={styles.form_text}>체험상품 명</p>
             <input
               type="text"
               className={styles.form_input}
               onChange={nameChangeHandler}
               spellCheck="false"
-              placeholder="관광지 명"
+              placeholder="체험상품 명"
             />
           </div>
           <div className={styles.form_content}>
-            <p className={styles.form_text}>관광지 위치</p>
+            <p className={styles.form_text}>체험상품 가격</p>
+            <input
+              type="text"
+              className={styles.form_input}
+              onChange={nameChangeHandler}
+              spellCheck="false"
+              placeholder="체험상품 가격 (숫자만으로 입력)"
+            />
+          </div>
+          <div className={styles.form_content}>
+            <p className={styles.form_text}>체험상품 테마</p>
             <select
-              name="area"
-              id="area"
-              className={styles.area_select}
+              name="theme"
+              id="theme"
+              className={styles.theme_select}
               onChange={areaChangeHandler}
             >
-              <option value="">위치선택</option>
-              <option value="서울">서울</option>
-              <option value="경기">경기</option>
-              <option value="강원">강원</option>
-              <option value="부산">부산</option>
-              <option value="인천">인천</option>
-              <option value="충남">충남</option>
-              <option value="충북">충북</option>
-              <option value="대전">대전</option>
-              <option value="경북">경북</option>
-              <option value="대구">대구</option>
-              <option value="경남">경남</option>
-              <option value="전북">전북</option>
-              <option value="전남">전남</option>
-              <option value="광주">광주</option>
-              <option value="울산">울산</option>
-              <option value="제주">제주</option>
+              <option value="">테마선택</option>
+              <option value="농촌체험">농촌체험</option>
+              <option value="액티비티">액티비티</option>
+              <option value="단체">단체</option>
+              <option value="친구">친구</option>
+              <option value="가족">가족</option>
+              <option value="연인">연인</option>
             </select>
           </div>
           <div className={styles.form_content_textarea}>
-            <p className={styles.form_text}>관광지 소개</p>
+            <p className={styles.form_text}>상품 소개</p>
             <textarea
               name="content"
               id="content"
               className={styles.form_textarea}
               onChange={contentChangeHandler}
               spellCheck="false"
-              placeholder="관광지 소개"
+              placeholder="상품 소개"
             ></textarea>
           </div>
-
           <button className={styles.submit_button} onClick={onSubmitHandler}>
             업로드
           </button>
         </form>
-        <div className={styles.image_preview_container}>
-          <p className={styles.image_preview_title}>미리보기</p>
-          <section className={styles.area_item}>
-            <div className={styles.image_container}>
-              {previewImage && (
-                <img
-                  src={previewImage.previewURL}
-                  alt="image_preview"
-                  className={styles.image_preview}
-                />
-              )}
-              <div className={styles.region_badge}>{area}</div>
-            </div>
-            <div className={styles.text_container}>
-              <div className={styles.area_data_container}>
-                <p className={styles.name}>{name}</p>
-                <p className={styles.desc}>{content}</p>
-              </div>
-
-              <p className={styles.number_of_programs}>0 개의 상품</p>
-            </div>
-          </section>
-        </div>
       </section>
     </section>
   );
 };
-
-export default AdminAttractionUploadPage;
+export default AdminProgramUploadPage;

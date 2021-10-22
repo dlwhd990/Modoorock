@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter, Route } from "react-router-dom";
 import styles from "./app.module.css";
 import Footer from "./components/footer/footer";
@@ -20,7 +20,6 @@ import Mypage from "./components/mypage/mypage";
 import SearchResultPage from "./components/customerCenter/searchResultPage/searchResultPage";
 import FindIdResult from "./components/find/findId/findIdResult/findIdResult";
 import AdminMain from "./components/adminPages/adminMain/adminMain";
-import LoadingSpinner from "./components/loadingSpinner/loadingSpinner";
 
 axios.defaults.withCredentials = true;
 
@@ -86,7 +85,7 @@ const App = (props) => {
       content:
         "월미도(月尾島)는 인천광역시 중구 북성동에 속해 있는 섬이었다. 현재는 섬과 육지 사이가 메워졌다. 섬의 생김새가 반달 꼬리 모양 같아 붙여진 이름이다. 가장 높은 곳은 월미산으로, 해발 고도는 108m에 불과하다. 월미도 밑에는 그보다 작은 소월미도가 있다. 인천시민들과 그 주변 도시 주민들이 많이 찾는 명소이기도 하다.",
       user_idx: "관리자(보류)",
-      date: "보류",
+      date: 7,
       price: 25000,
       photo: "/Modoorock/images/service_right.png",
       attraction: 2,
@@ -94,8 +93,9 @@ const App = (props) => {
     {
       idx: 1,
       title: "2021 경림픽에 도전하라!",
-      content: "경복궁에서 경림픽에 도전하라",
-      user_idx: "관리자(보류)",
+      content:
+        "경복궁에서 경림픽에 도전하라 경복궁에서 경림픽에 도전하라 경복궁에서 경림픽에 도전하라 경복궁에서 경림픽에 도전하라 경복궁에서 경림픽에 도전하라 경복궁에서 경림픽에 도전하라 경복궁에서 경림픽에 도전하라 경복궁에서 경림픽에 도전하라 경복궁에서 경림픽에 도전하라 경복궁에서 경림픽에 도전하라 경복궁에서 경림픽에 도전하라 경복궁에서 경림픽에 도전하라 경복궁에서 경림픽에 도전하라 경복궁에서 경림픽에 도전하라 경복궁에서 경림픽에 도전하라 경복궁에서 경림픽에 도전하라 경복궁에서 경림픽에 도전하라 ",
+      user_idx: 1,
       date: "보류",
       price: 25000,
       photo: "/Modoorock/images/service_right.png",
@@ -105,7 +105,7 @@ const App = (props) => {
       idx: 2,
       title: "2021 경림픽에 도전하라!",
       content: "경복궁에서 경림픽에 도전하라",
-      user_idx: "관리자(보류)",
+      user_idx: 7,
       date: "보류",
       price: 20000,
       photo: "/Modoorock/images/service_right.png",
@@ -115,7 +115,7 @@ const App = (props) => {
       idx: 3,
       title: "2021 월림픽에 도전하라!",
       content: "월미도에서 월림픽에 도전하라",
-      user_idx: "관리자(보류)",
+      user_idx: 2,
       date: "보류",
       price: 25000,
       photo: "/Modoorock/images/service_right.png",
@@ -125,7 +125,7 @@ const App = (props) => {
       idx: 4,
       title: "해운대에서 해림픽에 도전하라",
       content: "짧은설명 여기에!",
-      user_idx: "관리자(보류)",
+      user_idx: 7,
       date: "보류",
       price: 1000,
       photo: "/Modoorock/images/service_right.png",
@@ -135,7 +135,7 @@ const App = (props) => {
       idx: 5,
       title: "[익산 교도소 세트장] 교도소를 체험하라 - 슬기로운 빵탈출",
       content: "교도소 세트장에서 탈출게임을 즐겨보세요",
-      user_idx: "관리자(보류)",
+      user_idx: 7,
       date: "보류",
       price: 11000,
       photo: "/Modoorock/images/service_right.png",
@@ -146,8 +146,8 @@ const App = (props) => {
       title:
         "English test English test English test English test English test English test",
       content:
-        "English test English test English test English test English test English test English test English test",
-      user_idx: "관리자(보류)",
+        "English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test ",
+      user_idx: 7,
       date: "보류",
       price: 1000,
       photo: "/Modoorock/images/service_right.png",
@@ -299,6 +299,7 @@ const App = (props) => {
     axios
       .post(`${process.env.REACT_APP_BASEURL}/user/session`)
       .then((response) => {
+        console.log(response);
         if (response.data !== "") {
           setLoggedin(true);
           setUserIdx(response.data.idx);
@@ -383,7 +384,11 @@ const App = (props) => {
       <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Route exact path="/">
           <Header loggedin={loggedin} userLogout={userLogout} />
-          <Mainpage programList={programList} viewItems={introVideos} />
+          <Mainpage
+            programList={programList}
+            viewItems={introVideos}
+            reviewList={reviewList}
+          />
           <Footer />
         </Route>
         <Route exact path="/login">
@@ -481,6 +486,12 @@ const App = (props) => {
           <AdminMain userLogout={userLogout} />
         </Route>
         <Route exact path="/admin/:path/:path_two">
+          <AdminMain userLogout={userLogout} />
+        </Route>
+        <Route exact path="/admin/:path/:path_two/:path_three">
+          <AdminMain userLogout={userLogout} />
+        </Route>
+        <Route exact path="/admin/:path/:path_two/:path_three/:path_four">
           <AdminMain userLogout={userLogout} />
         </Route>
       </BrowserRouter>

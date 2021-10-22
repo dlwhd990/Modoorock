@@ -1,12 +1,13 @@
 import axios from "axios";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import SimpleSliderThree from "../slick/three/slickThree";
 import styles from "./mainpage.module.css";
 import MainProgramItem from "./mainProgramItem/mainProgramItem";
 
-const Mainpage = ({ programList, viewItems }) => {
+const Mainpage = ({ programList, viewItems, reviewList }) => {
   const history = useHistory();
+  const [latestSixProgramList, setLatestSixProgramList] = useState([]);
   const goUpButtonHandler = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
@@ -15,6 +16,10 @@ const Mainpage = ({ programList, viewItems }) => {
     window.location.href =
       "https://www.youtube.com/channel/UCdTY_FXXLbtdNXXN9H3pXrg";
   };
+
+  useEffect(() => {
+    setLatestSixProgramList(programList.reverse().slice(0, 6));
+  }, [programList]);
 
   return (
     <section className={styles.mainpage}>
@@ -63,8 +68,12 @@ const Mainpage = ({ programList, viewItems }) => {
           <i className={`${styles.search_icon} fas fa-search`}></i>
         </div>
         <div className={styles.program_list_container}>
-          {programList.map((item) => (
-            <MainProgramItem key={item.idx} item={item} />
+          {latestSixProgramList.map((item) => (
+            <MainProgramItem
+              key={item.idx}
+              item={item}
+              reviewList={reviewList}
+            />
           ))}
         </div>
         <div className={styles.video_top_filter}>

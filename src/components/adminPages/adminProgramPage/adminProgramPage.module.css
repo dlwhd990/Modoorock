@@ -1,14 +1,13 @@
-.inquire_page {
+.program_page {
   height: calc(100vh - 70px);
   animation: appear 1s;
   display: flex;
   flex-direction: column;
   padding: 60px 8.2%;
   overflow-y: scroll;
-  animation: appear 1s;
 }
 
-.inquire_top {
+.program_top {
   width: 96%;
   height: 75px;
   display: flex;
@@ -17,7 +16,6 @@
   background-color: white;
   border: 1.5px solid var(--color-light-divide-line);
   padding: 16px;
-  margin-bottom: 1.5%;
 }
 
 .title_container {
@@ -30,14 +28,14 @@
   width: 40px;
   height: 40px;
   text-align: center;
-  line-height: 42px;
+  line-height: 46px;
   border-radius: 50%;
-  background-color: rgb(16, 193, 172);
+  background-color: rgb(171, 135, 222);
   margin-right: 20px;
 }
 
 .head_icon {
-  font-size: 22px;
+  font-size: var(--font-size-mini-title);
   color: white;
 }
 
@@ -46,40 +44,36 @@
   font-weight: 500;
   margin: 0;
   margin-right: 20px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  word-wrap: break-word;
+  word-break: break-all;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
 }
 
-.subtitle,
-.subtitle_slash,
-.subtitle_right {
+.subtitle {
   margin: 0;
   margin-top: 4px;
   font-size: var(--font-size-small);
   color: var(--color-desc);
 }
 
-.subtitle_slash {
-  margin: 0 8px;
-}
-
-.view_no_answer_only_button {
-  font-size: var(--font-size-normal);
-  padding: 8px 20px;
+.add_button {
+  width: 130px;
   outline: none;
   border: none;
-  border-radius: 4px;
+  font-size: var(--font-size-normal);
   background-color: var(--color-admin-theme);
   color: white;
-  font-weight: 500;
+  border-radius: 4px;
   cursor: pointer;
 }
 
-@keyframes appear {
-  0% {
-    transform: translateY(-20px);
-    opacity: 0;
-  }
-  100% {
-    transform: translateY(0);
-    opacity: 1;
-  }
+.main_list {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  flex-wrap: wrap;
 }

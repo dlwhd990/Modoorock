@@ -3,7 +3,7 @@ import { useHistory, useParams } from "react-router";
 import AdminAttractionItem from "./adminAttractionItem/adminAttractionItem";
 import styles from "./adminAttractionPage.module.css";
 
-const AdminAttractionPage = ({ myAttractionList }) => {
+const AdminAttractionPage = ({ loadMyAttractionList, myAttractionList }) => {
   const history = useHistory();
   const addAttractionHandler = () => {
     history.push("/admin/attraction/add");
@@ -27,7 +27,11 @@ const AdminAttractionPage = ({ myAttractionList }) => {
       </section>
       <section className={styles.main_list}>
         {myAttractionList.map((item) => (
-          <AdminAttractionItem key={item.idx} item={item} />
+          <AdminAttractionItem
+            key={item.idx}
+            item={item}
+            loadMyAttractionList={loadMyAttractionList}
+          />
         ))}
       </section>
     </section>
