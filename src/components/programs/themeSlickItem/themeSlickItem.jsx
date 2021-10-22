@@ -41,23 +41,28 @@ const ThemeSlickItem = ({ item, areaList, reviewList }) => {
         </div>
       </div>
       <div className={styles.text_container}>
-        <div className={styles.area_data_container}>
+        <div className={styles.name_container}>
           <p className={styles.name}>{item.title}</p>
+        </div>
+        <div className={styles.desc_container}>
           <p className={styles.desc}>{item.content}</p>
-          <div className={styles.rate_container}>
-            <div className={styles.star_container}>
-              <StarRatingComponent
-                name="star"
-                editing={false}
-                starCount={5}
-                value={parseFloat(reviewStarAvg)}
-              />
-              <span className={styles.rate_data}>{`${reviewStarAvg}/5.0`}</span>
-            </div>
-            <span
-              className={styles.review_count_text}
-            >{`${reviewCount}개의 리뷰`}</span>
+        </div>
+        <div className={styles.rate_container}>
+          <div className={styles.star_container}>
+            <StarRatingComponent
+              name="star"
+              editing={false}
+              starCount={5}
+              value={parseFloat(reviewStarAvg)}
+            />
+            <span className={styles.rate_data}>{`${reviewStarAvg}/5.0`}</span>
           </div>
+
+          <span
+            className={styles.review_count_text}
+          >{`${reviewCount}개의 리뷰`}</span>
+        </div>
+        <div className={styles.price_container}>
           <p className={styles.price}>{`${item.price.toLocaleString(
             "ko-KR"
           )}원`}</p>

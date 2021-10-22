@@ -36,7 +36,7 @@ function NextArrow(props) {
         display: arrowDisplay,
         width: 40,
         height: 40,
-        top: 200,
+        top: 250,
         right: arrowPosition,
         zIndex: 2,
       }}
@@ -76,7 +76,7 @@ function PrevArrow(props) {
         display: arrowDisplay,
         width: 40,
         height: 40,
-        top: 200,
+        top: 250,
         left: arrowPosition,
         zIndex: 2,
         backgroundColor: "transparent",
