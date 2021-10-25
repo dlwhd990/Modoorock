@@ -65,6 +65,7 @@
 
 .detail_on {
   display: block;
+  animation: appear 0.6s;
 }
 
 .detail {

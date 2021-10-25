@@ -20,6 +20,7 @@ import Mypage from "./components/mypage/mypage";
 import SearchResultPage from "./components/customerCenter/searchResultPage/searchResultPage";
 import FindIdResult from "./components/find/findId/findIdResult/findIdResult";
 import AdminMain from "./components/adminPages/adminMain/adminMain";
+import NoticeView from "./components/customerCenter/notice/noticeView/noticeView";
 
 axios.defaults.withCredentials = true;
 
@@ -459,6 +460,11 @@ const App = (props) => {
         <Route exact path="/customer/:path/write">
           <Header loggedin={loggedin} userLogout={userLogout} />
           <WriteMain loggedin={loggedin} />
+          <Footer />
+        </Route>
+        <Route exact path="/customer/notice/view/:path">
+          <Header loggedin={loggedin} userLogout={userLogout} />
+          <NoticeView />
           <Footer />
         </Route>
         <Route exact path="/customer/:path/search/:type/:query">
