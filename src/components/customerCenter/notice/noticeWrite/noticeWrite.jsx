@@ -28,7 +28,6 @@ const NoticeWrite = () => {
             content,
           })
           .then((response) => {
-            console.log(response);
             history.push("/customer/notice");
             window.scrollTo({ top: 0 });
           })

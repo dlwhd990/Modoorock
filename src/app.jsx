@@ -299,7 +299,6 @@ const App = (props) => {
     axios
       .post(`${process.env.REACT_APP_BASEURL}/user/session`)
       .then((response) => {
-        console.log(response);
         if (response.data !== "") {
           setLoggedin(true);
           setUserIdx(response.data.idx);
@@ -350,7 +349,6 @@ const App = (props) => {
         userIdx,
       })
       .then((response) => {
-        console.log(response.data);
         setInquireArticles(response.data);
       })
       .catch((err) => console.error(err));

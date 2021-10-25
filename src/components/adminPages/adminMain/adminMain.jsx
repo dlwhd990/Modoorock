@@ -27,7 +27,7 @@ const AdminMain = ({ userLogout }) => {
 
   const onButtonClickHandler = (e) => {
     const value = e.currentTarget.dataset.value;
-    setMenuSelected(e.currentTarget.dataset.value);
+    setMenuSelected(value);
     history.push(`/admin/${value}`);
   };
 
@@ -43,7 +43,6 @@ const AdminMain = ({ userLogout }) => {
             result.push(attraction);
           }
         });
-        console.log(result);
         setMyAttractionList(result);
       })
       .catch((err) => console.error(err));
@@ -55,7 +54,6 @@ const AdminMain = ({ userLogout }) => {
         userIdx: user.idx,
       })
       .then((response) => {
-        console.log(response.data.reverse());
         setMyInquireList(response.data.reverse());
       })
       .catch((err) => console.error(err));
@@ -89,7 +87,7 @@ const AdminMain = ({ userLogout }) => {
             <div
               className={styles.logo_container}
               onClick={() => {
-                window.location.reload();
+                history.push("/admin/main");
                 window.scrollTo({ top: 0 });
               }}
             >

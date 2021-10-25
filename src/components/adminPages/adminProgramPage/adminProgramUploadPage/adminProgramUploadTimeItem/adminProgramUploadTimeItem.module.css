@@ -1,0 +1,15 @@
+.item {
+  height: 64px;
+  padding: 6px 16px;
+  border-bottom: 1px solid var(--color-light-border);
+}
+
+.time_data,
+.amount_data {
+  margin: 0;
+}
+
+.amount_data {
+  text-align: right;
+  color: var(--color-light-blue);
+}

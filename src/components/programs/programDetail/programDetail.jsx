@@ -14,11 +14,7 @@ const ProgramDetail = ({ programList, reviewList }) => {
 
   const { path } = useParams();
 
-  const onSelectHandler = (e) => {
-    if (e.currentTarget.innerText === "프로그램 상세") {
-      console.log("nothing to change");
-    }
-  };
+  const onSelectHandler = (e) => {};
 
   useEffect(() => {
     const result = [];

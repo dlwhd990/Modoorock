@@ -40,9 +40,7 @@ const LoginPage = () => {
         { withCredentials: true }
       )
       .then((response) => {
-        console.log(response);
         if (response.data === "loggedin") {
-          console.log(response);
           window.alert("로그인 되었습니다.");
           refresh();
         } else {

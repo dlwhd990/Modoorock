@@ -29,7 +29,6 @@ const Signup = (props) => {
 
   const signupSubmitHandler = (e) => {
     e.preventDefault();
-    console.log("clicked");
 
     if (
       !(
@@ -69,7 +68,6 @@ const Signup = (props) => {
         phone,
       })
       .then((response) => {
-        console.log(response);
         const resData = response.data;
         if (resData === "duplicate") {
           window.alert(
