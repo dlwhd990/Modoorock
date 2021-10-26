@@ -3,7 +3,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "./programsTheme.css";
 import "slick-carousel/slick/slick-theme.css";
-import ThemeSlickItem from "../../programs/themeSlickItem/themeSlickItem";
+import ThemeSlickItem from "./themeSlickItem/themeSlickItem";
 
 function NextArrow(props) {
   const { className, style, onClick } = props;

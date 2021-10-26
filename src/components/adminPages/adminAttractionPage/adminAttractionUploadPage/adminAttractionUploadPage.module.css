@@ -273,7 +273,7 @@
 .button_order_setting_main {
   width: 50%;
   border: 1px solid var(--color-light-border);
-  padding: 0 20px;
+  border-bottom: none;
 }
 
 .button_order_setting_main_header {
@@ -281,7 +281,8 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  padding: 12px 0;
+  padding: 12px 20px;
+  border-bottom: 1px solid var(--color-light-border);
 }
 
 .button_order_setting_main_header_id {
@@ -293,13 +294,6 @@
 
 .button_order_setting_main_header_name {
   flex-basis: 55%;
-  white-space: nowrap;
-  margin: 0;
-}
-
-.button_order_setting_main_header_delete {
-  flex-basis: 10%;
-  text-align: center;
   white-space: nowrap;
   margin: 0;
 }
@@ -375,6 +369,34 @@
   background-color: var(--color-admin-theme);
   border-radius: 4px;
   cursor: pointer;
+}
+
+.template_button_item {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--color-light-border);
+  padding: 12px 20px;
+}
+.template_button_id {
+  flex-basis: 8%;
+  text-align: center;
+  white-space: nowrap;
+  margin: 0;
+}
+
+.template_button_name {
+  flex-basis: 55%;
+  white-space: nowrap;
+  margin: 0;
+}
+
+.template_button_change {
+  flex-basis: 10%;
+  text-align: center;
+  white-space: nowrap;
+  margin: 0;
 }
 
 @keyframes appear {

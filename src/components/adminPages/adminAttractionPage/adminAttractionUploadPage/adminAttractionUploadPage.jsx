@@ -1,7 +1,8 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import TemplateSlick from "../../../slick/templateSlick/templateSlick";
+import AdminAttractionUploadButtonItem from "./adminAttractionUploadButtonItem/adminAttractionUploadButtonItem";
 import styles from "./adminAttractionUploadPage.module.css";
 
 const AdminAttractionUploadPage = ({ user }) => {
@@ -15,6 +16,84 @@ const AdminAttractionUploadPage = ({ user }) => {
   const [gameBgPopupOn, setGameBgPopupOn] = useState(false);
   const [templateValue, setTemplateValue] = useState(null);
   const [templateTempValue, setTemplateTempValue] = useState(null);
+  const [templateButtonList, setTemplateButtonList] = useState({
+    1: [
+      {
+        idx: 0,
+        name: "게임시작",
+      },
+      {
+        idx: 1,
+        name: "게임설명",
+      },
+      {
+        idx: 2,
+        name: "점수확인",
+      },
+      {
+        idx: 3,
+        name: "지도",
+      },
+    ],
+    2: [
+      {
+        idx: 0,
+        name: "게임시작",
+      },
+      {
+        idx: 1,
+        name: "게임설명",
+      },
+      {
+        idx: 2,
+        name: "점수확인",
+      },
+      {
+        idx: 3,
+        name: "지도",
+      },
+      {
+        idx: 4,
+        name: "5번버튼",
+      },
+    ],
+    3: [
+      {
+        idx: 3,
+        name: "지도",
+      },
+      {
+        idx: 1,
+        name: "게임설명",
+      },
+      {
+        idx: 2,
+        name: "점수확인",
+      },
+      {
+        idx: 0,
+        name: "게임시작",
+      },
+    ],
+    4: [
+      {
+        idx: 0,
+        name: "게임시작",
+      },
+      {
+        idx: 3,
+        name: "지도",
+      },
+      {
+        idx: 2,
+        name: "점수확인",
+      },
+      {
+        idx: 1,
+        name: "게임설명",
+      },
+    ],
+  });
   const [templateList, setTemplateList] = useState([
     {
       idx: 1,
@@ -37,6 +116,7 @@ const AdminAttractionUploadPage = ({ user }) => {
       image: "/Modoorock/Images/templateImages/modoorock.png",
     },
   ]);
+  const [nowTemplateButtonOrder, setNowTemplateButtonOrder] = useState([]);
 
   const onFileInputChangeHandler = (e) => {
     let reader = new FileReader();
@@ -121,8 +201,66 @@ const AdminAttractionUploadPage = ({ user }) => {
 
   const templateValueSettingHandler = () => {
     templateTempValue && setTemplateValue(templateTempValue);
+    templateTempValue &&
+      setNowTemplateButtonOrder(templateButtonList[templateTempValue]);
     setTemplateTempValue(null);
     setTemplatePopupOn(false);
+  };
+
+  const initialDnDState = {
+    draggedFrom: null,
+    draggedTo: null,
+    isDragging: false,
+    originalOrder: [],
+    updatedOrder: [],
+  };
+
+  const [dragAndDrop, setDragAndDrop] = useState(initialDnDState);
+
+  const onDragStart = (e) => {
+    const initialPosition = Number(e.currentTarget.dataset.position);
+    setDragAndDrop({
+      ...dragAndDrop,
+      draggedFrom: initialPosition,
+      isDragging: true,
+      originalOrder: nowTemplateButtonOrder,
+    });
+    e.dataTransfer.setData("text/html", "");
+  };
+
+  const onDragOver = (e) => {
+    e.preventDefault();
+    let newList = dragAndDrop.originalOrder;
+    const draggedFrom = dragAndDrop.draggedFrom;
+    const draggedTo = Number(e.currentTarget.dataset.position);
+    const itemDragged = newList[draggedFrom];
+    const remainingItems = newList.filter(
+      (item, index) => index !== draggedFrom
+    );
+
+    newList = [
+      ...remainingItems.slice(0, draggedTo),
+      itemDragged,
+      ...remainingItems.slice(draggedTo),
+    ];
+
+    if (draggedTo !== dragAndDrop.draggedTo) {
+      setDragAndDrop({
+        ...dragAndDrop,
+        updatedOrder: newList,
+        draggedTo: draggedTo,
+      });
+    }
+  };
+
+  const onDrop = () => {
+    setNowTemplateButtonOrder(dragAndDrop.updatedOrder);
+    setDragAndDrop({
+      ...dragAndDrop,
+      draggedFrom: null,
+      draggedTo: null,
+      isDragging: false,
+    });
   };
 
   return (
@@ -270,6 +408,22 @@ const AdminAttractionUploadPage = ({ user }) => {
                 순서
               </p>
             </div>
+            {nowTemplateButtonOrder &&
+              nowTemplateButtonOrder.map((item, index) => (
+                <div
+                  key={item.idx}
+                  data-position={index}
+                  className={styles.template_button_item}
+                  draggable="true"
+                  onDragStart={onDragStart}
+                  onDragOver={onDragOver}
+                  onDrop={onDrop}
+                >
+                  <p className={styles.template_button_id}>{item.idx}</p>
+                  <p className={styles.template_button_name}>{item.name}</p>
+                  <p className={styles.template_button_change}>변경</p>
+                </div>
+              ))}
           </section>
         </section>
       </section>
