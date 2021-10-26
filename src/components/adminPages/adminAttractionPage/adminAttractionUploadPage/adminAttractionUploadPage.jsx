@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useHistory } from "react-router";
+import TemplateSlick from "../../../slick/templateSlick/templateSlick";
 import styles from "./adminAttractionUploadPage.module.css";
 
 const AdminAttractionUploadPage = ({ user }) => {
@@ -12,6 +13,30 @@ const AdminAttractionUploadPage = ({ user }) => {
   const [templatePopupOn, setTemplatePopupOn] = useState(false);
   const [mainBgPopupOn, setMainBgPopupOn] = useState(false);
   const [gameBgPopupOn, setGameBgPopupOn] = useState(false);
+  const [templateValue, setTemplateValue] = useState(null);
+  const [templateTempValue, setTemplateTempValue] = useState(null);
+  const [templateList, setTemplateList] = useState([
+    {
+      idx: 1,
+      name: "1번 템플릿",
+      image: "/Modoorock/Images/templateImages/office.jpeg",
+    },
+    {
+      idx: 2,
+      name: "2번 템플릿",
+      image: "/Modoorock/Images/templateImages/about_us_top.png",
+    },
+    {
+      idx: 3,
+      name: "3번 템플릿",
+      image: "/Modoorock/Images/templateImages/service_right.png",
+    },
+    {
+      idx: 4,
+      name: "4번 템플릿",
+      image: "/Modoorock/Images/templateImages/modoorock.png",
+    },
+  ]);
 
   const onFileInputChangeHandler = (e) => {
     let reader = new FileReader();
@@ -90,6 +115,16 @@ const AdminAttractionUploadPage = ({ user }) => {
     setGameBgPopupOn(!gameBgPopupOn);
   };
 
+  const templateTempSelectHandler = (idx) => {
+    setTemplateTempValue(idx);
+  };
+
+  const templateValueSettingHandler = () => {
+    templateTempValue && setTemplateValue(templateTempValue);
+    setTemplateTempValue(null);
+    setTemplatePopupOn(false);
+  };
+
   return (
     <section className={styles.attraction_upload_page}>
       <section className={styles.attraction_top}>
@@ -161,10 +196,6 @@ const AdminAttractionUploadPage = ({ user }) => {
                 placeholder="관광지 소개"
               ></textarea>
             </div>
-
-            <button className={styles.submit_button} onClick={onSubmitHandler}>
-              업로드
-            </button>
           </form>
           <div className={styles.image_preview_container}>
             <p className={styles.image_preview_title}>미리보기</p>
@@ -196,7 +227,9 @@ const AdminAttractionUploadPage = ({ user }) => {
         <div className={styles.form_content}>
           <p className={styles.form_text}>템플릿 설정</p>
           <div className={styles.template_input_container}>
-            <p className={styles.template_selected}>선택된 템플릿 번호: 1</p>
+            <p className={styles.template_selected}>{`선택된 템플릿 번호: ${
+              templateValue ? templateValue : "없음"
+            }`}</p>
             <button
               className={styles.template_popup_on_button}
               onClick={templatePopupHandler}
@@ -224,10 +257,10 @@ const AdminAttractionUploadPage = ({ user }) => {
           </button>
         </div>
         <section className={styles.button_order_setting_container}>
-          <div className={styles.button_order_setting_top}>
+          <section className={styles.button_order_setting_top}>
             <p className={styles.button_order_setting_title}>버튼 설정</p>
-          </div>
-          <div className={styles.button_order_setting_main}>
+          </section>
+          <section className={styles.button_order_setting_main}>
             <div className={styles.button_order_setting_main_header}>
               <p className={styles.button_order_setting_main_header_id}>번호</p>
               <p className={styles.button_order_setting_main_header_name}>
@@ -237,7 +270,7 @@ const AdminAttractionUploadPage = ({ user }) => {
                 순서
               </p>
             </div>
-          </div>
+          </section>
         </section>
       </section>
       {templatePopupOn && (
@@ -250,7 +283,21 @@ const AdminAttractionUploadPage = ({ user }) => {
               <p className={styles.popup_title}>템플릿 설정</p>
             </div>
 
-            <div className={styles.template_popup_main}>dasdsad</div>
+            <div className={styles.template_popup_main}>
+              <TemplateSlick
+                viewItems={templateList}
+                templateTempSelectHandler={templateTempSelectHandler}
+                templateTempValue={templateTempValue}
+              />
+            </div>
+            <div className={styles.select_button_container}>
+              <button
+                className={styles.select_button}
+                onClick={templateValueSettingHandler}
+              >
+                선택
+              </button>
+            </div>
           </div>
         </section>
       )}

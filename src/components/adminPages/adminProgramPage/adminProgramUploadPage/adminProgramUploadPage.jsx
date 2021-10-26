@@ -39,6 +39,7 @@ const AdminProgramUploadPage = ({ user }) => {
   const onFileInputChangeHandler = (e) => {
     let reader = new FileReader();
     let file = e.target.files[0];
+
     reader.onloadend = () => {
       setPreviewImage({
         file: file,
@@ -207,116 +208,120 @@ const AdminProgramUploadPage = ({ user }) => {
         </div>
       </section>
       <section className={styles.main}>
-        <form className={styles.main_form}>
-          <div className={styles.form_content}>
-            <p className={styles.form_text}>메인 이미지</p>
-            <input
-              type="file"
-              accept="image/jpg,image/png,image/jpeg"
-              className={styles.form_input_file}
-              onChange={onFileInputChangeHandler}
-            />
-          </div>
-          <div className={styles.form_content}>
-            <p className={styles.form_text}>서브 이미지(3장)</p>
-            <input
-              type="file"
-              accept="image/jpg,image/png,image/jpeg"
-              className={styles.form_input_file}
-              onChange={onMultipleFileInputChangeHandler}
-              multiple
-            />
-          </div>
-          <div className={styles.form_content}>
-            <p className={styles.form_text}>체험상품 명</p>
-            <input
-              type="text"
-              className={styles.form_input}
-              onChange={nameChangeHandler}
-              spellCheck="false"
-              placeholder="체험상품 명"
-            />
-          </div>
-          <div className={styles.form_content}>
-            <p className={styles.form_text}>체험상품 가격</p>
-            <input
-              type="text"
-              className={styles.form_input}
-              onChange={priceChangeHandler}
-              spellCheck="false"
-              placeholder="체험상품 가격 (숫자만으로 입력)"
-            />
-          </div>
-          <div className={styles.form_content}>
-            <p className={styles.form_text}>체험상품 테마</p>
-            <select
-              name="theme"
-              id="theme"
-              className={styles.theme_select}
-              onChange={themeChangeHandler}
-            >
-              <option value="">테마선택</option>
-              <option value="농촌체험">농촌체험</option>
-              <option value="액티비티">액티비티</option>
-              <option value="단체">단체</option>
-              <option value="친구">친구</option>
-              <option value="가족">가족</option>
-              <option value="연인">연인</option>
-            </select>
-          </div>
-          <div className={styles.form_content_textarea}>
-            <p className={styles.form_text}>상품 소개</p>
-            <textarea
-              name="content"
-              id="content"
-              className={styles.form_textarea}
-              onChange={contentChangeHandler}
-              spellCheck="false"
-              placeholder="상품 소개"
-            ></textarea>
-          </div>
-        </form>
-        <section className={styles.image_preview_container}>
-          <p className={styles.image_preview_title}>미리보기</p>
-          <section className={styles.program_item}>
-            <div className={styles.image_container}>
-              {previewImage && (
-                <img
-                  src={previewImage.previewURL}
-                  alt="area_image"
-                  className={styles.image}
-                />
-              )}
-              <div className={styles.area_badge}>{theme}</div>
+        <h1 className={styles.section_title}>체험상품 정보 입력</h1>
+        <section className={styles.main_container}>
+          <form className={styles.main_form}>
+            <div className={styles.form_content}>
+              <p className={styles.form_text}>메인 이미지</p>
+              <input
+                type="file"
+                accept="image/jpg,image/png,image/jpeg"
+                className={styles.form_input_file}
+                onChange={onFileInputChangeHandler}
+              />
             </div>
-            <div className={styles.text_container}>
-              <div className={styles.name_container}>
-                <p className={styles.name}>{name}</p>
-              </div>
-
-              <div className={styles.desc_container}>
-                <p className={styles.desc}>{content}</p>
-              </div>
-              <div className={styles.rate_container}>
-                <div className={styles.star_container}>
-                  <StarRatingComponent
-                    name="star"
-                    editing={false}
-                    starCount={5}
-                    value={5}
+            <div className={styles.form_content}>
+              <p className={styles.form_text}>서브 이미지(3장)</p>
+              <input
+                type="file"
+                accept="image/jpg,image/png,image/jpeg"
+                className={styles.form_input_file}
+                onChange={onMultipleFileInputChangeHandler}
+                multiple
+              />
+            </div>
+            <div className={styles.form_content}>
+              <p className={styles.form_text}>체험상품 명</p>
+              <input
+                type="text"
+                className={styles.form_input}
+                onChange={nameChangeHandler}
+                spellCheck="false"
+                placeholder="체험상품 명"
+              />
+            </div>
+            <div className={styles.form_content}>
+              <p className={styles.form_text}>체험상품 가격</p>
+              <input
+                type="text"
+                className={styles.form_input}
+                onChange={priceChangeHandler}
+                spellCheck="false"
+                placeholder="체험상품 가격 (숫자만으로 입력)"
+              />
+            </div>
+            <div className={styles.form_content}>
+              <p className={styles.form_text}>체험상품 테마</p>
+              <select
+                name="theme"
+                id="theme"
+                className={styles.theme_select}
+                onChange={themeChangeHandler}
+              >
+                <option value="">테마선택</option>
+                <option value="농촌체험">농촌체험</option>
+                <option value="액티비티">액티비티</option>
+                <option value="단체">단체</option>
+                <option value="친구">친구</option>
+                <option value="가족">가족</option>
+                <option value="연인">연인</option>
+              </select>
+            </div>
+            <div className={styles.form_content_textarea}>
+              <p className={styles.form_text}>상품 소개</p>
+              <textarea
+                name="content"
+                id="content"
+                className={styles.form_textarea}
+                onChange={contentChangeHandler}
+                spellCheck="false"
+                placeholder="상품 소개"
+              ></textarea>
+            </div>
+          </form>
+          <section className={styles.image_preview_container}>
+            <p className={styles.image_preview_title}>미리보기</p>
+            <section className={styles.program_item}>
+              <div className={styles.image_container}>
+                {previewImage && (
+                  <img
+                    src={previewImage.previewURL}
+                    alt="area_image"
+                    className={styles.image}
                   />
-                  <span className={styles.rate_data}>5.0/5.0</span>
+                )}
+                <div className={styles.area_badge}>{theme}</div>
+              </div>
+              <div className={styles.text_container}>
+                <div className={styles.name_container}>
+                  <p className={styles.name}>{name}</p>
                 </div>
-                <span className={styles.review_count_text}>32개의 리뷰</span>
+
+                <div className={styles.desc_container}>
+                  <p className={styles.desc}>{content}</p>
+                </div>
+                <div className={styles.rate_container}>
+                  <div className={styles.star_container}>
+                    <StarRatingComponent
+                      name="star"
+                      editing={false}
+                      starCount={5}
+                      value={5}
+                    />
+                    <span className={styles.rate_data}>5.0/5.0</span>
+                  </div>
+                  <span className={styles.review_count_text}>32개의 리뷰</span>
+                </div>
+                <div className={styles.price_container}>
+                  <p className={styles.price}>{`${price}원`}</p>
+                </div>
               </div>
-              <div className={styles.price_container}>
-                <p className={styles.price}>{`${price}원`}</p>
-              </div>
-            </div>
+            </section>
           </section>
         </section>
       </section>
       <section className={styles.date_select_section}>
+        <h1 className={styles.section_title}>일정 및 수량 입력</h1>
         <div className={styles.time_select_and_result_view}>
           <div className={styles.date_picker_container}>
             <DatePicker
