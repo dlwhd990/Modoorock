@@ -7,6 +7,22 @@ const MainProgramItem = React.memo(({ item, reviewList }) => {
   const history = useHistory();
   const [review, setReview] = useState([]);
   const [reviewAvg, setReviewAvg] = useState(null);
+  const [mainImage, setMainImage] = useState(null);
+
+  const moveToProgram = () => {
+    history.push(`/programs/view/${item.idx}`);
+    window.scrollTo({ top: 0 });
+  };
+
+  useEffect(() => {
+    const imageList = item.photo.split("#");
+    imageList.forEach((photo) => {
+      if (photo.includes("_main")) {
+        setMainImage(photo);
+        return false;
+      }
+    });
+  }, []);
 
   useEffect(() => {
     const reviewResult = [];
@@ -28,12 +44,14 @@ const MainProgramItem = React.memo(({ item, reviewList }) => {
   }, [reviewList]);
 
   return (
-    <div className={styles.program_item}>
-      <img
-        src={item.photo}
-        alt="program_image"
-        className={styles.program_image}
-      />
+    <div className={styles.program_item} onClick={moveToProgram}>
+      {mainImage && (
+        <img
+          src={`${process.env.REACT_APP_BASEURL}-images/Exp/${mainImage}`}
+          alt="program_image"
+          className={styles.program_image}
+        />
+      )}
       <div className={styles.program_data_container}>
         <p className={styles.program_title}>{item.title}</p>
         <div className={styles.star_container}>

@@ -5,6 +5,7 @@ import styles from "./programDetail.module.css";
 import ProgramReview from "./programReview/programReview";
 import ReactStars from "react-rating-stars-component";
 import axios from "axios";
+import LoadingPage from "../../loadingPage/loadingPage";
 
 // 이미지 확대 시킬건지 (작으면 설명 잘 안보이니까)
 const ProgramDetail = ({ programList, reviewList }) => {
@@ -66,7 +67,7 @@ const ProgramDetail = ({ programList, reviewList }) => {
           프로그램 상세
         </div>
       </section>
-      {program && (
+      {program ? (
         <section>
           <section className={styles.program_detail_main}>
             <div className={styles.image_container}>
@@ -287,6 +288,8 @@ const ProgramDetail = ({ programList, reviewList }) => {
             </section>
           </section>
         </section>
+      ) : (
+        <LoadingPage />
       )}
     </section>
   );
