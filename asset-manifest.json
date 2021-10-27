@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/Modoorock/static/css/main.f6c7d2cc.chunk.css",
-    "main.js": "/Modoorock/static/js/main.3a74b064.chunk.js",
-    "main.js.map": "/Modoorock/static/js/main.3a74b064.chunk.js.map",
+    "main.js": "/Modoorock/static/js/main.8d4d99a8.chunk.js",
+    "main.js.map": "/Modoorock/static/js/main.8d4d99a8.chunk.js.map",
     "runtime-main.js": "/Modoorock/static/js/runtime-main.b34af722.js",
     "runtime-main.js.map": "/Modoorock/static/js/runtime-main.b34af722.js.map",
     "static/css/2.6cb9e2b9.chunk.css": "/Modoorock/static/css/2.6cb9e2b9.chunk.css",
@@ -24,6 +24,6 @@
     "static/css/2.6cb9e2b9.chunk.css",
     "static/js/2.974dcb82.chunk.js",
     "static/css/main.f6c7d2cc.chunk.css",
-    "static/js/main.3a74b064.chunk.js"
+    "static/js/main.8d4d99a8.chunk.js"
   ]
 }
