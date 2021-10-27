@@ -48,7 +48,7 @@ const AdminMain = ({ userLogout }) => {
       .catch((err) => console.error(err));
   };
 
-  const loadMyInquireList = (expIdx) => {
+  const loadMyInquireList = () => {
     axios
       .post(`${process.env.REACT_APP_BASEURL}/qna/getqnaexpuserlist`, {
         userIdx: user.idx,

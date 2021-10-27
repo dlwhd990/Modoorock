@@ -18,7 +18,10 @@ const Mainpage = ({ programList, viewItems, reviewList }) => {
   };
 
   useEffect(() => {
-    programList && setLatestSixProgramList(programList.reverse().slice(0, 6));
+    programList &&
+      setLatestSixProgramList(
+        programList.slice(programList.length - 6, programList.length)
+      );
   }, [programList]);
 
   return (
