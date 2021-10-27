@@ -45,6 +45,7 @@ const Programs = ({ areaList, programList, reviewList }) => {
       subtitle: "연인을 위한 패키지",
     },
   ];
+  const [themeDivision, setThemeDivision] = useState(null);
 
   const onSelectHandler = (e) => {
     if (e.currentTarget.innerText === "프로그램") {
@@ -115,6 +116,33 @@ const Programs = ({ areaList, programList, reviewList }) => {
       history.push("/programs/theme");
     }
   }, [switchValue]);
+
+  useEffect(() => {
+    const tmp = {
+      rural: [],
+      activity: [],
+      group: [],
+      friend: [],
+      family: [],
+      lover: [],
+    };
+    programList.forEach((item) => {
+      if (item.theme === "농촌체험") {
+        tmp.rural.push(item);
+      } else if (item.theme === "액티비티") {
+        tmp.activity.push(item);
+      } else if (item.theme === "단체") {
+        tmp.group.push(item);
+      } else if (item.theme === "친구") {
+        tmp.friend.push(item);
+      } else if (item.theme === "가족") {
+        tmp.family.push(item);
+      } else if (item.theme === "연인") {
+        tmp.lover.push(item);
+      }
+    });
+    setThemeDivision(tmp);
+  }, []);
 
   return (
     <section className={styles.programs}>
@@ -423,11 +451,48 @@ const Programs = ({ areaList, programList, reviewList }) => {
                     <i
                       className={`${styles.slick_arrow_icon_right} fas fa-chevron-right`}
                     ></i>
-                    <ProgramsThemeSlick
-                      viewItems={programList}
-                      areaList={areaList}
-                      reviewList={reviewList}
-                    />
+                    {themeDivision && theme.title === "농촌체험" && (
+                      <ProgramsThemeSlick
+                        viewItems={themeDivision.rural}
+                        areaList={areaList}
+                        reviewList={reviewList}
+                      />
+                    )}
+                    {themeDivision && theme.title === "액티비티" && (
+                      <ProgramsThemeSlick
+                        viewItems={themeDivision.activity}
+                        areaList={areaList}
+                        reviewList={reviewList}
+                      />
+                    )}
+                    {themeDivision && theme.title === "단체" && (
+                      <ProgramsThemeSlick
+                        viewItems={themeDivision.group}
+                        areaList={areaList}
+                        reviewList={reviewList}
+                      />
+                    )}
+                    {themeDivision && theme.title === "친구" && (
+                      <ProgramsThemeSlick
+                        viewItems={themeDivision.friend}
+                        areaList={areaList}
+                        reviewList={reviewList}
+                      />
+                    )}
+                    {themeDivision && theme.title === "가족" && (
+                      <ProgramsThemeSlick
+                        viewItems={themeDivision.family}
+                        areaList={areaList}
+                        reviewList={reviewList}
+                      />
+                    )}
+                    {themeDivision && theme.title === "연인" && (
+                      <ProgramsThemeSlick
+                        viewItems={themeDivision.lover}
+                        areaList={areaList}
+                        reviewList={reviewList}
+                      />
+                    )}
                   </div>
                 </section>
               ))}

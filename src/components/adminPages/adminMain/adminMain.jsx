@@ -64,6 +64,7 @@ const AdminMain = ({ userLogout }) => {
       .post(`${process.env.REACT_APP_BASEURL}/user/session`)
       .then((response) => {
         if (response.data === "") {
+          // if문 내부에 ||response.data.idType !== 1도 추가, 테스트 끝나면 추가하도록
           setUser(false);
         } else {
           setUser(response.data);

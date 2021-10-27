@@ -30,83 +30,7 @@ const App = (props) => {
 
   const [areaList, setAreaList] = useState(null);
 
-  const [programList, setProgramList] = useState([
-    {
-      idx: 0,
-      title:
-        "2021 월림픽에 도전하라! 2021 월림픽에 도전하라! 2021 월림픽에 도전하라! 2021 월림픽에 도전하라! 2021 월림픽에 도전하라! 2021 월림픽에 도전하라! 2021 월림픽에 도전하라! 2021 월림픽에 도전하라! 2021 월림픽에 도전하라!",
-      content:
-        "월미도(月尾島)는 인천광역시 중구 북성동에 속해 있는 섬이었다. 현재는 섬과 육지 사이가 메워졌다. 섬의 생김새가 반달 꼬리 모양 같아 붙여진 이름이다. 가장 높은 곳은 월미산으로, 해발 고도는 108m에 불과하다. 월미도 밑에는 그보다 작은 소월미도가 있다. 인천시민들과 그 주변 도시 주민들이 많이 찾는 명소이기도 하다.",
-      user_idx: "관리자(보류)",
-      date: 7,
-      price: 25000,
-      photo: "/Modoorock/images/service_right.png",
-      attraction: 2,
-    },
-    {
-      idx: 1,
-      title: "2021 경림픽에 도전하라!",
-      content:
-        "경복궁에서 경림픽에 도전하라 경복궁에서 경림픽에 도전하라 경복궁에서 경림픽에 도전하라 경복궁에서 경림픽에 도전하라 경복궁에서 경림픽에 도전하라 경복궁에서 경림픽에 도전하라 경복궁에서 경림픽에 도전하라 경복궁에서 경림픽에 도전하라 경복궁에서 경림픽에 도전하라 경복궁에서 경림픽에 도전하라 경복궁에서 경림픽에 도전하라 경복궁에서 경림픽에 도전하라 경복궁에서 경림픽에 도전하라 경복궁에서 경림픽에 도전하라 경복궁에서 경림픽에 도전하라 경복궁에서 경림픽에 도전하라 경복궁에서 경림픽에 도전하라 ",
-      user_idx: 1,
-      date: "보류",
-      price: 25000,
-      photo: "/Modoorock/images/service_right.png",
-      attraction: 1,
-    },
-    {
-      idx: 2,
-      title: "2021 경림픽에 도전하라!",
-      content: "경복궁에서 경림픽에 도전하라",
-      user_idx: 7,
-      date: "보류",
-      price: 20000,
-      photo: "/Modoorock/images/service_right.png",
-      attraction: 1,
-    },
-    {
-      idx: 3,
-      title: "2021 월림픽에 도전하라!",
-      content: "월미도에서 월림픽에 도전하라",
-      user_idx: 2,
-      date: "보류",
-      price: 25000,
-      photo: "/Modoorock/images/service_right.png",
-      attraction: 3,
-    },
-    {
-      idx: 4,
-      title: "해운대에서 해림픽에 도전하라",
-      content: "짧은설명 여기에!",
-      user_idx: 7,
-      date: "보류",
-      price: 1000,
-      photo: "/Modoorock/images/service_right.png",
-      attraction: 9,
-    },
-    {
-      idx: 5,
-      title: "[익산 교도소 세트장] 교도소를 체험하라 - 슬기로운 빵탈출",
-      content: "교도소 세트장에서 탈출게임을 즐겨보세요",
-      user_idx: 7,
-      date: "보류",
-      price: 11000,
-      photo: "/Modoorock/images/service_right.png",
-      attraction: 8,
-    },
-    {
-      idx: 6,
-      title:
-        "English test English test English test English test English test English test",
-      content:
-        "English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test English test ",
-      user_idx: 7,
-      date: "보류",
-      price: 1000,
-      photo: "/Modoorock/images/service_right.png",
-      attraction: 5,
-    },
-  ]);
+  const [programList, setProgramList] = useState(null);
 
   const [userIdx, setUserIdx] = useState(null);
 
@@ -318,6 +242,15 @@ const App = (props) => {
       });
   };
 
+  const getProgramList = () => {
+    axios
+      .post(`${process.env.REACT_APP_BASEURL}/exp/getexplist`, {
+        theme: "전체",
+      })
+      .then((response) => setProgramList(response.data))
+      .catch((err) => console.error(err));
+  };
+
   const getIntroVideos = () => {
     axios
       .post(`${process.env.REACT_APP_BASEURL}/advertise/getadvertiselist`)
@@ -330,6 +263,7 @@ const App = (props) => {
     getNoticeList();
     getFaqList();
     getAttractionList();
+    getProgramList();
     getIntroVideos();
   }, []);
 
@@ -393,11 +327,13 @@ const App = (props) => {
         </Route>
         <Route exact path="/programs/attraction/:path">
           <Header loggedin={loggedin} userLogout={userLogout} />
-          <Attraction
-            programList={programList}
-            areaList={areaList}
-            reviewList={reviewList}
-          />
+          {programList && areaList && reviewList && (
+            <Attraction
+              programList={programList}
+              areaList={areaList}
+              reviewList={reviewList}
+            />
+          )}
           <Footer />
         </Route>
         <Route exact path="/customer/:path">

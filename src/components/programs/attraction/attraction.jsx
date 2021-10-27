@@ -51,7 +51,7 @@ const Attraction = ({ programList, areaList, reviewList }) => {
       }
     }
     programList.forEach((item) => {
-      item.attraction === parseInt(path) && result.push(item);
+      item.attractionIdx === parseInt(path) && result.push(item);
     });
     setAttractionProgramList(result);
     setResultProgramList(result);

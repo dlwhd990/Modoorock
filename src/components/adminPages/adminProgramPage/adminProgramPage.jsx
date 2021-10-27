@@ -15,8 +15,16 @@ const AdminProgramPage = (props) => {
         idx: parseInt(path_three),
       })
       .then((response) => {
-        console.log(response);
-        setAttractionInfo(response.data);
+        axios
+          .post(`${process.env.REACT_APP_BASEURL}/user/session`)
+          .then((res) => {
+            if (res.data.idx !== response.data.userIdx) {
+              window.alert("이 페이지에 접근할 권한이 없습니다.");
+              window.location.href = "/";
+              return;
+            }
+            setAttractionInfo(response.data);
+          });
       })
       .catch((err) => console.error(err));
   };
@@ -27,8 +35,13 @@ const AdminProgramPage = (props) => {
         theme: "전체",
       })
       .then((response) => {
-        console.log(response); //임시
-        setMyProgramList(response.data);
+        const result = [];
+        response.data.forEach((item) => {
+          if (item.attractionIdx === parseInt(path_three)) {
+            result.push(item);
+          }
+        });
+        setMyProgramList(result);
       })
       .catch((err) => console.error(err));
   };

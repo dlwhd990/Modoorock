@@ -15,8 +15,9 @@ const AreaItem = ({ item, programList }) => {
 
   useEffect(() => {
     let cnt = 0;
+    console.log(programList, item);
     programList.forEach((program) => {
-      program.attraction === item.idx && cnt++;
+      program.attractionIdx === item.idx && cnt++;
     });
     setProgramCount(cnt);
   }, []);

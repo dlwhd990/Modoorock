@@ -11,6 +11,7 @@ import AdminProgramUploadTimeItem from "./adminProgramUploadTimeItem/adminProgra
 
 registerLocale("ko", ko);
 
+// 이 페이지 url 타고 타 사용자가 접근하는 것 막아야함 => 방법은 나중에 생각
 const AdminProgramUploadPage = ({ user }) => {
   const history = useHistory();
   const params = useParams();
@@ -111,7 +112,14 @@ const AdminProgramUploadPage = ({ user }) => {
 
     axios
       .post(`${process.env.REACT_APP_BASEURL}/exp/insertexp`, formData)
-      .then((response) => console.log(response))
+      .then((response) => {
+        if (response.data === "success") {
+          window.alert("성공적으로 업로드되었습니다.");
+          history.push(`/admin/attraction/view/${params.path_three}`);
+        } else {
+          window.alert("오류가 발생했습니다. 새로고침 후에 다시 시도해주세요");
+        }
+      })
       .catch((err) => console.error(err));
   };
 
@@ -132,9 +140,11 @@ const AdminProgramUploadPage = ({ user }) => {
         console.log(response.data);
         if (response.data === "") {
           window.alert("로그인 후에 사용해주세요");
-        } else if (response.data.idType !== 1) {
-          window.alert("권한이 없습니다. 다시 로그인 후에 사용해주세요");
-        } else {
+        }
+        //else if (response.data.idType !== 1) {
+        //window.alert("권한이 없습니다. 다시 로그인 후에 사용해주세요"); //여기 나중에 주석풀기
+        //}
+        else {
           const userIdx = response.data.idx;
           insertProgramHandler(userIdx);
         }

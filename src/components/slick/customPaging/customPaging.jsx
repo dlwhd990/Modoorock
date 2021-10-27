@@ -63,12 +63,16 @@ function PrevArrow(props) {
 
 export default class CustomPaging extends Component {
   render() {
+    const { imageList } = this.props;
+    console.log(imageList);
     const settings = {
       customPaging: function (i) {
         return (
           <a>
             <img
-              src={`/Modoorock/images/${i + 1}.png`}
+              src={`${process.env.REACT_APP_BASEURL}-images/Exp/${
+                imageList[i - 1 + 1]
+              }`}
               alt="select_image"
               className="dot_image"
             />
@@ -92,28 +96,28 @@ export default class CustomPaging extends Component {
         <Slider {...settings}>
           <div>
             <img
-              src="/Modoorock/images/1.png"
+              src={`${process.env.REACT_APP_BASEURL}-images/Exp/${imageList[0]}`}
               alt="slide_image"
               className="image"
             />
           </div>
           <div>
             <img
-              src="/Modoorock/images/2.png"
+              src={`${process.env.REACT_APP_BASEURL}-images/Exp/${imageList[1]}`}
               alt="slide_image"
               className="image"
             />
           </div>
           <div>
             <img
-              src="/Modoorock/images/3.png"
+              src={`${process.env.REACT_APP_BASEURL}-images/Exp/${imageList[2]}`}
               alt="slide_image"
               className="image"
             />
           </div>
           <div>
             <img
-              src="/Modoorock/images/4.png"
+              src={`${process.env.REACT_APP_BASEURL}-images/Exp/${imageList[3]}`}
               alt="slide_image"
               className="image"
             />

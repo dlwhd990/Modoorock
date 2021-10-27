@@ -3,10 +3,10 @@ import { useHistory } from "react-router";
 import styles from "./themeSlickItem.module.css";
 import StarRatingComponent from "react-star-rating-component";
 
-const ThemeSlickItem = ({ item, areaList, reviewList }) => {
-  const [areaData, setAreaData] = useState(null);
+const ThemeSlickItem = ({ item, reviewList }) => {
   const [reviewCount, setReviewCount] = useState(0);
   const [reviewStarAvg, setReviewStarAvg] = useState((0).toFixed(1));
+  const [mainImage, setMainImage] = useState(null);
   const history = useHistory();
 
   const onItemClick = () => {
@@ -18,12 +18,6 @@ const ThemeSlickItem = ({ item, areaList, reviewList }) => {
     let count = 0;
     let total = 0;
 
-    for (let i = 0; i < areaList.length; i++) {
-      if (areaList[i].idx === item.attraction) {
-        setAreaData(areaList[i]);
-        break;
-      }
-    }
     reviewList.forEach((reviewItem) => {
       reviewItem.exp_idx === item.idx &&
         (count += 1) &&
@@ -31,14 +25,27 @@ const ThemeSlickItem = ({ item, areaList, reviewList }) => {
     });
     setReviewCount(count);
     count > 0 && setReviewStarAvg((total / count).toFixed(1));
+
+    //이미지 설정
+    const tmp = item.photo.split("#");
+    tmp.forEach((photo) => {
+      if (photo.includes("_main")) {
+        setMainImage(photo);
+        return false;
+      }
+    });
   }, []);
   return (
     <section className={styles.theme_item} onClick={onItemClick}>
       <div className={styles.image_container}>
-        <img src={item.photo} alt="area_image" className={styles.image} />
-        <div className={styles.area_badge}>
-          {areaData && `[${areaData.area}] ${areaData.name}`}
-        </div>
+        {mainImage && (
+          <img
+            src={`${process.env.REACT_APP_BASEURL}-images/Exp/${mainImage}`}
+            alt="area_image"
+            className={styles.image}
+          />
+        )}
+        <div className={styles.area_badge}>{item.theme}</div>
       </div>
       <div className={styles.text_container}>
         <div className={styles.name_container}>
