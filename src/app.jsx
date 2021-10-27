@@ -21,60 +21,12 @@ import SearchResultPage from "./components/customerCenter/searchResultPage/searc
 import FindIdResult from "./components/find/findId/findIdResult/findIdResult";
 import AdminMain from "./components/adminPages/adminMain/adminMain";
 import NoticeView from "./components/customerCenter/notice/noticeView/noticeView";
+import ModoorockAdmin from "./components/adminPages/modoorockAdmin/modoorockAdmin";
 
 axios.defaults.withCredentials = true;
 
 const App = (props) => {
-  const [introVideos, setIntroVideos] = useState([
-    {
-      idx: 0,
-      date: "보류",
-      title: "[북촌 한옥마을 미션투어]",
-      content: "https://www.youtube.com/watch?v=fRgizRKpE_Q",
-      thumbnail:
-        "https://static.wixstatic.com/media/9e9163_0d65cbf903064b47872fb9fc8bc3428c~mv2.png/v1/fill/w_724,h_516,al_c,lg_1,q_90/%EC%A0%9C%EB%AA%A9%EC%9D%84%20%EC%9E%85%EB%A0%A5%ED%95%B4%EC%A3%BC%EC%84%B8%EC%9A%94_-002%20(1).webp",
-    },
-    {
-      idx: 1,
-      date: "보류",
-      title: "[북촌 한옥마을 미션투어]",
-      content: "https://www.youtube.com/watch?v=fRgizRKpE_Q",
-      thumbnail:
-        "https://static.wixstatic.com/media/9e9163_0d65cbf903064b47872fb9fc8bc3428c~mv2.png/v1/fill/w_724,h_516,al_c,lg_1,q_90/%EC%A0%9C%EB%AA%A9%EC%9D%84%20%EC%9E%85%EB%A0%A5%ED%95%B4%EC%A3%BC%EC%84%B8%EC%9A%94_-002%20(1).webp",
-    },
-    {
-      idx: 2,
-      date: "보류",
-      title: "[북촌 한옥마을 미션투어]",
-      content: "https://www.youtube.com/watch?v=fRgizRKpE_Q",
-      thumbnail:
-        "https://static.wixstatic.com/media/9e9163_0d65cbf903064b47872fb9fc8bc3428c~mv2.png/v1/fill/w_724,h_516,al_c,lg_1,q_90/%EC%A0%9C%EB%AA%A9%EC%9D%84%20%EC%9E%85%EB%A0%A5%ED%95%B4%EC%A3%BC%EC%84%B8%EC%9A%94_-002%20(1).webp",
-    },
-    {
-      idx: 3,
-      date: "보류",
-      title: "[북촌 한옥마을 미션투어]",
-      content: "https://www.youtube.com/watch?v=fRgizRKpE_Q",
-      thumbnail:
-        "https://static.wixstatic.com/media/9e9163_0d65cbf903064b47872fb9fc8bc3428c~mv2.png/v1/fill/w_724,h_516,al_c,lg_1,q_90/%EC%A0%9C%EB%AA%A9%EC%9D%84%20%EC%9E%85%EB%A0%A5%ED%95%B4%EC%A3%BC%EC%84%B8%EC%9A%94_-002%20(1).webp",
-    },
-    {
-      idx: 4,
-      date: "보류",
-      title: "[북촌 한옥마을 미션투어]",
-      content: "https://www.youtube.com/watch?v=fRgizRKpE_Q",
-      thumbnail:
-        "https://static.wixstatic.com/media/9e9163_0d65cbf903064b47872fb9fc8bc3428c~mv2.png/v1/fill/w_724,h_516,al_c,lg_1,q_90/%EC%A0%9C%EB%AA%A9%EC%9D%84%20%EC%9E%85%EB%A0%A5%ED%95%B4%EC%A3%BC%EC%84%B8%EC%9A%94_-002%20(1).webp",
-    },
-    {
-      idx: 5,
-      date: "보류",
-      title: "[북촌 한옥마을 미션투어]",
-      content: "https://www.youtube.com/watch?v=fRgizRKpE_Q",
-      thumbnail:
-        "https://static.wixstatic.com/media/9e9163_0d65cbf903064b47872fb9fc8bc3428c~mv2.png/v1/fill/w_724,h_516,al_c,lg_1,q_90/%EC%A0%9C%EB%AA%A9%EC%9D%84%20%EC%9E%85%EB%A0%A5%ED%95%B4%EC%A3%BC%EC%84%B8%EC%9A%94_-002%20(1).webp",
-    },
-  ]);
+  const [introVideos, setIntroVideos] = useState([]);
 
   const [areaList, setAreaList] = useState(null);
 
@@ -366,11 +318,19 @@ const App = (props) => {
       });
   };
 
+  const getIntroVideos = () => {
+    axios
+      .post(`${process.env.REACT_APP_BASEURL}/advertise/getadvertiselist`)
+      .then((response) => setIntroVideos(response.data))
+      .catch((err) => console.error(err));
+  };
+
   useEffect(() => {
     sessionCheck();
     getNoticeList();
     getFaqList();
     getAttractionList();
+    getIntroVideos();
   }, []);
 
   useEffect(() => {
@@ -497,6 +457,9 @@ const App = (props) => {
         </Route>
         <Route exact path="/admin/:path/:path_two/:path_three/:path_four">
           <AdminMain userLogout={userLogout} />
+        </Route>
+        <Route exact path="/modoorockAdmin">
+          <ModoorockAdmin />
         </Route>
       </BrowserRouter>
     </section>

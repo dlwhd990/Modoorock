@@ -1,15 +1,30 @@
 .item {
-  height: 64px;
+  height: 70px;
   padding: 6px 16px;
   border-bottom: 1px solid var(--color-light-border);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .time_data,
+.delete_button,
 .amount_data {
   margin: 0;
 }
 
+.delete_button_and_amount_data {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.delete_button {
+  color: red;
+  cursor: pointer;
+}
+
 .amount_data {
-  text-align: right;
   color: var(--color-light-blue);
 }

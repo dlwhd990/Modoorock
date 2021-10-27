@@ -116,7 +116,7 @@
 .submit_button {
   width: 80px;
   position: absolute;
-  bottom: 30px;
+  bottom: 0;
   right: 0;
   outline: none;
   border: none;
@@ -334,7 +334,7 @@
 
 .view_date_result_container {
   width: 250px;
-  height: 320px;
+  height: 350px;
   border: 1px solid var(--color-light-border);
   border-radius: 4px;
   overflow-y: scroll;

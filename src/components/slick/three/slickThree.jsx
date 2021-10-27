@@ -93,7 +93,7 @@ export default class SimpleSliderThree extends Component {
           {viewItems.map((item) => (
             <div key={item.idx} className="image_box">
               <img
-                src={item.thumbnail}
+                src={`${process.env.REACT_APP_BASEURL}-images/Advertise/${item.thumbnail}`}
                 alt="thumbnail"
                 className="thumbnail"
                 onClick={() => {

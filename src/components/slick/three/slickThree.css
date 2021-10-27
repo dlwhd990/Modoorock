@@ -23,6 +23,7 @@
 
 .thumbnail {
   width: 80%;
+  height: 300px;
   outline: none;
   border-radius: 8px;
   margin: auto;

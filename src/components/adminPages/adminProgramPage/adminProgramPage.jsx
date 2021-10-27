@@ -23,8 +23,8 @@ const AdminProgramPage = (props) => {
 
   const loadProgramList = () => {
     axios
-      .post(`${process.env.REACT_APP_BASEURL}/exp/getexpinfo`, {
-        idx: path_three,
+      .post(`${process.env.REACT_APP_BASEURL}/exp/getexplist`, {
+        theme: "전체",
       })
       .then((response) => {
         console.log(response); //임시
@@ -40,7 +40,7 @@ const AdminProgramPage = (props) => {
 
   useEffect(() => {
     loadAttractionInfo();
-    //loadProgramList();
+    loadProgramList();
   }, []);
 
   return (
@@ -58,7 +58,7 @@ const AdminProgramPage = (props) => {
           >{`${myProgramList.length} 개의 체험상품`}</p>
         </div>
         <button className={styles.add_button} onClick={addProgramHandler}>
-          관광지 추가
+          체험상품 추가
         </button>
       </section>
     </section>

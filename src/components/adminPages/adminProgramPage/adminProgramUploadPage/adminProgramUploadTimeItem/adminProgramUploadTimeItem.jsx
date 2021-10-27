@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./adminProgramUploadTimeItem.module.css";
 
-const AdminProgramUploadTimeItem = ({ item }) => {
+const AdminProgramUploadTimeItem = ({ item, deleteDateDataHandler }) => {
   const time = item.time;
 
   return (
@@ -12,7 +12,16 @@ const AdminProgramUploadTimeItem = ({ item }) => {
           10
         )}일 ${time.slice(11, 13)}시 ${time.slice(14, 16)}분`}
       </p>
-      <p className={styles.amount_data}>{`${item.amount} 개`}</p>
+      <div className={styles.delete_button_and_amount_data}>
+        <p
+          className={styles.delete_button}
+          data-idx={item.idx}
+          onClick={deleteDateDataHandler}
+        >
+          삭제
+        </p>
+        <p className={styles.amount_data}>{`${item.amount} 개`}</p>
+      </div>
     </div>
   );
 };

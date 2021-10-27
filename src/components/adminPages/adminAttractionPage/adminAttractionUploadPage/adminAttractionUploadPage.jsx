@@ -2,7 +2,6 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import TemplateSlick from "../../../slick/templateSlick/templateSlick";
-import AdminAttractionUploadButtonItem from "./adminAttractionUploadButtonItem/adminAttractionUploadButtonItem";
 import styles from "./adminAttractionUploadPage.module.css";
 
 const AdminAttractionUploadPage = ({ user }) => {
@@ -263,6 +262,10 @@ const AdminAttractionUploadPage = ({ user }) => {
     });
   };
 
+  useEffect(() => {
+    console.log(nowTemplateButtonOrder);
+  }, [nowTemplateButtonOrder]);
+
   return (
     <section className={styles.attraction_upload_page}>
       <section className={styles.attraction_top}>
@@ -394,37 +397,45 @@ const AdminAttractionUploadPage = ({ user }) => {
             설정
           </button>
         </div>
-        <section className={styles.button_order_setting_container}>
-          <section className={styles.button_order_setting_top}>
-            <p className={styles.button_order_setting_title}>버튼 설정</p>
-          </section>
-          <section className={styles.button_order_setting_main}>
-            <div className={styles.button_order_setting_main_header}>
-              <p className={styles.button_order_setting_main_header_id}>번호</p>
-              <p className={styles.button_order_setting_main_header_name}>
-                버튼명
+        <section className={styles.button_order_setting_and_preview_container}>
+          <section className={styles.button_order_setting_container}>
+            <section className={styles.button_order_setting_top}>
+              <p className={styles.button_order_setting_title}>버튼 설정</p>
+              <p className={styles.button_order_setting_subtitle}>
+                드래그하여 순서 변경
               </p>
-              <p className={styles.button_order_setting_main_header_edit}>
-                순서
-              </p>
-            </div>
-            {nowTemplateButtonOrder &&
-              nowTemplateButtonOrder.map((item, index) => (
-                <div
-                  key={item.idx}
-                  data-position={index}
-                  className={styles.template_button_item}
-                  draggable="true"
-                  onDragStart={onDragStart}
-                  onDragOver={onDragOver}
-                  onDrop={onDrop}
-                >
-                  <p className={styles.template_button_id}>{item.idx}</p>
-                  <p className={styles.template_button_name}>{item.name}</p>
-                  <p className={styles.template_button_change}>변경</p>
-                </div>
-              ))}
+            </section>
+            <section className={styles.button_order_setting_main}>
+              <div className={styles.button_order_setting_main_header}>
+                <p className={styles.button_order_setting_main_header_id}>
+                  번호
+                </p>
+                <p className={styles.button_order_setting_main_header_name}>
+                  버튼명
+                </p>
+                <p className={styles.button_order_setting_main_header_edit}></p>
+              </div>
+              {nowTemplateButtonOrder &&
+                nowTemplateButtonOrder.map((item, index) => (
+                  <div
+                    key={item.idx}
+                    data-position={index}
+                    className={styles.template_button_item}
+                    draggable="true"
+                    onDragStart={onDragStart}
+                    onDragOver={onDragOver}
+                    onDrop={onDrop}
+                  >
+                    <p className={styles.template_button_id}>{item.idx}</p>
+                    <p className={styles.template_button_name}>{item.name}</p>
+                    <i
+                      className={`${styles.template_button_icon} fas fa-arrows-alt-v`}
+                    ></i>
+                  </div>
+                ))}
+            </section>
           </section>
+          <section className={styles.template_preview}></section>
         </section>
       </section>
       {templatePopupOn && (

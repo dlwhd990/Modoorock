@@ -14,6 +14,10 @@ registerLocale("ko", ko);
 const AdminProgramUploadPage = ({ user }) => {
   const history = useHistory();
   const params = useParams();
+  const titleRef = useRef();
+  const priceRef = useRef();
+  const themeRef = useRef();
+  const contentRef = useRef();
   const countInputRef = useRef();
   const [previewImage, setPreviewImage] = useState(null);
   const [subImages, setSubImages] = useState(null);
@@ -37,31 +41,37 @@ const AdminProgramUploadPage = ({ user }) => {
   };
 
   const onFileInputChangeHandler = (e) => {
-    let reader = new FileReader();
-    let file = e.target.files[0];
-
+    const reader = new FileReader();
+    const file = e.target.files[0];
+    const blob = file.slice(0, file.size, "image/png");
+    const fileName = file.name.split(".");
+    const newFile = new File([blob], `${fileName[0]}_main.${fileName[1]}`, {
+      type: "image/png",
+    });
     reader.onloadend = () => {
       setPreviewImage({
-        file: file,
+        file: newFile,
         previewURL: reader.result,
       });
-      console.log(file, reader.result);
+      console.log(newFile, reader.result);
     };
     file && reader.readAsDataURL(file);
   };
 
   const onMultipleFileInputChangeHandler = (event) => {
-    let reader = new FileReader();
+    const reader = new FileReader();
+    const result = [];
     function readFile(index) {
       let files = event.target.files;
       if (index >= files.length) return;
       var file = files[index];
       reader.onload = function (e) {
-        setSubImages(e.target.result);
+        result.push(file);
         readFile(index + 1);
       };
       reader.readAsDataURL(file);
     }
+    setSubImages(result);
     readFile(0);
   };
 
@@ -77,47 +87,59 @@ const AdminProgramUploadPage = ({ user }) => {
     </button>
   ));
 
-  //const insertAttraction = (userData) => {
-  //  console.log(userData);
-  //  axios
-  //    .post(`${process.env.REACT_APP_BASEURL}/attraction/insertattraction`, {
-  //      name,
-  //      area,
-  //      photo: "nothing",
-  //      content,
-  //      userIdx: userData.data.idx,
-  //    })
-  //    .then((res) => {
-  //      if (res.data === "success") {
-  //        window.alert("성공적으로 업로드 되었습니다");
-  //        history.push("/admin/attraction");
-  //      }
-  //    })
-  //    .catch((err) => console.error(err));
-  //};
-  //
-  //const onSubmitHandler = (e) => {
-  //  e.preventDefault();
-  //  if (name === "" || content === "" || area === "" || !previewImage) {
-  //    window.alert("모든 사항을 입력해주세요");
-  //    return;
-  //  }
-  //  axios
-  //    .post(`${process.env.REACT_APP_BASEURL}/user/session`)
-  //    .then((response) => {
-  //      console.log(response);
-  //      if (
-  //        response.data !== "" &&
-  //        response.data.idType === 1 &&
-  //        response.data.idx === user.idx
-  //      ) {
-  //        insertAttraction(response);
-  //      } else {
-  //        window.alert("로그인 정보가 맞지 않습니다.");
-  //      }
-  //    })
-  //    .catch((err) => console.error(err));
-  //};
+  const insertProgramHandler = (userIdx) => {
+    const title = titleRef.current.value;
+    const price = priceRef.current.value;
+    const content = contentRef.current.value;
+    const theme = themeRef.current.value;
+    const files = [...subImages, previewImage.file];
+
+    const formData = new FormData();
+    formData.append("userIdx", userIdx);
+    formData.append("attractionIdx", params.path_three);
+    formData.append("title", title);
+    formData.append("price", price);
+    formData.append("content", content);
+    formData.append("theme", theme);
+    files.forEach((file) => {
+      formData.append("files", file);
+    });
+
+    for (let value of formData.values()) {
+      console.log(value);
+    }
+
+    axios
+      .post(`${process.env.REACT_APP_BASEURL}/exp/insertexp`, formData)
+      .then((response) => console.log(response))
+      .catch((err) => console.error(err));
+  };
+
+  const submitButtonHandler = (e) => {
+    e.preventDefault();
+    const title = titleRef.current.value;
+    const price = priceRef.current.value;
+    const content = contentRef.current.value;
+    const theme = themeRef.current.value;
+    const files = [...subImages, previewImage.file];
+    if (!title || !price || !content || !theme || files.length < 4) {
+      window.alert("모든 정보를 입력해주세요");
+      return;
+    }
+    axios
+      .post(`${process.env.REACT_APP_BASEURL}/user/session`)
+      .then((response) => {
+        console.log(response.data);
+        if (response.data === "") {
+          window.alert("로그인 후에 사용해주세요");
+        } else if (response.data.idType !== 1) {
+          window.alert("권한이 없습니다. 다시 로그인 후에 사용해주세요");
+        } else {
+          const userIdx = response.data.idx;
+          insertProgramHandler(userIdx);
+        }
+      });
+  };
 
   const nameChangeHandler = (e) => {
     setName(e.target.value);
@@ -189,6 +211,16 @@ const AdminProgramUploadPage = ({ user }) => {
     });
   };
 
+  const deleteDateDataHandler = (e) => {
+    const result = [];
+
+    dateDataList.forEach((item) => {
+      parseInt(e.target.dataset.idx) !== item.idx && result.push(item);
+    });
+    setDateDataList(result);
+    console.log(result);
+  };
+
   useEffect(() => {
     loadAttractionInfo();
   }, []);
@@ -233,6 +265,7 @@ const AdminProgramUploadPage = ({ user }) => {
             <div className={styles.form_content}>
               <p className={styles.form_text}>체험상품 명</p>
               <input
+                ref={titleRef}
                 type="text"
                 className={styles.form_input}
                 onChange={nameChangeHandler}
@@ -243,6 +276,7 @@ const AdminProgramUploadPage = ({ user }) => {
             <div className={styles.form_content}>
               <p className={styles.form_text}>체험상품 가격</p>
               <input
+                ref={priceRef}
                 type="text"
                 className={styles.form_input}
                 onChange={priceChangeHandler}
@@ -253,6 +287,7 @@ const AdminProgramUploadPage = ({ user }) => {
             <div className={styles.form_content}>
               <p className={styles.form_text}>체험상품 테마</p>
               <select
+                ref={themeRef}
                 name="theme"
                 id="theme"
                 className={styles.theme_select}
@@ -270,6 +305,7 @@ const AdminProgramUploadPage = ({ user }) => {
             <div className={styles.form_content_textarea}>
               <p className={styles.form_text}>상품 소개</p>
               <textarea
+                ref={contentRef}
                 name="content"
                 id="content"
                 className={styles.form_textarea}
@@ -278,6 +314,12 @@ const AdminProgramUploadPage = ({ user }) => {
                 placeholder="상품 소개"
               ></textarea>
             </div>
+            <button
+              className={styles.submit_button}
+              onClick={submitButtonHandler}
+            >
+              업로드
+            </button>
           </form>
           <section className={styles.image_preview_container}>
             <p className={styles.image_preview_title}>미리보기</p>
@@ -400,7 +442,11 @@ const AdminProgramUploadPage = ({ user }) => {
           </div>
           <div className={styles.view_date_result_container}>
             {dateDataList.map((item) => (
-              <AdminProgramUploadTimeItem key={item.idx} item={item} />
+              <AdminProgramUploadTimeItem
+                key={item.idx}
+                item={item}
+                deleteDateDataHandler={deleteDateDataHandler}
+              />
             ))}
           </div>
         </div>
