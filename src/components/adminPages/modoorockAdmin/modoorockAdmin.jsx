@@ -1,65 +1,177 @@
 import axios from "axios";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useHistory, useParams } from "react-router";
 import styles from "./modoorockAdmin.module.css";
+import ModoorockAdminAdPage from "./modoorockAdminAdPage/modoorockAdminAdPage";
+import ModoorockAdminAttractionPage from "./modoorockAdminAttractionPage/modoorockAdminAttractionPage";
 
 const ModoorockAdmin = (props) => {
-  const adTitleRef = useRef();
-  const adUrlRef = useRef();
-  const [adThumbnail, setAdThumbnail] = useState(null);
+  const history = useHistory();
+  const { path } = useParams();
+  const [selected, setSelected] = useState("메인");
+  const [attractionList, setAttractionList] = useState(null);
+  const [programList, setProgramList] = useState(null);
+  const [userList, setUserList] = useState(null);
 
-  const onFileInputHandler = (e) => {
-    let reader = new FileReader();
-    let file = e.target.files[0];
-
-    reader.onloadend = () => {
-      setAdThumbnail(file);
-    };
-    file && reader.readAsDataURL(file);
-  };
-
-  const onAdvertisementUploadHandler = () => {
-    const title = adTitleRef.current.value;
-    const content = adUrlRef.current.value;
-    const formData = new FormData();
-    formData.append("title", title);
-    formData.append("content", content);
-    formData.append("files", adThumbnail);
+  const modoorockAdminCheck = () => {
     axios
-      .post(
-        `${process.env.REACT_APP_BASEURL}/advertise/insertadvertise`,
-        formData
-      )
-      .then((response) => console.log(response))
+      .post(`${process.env.REACT_APP_BASEURL}/user/session`)
+      .then((response) => {
+        if (response.data === "") {
+          //|| response.data.idType !== 2 나중에추가
+          window.alert("권한이 없습니다.");
+          window.location.href = "/Modoorock";
+        } else {
+          loadAttractionList();
+          loadUserList();
+          loadProgramList();
+        }
+      })
       .catch((err) => console.error(err));
   };
+
+  const onSelectHandler = (e) => {
+    setSelected(e.currentTarget.innerText);
+    history.push(`/modoorockadmin/${e.currentTarget.dataset.param}`);
+    window.scrollTo({ top: 0 });
+  };
+
+  const loadAttractionList = () => {
+    axios
+      .post(`${process.env.REACT_APP_BASEURL}/attraction/getattractionlist`, {
+        area: "전체",
+      })
+      .then((response) => setAttractionList(response.data))
+      .catch((err) => console.error(err));
+  };
+
+  const loadUserList = () => {
+    axios
+      .post(`${process.env.REACT_APP_BASEURL}/user/getuserlist`)
+      .then((response) => setUserList(response.data))
+      .catch((err) => console.error(err));
+  };
+
+  const loadProgramList = () => {
+    axios
+      .post(`${process.env.REACT_APP_BASEURL}/exp/getexplist`, {
+        theme: "전체",
+      })
+      .then((response) => setProgramList(response.data))
+      .catch((err) => console.error(err));
+  };
+
+  useEffect(() => {
+    modoorockAdminCheck();
+  }, []);
+
   return (
     <section className={styles.main}>
-      <section className={styles.advertise_upload_container}>
-        <h1 className={styles.container_title}>홍보영상 업로드</h1>
-        <div className={styles.input_container}>
-          <p className={styles.text}>제목</p>
-          <input ref={adTitleRef} type="text" className={styles.text_input} />
-        </div>
-        <div className={styles.input_container}>
-          <p className={styles.text}>주소 (URL)</p>
-          <input ref={adUrlRef} type="text" className={styles.text_input} />
-        </div>
-        <div className={styles.input_container}>
-          <p className={styles.text}>썸네일</p>
-          <input
-            type="file"
-            accept="image/jpg,image/png,image/jpeg"
-            className={styles.file_input}
-            onChange={onFileInputHandler}
+      <header className={styles.header}>
+        <img
+          src="/Modoorock/images/modoorock.png"
+          alt="logo"
+          className={styles.logo}
+          onClick={() => {
+            setSelected("메인");
+            history.push("/modoorockadmin");
+            window.scrollTo({ top: 0 });
+          }}
+        />
+        <nav className={styles.nav}>
+          <ul className={styles.menu_list}>
+            <li
+              className={`${
+                selected === "홍보영상"
+                  ? `${styles.menu_item} ${styles.selected}`
+                  : `${styles.menu_item} ${styles.not_selected}`
+              }`}
+              onClick={onSelectHandler}
+              data-param="advertise"
+            >
+              홍보영상
+            </li>
+            <li
+              className={`${
+                selected === "관광지 관리"
+                  ? `${styles.menu_item} ${styles.selected}`
+                  : `${styles.menu_item} ${styles.not_selected}`
+              }`}
+              onClick={onSelectHandler}
+              data-param="attraction"
+            >
+              관광지 관리
+            </li>
+            <li
+              className={`${
+                selected === "문의/답변"
+                  ? `${styles.menu_item} ${styles.selected}`
+                  : `${styles.menu_item} ${styles.not_selected}`
+              }`}
+              onClick={onSelectHandler}
+              data-param="inquire"
+            >
+              문의/답변
+            </li>
+            <li
+              className={`${
+                selected === "배경 업로드"
+                  ? `${styles.menu_item} ${styles.selected}`
+                  : `${styles.menu_item} ${styles.not_selected}`
+              }`}
+              onClick={onSelectHandler}
+              data-param="background"
+            >
+              배경 업로드
+            </li>
+            <li
+              className={`${
+                selected === "회원관리"
+                  ? `${styles.menu_item} ${styles.selected}`
+                  : `${styles.menu_item} ${styles.not_selected}`
+              }`}
+              onClick={onSelectHandler}
+              data-param="user"
+            >
+              회원관리
+            </li>
+            <li
+              className={`${
+                selected === "통계"
+                  ? `${styles.menu_item} ${styles.selected}`
+                  : `${styles.menu_item} ${styles.not_selected}`
+              }`}
+              onClick={onSelectHandler}
+              data-param="stat"
+            >
+              통계
+            </li>
+          </ul>
+        </nav>
+      </header>
+      {!path ? (
+        <section className={styles.mainpage}>
+          <div className={styles.filter}></div>
+          <div className={styles.data_container}>
+            <p className={styles.title}>모두락 관리자 페이지</p>
+            <p className={styles.subtitle}>웹사이트 관리 시스템</p>
+          </div>
+        </section>
+      ) : path === "advertise" ? (
+        <ModoorockAdminAdPage />
+      ) : path === "attraction" ? (
+        attractionList &&
+        userList &&
+        programList && (
+          <ModoorockAdminAttractionPage
+            attractionList={attractionList}
+            userList={userList}
+            programList={programList}
           />
-        </div>
-        <button
-          className={styles.submit_button}
-          onClick={onAdvertisementUploadHandler}
-        >
-          업로드
-        </button>
-      </section>
+        )
+      ) : (
+        <></>
+      )}
     </section>
   );
 };

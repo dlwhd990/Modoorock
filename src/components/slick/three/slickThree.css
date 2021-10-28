@@ -52,4 +52,9 @@
     transform: scale(1.15) translateY(50px);
     transition: 200ms all ease-in;
   }
+
+  .thumbnail {
+    width: 75%;
+    height: 180px;
+  }
 }

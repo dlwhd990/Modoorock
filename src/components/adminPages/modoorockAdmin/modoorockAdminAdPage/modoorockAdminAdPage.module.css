@@ -1,0 +1,65 @@
+.main {
+  background-color: var(--color-smoke-white);
+}
+
+.advertise_upload_container {
+  width: 100%;
+  height: calc(100vh - 80px);
+  margin-top: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  animation: appear 0.6s;
+}
+.title {
+  font-size: var(--font-size-title);
+  font-weight: 500;
+  margin: 0 0 20px 0;
+}
+.text {
+  width: 100px;
+}
+.input_container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.text_input {
+  width: 300px;
+  height: 32px;
+  padding: 2px 4px;
+  border: 1px solid var(--color-light-border);
+  border-radius: 4px;
+  font-size: var(--font-size-normal);
+}
+
+.file_input {
+  width: 300px;
+}
+
+.submit_button {
+  margin-top: 30px;
+  width: 80px;
+  height: 30px;
+  outline: none;
+  border: none;
+  background-color: var(--color-admin-theme);
+  color: white;
+  font-size: var(--font-size-normal);
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+@keyframes appear {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
