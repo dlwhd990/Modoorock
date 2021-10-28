@@ -1,9 +1,39 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import styles from "./modoorockAdminAttractionItem.module.css";
 
-const ModoorockAdminAttractionItem = ({ item, userList, programList }) => {
+const ModoorockAdminAttractionItem = ({
+  item,
+  userList,
+  programList,
+  loadAttractionList,
+}) => {
   const [user, setUser] = useState(null);
   const [programCount, setProgramCount] = useState(0);
+
+  const attractionDeleteButtonHandler = () => {
+    const confirm = window.confirm(
+      "정말로 관광지를 삭제하시겠습니까? 관광지를 삭제하면 관광지에 포함된 체험 상품들까지 모두 삭제되며 이는 절대 복구할 수 없습니다."
+    );
+    if (!confirm) {
+      return;
+    }
+    console.log(item.idx);
+    axios
+      .post(`${process.env.REACT_APP_BASEURL}/attraction/deleteattraction`, {
+        idx: item.idx,
+      })
+      .then((response) => {
+        if (response.data === "success") {
+          window.alert("삭제가 완료되었습니다.");
+          loadAttractionList();
+        } else {
+          window.alert("에러가 발생했습니다. 새로고침 후에 다시 시도해주세요");
+        }
+      })
+      .catch((err) => console.error(err));
+  };
+
   useEffect(() => {
     let count = 0;
 
@@ -19,6 +49,7 @@ const ModoorockAdminAttractionItem = ({ item, userList, programList }) => {
     });
     setProgramCount(count);
   }, []);
+
   return (
     <div className={styles.item}>
       <div className={styles.image_container}>
@@ -42,7 +73,12 @@ const ModoorockAdminAttractionItem = ({ item, userList, programList }) => {
         </p>
       </div>
       <div className={styles.button_container}>
-        <button className={styles.delete_button}>삭제</button>
+        <button
+          className={styles.delete_button}
+          onClick={attractionDeleteButtonHandler}
+        >
+          삭제
+        </button>
       </div>
     </div>
   );

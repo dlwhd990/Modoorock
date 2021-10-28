@@ -4,6 +4,9 @@ import { useHistory, useParams } from "react-router";
 import styles from "./modoorockAdmin.module.css";
 import ModoorockAdminAdPage from "./modoorockAdminAdPage/modoorockAdminAdPage";
 import ModoorockAdminAttractionPage from "./modoorockAdminAttractionPage/modoorockAdminAttractionPage";
+import ModoorockAdminBackgroundUploadPage from "./modoorockAdminBackgroundUploadPage/modoorockAdminBackgroundUploadPage";
+import ModoorockAdminInquirePage from "./modoorockAdminInquirePage/modoorockAdminInquirePage";
+import ModoorockAdminUserPage from "./modoorockAdminUserPage/modoorockAdminUserPage";
 
 const ModoorockAdmin = (props) => {
   const history = useHistory();
@@ -11,6 +14,7 @@ const ModoorockAdmin = (props) => {
   const [selected, setSelected] = useState("메인");
   const [attractionList, setAttractionList] = useState(null);
   const [programList, setProgramList] = useState(null);
+  const [inquireList, setInquireList] = useState(null);
   const [userList, setUserList] = useState(null);
 
   const modoorockAdminCheck = () => {
@@ -25,6 +29,7 @@ const ModoorockAdmin = (props) => {
           loadAttractionList();
           loadUserList();
           loadProgramList();
+          loadInquireList();
         }
       })
       .catch((err) => console.error(err));
@@ -58,6 +63,15 @@ const ModoorockAdmin = (props) => {
         theme: "전체",
       })
       .then((response) => setProgramList(response.data))
+      .catch((err) => console.error(err));
+  };
+
+  const loadInquireList = () => {
+    axios
+      .post(`${process.env.REACT_APP_BASEURL}/qna/getqnaexplist`, {
+        idx: 0,
+      })
+      .then((response) => setInquireList(response.data))
       .catch((err) => console.error(err));
   };
 
@@ -167,8 +181,15 @@ const ModoorockAdmin = (props) => {
             attractionList={attractionList}
             userList={userList}
             programList={programList}
+            loadAttractionList={loadAttractionList}
           />
         )
+      ) : path === "inquire" ? (
+        inquireList && <ModoorockAdminInquirePage inquireList={inquireList} />
+      ) : path === "background" ? (
+        <ModoorockAdminBackgroundUploadPage />
+      ) : path === "user" ? (
+        <ModoorockAdminUserPage userList={userList} />
       ) : (
         <></>
       )}
