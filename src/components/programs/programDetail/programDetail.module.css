@@ -171,7 +171,7 @@
 .review_container {
   width: 85%;
   margin: auto;
-  margin-bottom: 200px;
+  margin-bottom: 90px;
   animation: appear 0.6s;
 }
 
@@ -282,6 +282,96 @@
   height: 30px;
   background-color: rgb(255, 123, 84);
   border-radius: 4px;
+}
+
+.inquire_top_container {
+  width: 85%;
+  margin: auto;
+  margin-bottom: 40px;
+  box-shadow: 1px 3px 8px var(--color-light-divide-line);
+  border-radius: 4px;
+  padding: 16px;
+}
+
+.inquire_title {
+  margin: 0;
+  margin-left: 4px;
+  font-size: var(--font-size-big);
+  font-weight: 500;
+}
+
+.inquire_main_container {
+  width: 85%;
+  margin: auto;
+  box-shadow: 1px 3px 8px var(--color-light-divide-line);
+  border-radius: 16px;
+  padding: 50px;
+  margin-bottom: 200px;
+}
+
+.type_select_container,
+.title_input_container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 25px;
+}
+
+.content_input_container {
+  margin-top: 40px;
+}
+
+.type_text,
+.title_text,
+.content_text {
+  width: 38px;
+  margin: 0;
+  margin-bottom: 8px;
+  font-size: 18px;
+}
+
+.type_select {
+  height: 40px;
+  font-size: var(--font-size-normal);
+  padding: 0 4px;
+  border: 1px solid var(--color-light-border);
+  border-radius: 4px;
+}
+.title_input {
+  height: 40px;
+  padding: 4px 6px;
+  font-size: var(--font-size-normal);
+  border: 1px solid var(--color-light-border);
+  border-radius: 4px;
+}
+
+.content_input {
+  width: 100%;
+  height: 250px;
+  resize: none;
+  border: 1px solid var(--color-light-border);
+  border-radius: 4px;
+  font-size: var(--font-size-normal);
+  padding: 4px 6px;
+}
+
+.submit_button_container {
+  width: 100%;
+  text-align: end;
+  margin-top: 20px;
+}
+
+.submit_button {
+  width: 90px;
+  height: 40px;
+  outline: none;
+  border: none;
+  background-color: var(--color-theme);
+  color: white;
+  font-size: var(--font-size-normal);
+  font-size: 500;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
 @keyframes appear {

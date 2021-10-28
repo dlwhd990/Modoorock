@@ -162,11 +162,11 @@
 }
 
 .write_button {
+  width: auto;
   background-color: #39a2e8;
   border: none;
   border-radius: 4px;
-  width: 5.2rem;
-  height: 2.2rem;
+  padding: 4px 12px;
   font-size: 1.2rem;
   outline: none;
   cursor: pointer;

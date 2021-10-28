@@ -1,9 +1,10 @@
 import axios from "axios";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styles from "./adminInquireItem.module.css";
 
 const AdminInquireItem = ({ article, loadMyInquireList, user }) => {
   const [viewDetail, setViewDetail] = useState(false);
+  const [program, setProgram] = useState(null);
   const answerRef = useRef();
 
   const viewArticle = () => {
@@ -32,6 +33,19 @@ const AdminInquireItem = ({ article, loadMyInquireList, user }) => {
       .catch((err) => console.error(err));
   };
 
+  const getProgramName = () => {
+    axios
+      .post(`${process.env.REACT_APP_BASEURL}/exp/getexpinfo`, {
+        idx: article.expIdx,
+      })
+      .then((response) => setProgram(response.data))
+      .catch((err) => console.error(err));
+  };
+
+  useEffect(() => {
+    getProgramName();
+  }, []);
+
   return (
     <section className={styles.item}>
       <section className={styles.inquire} onClick={viewArticle}>
@@ -58,6 +72,10 @@ const AdminInquireItem = ({ article, loadMyInquireList, user }) => {
         }
       >
         <div className={styles.content_container}>
+          {program && (
+            <p className={styles.program_title}>{`상품명: ${program.title}`}</p>
+          )}
+
           <div className={styles.inquire_container}>
             <div className={styles.tag_container}>
               <div className={styles.tag}>문의내용</div>

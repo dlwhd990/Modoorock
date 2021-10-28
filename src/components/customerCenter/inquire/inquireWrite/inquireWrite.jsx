@@ -25,7 +25,6 @@ const InquireWrite = () => {
             title,
             content,
             userIdx,
-            expIdx: 1,
           })
           .then((response) => {
             console.log(response);

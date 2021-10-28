@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import React, { useEffect, useState, useRef } from "react";
+import { useHistory, useParams } from "react-router";
 import CustomPaging from "../../slick/customPaging/customPaging";
 import styles from "./programDetail.module.css";
 import ProgramReview from "./programReview/programReview";
@@ -14,8 +14,10 @@ const ProgramDetail = ({ programList, reviewList }) => {
   const [review, setReview] = useState([]);
   const [statSeparate, setStatSeparate] = useState([]);
   const [reviewAvg, setReviewAvg] = useState(null);
-
+  const history = useHistory();
   const { path } = useParams();
+  const titleRef = useRef();
+  const contentRef = useRef();
 
   const onSelectHandler = (e) => {};
 
@@ -27,6 +29,49 @@ const ProgramDetail = ({ programList, reviewList }) => {
       .then((response) => {
         setProgram(response.data);
         setImageList(response.data.photo.split("#").reverse());
+      })
+      .catch((err) => console.error(err));
+  };
+
+  const inquireButtonHandler = () => {
+    history.push(`/programs/view/${path}/inquire`);
+  };
+
+  const uploadInquire = (res) => {
+    axios
+      .post(`${process.env.REACT_APP_BASEURL}/qna/insertqna`, {
+        userIdx: res.data.idx,
+        expIdx: parseInt(path),
+        title: titleRef.current.value,
+        content: contentRef.current.value,
+      })
+      .then((response) => {
+        if (response.data === "success") {
+          window.alert(
+            "문의가 완료되었습니다. 해당 내용은 '문의게시판' 에서 열람 가능합니다."
+          );
+          titleRef.current.value = "";
+          contentRef.current.value = "";
+        } else {
+          window.alert("에러가 발생했습니다. 새로고침 후에 다시 시도해주세요.");
+        }
+      })
+      .catch((err) => console.error(err));
+  };
+
+  const writeSubmitHandler = () => {
+    axios
+      .post(`${process.env.REACT_APP_BASEURL}/user/session`)
+      .then((res) => {
+        console.log(res);
+        console.log(titleRef.current.value);
+        console.log(contentRef.current.value);
+
+        if (res.data === "") {
+          window.alert("로그인 후에 문의가 가능합니다.");
+          return;
+        }
+        uploadInquire(res); //문의글 업로드 함수
       })
       .catch((err) => console.error(err));
   };
@@ -104,7 +149,12 @@ const ProgramDetail = ({ programList, reviewList }) => {
               </div>
               <div className={styles.button_container}>
                 <button className={styles.reservation_button}>예약하기</button>
-                <button className={styles.inquire_button}>문의하기</button>
+                <button
+                  className={styles.inquire_button}
+                  onClick={inquireButtonHandler}
+                >
+                  문의하기
+                </button>
               </div>
             </div>
           </section>
@@ -286,6 +336,40 @@ const ProgramDetail = ({ programList, reviewList }) => {
                 )}
               </div>
             </section>
+          </section>
+          <section className={styles.inquire_top_container}>
+            <p className={styles.inquire_title}>문의하기</p>
+          </section>
+          <section className={styles.inquire_main_container}>
+            <div className={styles.title_input_container}>
+              <p className={styles.title_text}>제목</p>
+              <input
+                ref={titleRef}
+                type="text"
+                className={styles.title_input}
+                spellCheck="false"
+                placeholder="제목"
+              />
+            </div>
+            <div className={styles.content_input_container}>
+              <p className={styles.content_text}>내용</p>
+              <textarea
+                ref={contentRef}
+                name="content"
+                id="content"
+                className={styles.content_input}
+                spellCheck="false"
+                placeholder="내용"
+              ></textarea>
+            </div>
+            <div className={styles.submit_button_container}>
+              <button
+                className={styles.submit_button}
+                onClick={writeSubmitHandler}
+              >
+                글쓰기
+              </button>
+            </div>
           </section>
         </section>
       ) : (
