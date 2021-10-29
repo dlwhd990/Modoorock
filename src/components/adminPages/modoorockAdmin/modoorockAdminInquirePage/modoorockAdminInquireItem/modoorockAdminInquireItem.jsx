@@ -1,8 +1,8 @@
+import React, { useState, useRef } from "react";
+import styles from "./modoorockAdminInquireItem.module.css";
 import axios from "axios";
-import React, { useEffect, useRef, useState } from "react";
-import styles from "./adminInquireItem.module.css";
 
-const AdminInquireItem = ({ article, loadMyInquireList, user }) => {
+const ModoorockAdminInquireItem = ({ article, loadInquireList }) => {
   const [viewDetail, setViewDetail] = useState(false);
   const [program, setProgram] = useState(null);
   const answerRef = useRef();
@@ -25,7 +25,7 @@ const AdminInquireItem = ({ article, loadMyInquireList, user }) => {
       .then((response) => {
         if (response.data === "success") {
           window.alert("답변이 완료되었습니다.");
-          user && loadMyInquireList();
+          loadInquireList();
         } else {
           window.alert(
             "에러가 발생했습니다. 페이지를 새로고침한 후에 다시 시도해주세요."
@@ -34,19 +34,6 @@ const AdminInquireItem = ({ article, loadMyInquireList, user }) => {
       })
       .catch((err) => console.error(err));
   };
-
-  const getProgramName = () => {
-    axios
-      .post(`${process.env.REACT_APP_BASEURL}/exp/getexpinfo`, {
-        idx: article.expIdx,
-      })
-      .then((response) => setProgram(response.data))
-      .catch((err) => console.error(err));
-  };
-
-  useEffect(() => {
-    getProgramName();
-  }, []);
 
   return (
     <section className={styles.item}>
@@ -117,4 +104,4 @@ const AdminInquireItem = ({ article, loadMyInquireList, user }) => {
   );
 };
 
-export default AdminInquireItem;
+export default ModoorockAdminInquireItem;

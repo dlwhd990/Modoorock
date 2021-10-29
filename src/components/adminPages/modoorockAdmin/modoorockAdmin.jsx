@@ -185,7 +185,12 @@ const ModoorockAdmin = (props) => {
           />
         )
       ) : path === "inquire" ? (
-        inquireList && <ModoorockAdminInquirePage inquireList={inquireList} />
+        inquireList && (
+          <ModoorockAdminInquirePage
+            inquireList={inquireList}
+            loadInquireList={loadInquireList}
+          />
+        )
       ) : path === "background" ? (
         <ModoorockAdminBackgroundUploadPage />
       ) : path === "user" ? (
