@@ -1,14 +1,23 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import styles from "./modoorockAdminInquireItem.module.css";
 import axios from "axios";
 
 const ModoorockAdminInquireItem = ({ article, loadInquireList }) => {
   const [viewDetail, setViewDetail] = useState(false);
-  const [program, setProgram] = useState(null);
+  const [writerId, setWriterId] = useState(null);
   const answerRef = useRef();
 
   const viewArticle = () => {
     setViewDetail(!viewDetail);
+  };
+
+  const getWriterId = () => {
+    axios
+      .post(`${process.env.REACT_APP_BASEURL}/user/getuserinfo`, {
+        idx: article.userIdx,
+      })
+      .then((response) => setWriterId(response.data.id))
+      .catch((err) => console.error(err));
   };
 
   const answerSubmitHandler = () => {
@@ -35,6 +44,10 @@ const ModoorockAdminInquireItem = ({ article, loadInquireList }) => {
       .catch((err) => console.error(err));
   };
 
+  useEffect(() => {
+    getWriterId();
+  }, []);
+
   return (
     <section className={styles.item}>
       <section className={styles.inquire} onClick={viewArticle}>
@@ -50,7 +63,7 @@ const ModoorockAdminInquireItem = ({ article, loadInquireList }) => {
           </div>
         </div>
         <div className={styles.title}>{article.title}</div>
-        <div className={styles.writer}>dlwhd***</div>
+        <div className={styles.writer}>{writerId && writerId}</div>
         <div className={styles.date}>{article.date}</div>
       </section>
       <section
@@ -61,10 +74,6 @@ const ModoorockAdminInquireItem = ({ article, loadInquireList }) => {
         }
       >
         <div className={styles.content_container}>
-          {program && (
-            <p className={styles.program_title}>{`상품명: ${program.title}`}</p>
-          )}
-
           <div className={styles.inquire_container}>
             <div className={styles.tag_container}>
               <div className={styles.tag}>문의내용</div>

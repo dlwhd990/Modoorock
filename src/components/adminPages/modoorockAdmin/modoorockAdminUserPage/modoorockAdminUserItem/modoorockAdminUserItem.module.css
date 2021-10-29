@@ -1,26 +1,12 @@
-.user_page {
-  margin-top: 80px;
-  padding: 150px 200px;
-  background-color: var(--color-smoke-white);
-}
-
-.main {
-  animation: appear 0.6s;
-}
-
-.title {
-  font-size: var(--font-size-title);
-  font-weight: 500;
-}
-
-.header {
-  width: 100%;
+.item {
   display: flex;
   flex-direction: row;
+  align-items: center;
   border: 1px solid var(--color-light-divide-line);
+  margin-top: -1px;
   background-color: white;
+  padding: 4px 0;
 }
-
 .idx {
   width: 10%;
   text-align: center;
@@ -56,13 +42,8 @@
   text-align: center;
 }
 
-@keyframes appear {
-  0% {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.change_grade_button {
+  width: 90%;
+  outline: none;
+  cursor: pointer;
 }

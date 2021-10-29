@@ -1,11 +1,51 @@
+.inquire_page {
+  background-color: var(--color-smoke-white);
+  padding-top: 160px;
+  padding-bottom: 200px;
+  min-height: 100vh;
+}
+
 .main {
-  width: 1200px;
+  animation: appear 0.6s;
+}
+
+.top {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.main {
+  width: 60%;
+  min-width: 1150px;
   margin: auto;
-  margin-top: 230px;
-  margin-bottom: 230px;
 }
 
 .title {
   font-size: var(--font-size-title);
   font-weight: 500;
+}
+
+.view_no_answer_only_button {
+  font-size: var(--font-size-normal);
+  padding: 8px 20px;
+  outline: none;
+  border: none;
+  border-radius: 4px;
+  background-color: var(--color-admin-theme);
+  color: white;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+@keyframes appear {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

@@ -71,7 +71,7 @@ const ModoorockAdmin = (props) => {
       .post(`${process.env.REACT_APP_BASEURL}/qna/getqnaexplist`, {
         idx: 0,
       })
-      .then((response) => setInquireList(response.data))
+      .then((response) => setInquireList(response.data.reverse()))
       .catch((err) => console.error(err));
   };
 
@@ -194,7 +194,12 @@ const ModoorockAdmin = (props) => {
       ) : path === "background" ? (
         <ModoorockAdminBackgroundUploadPage />
       ) : path === "user" ? (
-        <ModoorockAdminUserPage userList={userList} />
+        userList && (
+          <ModoorockAdminUserPage
+            userList={userList}
+            loadUserList={loadUserList}
+          />
+        )
       ) : (
         <></>
       )}

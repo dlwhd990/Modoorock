@@ -18,6 +18,7 @@ const ProgramDetail = ({ programList, reviewList }) => {
   const { path } = useParams();
   const titleRef = useRef();
   const contentRef = useRef();
+  const toInquireRef = useRef();
 
   const onSelectHandler = (e) => {};
 
@@ -34,7 +35,10 @@ const ProgramDetail = ({ programList, reviewList }) => {
   };
 
   const inquireButtonHandler = () => {
-    history.push(`/programs/view/${path}/inquire`);
+    toInquireRef.current.scrollIntoView({
+      behavior: "smooth",
+      block: "end",
+    });
   };
 
   const uploadInquire = (res) => {
@@ -338,9 +342,11 @@ const ProgramDetail = ({ programList, reviewList }) => {
             </section>
           </section>
           <section className={styles.inquire_top_container}>
-            <p className={styles.inquire_title}>문의하기</p>
+            <p ref={toInquireRef} className={styles.inquire_title}>
+              문의하기
+            </p>
           </section>
-          <section className={styles.inquire_main_container}>
+          <section ref={toInquireRef} className={styles.inquire_main_container}>
             <div className={styles.title_input_container}>
               <p className={styles.title_text}>제목</p>
               <input
