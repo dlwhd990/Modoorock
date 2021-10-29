@@ -6,7 +6,7 @@ const AdminFirstPageAttractionItem = ({ item }) => {
     <div className={styles.item}>
       <div className={styles.main}>
         <img
-          src={item.photo}
+          src={`${process.env.REACT_APP_BASEURL}-images/Attraction/${item.photo}`}
           alt="attraction_photo"
           className={styles.item_photo}
         />
