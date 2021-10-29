@@ -23,6 +23,8 @@ const AdminMain = ({ userLogout }) => {
 
   const [myPointList, setMyPointList] = useState([]);
 
+  const [backgroundList, setBackgroundList] = useState(null);
+
   const [menuSelected, setMenuSelected] = useState(params.path);
 
   const onButtonClickHandler = (e) => {
@@ -53,9 +55,14 @@ const AdminMain = ({ userLogout }) => {
       .post(`${process.env.REACT_APP_BASEURL}/qna/getqnaexpuserlist`, {
         userIdx: user.idx,
       })
-      .then((response) => {
-        setMyInquireList(response.data.reverse());
-      })
+      .then((response) => setMyInquireList(response.data.reverse()))
+      .catch((err) => console.error(err));
+  };
+
+  const loadBackgroundList = () => {
+    axios
+      .post(`${process.env.REACT_APP_BASEURL}/file/getbglist`)
+      .then((response) => setBackgroundList(response.data))
       .catch((err) => console.error(err));
   };
 
@@ -75,6 +82,7 @@ const AdminMain = ({ userLogout }) => {
   useEffect(() => {
     user && loadMyAttractionList();
     user && loadMyInquireList();
+    user && loadBackgroundList();
   }, [user]);
 
   return (
@@ -186,9 +194,14 @@ const AdminMain = ({ userLogout }) => {
                 params.path_three &&
                 params.path_two === "view" &&
                 params.path === "attraction" && <AdminProgramPage />}
-              {params.path_two === "add" && params.path === "attraction" && (
-                <AdminAttractionUploadPage user={user} />
-              )}
+              {params.path_two === "add" &&
+                params.path === "attraction" &&
+                backgroundList && (
+                  <AdminAttractionUploadPage
+                    user={user}
+                    backgroundList={backgroundList}
+                  />
+                )}
               {params.path === "main" &&
                 myAttractionList &&
                 myInquireList &&

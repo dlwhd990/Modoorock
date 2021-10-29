@@ -1,10 +1,11 @@
 import axios from "axios";
+import { result } from "lodash";
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import TemplateSlick from "../../../slick/templateSlick/templateSlick";
 import styles from "./adminAttractionUploadPage.module.css";
 
-const AdminAttractionUploadPage = ({ user }) => {
+const AdminAttractionUploadPage = ({ user, backgroundList }) => {
   const history = useHistory();
   const [previewImage, setPreviewImage] = useState(null);
   const [name, setName] = useState("");
@@ -116,6 +117,12 @@ const AdminAttractionUploadPage = ({ user }) => {
     },
   ]);
   const [nowTemplateButtonOrder, setNowTemplateButtonOrder] = useState([]);
+  const [backgroundNameList, setBackgroundNameList] = useState(null);
+  const [mainBackground, setMainBackground] = useState(null);
+  const [gameBackground, setGameBackground] = useState(null);
+  const [tmpMainBackground, setTmpMainBackground] = useState(null);
+  const [tmpGameBackground, setTmpGameBackground] = useState(null);
+  const backgroundBaseUrl = backgroundList[0];
 
   const onFileInputChangeHandler = (e) => {
     let reader = new FileReader();
@@ -130,14 +137,23 @@ const AdminAttractionUploadPage = ({ user }) => {
   };
 
   const insertAttraction = (userData) => {
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("area", area);
+    formData.append("content", content);
+    formData.append("userIdx", userData.idx);
+    formData.append("files", previewImage.file);
+    formData.append("mainPhoto", mainBackground);
+    formData.append("gamePhoto", gameBackground);
+    nowTemplateButtonOrder.forEach((item) => {
+      formData.append("menuOrderList", item.idx);
+    });
+
     axios
-      .post(`${process.env.REACT_APP_BASEURL}/attraction/insertattraction`, {
-        name,
-        area,
-        photo: "nothing",
-        content,
-        userIdx: userData.data.idx,
-      })
+      .post(
+        `${process.env.REACT_APP_BASEURL}/attraction/insertattraction`,
+        formData
+      )
       .then((res) => {
         if (res.data === "success") {
           window.alert("성공적으로 업로드 되었습니다");
@@ -162,7 +178,7 @@ const AdminAttractionUploadPage = ({ user }) => {
           response.data.idType === 1 &&
           response.data.idx === user.idx
         ) {
-          insertAttraction(response);
+          insertAttraction(response.data);
         } else {
           window.alert("로그인 정보가 맞지 않습니다.");
         }
@@ -262,9 +278,32 @@ const AdminAttractionUploadPage = ({ user }) => {
     });
   };
 
+  const makeBackgroundNameList = () => {
+    setBackgroundNameList(backgroundList.slice(1));
+  };
+
+  const selectMainBackgroundHandler = (e) => {
+    setTmpMainBackground(e.currentTarget.dataset.name);
+  };
+
+  const selectGameBackgroundHandler = (e) => {
+    setTmpGameBackground(e.currentTarget.dataset.name);
+  };
+
+  const saveGameBackground = () => {
+    setGameBackground(tmpGameBackground);
+    setGameBgPopupOn(false);
+  };
+
+  const saveMainBackground = () => {
+    setMainBackground(tmpMainBackground);
+    setMainBgPopupOn(false);
+  };
+
   useEffect(() => {
-    console.log(nowTemplateButtonOrder);
-  }, [nowTemplateButtonOrder]);
+    makeBackgroundNameList();
+    console.log(backgroundList);
+  }, []);
 
   return (
     <section className={styles.attraction_upload_page}>
@@ -382,7 +421,7 @@ const AdminAttractionUploadPage = ({ user }) => {
         <div className={styles.form_content}>
           <p className={styles.form_text}>메인 배경</p>
           <button
-            className={styles.template_bg_popup_on_button}
+            className={styles.template_popup_on_button}
             onClick={mainBgPopupHandler}
           >
             설정
@@ -391,7 +430,7 @@ const AdminAttractionUploadPage = ({ user }) => {
         <div className={styles.form_content}>
           <p className={styles.form_text}>게임 배경</p>
           <button
-            className={styles.template_bg_popup_on_button}
+            className={styles.template_popup_on_button}
             onClick={gameBgPopupHandler}
           >
             설정
@@ -435,9 +474,31 @@ const AdminAttractionUploadPage = ({ user }) => {
                 ))}
             </section>
           </section>
-          <section className={styles.template_preview}></section>
+          <section className={styles.template_preview_container}>
+            <section className={styles.template_preview}>
+              {mainBackground && (
+                <img
+                  src={`${backgroundBaseUrl}/${mainBackground}`}
+                  alt=""
+                  className={styles.background_preview}
+                />
+              )}
+            </section>
+            <section className={styles.template_preview}>
+              {gameBackground && (
+                <img
+                  src={`${backgroundBaseUrl}/${gameBackground}`}
+                  alt=""
+                  className={styles.background_preview}
+                />
+              )}
+            </section>
+          </section>
         </section>
       </section>
+      <button className={styles.submit_button} onClick={onSubmitHandler}>
+        업로드
+      </button>
       {templatePopupOn && (
         <section className={styles.popup_filter}>
           <div className={styles.template_popup_container}>
@@ -476,7 +537,31 @@ const AdminAttractionUploadPage = ({ user }) => {
               <p className={styles.popup_title}>메인 배경 설정</p>
             </div>
 
-            <div className={styles.template_popup_main}>dasdsad</div>
+            <div className={styles.background_popup_main}>
+              {backgroundNameList &&
+                backgroundNameList.map((item) => (
+                  <img
+                    key={item}
+                    data-name={item}
+                    src={`${backgroundBaseUrl}/${item}`}
+                    alt="background_image"
+                    className={`${
+                      tmpMainBackground === item
+                        ? `${styles.bg_image} ${styles.background_selected}`
+                        : `${styles.bg_image}`
+                    }`}
+                    onClick={selectMainBackgroundHandler}
+                  />
+                ))}
+            </div>
+            <div className={styles.select_button_container}>
+              <button
+                className={styles.select_button}
+                onClick={saveMainBackground}
+              >
+                선택
+              </button>
+            </div>
           </div>
         </section>
       )}
@@ -490,7 +575,31 @@ const AdminAttractionUploadPage = ({ user }) => {
               <p className={styles.popup_title}>게임 배경 설정</p>
             </div>
 
-            <div className={styles.template_popup_main}>dasdsad</div>
+            <div className={styles.background_popup_main}>
+              {backgroundNameList &&
+                backgroundNameList.map((item) => (
+                  <img
+                    key={item}
+                    data-name={item}
+                    src={`${backgroundBaseUrl}/${item}`}
+                    alt="background_image"
+                    className={`${
+                      tmpGameBackground === item
+                        ? `${styles.bg_image} ${styles.background_selected}`
+                        : `${styles.bg_image}`
+                    }`}
+                    onClick={selectGameBackgroundHandler}
+                  />
+                ))}
+            </div>
+            <div className={styles.select_button_container}>
+              <button
+                className={styles.select_button}
+                onClick={saveGameBackground}
+              >
+                선택
+              </button>
+            </div>
           </div>
         </section>
       )}

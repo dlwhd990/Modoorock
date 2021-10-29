@@ -1,5 +1,5 @@
 .attraction_upload_page {
-  height: calc(100vh - 70px);
+  min-height: calc(100vh - 70px);
   animation: appear 1s;
   display: flex;
   flex-direction: column;
@@ -116,15 +116,14 @@
 }
 
 .submit_button {
-  width: 80px;
-  position: absolute;
-  bottom: 10px;
-  right: 0;
+  width: 96%;
+  height: 55px;
+  margin-top: 20px;
   outline: none;
   border: none;
-  background-color: var(--color-light-blue);
+  background-color: var(--color-admin-theme);
   color: white;
-  font-size: var(--font-size-normal);
+  font-size: var(--font-size-big);
   font-weight: 500;
   padding-top: 4px;
   border-radius: 4px;
@@ -235,7 +234,7 @@
   outline: none;
   width: 80px;
   cursor: pointer;
-  background-color: var(--color-theme);
+  background-color: var(--color-admin-theme);
   color: white;
   border: none;
   padding: 4px 0;
@@ -247,7 +246,7 @@
   outline: none;
   width: 120px;
   cursor: pointer;
-  background-color: var(--color-theme);
+  background-color: var(--color-admin-theme);
   color: white;
   border: none;
   padding: 4px 0;
@@ -265,6 +264,7 @@
 
 .button_order_setting_container {
   width: 50%;
+  min-width: 280px;
 }
 
 .button_order_setting_top {
@@ -274,10 +274,12 @@
 }
 
 .button_order_setting_title {
+  margin-top: 0;
   font-size: var(--font-size-big);
   font-weight: 500;
 }
 .button_order_setting_subtitle {
+  margin-top: 0;
   font-size: var(--font-size-normal);
   color: var(--color-desc);
   font-weight: 500;
@@ -415,11 +417,45 @@
   cursor: pointer;
 }
 
+.template_preview_container {
+  width: 50%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
 .template_preview {
-  width: calc(70vh * 0.4736);
-  height: 70vh;
+  width: 15vw;
+  height: calc(15vw * 19 / 9);
   border: 1px solid lightgray;
   margin-right: 5%;
+  border-radius: 8px;
+}
+
+.background_preview {
+  width: 15vw;
+  height: calc(15vw * 19 / 9);
+  border-radius: 8px;
+}
+
+.background_popup_main {
+  height: 455px;
+  margin: 40px 0;
+  overflow-y: scroll;
+  margin-left: 20px;
+}
+
+.bg_image {
+  width: 172px;
+  height: 170px;
+  box-shadow: 0 0 5px var(--color-light-divide-line);
+  border-radius: 4px;
+  margin: 10px;
+  cursor: pointer;
+}
+
+.background_selected {
+  border: 2px solid var(--color-light-blue);
 }
 
 @keyframes appear {

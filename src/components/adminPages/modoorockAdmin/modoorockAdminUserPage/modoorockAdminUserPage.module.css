@@ -1,10 +1,13 @@
 .user_page {
   margin-top: 80px;
-  padding: 150px 200px;
+  padding: 150px 0;
   background-color: var(--color-smoke-white);
 }
 
 .main {
+  width: 70%;
+  min-width: 1000px;
+  margin: auto;
   animation: appear 0.6s;
 }
 

@@ -25,7 +25,11 @@ const AreaItem = ({ item, programList }) => {
   return (
     <section className={styles.area_item} onClick={areaClickHandler}>
       <div className={styles.image_container}>
-        <img src={item.photo} alt="area_image" className={styles.image} />
+        <img
+          src={`${process.env.REACT_APP_BASEURL}-images/Attraction/${item.photo}`}
+          alt="area_image"
+          className={styles.image}
+        />
         <div className={styles.region_badge}>{item.area}</div>
       </div>
       <div className={styles.text_container}>

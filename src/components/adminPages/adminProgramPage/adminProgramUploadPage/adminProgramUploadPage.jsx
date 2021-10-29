@@ -140,11 +140,9 @@ const AdminProgramUploadPage = ({ user }) => {
         console.log(response.data);
         if (response.data === "") {
           window.alert("로그인 후에 사용해주세요");
-        }
-        //else if (response.data.idType !== 1) {
-        //window.alert("권한이 없습니다. 다시 로그인 후에 사용해주세요"); //여기 나중에 주석풀기
-        //}
-        else {
+        } else if (response.data.idType !== 1) {
+          window.alert("권한이 없습니다. 다시 로그인 후에 사용해주세요");
+        } else {
           const userIdx = response.data.idx;
           insertProgramHandler(userIdx);
         }

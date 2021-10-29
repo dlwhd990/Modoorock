@@ -9,13 +9,13 @@ const AdminAttractionItem = ({ item, loadMyAttractionList }) => {
   const itemClickHandler = () => {
     history.push(`/admin/attraction/view/${item.idx}`);
   };
-
+  console.log(item);
   return (
     <div className={styles.item} onClick={itemClickHandler}>
       <div className={styles.main}>
         <div className={styles.photo_container}>
           <img
-            src={item.photo}
+            src={`${process.env.REACT_APP_BASEURL}-images/Attraction/${item.photo}`}
             alt="attraction_photo"
             className={styles.photo}
           />

@@ -18,7 +18,6 @@ const ModoorockAdminAttractionItem = ({
     if (!confirm) {
       return;
     }
-    console.log(item.idx);
     axios
       .post(`${process.env.REACT_APP_BASEURL}/attraction/deleteattraction`, {
         idx: item.idx,
@@ -53,7 +52,11 @@ const ModoorockAdminAttractionItem = ({
   return (
     <div className={styles.item}>
       <div className={styles.image_container}>
-        <img src={item.photo} alt="attraction_image" className={styles.image} />
+        <img
+          src={`${process.env.REACT_APP_BASEURL}-images/bg/${item.photo}`}
+          alt="attraction_image"
+          className={styles.image}
+        />
       </div>
       <div className={styles.data_container}>
         <div className={styles.badge_container}>
