@@ -17,27 +17,36 @@ const ModoorockAdminBackgroundUploadPage = (props) => {
 
   const uploadButtonHandler = () => {
     const formData = new FormData();
-    formData.append("files", background);
-    for (let value of formData.values()) {
-      console.log(value); //내용확인
+    if (!background) {
+      window.alert("이미지가 선택되지 않았습니다.");
+      return;
     }
+    formData.append("files", background);
+
     axios
       .post(`${process.env.REACT_APP_BASEURL}/file/bgupload`, formData)
-      .then((response) => console.log(response))
+      .then((response) => response.data && window.alert("업로드 되었습니다."))
       .catch((err) => console.error(err));
   };
   return (
     <section className={styles.upload_page}>
-      <h1 className={styles.title}>배경업로드</h1>
-      <input
-        type="file"
-        accept="image/jpg,image/png,image/jpeg"
-        className={styles.input}
-        onChange={onFileInputChangeHandler}
-      />
-      <button className={styles.upload_button} onClick={uploadButtonHandler}>
-        업로드
-      </button>
+      <section className={styles.container}>
+        <h1 className={styles.title}>배경업로드</h1>
+        <div className={styles.form}>
+          <input
+            type="file"
+            accept="image/jpg,image/png,image/jpeg,image/webp"
+            className={styles.input}
+            onChange={onFileInputChangeHandler}
+          />
+          <button
+            className={styles.upload_button}
+            onClick={uploadButtonHandler}
+          >
+            업로드
+          </button>
+        </div>
+      </section>
     </section>
   );
 };

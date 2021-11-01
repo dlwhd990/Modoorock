@@ -9,7 +9,6 @@ const AdminAttractionItem = ({ item, loadMyAttractionList }) => {
   const itemClickHandler = () => {
     history.push(`/admin/attraction/view/${item.idx}`);
   };
-  console.log(item);
   return (
     <div className={styles.item} onClick={itemClickHandler}>
       <div className={styles.main}>

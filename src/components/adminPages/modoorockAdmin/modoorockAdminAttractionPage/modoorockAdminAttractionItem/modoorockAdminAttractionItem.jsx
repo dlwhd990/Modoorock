@@ -53,7 +53,7 @@ const ModoorockAdminAttractionItem = ({
     <div className={styles.item}>
       <div className={styles.image_container}>
         <img
-          src={`${process.env.REACT_APP_BASEURL}-images/bg/${item.photo}`}
+          src={`${process.env.REACT_APP_BASEURL}-images/Attraction/${item.photo}`}
           alt="attraction_image"
           className={styles.image}
         />

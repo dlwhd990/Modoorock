@@ -254,22 +254,27 @@ const Header = ({ loggedin, userLogout }) => {
           }`}
           onClick={onToggleHandler}
         >
-          <span
-            className={styles.login}
-            onClick={() => {
-              userLogout();
-            }}
-          >
-            로그아웃
-          </span>
-          <span
-            className={styles.signup}
+          <div
+            className={styles.profile_container}
             onClick={() => {
               history.push("/mypage");
               window.scrollTo({ top: 0 });
             }}
           >
-            마이페이지
+            <img
+              src="/Modoorock/images/1.png"
+              alt="profile_image"
+              className={styles.profile_image}
+            />
+            <span className={styles.signup}>{`${loggedin}님`}</span>
+          </div>
+          <span
+            className={styles.logout}
+            onClick={() => {
+              userLogout();
+            }}
+          >
+            로그아웃
           </span>
         </div>
       ) : (

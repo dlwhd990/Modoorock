@@ -55,7 +55,7 @@ const ModoorockAdminAdPage = (props) => {
           <p className={styles.text}>썸네일</p>
           <input
             type="file"
-            accept="image/jpg,image/png,image/jpeg"
+            accept="image/jpg,image/png,image/jpeg,image/webp"
             className={styles.file_input}
             onChange={onFileInputHandler}
           />

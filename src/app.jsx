@@ -177,7 +177,7 @@ const App = (props) => {
       .post(`${process.env.REACT_APP_BASEURL}/user/session`)
       .then((response) => {
         if (response.data !== "") {
-          setLoggedin(true);
+          setLoggedin(response.data.id);
           setUserIdx(response.data.idx);
         } else {
           setLoggedin(false);

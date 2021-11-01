@@ -116,7 +116,7 @@ const AdminAttractionUploadPage = ({ user, backgroundList }) => {
       image: "/Modoorock/Images/templateImages/modoorock.png",
     },
   ]);
-  const [nowTemplateButtonOrder, setNowTemplateButtonOrder] = useState([]);
+  const [nowTemplateButtonOrder, setNowTemplateButtonOrder] = useState(null);
   const [backgroundNameList, setBackgroundNameList] = useState(null);
   const [mainBackground, setMainBackground] = useState(null);
   const [gameBackground, setGameBackground] = useState(null);
@@ -165,14 +165,21 @@ const AdminAttractionUploadPage = ({ user, backgroundList }) => {
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    if (name === "" || content === "" || area === "" || !previewImage) {
+    if (
+      name === "" ||
+      content === "" ||
+      area === "" ||
+      !previewImage ||
+      !mainBackground ||
+      !gameBackground ||
+      !nowTemplateButtonOrder
+    ) {
       window.alert("모든 사항을 입력해주세요");
       return;
     }
     axios
       .post(`${process.env.REACT_APP_BASEURL}/user/session`)
       .then((response) => {
-        console.log(response);
         if (
           response.data !== "" &&
           response.data.idType === 1 &&
@@ -323,7 +330,7 @@ const AdminAttractionUploadPage = ({ user, backgroundList }) => {
               <p className={styles.form_text}>관광지 이미지</p>
               <input
                 type="file"
-                accept="image/jpg,image/png,image/jpeg"
+                accept="image/jpg,image/png,image/jpeg,image/webp"
                 className={styles.form_input_file}
                 onChange={onFileInputChangeHandler}
               />

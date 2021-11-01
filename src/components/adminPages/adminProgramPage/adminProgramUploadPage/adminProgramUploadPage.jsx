@@ -44,7 +44,10 @@ const AdminProgramUploadPage = ({ user }) => {
   const onFileInputChangeHandler = (e) => {
     const reader = new FileReader();
     const file = e.target.files[0];
-    const blob = file.slice(0, file.size, "image/png");
+    const blob = file && file.slice(0, file.size, "image/png");
+    if (!blob) {
+      return;
+    }
     const fileName = file.name.split(".");
     const newFile = new File([blob], `${fileName[0]}_main.${fileName[1]}`, {
       type: "image/png",
@@ -129,7 +132,8 @@ const AdminProgramUploadPage = ({ user }) => {
     const price = priceRef.current.value;
     const content = contentRef.current.value;
     const theme = themeRef.current.value;
-    const files = [...subImages, previewImage.file];
+    const files = subImages &&
+      previewImage && [...subImages, previewImage.file];
     if (!title || !price || !content || !theme || files.length < 4) {
       window.alert("모든 정보를 입력해주세요");
       return;
@@ -255,7 +259,7 @@ const AdminProgramUploadPage = ({ user }) => {
               <p className={styles.form_text}>메인 이미지</p>
               <input
                 type="file"
-                accept="image/jpg,image/png,image/jpeg"
+                accept="image/jpg,image/png,image/jpeg,image/webp"
                 className={styles.form_input_file}
                 onChange={onFileInputChangeHandler}
               />
@@ -264,7 +268,7 @@ const AdminProgramUploadPage = ({ user }) => {
               <p className={styles.form_text}>서브 이미지(3장)</p>
               <input
                 type="file"
-                accept="image/jpg,image/png,image/jpeg"
+                accept="image/jpg,image/png,image/jpeg,image/webp"
                 className={styles.form_input_file}
                 onChange={onMultipleFileInputChangeHandler}
                 multiple

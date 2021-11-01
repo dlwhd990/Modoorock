@@ -12,6 +12,7 @@ import AdminProgramUploadPage from "../adminProgramPage/adminProgramUploadPage/a
 import styles from "./adminMain.module.css";
 
 const AdminMain = ({ userLogout }) => {
+  //관리자 인증 방식 바꾸기
   const history = useHistory();
   const params = useParams();
 
