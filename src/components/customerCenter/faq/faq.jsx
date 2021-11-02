@@ -7,8 +7,6 @@ import axios from "axios";
 const Faq = ({ articles, getFaqList }) => {
   const [headerSelect, setHeaderSelect] = useState("All");
   const history = useHistory();
-  const searchTypeRef = useRef();
-  const searchInputRef = useRef();
   const [pageList, setPageList] = useState([]);
   const [listList, setListList] = useState([]);
   const [numbering, setNumbering] = useState(1);
@@ -131,43 +129,6 @@ const Faq = ({ articles, getFaqList }) => {
       .catch((err) => console.error(err));
   };
 
-  const onSearchHandler = () => {
-    if (!searchInputRef.current || !searchTypeRef.current) {
-      return;
-    }
-    const query = searchInputRef.current.value;
-    const type = searchTypeRef.current.value;
-    if (query === "") {
-      window.alert("검색어를 입력하세요");
-      return;
-    } else if (query === "?" || query === "#") {
-      window.alert("?, #는 검색할 수 없습니다.");
-      return;
-    }
-    searchInputRef.current.value = "";
-    history.push(`/customer/faq/search/${type}/${query}`); //추후변경
-    window.scrollTo({ top: 0 });
-    getFaqList();
-  };
-
-  const keyHandler = (e) => {
-    if (e.key !== "Enter") {
-      return;
-    }
-    onSearchHandler();
-  };
-
-  useEffect(() => {
-    window.addEventListener("keydown", keyHandler);
-    return () => {
-      window.removeEventListener("keydown", keyHandler);
-    };
-  }, []);
-
-  useEffect(() => {
-    searchInputRef && searchInputRef.current.focus();
-  }, [searchInputRef]);
-
   useEffect(() => {
     if (listList.length === 0) {
       return;
@@ -195,20 +156,7 @@ const Faq = ({ articles, getFaqList }) => {
 
   return (
     <section className={styles.notice}>
-      <section className={styles.top}>
-        <section className={styles.search}>
-          <input
-            ref={searchInputRef}
-            type="text"
-            className={styles.search_text_input}
-            placeholder="질문을 입력하세요"
-            spellCheck="false"
-          />
-          <button className={styles.search_button} onClick={onSearchHandler}>
-            검색
-          </button>
-        </section>
-      </section>
+      <section className={styles.top}></section>
       <section className={styles.header} onClick={headerSelectHandler}>
         <p
           className={`${

@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router";
+import AdminProgramItem from "./adminProgramItem/adminProgramItem";
 import styles from "./adminProgramPage.module.css";
 
 const AdminProgramPage = (props) => {
@@ -73,6 +74,12 @@ const AdminProgramPage = (props) => {
         <button className={styles.add_button} onClick={addProgramHandler}>
           체험상품 추가
         </button>
+      </section>
+      <section className={styles.main}>
+        {myProgramList &&
+          myProgramList.map((item) => (
+            <AdminProgramItem key={item.idx} item={item} />
+          ))}
       </section>
     </section>
   );

@@ -6,7 +6,7 @@ import Faq from "./faq/faq";
 import Notice from "./notice/notice";
 
 const CustomerCenter = ({
-  loggedin,
+  user,
   noticeArticles,
   faqArticles,
   inquireArticles,
@@ -115,7 +115,7 @@ const CustomerCenter = ({
           <Faq articles={faqArticles} getFaqList={getFaqList} />
         ) : (
           <Inquire
-            loggedin={loggedin}
+            user={user}
             articles={inquireArticles}
             getInquireList={getInquireList}
           />

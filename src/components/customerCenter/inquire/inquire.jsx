@@ -4,9 +4,8 @@ import InquireArticle from "./inquireArticle/inquireArticle";
 import styles from "./inquire.module.css";
 import axios from "axios";
 
-const Inquire = ({ articles, getInquireList, loggedin }) => {
+const Inquire = ({ articles, getInquireList, user }) => {
   const history = useHistory();
-  const searchTypeRef = useRef();
   const searchInputRef = useRef();
   const [pageList, setPageList] = useState([]);
   const [listList, setListList] = useState([]);
@@ -20,7 +19,7 @@ const Inquire = ({ articles, getInquireList, loggedin }) => {
   }, []);
 
   useEffect(() => {
-    if (!loggedin) {
+    if (!user) {
       return;
     }
     let pagelength = 0;
@@ -54,7 +53,6 @@ const Inquire = ({ articles, getInquireList, loggedin }) => {
     }
     setPageList(pages);
     setListList(list);
-    setResultArticles(articles);
     setSliceList(list.slice(0, 5));
   }, [articles]);
 
@@ -77,11 +75,11 @@ const Inquire = ({ articles, getInquireList, loggedin }) => {
   };
 
   const onSearchHandler = () => {
-    if (!searchInputRef.current || !searchTypeRef.current) {
+    if (!searchInputRef.current) {
       return;
     }
     const query = searchInputRef.current.value;
-    const type = searchTypeRef.current.value;
+
     if (query === "") {
       window.alert("검색어를 입력하세요");
       return;
@@ -90,7 +88,7 @@ const Inquire = ({ articles, getInquireList, loggedin }) => {
       return;
     }
     searchInputRef.current.value = "";
-    history.push(`/customer/inquire/search/${type}/${query}`);
+    history.push(`/customer/inquire/search/${query}`); //수정
     window.scrollTo({ top: 0 });
     getInquireList();
   };
@@ -103,7 +101,7 @@ const Inquire = ({ articles, getInquireList, loggedin }) => {
   };
 
   useEffect(() => {
-    if (!loggedin) {
+    if (!user) {
       return;
     }
     window.addEventListener("keydown", keyHandler);
@@ -113,14 +111,14 @@ const Inquire = ({ articles, getInquireList, loggedin }) => {
   }, []);
 
   useEffect(() => {
-    if (!loggedin) {
+    if (!user) {
       return;
     }
     searchInputRef && searchInputRef.current.focus();
   }, [searchInputRef]);
 
   useEffect(() => {
-    if (!loggedin) {
+    if (!user) {
       return;
     }
     setSliceList(listList.slice(cursor, cursor + 5));
@@ -141,22 +139,11 @@ const Inquire = ({ articles, getInquireList, loggedin }) => {
     setCursor(cursor + 5);
   };
 
-  if (loggedin) {
+  if (user) {
     return (
       <section className={styles.inquire}>
         <section className={styles.top}>
           <section className={styles.search}>
-            <select
-              ref={searchTypeRef}
-              name="search_type"
-              id="search_type"
-              className={styles.search_type_select}
-            >
-              <option value="all">전체</option>
-              <option value="title">제목</option>
-              <option value="writer">작성자</option>
-            </select>
-
             <input
               ref={searchInputRef}
               type="text"
@@ -172,7 +159,7 @@ const Inquire = ({ articles, getInquireList, loggedin }) => {
         <section className={styles.header}>
           <div className={styles.division}>구분</div>
           <div className={styles.title}>제목</div>
-          <div className={styles.writer}>작성자</div>
+          <div className={styles.writer}></div>
           <div className={styles.date}>작성일</div>
         </section>
         <section className={styles.body}>
@@ -218,9 +205,7 @@ const Inquire = ({ articles, getInquireList, loggedin }) => {
     );
   } else {
     return (
-      <section className={styles.not_loggedin}>
-        로그인 후에 확인해주세요
-      </section>
+      <section className={styles.not_user}>로그인 후에 확인해주세요</section>
     );
   }
 };

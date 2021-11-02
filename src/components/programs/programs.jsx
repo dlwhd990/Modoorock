@@ -389,16 +389,6 @@ const Programs = ({ areaList, programList, reviewList }) => {
                 </div>
                 <div
                   className={`${
-                    regionValue === "울산"
-                      ? `${styles.region_select} ${styles.region_on}`
-                      : `${styles.region_select}`
-                  }`}
-                  onClick={regionChangeHandler}
-                >
-                  울산
-                </div>
-                <div
-                  className={`${
                     regionValue === "제주"
                       ? `${styles.region_select} ${styles.region_on}`
                       : `${styles.region_select}`

@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import LoadingSpinnerWhite from "../loadingSpinner/loadingSpinnerWhite/loadingSpinnerWhite";
 import styles from "./header.module.css";
 
-const Header = ({ loggedin, userLogout }) => {
+const Header = ({ user, userLogout }) => {
   const [aboutDropDown, setAboutDropDown] = useState(false);
   const [programDropDown, setProgramDropDown] = useState(false);
   const [fnqDropDown, setFnqDropDown] = useState(false);
@@ -235,7 +235,7 @@ const Header = ({ loggedin, userLogout }) => {
           </li>
         </ul>
       </nav>
-      {loggedin === null ? (
+      {user === null ? (
         <div
           className={`${
             toggle
@@ -245,7 +245,7 @@ const Header = ({ loggedin, userLogout }) => {
         >
           <LoadingSpinnerWhite />
         </div>
-      ) : loggedin ? (
+      ) : user ? (
         <div
           className={`${
             toggle
@@ -257,7 +257,7 @@ const Header = ({ loggedin, userLogout }) => {
           <div
             className={styles.profile_container}
             onClick={() => {
-              history.push("/mypage");
+              history.push("/mypage/main");
               window.scrollTo({ top: 0 });
             }}
           >
@@ -266,7 +266,7 @@ const Header = ({ loggedin, userLogout }) => {
               alt="profile_image"
               className={styles.profile_image}
             />
-            <span className={styles.signup}>{`${loggedin}님`}</span>
+            <span className={styles.signup}>{`${user.id}님`}</span>
           </div>
           <span
             className={styles.logout}

@@ -23,21 +23,12 @@
   align-items: center;
 }
 
-.search_type_select {
-  width: 20%;
-  height: 45px;
-  font-size: 16px;
-  outline: none;
-  border: 1px solid var(--color-light-border);
-  padding: 4px;
-}
-
 .search_text_input {
-  width: 48%;
+  width: 70%;
   height: 45px;
   font-size: 16px;
   outline: none;
-  padding-left: 8px;
+  padding: 0 8px;
   border: 1px solid var(--color-light-border);
   margin: 0 20px;
 }

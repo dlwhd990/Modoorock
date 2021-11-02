@@ -6,7 +6,6 @@ import axios from "axios";
 
 const Notice = ({ articles, getNoticeList }) => {
   const history = useHistory();
-  const searchTypeRef = useRef();
   const searchInputRef = useRef();
   const [pageList, setPageList] = useState([]);
   const [listList, setListList] = useState([]);
@@ -74,11 +73,11 @@ const Notice = ({ articles, getNoticeList }) => {
   };
 
   const onSearchHandler = () => {
-    if (!searchInputRef.current || !searchTypeRef.current) {
+    if (!searchInputRef.current) {
+      window.alert("검색어를 입력해주세요");
       return;
     }
     const query = searchInputRef.current.value;
-    const type = searchTypeRef.current.value;
     if (query === "") {
       window.alert("검색어를 입력하세요");
       return;
@@ -87,7 +86,7 @@ const Notice = ({ articles, getNoticeList }) => {
       return;
     }
     searchInputRef.current.value = "";
-    history.push(`/customer/notice/search/${type}/${query}`);
+    history.push(`/customer/notice/search/${query}`); //수정예정
     window.scrollTo({ top: 0 });
     getNoticeList();
   };
@@ -133,17 +132,6 @@ const Notice = ({ articles, getNoticeList }) => {
     <section className={styles.qna}>
       <section className={styles.top}>
         <section className={styles.search}>
-          <select
-            ref={searchTypeRef}
-            name="search_type"
-            id="search_type"
-            className={styles.search_type_select}
-          >
-            <option value="all">전체</option>
-            <option value="title">제목</option>
-            <option value="writer">작성자</option>
-          </select>
-
           <input
             ref={searchInputRef}
             type="text"

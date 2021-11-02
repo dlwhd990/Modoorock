@@ -1,15 +1,14 @@
 .main {
-  margin-top: 80px;
+  padding: 140px 0;
   width: 100%;
-  height: calc(100vh - 80px);
+  height: auto;
   background-color: var(--color-smoke-white);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
 }
 
 .advertise_upload_container {
+  width: 60%;
+  min-width: 900px;
+  margin: auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -19,6 +18,7 @@
   padding: 50px 100px;
   border-radius: 8px;
   box-shadow: 0 3px 5px lightgray;
+  margin-bottom: 50px;
 }
 .title {
   font-size: var(--font-size-title);
@@ -61,6 +61,16 @@
   cursor: pointer;
   border-radius: 4px;
   box-shadow: 0 3px 5px lightgray;
+}
+
+.list {
+  width: 60%;
+  min-width: 900px;
+  margin: auto;
+  border-radius: 8px;
+  box-shadow: 0 3px 5px lightgray;
+  background-color: white;
+  animation: appear 0.6s;
 }
 
 @keyframes appear {

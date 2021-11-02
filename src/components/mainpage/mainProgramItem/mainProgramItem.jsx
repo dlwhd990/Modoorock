@@ -29,7 +29,7 @@ const MainProgramItem = React.memo(({ item, reviewList }) => {
     let total = 0;
 
     reviewList.forEach((reviewItem) => {
-      if (reviewItem.idx === item.idx) {
+      if (reviewItem.exp_idx === item.idx) {
         reviewResult.push(reviewItem);
         total += reviewItem.stars;
       }

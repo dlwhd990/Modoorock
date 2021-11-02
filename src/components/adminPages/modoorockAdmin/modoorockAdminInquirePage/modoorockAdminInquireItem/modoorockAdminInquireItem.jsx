@@ -46,6 +46,9 @@ const ModoorockAdminInquireItem = ({ article, loadInquireList }) => {
 
   useEffect(() => {
     getWriterId();
+    return () => {
+      setWriterId(null);
+    };
   }, []);
 
   return (

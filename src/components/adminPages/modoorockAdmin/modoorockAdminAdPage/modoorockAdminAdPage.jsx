@@ -1,8 +1,9 @@
 import axios from "axios";
 import React, { useRef, useState } from "react";
+import ModoorockAdminAdItem from "./modoorockAdminAdItem/modoorockAdminAdItem";
 import styles from "./modoorockAdminAdPage.module.css";
 
-const ModoorockAdminAdPage = (props) => {
+const ModoorockAdminAdPage = ({ advertiseList, loadAdvertiseList }) => {
   const adTitleRef = useRef();
   const adUrlRef = useRef();
   const [adThumbnail, setAdThumbnail] = useState(null);
@@ -19,7 +20,7 @@ const ModoorockAdminAdPage = (props) => {
   const onAdvertisementUploadHandler = () => {
     const title = adTitleRef.current.value;
     const content = adUrlRef.current.value;
-    if (title === "" || content == "" || !adThumbnail) {
+    if (title === "" || content === "" || !adThumbnail) {
       window.alert("모든 정보를 입력한 후에 업로드 가능합니다.");
       return;
     }
@@ -36,9 +37,11 @@ const ModoorockAdminAdPage = (props) => {
         response.data === "success"
           ? window.alert("업로드완료")
           : window.alert("업로드에 실패했습니다.");
+        loadAdvertiseList();
       })
       .catch((err) => console.error(err));
   };
+
   return (
     <section className={styles.main}>
       <section className={styles.advertise_upload_container}>
@@ -66,6 +69,15 @@ const ModoorockAdminAdPage = (props) => {
         >
           업로드
         </button>
+      </section>
+      <section className={styles.list}>
+        {advertiseList.map((item) => (
+          <ModoorockAdminAdItem
+            key={item.idx}
+            item={item}
+            loadAdvertiseList={loadAdvertiseList}
+          />
+        ))}
       </section>
     </section>
   );

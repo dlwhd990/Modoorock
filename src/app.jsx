@@ -17,7 +17,6 @@ import axios from "axios";
 import WriteMain from "./components/customerCenter/writeMain/writeMain";
 import LoadingPage from "./components/loadingPage/loadingPage";
 import Mypage from "./components/mypage/mypage";
-import SearchResultPage from "./components/customerCenter/searchResultPage/searchResultPage";
 import FindIdResult from "./components/find/findId/findIdResult/findIdResult";
 import AdminMain from "./components/adminPages/adminMain/adminMain";
 import NoticeView from "./components/customerCenter/notice/noticeView/noticeView";
@@ -31,8 +30,6 @@ const App = (props) => {
   const [areaList, setAreaList] = useState(null);
 
   const [programList, setProgramList] = useState(null);
-
-  const [userIdx, setUserIdx] = useState(null);
 
   const [faqArticles, setFaqArticles] = useState(null);
   const [noticeArticles, setNoticeArticles] = useState(null);
@@ -170,18 +167,16 @@ const App = (props) => {
     },
   ]);
 
-  const [loggedin, setLoggedin] = useState(null);
+  const [user, setUser] = useState(null);
 
   const sessionCheck = () => {
     axios
       .post(`${process.env.REACT_APP_BASEURL}/user/session`)
       .then((response) => {
         if (response.data !== "") {
-          setLoggedin(response.data.id);
-          setUserIdx(response.data.idx);
+          setUser(response.data);
         } else {
-          setLoggedin(false);
-          setUserIdx(null);
+          setUser(false);
         }
       })
       .catch((err) => console.error(err));
@@ -191,7 +186,7 @@ const App = (props) => {
     axios
       .post(`${process.env.REACT_APP_BASEURL}/user/logout`)
       .then(() => {
-        setLoggedin(false);
+        setUser(false);
         window.alert("안전하게 로그아웃 되었습니다.");
         window.location.href = "/";
       })
@@ -223,7 +218,7 @@ const App = (props) => {
   const getInquireList = () => {
     axios
       .post(`${process.env.REACT_APP_BASEURL}/qna/getqnalist`, {
-        userIdx,
+        userIdx: user.idx,
       })
       .then((response) => {
         setInquireArticles(response.data);
@@ -236,7 +231,7 @@ const App = (props) => {
       .post(`${process.env.REACT_APP_BASEURL}/attraction/getattractionlist`, {
         area: "전체",
       })
-      .then((response) => setAreaList(response.data))
+      .then((response) => setAreaList(response.data.reverse()))
       .catch((err) => {
         console.error(err);
       });
@@ -268,15 +263,15 @@ const App = (props) => {
   }, []);
 
   useEffect(() => {
-    userIdx && getInquireList();
-  }, [userIdx]);
+    user && getInquireList();
+  }, [user]);
 
   // 방법 찾을 때  까지 header+footer 모두에게 붙임 (admin 페이지에서는 안떠야하기 때문에)
   return (
     <section className={styles.app}>
       <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Route exact path="/">
-          <Header loggedin={loggedin} userLogout={userLogout} />
+          <Header user={user} userLogout={userLogout} />
           <Mainpage
             programList={programList}
             viewItems={introVideos}
@@ -285,37 +280,37 @@ const App = (props) => {
           <Footer />
         </Route>
         <Route exact path="/login">
-          <Header loggedin={loggedin} userLogout={userLogout} />
+          <Header user={user} userLogout={userLogout} />
           <LoginPage />
           <Footer />
         </Route>
         <Route exact path="/signup">
-          <Header loggedin={loggedin} userLogout={userLogout} />
+          <Header user={user} userLogout={userLogout} />
           <Signup />
           <Footer />
         </Route>
         <Route exact path="/find">
-          <Header loggedin={loggedin} userLogout={userLogout} />
+          <Header user={user} userLogout={userLogout} />
           <Find />
           <Footer />
         </Route>
         <Route exact path="/find/id/:phone">
-          <Header loggedin={loggedin} userLogout={userLogout} />
+          <Header user={user} userLogout={userLogout} />
           <FindIdResult />
           <Footer />
         </Route>
         <Route exact path="/introduce/:path">
-          <Header loggedin={loggedin} userLogout={userLogout} />
+          <Header user={user} userLogout={userLogout} />
           <Introduce viewItems={introVideos} />
           <Footer />
         </Route>
         <Route exact path="/programs/view/:path">
-          <Header loggedin={loggedin} userLogout={userLogout} />
+          <Header user={user} userLogout={userLogout} />
           <ProgramDetail programList={programList} reviewList={reviewList} />
           <Footer />
         </Route>
         <Route exact path="/programs/:path">
-          <Header loggedin={loggedin} userLogout={userLogout} />
+          <Header user={user} userLogout={userLogout} />
           {programList && areaList && reviewList && (
             <Programs
               areaList={areaList}
@@ -326,7 +321,7 @@ const App = (props) => {
           <Footer />
         </Route>
         <Route exact path="/programs/attraction/:path">
-          <Header loggedin={loggedin} userLogout={userLogout} />
+          <Header user={user} userLogout={userLogout} />
           {programList && areaList && reviewList && (
             <Attraction
               programList={programList}
@@ -337,10 +332,10 @@ const App = (props) => {
           <Footer />
         </Route>
         <Route exact path="/customer/:path">
-          <Header loggedin={loggedin} userLogout={userLogout} />
-          {noticeArticles && faqArticles && (inquireArticles || !loggedin) ? (
+          <Header user={user} userLogout={userLogout} />
+          {noticeArticles && faqArticles && (inquireArticles || !user) ? (
             <CustomerCenter
-              loggedin={loggedin}
+              user={user}
               noticeArticles={noticeArticles}
               faqArticles={faqArticles}
               inquireArticles={inquireArticles}
@@ -354,32 +349,23 @@ const App = (props) => {
           <Footer />
         </Route>
         <Route exact path="/customer/:path/write">
-          <Header loggedin={loggedin} userLogout={userLogout} />
-          <WriteMain loggedin={loggedin} />
+          <Header user={user} userLogout={userLogout} />
+          <WriteMain user={user} />
           <Footer />
         </Route>
         <Route exact path="/customer/notice/view/:path">
-          <Header loggedin={loggedin} userLogout={userLogout} />
+          <Header user={user} userLogout={userLogout} />
           <NoticeView />
           <Footer />
         </Route>
-        <Route exact path="/customer/:path/search/:type/:query">
-          <Header loggedin={loggedin} userLogout={userLogout} />
-          <SearchResultPage
-            noticeArticles={noticeArticles}
-            faqArticles={faqArticles}
-            inquireArticles={inquireArticles}
-          />
-          <Footer />
-        </Route>
         <Route exact path="/contact">
-          <Header loggedin={loggedin} userLogout={userLogout} />
+          <Header user={user} userLogout={userLogout} />
           <Contact />
           <Footer />
         </Route>
         <Route exact path="/mypage/:path">
-          <Header loggedin={loggedin} userLogout={userLogout} />
-          <Mypage loggedin={loggedin} />
+          <Header user={user} userLogout={userLogout} />
+          <Mypage user={user} />
           <Footer />
         </Route>
         <Route exact path="/admin/:path">

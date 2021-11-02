@@ -10,31 +10,7 @@ const Contact = (props) => {
       <section className={styles.select_bar_container}>
         <div className={`${styles.select_button} ${styles.on}`}>Contact</div>
       </section>
-      <h1 className={styles.title}>Contact</h1>
-      <div className={styles.route_button_container}>
-        <div
-          className={styles.home_icon_container}
-          onClick={() => {
-            history.push("/");
-            window.scrollTo({ top: 0 });
-          }}
-        >
-          <i className={`${styles.home_icon} fas fa-home`}></i>
-        </div>
 
-        <i className={`${styles.arrow_icon} fas fa-chevron-right`}></i>
-
-        <p
-          className={styles.route_button}
-          onClick={() => {
-            history.push("/contact");
-
-            window.scrollTo({ top: 0 });
-          }}
-        >
-          Contact
-        </p>
-      </div>
       <section className={styles.contact_us_container}>
         <p className={styles.contact_us_title}>Contact Us</p>
         <p className={styles.desc}>

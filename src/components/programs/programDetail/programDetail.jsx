@@ -365,7 +365,7 @@ const ProgramDetail = ({ programList, reviewList }) => {
                 id="content"
                 className={styles.content_input}
                 spellCheck="false"
-                placeholder="내용"
+                placeholder="이 곳은 해당 체험상품에 대해 문의하는 곳입니다. 모두락 웹사이트에 대해 문의하시는 경우에는 '문의게시판' 을 이용해주세요."
               ></textarea>
             </div>
             <div className={styles.submit_button_container}>

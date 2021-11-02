@@ -230,7 +230,6 @@
 
 .review_items_container {
   flex-basis: 70%;
-  height: auto;
   box-shadow: 1px 3px 8px var(--color-light-divide-line);
   padding: 0 20px;
   border-radius: 16px;

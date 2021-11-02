@@ -15,6 +15,7 @@ const ModoorockAdmin = (props) => {
   const [attractionList, setAttractionList] = useState(null);
   const [programList, setProgramList] = useState(null);
   const [inquireList, setInquireList] = useState(null);
+  const [advertiseList, setAdvertiseList] = useState(null);
   const [userList, setUserList] = useState(null);
 
   const modoorockAdminCheck = () => {
@@ -30,6 +31,7 @@ const ModoorockAdmin = (props) => {
           loadUserList();
           loadProgramList();
           loadInquireList();
+          loadAdvertiseList();
         }
       })
       .catch((err) => console.error(err));
@@ -53,7 +55,7 @@ const ModoorockAdmin = (props) => {
   const loadUserList = () => {
     axios
       .post(`${process.env.REACT_APP_BASEURL}/user/getuserlist`)
-      .then((response) => setUserList(response.data))
+      .then((response) => setUserList(response.data.reverse()))
       .catch((err) => console.error(err));
   };
 
@@ -62,7 +64,7 @@ const ModoorockAdmin = (props) => {
       .post(`${process.env.REACT_APP_BASEURL}/exp/getexplist`, {
         theme: "전체",
       })
-      .then((response) => setProgramList(response.data))
+      .then((response) => setProgramList(response.data.reverse()))
       .catch((err) => console.error(err));
   };
 
@@ -72,6 +74,13 @@ const ModoorockAdmin = (props) => {
         idx: 0,
       })
       .then((response) => setInquireList(response.data.reverse()))
+      .catch((err) => console.error(err));
+  };
+
+  const loadAdvertiseList = () => {
+    axios
+      .post(`${process.env.REACT_APP_BASEURL}/advertise/getadvertiselist`)
+      .then((response) => setAdvertiseList(response.data.reverse()))
       .catch((err) => console.error(err));
   };
 
@@ -172,7 +181,12 @@ const ModoorockAdmin = (props) => {
           </div>
         </section>
       ) : path === "advertise" ? (
-        <ModoorockAdminAdPage />
+        advertiseList && (
+          <ModoorockAdminAdPage
+            advertiseList={advertiseList}
+            loadAdvertiseList={loadAdvertiseList}
+          />
+        )
       ) : path === "attraction" ? (
         attractionList &&
         userList &&

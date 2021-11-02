@@ -1,6 +1,7 @@
 import React from "react";
 import { useHistory, useParams } from "react-router";
 import styles from "./mypage.module.css";
+import MypageMain from "./mypageMain/mypageMain";
 
 const Mypage = (props) => {
   const history = useHistory();
@@ -79,6 +80,9 @@ const Mypage = (props) => {
           {path === "main" ? "내 정보" : "결제내역"}
         </p>
       </div>
+      <section className={styles.main}>
+        <MypageMain />
+      </section>
     </section>
   );
 };

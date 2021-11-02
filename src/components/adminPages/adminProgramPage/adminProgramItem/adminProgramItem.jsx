@@ -1,12 +1,12 @@
 import React from "react";
 import { useHistory } from "react-router";
-import styles from "./adminAttractionItem.module.css";
+import styles from "./adminProgramItem.module.css";
 
-const AdminAttractionItem = ({ item }) => {
+const AdminProgramItem = ({ item }) => {
   const history = useHistory();
 
   const itemClickHandler = () => {
-    history.push(`/admin/attraction/view/${item.idx}`);
+    history.push(`/admin/program/view/${item.idx}`); //수정예정
   };
 
   return (
@@ -14,14 +14,14 @@ const AdminAttractionItem = ({ item }) => {
       <div className={styles.main}>
         <div className={styles.photo_container}>
           <img
-            src={`${process.env.REACT_APP_BASEURL}-images/Attraction/${item.photo}`}
+            src={`${process.env.REACT_APP_BASEURL}-images/Exp/${item.photo}`}
             alt="attraction_photo"
             className={styles.photo}
           />
         </div>
         <div className={styles.data_container}>
-          <p className={styles.name}>{item.name}</p>
-          <p className={styles.area}>{item.area}</p>
+          <p className={styles.name}>{item.title}</p>
+          <p className={styles.area}>{item.theme}</p>
         </div>
       </div>
 
@@ -37,4 +37,4 @@ const AdminAttractionItem = ({ item }) => {
   );
 };
 
-export default AdminAttractionItem;
+export default AdminProgramItem;
