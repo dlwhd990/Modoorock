@@ -3,7 +3,7 @@ import { useHistory, useParams } from "react-router";
 import styles from "./mypage.module.css";
 import MypageMain from "./mypageMain/mypageMain";
 
-const Mypage = (props) => {
+const Mypage = ({ user }) => {
   const history = useHistory();
   const { path } = useParams();
 
@@ -81,7 +81,7 @@ const Mypage = (props) => {
         </p>
       </div>
       <section className={styles.main}>
-        <MypageMain />
+        <MypageMain user={user} />
       </section>
     </section>
   );

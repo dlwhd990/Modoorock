@@ -262,7 +262,7 @@ const Header = ({ user, userLogout }) => {
             }}
           >
             <img
-              src="/Modoorock/images/1.png"
+              src="/Modoorock/images/profile_default.png"
               alt="profile_image"
               className={styles.profile_image}
             />

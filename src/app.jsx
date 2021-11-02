@@ -365,7 +365,7 @@ const App = (props) => {
         </Route>
         <Route exact path="/mypage/:path">
           <Header user={user} userLogout={userLogout} />
-          <Mypage user={user} />
+          {user && <Mypage user={user} sessionCheck={sessionCheck} />}
           <Footer />
         </Route>
         <Route exact path="/admin/:path">
