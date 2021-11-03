@@ -2,11 +2,31 @@ import React, { useState, useEffect } from "react";
 import styles from "./inquireArticle.module.css";
 import axios from "axios";
 
-const InquireArticle = ({ article }) => {
+const InquireArticle = ({ article, getInquireList }) => {
   const [viewDetail, setViewDetail] = useState(false);
   const [program, setProgram] = useState(null);
   const viewArticle = () => {
     setViewDetail(!viewDetail);
+  };
+
+  const deleteHandler = () => {
+    const confirm = window.confirm("정말로 삭제하시겠습니까?");
+    if (!confirm) {
+      return;
+    }
+    axios
+      .post(`${process.env.REACT_APP_BASEURL}/qna/deleteqna`, {
+        idx: article.idx,
+      })
+      .then((response) => {
+        if (response.data === "success") {
+          window.alert("삭제되었습니다.");
+          getInquireList();
+        } else {
+          window.alert("에러가 발생했습니다. 새로고침 후에 다시 시도해주세요");
+        }
+      })
+      .catch((err) => console.error(err));
   };
 
   const getProgramName = () => {
@@ -23,6 +43,9 @@ const InquireArticle = ({ article }) => {
 
   useEffect(() => {
     getProgramName();
+    return () => {
+      setProgram(null);
+    };
   }, []);
 
   return (
@@ -76,6 +99,9 @@ const InquireArticle = ({ article }) => {
               <p className={styles.content}>{article.answer}</p>
             </div>
           )}
+          <button className={styles.delete_button} onClick={deleteHandler}>
+            삭제하기
+          </button>
         </div>
       </section>
     </section>

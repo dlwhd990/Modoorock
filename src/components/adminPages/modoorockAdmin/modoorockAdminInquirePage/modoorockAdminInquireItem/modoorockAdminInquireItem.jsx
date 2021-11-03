@@ -44,6 +44,26 @@ const ModoorockAdminInquireItem = ({ article, loadInquireList }) => {
       .catch((err) => console.error(err));
   };
 
+  const deleteHandler = () => {
+    const confirm = window.confirm("정말로 삭제하시겠습니까?");
+    if (!confirm) {
+      return;
+    }
+    axios
+      .post(`${process.env.REACT_APP_BASEURL}/qna/deleteqna`, {
+        idx: article.idx,
+      })
+      .then((response) => {
+        if (response.data === "success") {
+          window.alert("삭제되었습니다.");
+          loadInquireList();
+        } else {
+          window.alert("에러가 발생했습니다. 새로고침 후에 다시 시도해주세요");
+        }
+      })
+      .catch((err) => console.error(err));
+  };
+
   useEffect(() => {
     getWriterId();
     return () => {
@@ -110,6 +130,9 @@ const ModoorockAdminInquireItem = ({ article, loadInquireList }) => {
               </div>
             </div>
           )}
+          <button className={styles.delete_button} onClick={deleteHandler}>
+            삭제하기
+          </button>
         </div>
       </section>
     </section>

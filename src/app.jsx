@@ -380,6 +380,12 @@ const App = (props) => {
         <Route exact path="/admin/:path/:path_two/:path_three/:path_four">
           <AdminMain userLogout={userLogout} />
         </Route>
+        <Route
+          exact
+          path="/admin/:path/:path_two/:path_three/:path_four/:path_five"
+        >
+          <AdminMain userLogout={userLogout} />
+        </Route>
         <Route exact path="/modoorockadmin">
           <ModoorockAdmin />
         </Route>

@@ -114,6 +114,16 @@ const NoticeView = (props) => {
               </div>
               <div className={styles.article_content}>{article.content}</div>
             </article>
+            <div className={styles.go_to_list_button_container}>
+              <button
+                className={styles.go_to_list_button}
+                onClick={() => {
+                  history.push("/customer/notice");
+                }}
+              >
+                목록으로
+              </button>
+            </div>
           </section>
         ) : (
           <LoadingPage />

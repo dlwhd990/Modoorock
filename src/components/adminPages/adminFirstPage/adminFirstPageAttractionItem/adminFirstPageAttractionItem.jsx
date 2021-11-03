@@ -1,9 +1,14 @@
 import React from "react";
+import { useHistory } from "react-router";
 import styles from "./adminFirstPageAttractionItem.module.css";
 
 const AdminFirstPageAttractionItem = ({ item }) => {
+  const history = useHistory();
+  const onClickHandler = () => {
+    history.push(`/admin/attraction/view/${item.idx}`);
+  };
   return (
-    <div className={styles.item}>
+    <div className={styles.item} onClick={onClickHandler}>
       <div className={styles.main}>
         <img
           src={`${process.env.REACT_APP_BASEURL}-images/Attraction/${item.photo}`}

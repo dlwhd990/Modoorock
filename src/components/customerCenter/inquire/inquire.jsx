@@ -51,8 +51,10 @@ const Inquire = ({ articles, getInquireList, user }) => {
         pages[i].push(articleKeyList[j]);
       }
     }
+    pages.length <= numbering && setNumbering(numbering - 1);
     setPageList(pages);
     setListList(list);
+    setResultArticles(articles);
     setSliceList(list.slice(0, 5));
   }, [articles]);
 
@@ -168,6 +170,7 @@ const Inquire = ({ articles, getInquireList, user }) => {
               <InquireArticle
                 key={resultArticles[index].idx}
                 article={resultArticles[index]}
+                getInquireList={getInquireList}
               />
             ))}
         </section>

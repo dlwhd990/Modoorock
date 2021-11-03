@@ -1,14 +1,17 @@
 import axios from "axios";
+import { set } from "js-cookie";
 import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router";
 import AdminProgramItem from "./adminProgramItem/adminProgramItem";
 import styles from "./adminProgramPage.module.css";
+import AdminProgramPopup from "./adminProgramPopup/adminProgramPopup";
 
 const AdminProgramPage = (props) => {
   const history = useHistory();
   const { path_three } = useParams();
   const [myProgramList, setMyProgramList] = useState([]);
   const [attractionInfo, setAttractionInfo] = useState(null);
+  const [popupData, setPopupData] = useState(null);
 
   const loadAttractionInfo = () => {
     axios
@@ -52,6 +55,14 @@ const AdminProgramPage = (props) => {
     window.scrollTo({ top: 0 });
   };
 
+  const popupHandler = (item) => {
+    setPopupData(item);
+  };
+
+  const closePopupHandler = () => {
+    setPopupData(null);
+  };
+
   useEffect(() => {
     loadAttractionInfo();
     loadProgramList();
@@ -78,9 +89,21 @@ const AdminProgramPage = (props) => {
       <section className={styles.main}>
         {myProgramList &&
           myProgramList.map((item) => (
-            <AdminProgramItem key={item.idx} item={item} />
+            <AdminProgramItem
+              key={item.idx}
+              item={item}
+              popupHandler={popupHandler}
+            />
           ))}
       </section>
+      {popupData && (
+        <div className={styles.popup_filter}>
+          <AdminProgramPopup
+            item={popupData}
+            closePopupHandler={closePopupHandler}
+          />
+        </div>
+      )}
     </section>
   );
 };
