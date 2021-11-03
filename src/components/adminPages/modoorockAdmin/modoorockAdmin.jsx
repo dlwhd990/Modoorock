@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router";
 import styles from "./modoorockAdmin.module.css";
 import ModoorockAdminAdPage from "./modoorockAdminAdPage/modoorockAdminAdPage";
+import ModoorockAdminArticlePage from "./modoorockAdminArticlePage/modoorockAdminArticlePage";
 import ModoorockAdminAttractionPage from "./modoorockAdminAttractionPage/modoorockAdminAttractionPage";
 import ModoorockAdminBackgroundUploadPage from "./modoorockAdminBackgroundUploadPage/modoorockAdminBackgroundUploadPage";
 import ModoorockAdminInquirePage from "./modoorockAdminInquirePage/modoorockAdminInquirePage";
@@ -14,6 +15,8 @@ const ModoorockAdmin = (props) => {
   const [selected, setSelected] = useState("메인");
   const [attractionList, setAttractionList] = useState(null);
   const [programList, setProgramList] = useState(null);
+  const [noticeList, setNoticeList] = useState(null);
+  const [faqList, setFaqList] = useState(null);
   const [inquireList, setInquireList] = useState(null);
   const [advertiseList, setAdvertiseList] = useState(null);
   const [userList, setUserList] = useState(null);
@@ -32,6 +35,8 @@ const ModoorockAdmin = (props) => {
           loadProgramList();
           loadInquireList();
           loadAdvertiseList();
+          loadNoticeList();
+          loadFaqList();
         }
       })
       .catch((err) => console.error(err));
@@ -84,6 +89,24 @@ const ModoorockAdmin = (props) => {
       .catch((err) => console.error(err));
   };
 
+  const loadNoticeList = () => {
+    axios
+      .post(`${process.env.REACT_APP_BASEURL}/notice/getnoticelist`, {
+        type: "전체",
+      })
+      .then((response) => setNoticeList(response.data.reverse()))
+      .catch((err) => console.error(err));
+  };
+
+  const loadFaqList = () => {
+    axios
+      .post(`${process.env.REACT_APP_BASEURL}/faq/getfaqlist`, {
+        type: "전체",
+      })
+      .then((response) => setFaqList(response.data.reverse()))
+      .catch((err) => console.error(err));
+  };
+
   useEffect(() => {
     modoorockAdminCheck();
   }, []);
@@ -124,6 +147,17 @@ const ModoorockAdmin = (props) => {
               data-param="attraction"
             >
               관광지 관리
+            </li>
+            <li
+              className={`${
+                selected === "게시물 관리"
+                  ? `${styles.menu_item} ${styles.selected}`
+                  : `${styles.menu_item} ${styles.not_selected}`
+              }`}
+              onClick={onSelectHandler}
+              data-param="article"
+            >
+              게시물 관리
             </li>
             <li
               className={`${
@@ -212,6 +246,18 @@ const ModoorockAdmin = (props) => {
           <ModoorockAdminUserPage
             userList={userList}
             loadUserList={loadUserList}
+          />
+        )
+      ) : path === "article" ? (
+        noticeList &&
+        faqList &&
+        inquireList && (
+          <ModoorockAdminArticlePage
+            noticeList={noticeList}
+            faqList={faqList}
+            inquireList={inquireList}
+            loadNoticeList={loadNoticeList}
+            loadFaqList={loadFaqList}
           />
         )
       ) : (

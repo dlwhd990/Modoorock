@@ -1,0 +1,75 @@
+.item {
+  width: 1100px;
+  display: flex;
+  flex-direction: row;
+  padding: 1rem;
+  font-weight: bolder;
+  color: rgb(77, 77, 77);
+  border-top: 2px solid rgb(235, 235, 235);
+  border-bottom: 2px solid rgb(235, 235, 235);
+  margin: -2px 0;
+  cursor: pointer;
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--color-article);
+}
+
+.item:hover {
+  background-color: rgb(247, 247, 247);
+}
+
+.division {
+  flex-basis: 10%;
+  text-align: center;
+}
+
+.title {
+  margin-left: 50px;
+  flex-basis: 50%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  -moz-white-space: nowrap;
+  overflow: hidden;
+}
+
+.writer {
+  flex-basis: 15%;
+  text-align: center;
+}
+
+.date {
+  flex-basis: 15%;
+  text-align: center;
+}
+
+.delete_container {
+  flex-basis: 10%;
+  text-align: end;
+}
+
+.delete {
+  width: 75px;
+  outline: none;
+  border: 1px solid var(--color-light-border);
+  border-radius: 4px;
+  cursor: pointer;
+  padding: 6px 0;
+}
+
+.delete:hover {
+  background-color: red;
+  color: white;
+  transition: 200ms all ease-in;
+}
+
+.content {
+  width: 1100px;
+  padding: 20px 40px;
+  background-color: var(--color-smoke-white);
+  white-space: pre-line;
+  display: none;
+}
+
+.on {
+  display: block;
+}
