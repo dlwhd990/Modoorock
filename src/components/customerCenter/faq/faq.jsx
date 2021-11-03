@@ -119,7 +119,7 @@ const Faq = ({ articles, getFaqList }) => {
     axios
       .post(`${process.env.REACT_APP_BASEURL}/user/session`)
       .then((response) => {
-        if (!response.data === "" || response.data.userType !== 2) {
+        if (response.data === "" || response.data.idType !== 2) {
           window.alert("관리자만 작성이 가능합니다.");
           return;
         }
@@ -202,15 +202,6 @@ const Faq = ({ articles, getFaqList }) => {
           }`}
         >
           사이트 이용
-        </p>
-        <p
-          className={`${
-            headerSelect === "test"
-              ? `${styles.header_item} ${styles.header_on}`
-              : `${styles.header_item} ${styles.header_off}`
-          }`}
-        >
-          test
         </p>
       </section>
       <section className={styles.body}>

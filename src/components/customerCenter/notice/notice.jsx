@@ -62,7 +62,7 @@ const Notice = ({ articles, getNoticeList }) => {
     axios
       .post(`${process.env.REACT_APP_BASEURL}/user/session`)
       .then((response) => {
-        if (!response.data === "" || response.data.userType !== 2) {
+        if (response.data === "" || response.data.idType !== 2) {
           window.alert("관리자만 작성이 가능합니다.");
           return;
         }

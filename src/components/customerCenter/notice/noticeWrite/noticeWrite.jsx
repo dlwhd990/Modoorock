@@ -5,7 +5,6 @@ import { useHistory } from "react-router";
 
 const NoticeWrite = () => {
   const history = useHistory();
-  const typeRef = useRef();
   const titleRef = useRef();
   const contentRef = useRef();
   const writeSubmitHandler = (e) => {
@@ -14,16 +13,15 @@ const NoticeWrite = () => {
     axios
       .post(`${process.env.REACT_APP_BASEURL}/user/session`)
       .then((response) => {
-        if (!response.data === "" || response.data.userType !== 2) {
+        if (response.data === "" || response.data.idType !== 2) {
           window.alert("관리자만 작성이 가능합니다.");
           return;
         }
-        const type = typeRef.current.value;
         const title = titleRef.current.value;
         const content = contentRef.current.value;
         axios
           .post(`${process.env.REACT_APP_BASEURL}/notice/insertnotice`, {
-            type,
+            type: "공지",
             title,
             content,
           })
@@ -38,19 +36,6 @@ const NoticeWrite = () => {
   return (
     <section className={styles.write}>
       <form className={styles.write_form}>
-        <div className={styles.type_select_container}>
-          <p className={styles.type_text}>분류</p>
-          <select
-            ref={typeRef}
-            name="type"
-            id="type"
-            className={styles.type_select}
-          >
-            <option value="공지" className={styles.type}>
-              공지
-            </option>
-          </select>
-        </div>
         <div className={styles.title_input_container}>
           <p className={styles.title_text}>제목</p>
           <input
