@@ -57,6 +57,11 @@
   align-items: center;
 }
 
+.menu_item_title.on {
+  padding: 10px 0;
+  border-bottom: 2px solid white;
+}
+
 .login_container {
   width: 15%;
   display: flex;
@@ -80,17 +85,16 @@
   margin: 0;
   width: 140px;
   position: absolute;
-  top: 80px;
+  top: 81px;
   background-color: rgb(40, 40, 40);
   padding: 10px;
-  border-radius: 0 0 4px 4px;
+  border-radius: 4px;
   animation: appear 0.3s;
   list-style: none;
 }
 
-.on {
+.drop_down_menu.on {
   display: block;
-  border-top: 3px solid white;
 }
 
 .drop_down_menu_item {

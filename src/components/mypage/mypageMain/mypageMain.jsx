@@ -9,21 +9,38 @@ const MypageMain = ({ user, sessionCheck }) => {
   const nameRef = useRef();
   const phoneRef = useRef();
   const authNumRef = useRef();
-  const onSubmitHandler = () => {
+
+  const onPasswordChangeHandler = () => {
     const password = pwRef.current.value;
     const newPw = newPwRef.current.value;
     const newPwConfirm = newPwConfirmRef.current.value;
+    //암호화된 패스워드와 사용자가 입력한 패스워드가 일치하는지 확인하는 과정 필요
+    if (newPw !== newPwConfirm) {
+      window.alert("새로운 비밀번호와 확인이 일치하지 않습니다.");
+      return;
+    }
 
-    const phone = phoneRef.current.value;
-    const content = authNumRef.current.value;
-    //변수갖다쓰기
-  };
-
-  const onNameChangeHandler = () => {
     axios
       .post(`${process.env.REACT_APP_BASEURL}/user/modifyinfo`, {
-        id: "dww",
-        phone: "01044444444",
+        id: user.id,
+        phone: user.phone,
+        password: newPw,
+      })
+      .then((response) => console.log(response))
+      .catch((err) => console.error(err));
+  };
+
+  const onSmsHandler = () => {
+    //보류
+  };
+
+  const onPhoneChangeHandler = () => {
+    const phone = phoneRef.current.value;
+    //비밀번호를 보내야 한다면 원래 비밀번호는 암호화되어있어 모르기 때문에 문제생김
+    axios
+      .post(`${process.env.REACT_APP_BASEURL}/user/modifyinfo`, {
+        id: user.id,
+        phone,
         password: "dww",
       })
       .then((response) => console.log(response))
@@ -86,9 +103,7 @@ const MypageMain = ({ user, sessionCheck }) => {
               spellCheck="false"
               placeholder="새로운 비밀번호 확인"
             />
-            <button className={styles.button} onClick={onNameChangeHandler}>
-              비밀번호 변경
-            </button>
+            <button className={styles.button}>비밀번호 변경</button>
           </div>
         </div>
 

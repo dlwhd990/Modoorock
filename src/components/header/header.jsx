@@ -96,7 +96,15 @@ const Header = ({ user, userLogout }) => {
       >
         <ul className={styles.menu_list}>
           <li className={styles.menu_item} onMouseEnter={aboutDropDownOn}>
-            <div className={styles.menu_item_title}>소개</div>
+            <div
+              className={`${
+                aboutDropDown
+                  ? `${styles.menu_item_title} ${styles.on}`
+                  : `${styles.menu_item_title} ${styles.off}`
+              }`}
+            >
+              소개
+            </div>
             <ul
               className={`${
                 aboutDropDown
@@ -133,7 +141,15 @@ const Header = ({ user, userLogout }) => {
             </ul>
           </li>
           <li className={styles.menu_item} onMouseEnter={programDropDownOn}>
-            <div className={styles.menu_item_title}>프로그램</div>
+            <div
+              className={`${
+                programDropDown
+                  ? `${styles.menu_item_title} ${styles.on}`
+                  : `${styles.menu_item_title} ${styles.off}`
+              }`}
+            >
+              프로그램
+            </div>
             <ul
               className={`${
                 programDropDown
@@ -160,7 +176,15 @@ const Header = ({ user, userLogout }) => {
             </ul>
           </li>
           <li className={styles.menu_item} onMouseEnter={fnqDropDownOn}>
-            <div className={styles.menu_item_title}>고객센터</div>
+            <div
+              className={`${
+                fnqDropDown
+                  ? `${styles.menu_item_title} ${styles.on}`
+                  : `${styles.menu_item_title} ${styles.off}`
+              }`}
+            >
+              고객센터
+            </div>
             <ul
               className={`${
                 fnqDropDown
@@ -207,7 +231,15 @@ const Header = ({ user, userLogout }) => {
             </ul>
           </li>
           <li className={styles.menu_item} onMouseEnter={contactDropDownOn}>
-            <div className={styles.menu_item_title}>Contact</div>
+            <div
+              className={`${
+                contactDropDown
+                  ? `${styles.menu_item_title} ${styles.on}`
+                  : `${styles.menu_item_title} ${styles.off}`
+              }`}
+            >
+              Contact
+            </div>
             <ul
               className={`${
                 contactDropDown
