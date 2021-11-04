@@ -11,12 +11,21 @@
 
 .popup_top {
   position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .popup_title {
   font-size: var(--font-size-title);
   font-weight: 500;
   margin: 0;
+  margin-right: 14px;
+}
+
+.popup_subtitle {
+  margin: 0;
+  color: var(--color-desc);
 }
 
 .close_popup_button {
