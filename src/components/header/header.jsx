@@ -286,20 +286,6 @@ const Header = ({ user, userLogout }) => {
           }`}
           onClick={onToggleHandler}
         >
-          <div
-            className={styles.profile_container}
-            onClick={() => {
-              history.push("/mypage/main");
-              window.scrollTo({ top: 0 });
-            }}
-          >
-            <img
-              src="/Modoorock/images/profile_default.png"
-              alt="profile_image"
-              className={styles.profile_image}
-            />
-            <span className={styles.signup}>{`${user.id}님`}</span>
-          </div>
           <span
             className={styles.logout}
             onClick={() => {
@@ -308,6 +294,15 @@ const Header = ({ user, userLogout }) => {
           >
             로그아웃
           </span>
+          <div
+            className={styles.profile_container}
+            onClick={() => {
+              history.push("/mypage/main");
+              window.scrollTo({ top: 0 });
+            }}
+          >
+            <span className={styles.signup}>{`${user.id}님`}</span>
+          </div>
         </div>
       ) : (
         <div

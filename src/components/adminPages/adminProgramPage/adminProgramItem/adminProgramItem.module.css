@@ -1,6 +1,6 @@
 .item {
   width: 22.9%;
-  height: 300px;
+  height: 310px;
   margin: 1.5%;
   padding: 1%;
   margin-left: 0;
@@ -9,7 +9,6 @@
   background-color: white;
   border: 1.5px solid var(--color-light-divide-line);
   border-radius: 8px;
-  cursor: pointer;
   text-align: center;
 }
 
@@ -60,13 +59,36 @@
 }
 
 .button_container {
-  width: 80%;
+  width: 100%;
   margin: auto;
-  margin-bottom: 10px;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.button_mission {
+  width: 48%;
+  height: 30px;
+  font-size: var(--font-size-normal);
+  line-height: 28px;
+  outline: none;
+  border: none;
+  background-color: rgb(252, 199, 48);
+  color: white;
+  border-radius: 4px;
+  box-shadow: 0 2px 3px lightgray;
+  color: white;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: var(--font-size-small);
+  cursor: pointer;
+  transition: 140ms all ease-in;
 }
 
 .button_edit {
-  width: 100%;
+  width: 48%;
   height: 30px;
   font-size: var(--font-size-normal);
   line-height: 28px;
@@ -85,7 +107,8 @@
   transition: 140ms all ease-in;
 }
 
-.button_edit:hover {
+.button_edit:hover,
+.button_mission:hover {
   transform: scale(1.01);
 }
 
@@ -101,8 +124,8 @@
   color: rgb(56, 188, 129);
 }
 
-.delete_icon {
-  color: rgb(243, 66, 66);
+.mission_icon {
+  color: rgb(252, 199, 48);
 }
 
 .button_text {

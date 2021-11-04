@@ -8,6 +8,7 @@ import AdminFirstPage from "../adminFirstPage/adminFirstPage";
 import AdminInquirePage from "../adminInquirePage/adminInquirePage";
 import AdminPointPage from "../adminPointPage/adminPointPage";
 import AdminProgramEdit from "../adminProgramPage/adminProgramEdit/adminProgramEdit";
+import AdminProgramMission from "../adminProgramPage/adminProgramMission/adminProgramMission";
 import AdminProgramPage from "../adminProgramPage/adminProgramPage";
 import AdminProgramUploadPage from "../adminProgramPage/adminProgramUploadPage/adminProgramUploadPage";
 import styles from "./adminMain.module.css";
@@ -189,6 +190,9 @@ const AdminMain = ({ userLogout }) => {
               </div>
             </header>
             <section className={styles.content_container}>
+              {params.path_five && params.path_four === "mission" && (
+                <AdminProgramMission />
+              )}
               {params.path_five && params.path_four === "edit" && (
                 <AdminProgramEdit />
               )}

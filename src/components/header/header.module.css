@@ -115,18 +115,11 @@
   flex-direction: row;
   align-items: center;
   cursor: pointer;
-  margin-right: 40px;
-}
-
-.profile_image {
-  width: 35px;
-  height: 35px;
-  border-radius: 50%;
-  margin-right: 10px;
 }
 
 .logout {
   white-space: nowrap;
+  margin-right: 50px;
   cursor: pointer;
 }
 

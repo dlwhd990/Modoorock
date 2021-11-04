@@ -28,13 +28,8 @@ const ProgramItem = ({ item, reviewList }) => {
 
     //사진 스플릿
     const imageList = item.photo.split("#");
-
-    imageList.forEach((item) => {
-      if (item.includes("_main")) {
-        setMainImage(item);
-        return false;
-      }
-    });
+    const main = imageList.filter((item) => item.includes("_main"));
+    setMainImage(main);
   }, []);
   return (
     <section className={styles.program_item} onClick={onItemClick}>

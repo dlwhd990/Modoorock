@@ -16,12 +16,8 @@ const MainProgramItem = React.memo(({ item, reviewList }) => {
 
   useEffect(() => {
     const imageList = item.photo.split("#");
-    imageList.forEach((photo) => {
-      if (photo.includes("_main")) {
-        setMainImage(photo);
-        return false;
-      }
-    });
+    const main = imageList.filter((item) => item.includes("_main"));
+    setMainImage(main);
   }, []);
 
   useEffect(() => {

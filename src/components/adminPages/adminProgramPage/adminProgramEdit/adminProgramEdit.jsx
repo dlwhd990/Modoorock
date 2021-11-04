@@ -252,6 +252,7 @@ const AdminProgramEdit = (props) => {
               window.location.href = "/";
               return;
             }
+            loadAttractionInfo();
             const data = response.data;
             const imageList = data.photo.split("#");
             const mainImage = imageList.filter((item) =>
@@ -267,17 +268,13 @@ const AdminProgramEdit = (props) => {
               file: null,
               previewURL: `${process.env.REACT_APP_BASEURL}-images/Exp/${mainImage}`,
             });
-            titleRef.current.value = data.title;
-            priceRef.current.value = data.price;
-            contentRef.current.value = data.content;
-            themeRef.current.value = data.theme;
+            titleRef.current && (titleRef.current.value = data.title);
+            priceRef.current && (priceRef.current.value = data.price);
+            contentRef.current && (contentRef.current.value = data.content);
+            themeRef.current && (themeRef.current.value = data.theme);
           });
       })
       .catch((err) => console.error(err));
-  }, []);
-
-  useEffect(() => {
-    loadAttractionInfo();
   }, []);
 
   return (
