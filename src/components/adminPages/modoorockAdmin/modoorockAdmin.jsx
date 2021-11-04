@@ -25,8 +25,7 @@ const ModoorockAdmin = (props) => {
     axios
       .post(`${process.env.REACT_APP_BASEURL}/user/session`)
       .then((response) => {
-        if (response.data === "") {
-          //|| response.data.idType !== 2 나중에추가
+        if (response.data === "" || response.data.idType !== 2) {
           window.alert("권한이 없습니다.");
           window.location.href = "/Modoorock";
         } else {

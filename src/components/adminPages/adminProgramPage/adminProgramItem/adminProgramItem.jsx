@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import styles from "./adminProgramItem.module.css";
 
-const AdminProgramItem = ({ item, popupHandler }) => {
+const AdminProgramItem = ({ item, popupHandler, attractionIdx }) => {
   const history = useHistory();
   const [mainImage, setMainImage] = useState(null);
   useEffect(() => {
@@ -14,7 +14,7 @@ const AdminProgramItem = ({ item, popupHandler }) => {
 
   const onEditHandler = (e) => {
     e.stopPropagation();
-    console.log("dd");
+    history.push(`/admin/attraction/view/${attractionIdx}/edit/${item.idx}`);
   };
 
   return (

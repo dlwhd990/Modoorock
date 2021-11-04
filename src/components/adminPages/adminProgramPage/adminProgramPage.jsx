@@ -86,12 +86,13 @@ const AdminProgramPage = (props) => {
           체험상품 추가
         </button>
       </section>
-      <section className={styles.main}>
+      <section className={styles.main_list}>
         {myProgramList &&
           myProgramList.map((item) => (
             <AdminProgramItem
               key={item.idx}
               item={item}
+              attractionIdx={path_three}
               popupHandler={popupHandler}
             />
           ))}

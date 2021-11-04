@@ -1,16 +1,18 @@
 import axios from "axios";
 import React, { useEffect, useState, forwardRef, useRef } from "react";
 import { useHistory, useParams } from "react-router";
-import styles from "./adminProgramUploadPage.module.css";
+import styles from "./adminProgramEdit.module.css";
 import StarRatingComponent from "react-star-rating-component";
 import DatePicker, { registerLocale, setDefaultLocale } from "react-datepicker";
 import ko from "date-fns/locale/ko";
+import "./datePicker.css";
 import "../../../../../node_modules/react-datepicker/dist/react-datepicker.css";
+import AdminProgramUploadTimeItem from "./adminProgramUploadTimeItem/adminProgramUploadTimeItem";
 
 registerLocale("ko", ko);
 
-// 이 페이지 url 타고 타 사용자가 접근하는 것 막아야함 => 방법은 나중에 생각
-const AdminProgramUploadPage = ({ user }) => {
+const AdminProgramEdit = (props) => {
+  const [item, setItem] = useState(null);
   const history = useHistory();
   const params = useParams();
   const titleRef = useRef();
@@ -81,6 +83,13 @@ const AdminProgramUploadPage = ({ user }) => {
     console.log(subImages);
     console.log(previewImage);
   }, [subImages, previewImage]);
+
+  //date picker custom input
+  const ExampleCustomInput = forwardRef(({ value, onClick }, ref) => (
+    <button style={{ display: "none" }} onClick={onClick} ref={ref}>
+      {value}
+    </button>
+  ));
 
   const insertProgramHandler = (userIdx) => {
     const title = titleRef.current.value;
@@ -225,21 +234,63 @@ const AdminProgramUploadPage = ({ user }) => {
   };
 
   useEffect(() => {
+    axios
+      .post(`${process.env.REACT_APP_BASEURL}/exp/getexpinfo`, {
+        idx: params.path_five,
+      })
+      .then((response) => {
+        if (response.data.attractionIdx !== parseInt(params.path_three)) {
+          window.alert("잘못된 접근입니다.");
+          window.location.href = "/";
+          return;
+        }
+        axios
+          .post(`${process.env.REACT_APP_BASEURL}/user/session`)
+          .then((res) => {
+            if (res.data.idx !== response.data.userIdx) {
+              window.alert("접근 권한이 없습니다.");
+              window.location.href = "/";
+              return;
+            }
+            const data = response.data;
+            const imageList = data.photo.split("#");
+            const mainImage = imageList.filter((item) =>
+              item.includes("_main")
+            );
+
+            setItem(data);
+            setName(data.title);
+            setPrice(data.price);
+            setTheme(data.theme);
+            setContent(data.content);
+            setPreviewImage({
+              file: null,
+              previewURL: `${process.env.REACT_APP_BASEURL}-images/Exp/${mainImage}`,
+            });
+            titleRef.current.value = data.title;
+            priceRef.current.value = data.price;
+            contentRef.current.value = data.content;
+            themeRef.current.value = data.theme;
+          });
+      })
+      .catch((err) => console.error(err));
+  }, []);
+
+  useEffect(() => {
     loadAttractionInfo();
   }, []);
 
   return (
-    <section className={styles.upload_page}>
-      <section className={styles.upload_top}>
+    <section className={styles.edit_page}>
+      <section className={styles.edit_top}>
         <div className={styles.title_container}>
           <div className={styles.icon_container_one}>
             <i className={`${styles.head_icon} fas fa-map-marker-alt`}></i>
           </div>
-          {attractionInfo && (
-            <p
-              className={styles.title}
-            >{`체험상품 추가 - ${attractionInfo.name}`}</p>
-          )}
+          <p className={styles.title}>
+            {item && attractionInfo && `${attractionInfo.name} - ${item.title}`}
+          </p>
+          <p className={styles.subtitle}>정보수정</p>
         </div>
       </section>
       <section className={styles.main}>
@@ -365,7 +416,97 @@ const AdminProgramUploadPage = ({ user }) => {
           </section>
         </section>
       </section>
+      <section className={styles.date_select_section}>
+        <h1 className={styles.section_title}>일정 및 수량 입력</h1>
+        <div className={styles.time_select_and_result_view}>
+          <div className={styles.date_picker_container}>
+            <DatePicker
+              selected={startDate}
+              onChange={(date) => {
+                setStartDate(date);
+              }}
+              locale="ko"
+              open="true"
+              dateFormat="yyyy-MM-dd"
+              popperPlacement={"top-start"}
+              customInput={<ExampleCustomInput />}
+              calendarClassName="calendar"
+              inline
+            />
+          </div>
+          <div className={styles.time_and_count_select_container}>
+            <p className={styles.time_title}>시간 선택</p>
+            <select className={styles.time_select} onChange={timeChangeHandler}>
+              <option value="">시간 선택</option>
+              <option value="08:00:00">08:00</option>
+              <option value="08:30:00">08:30</option>
+              <option value="09:00:00">09:00</option>
+              <option value="09:30:00">09:30</option>
+              <option value="10:00:00">10:00</option>
+              <option value="10:30:00">10:30</option>
+              <option value="11:00:00">11:00</option>
+              <option value="11:30:00">11:30</option>
+              <option value="12:00:00">12:00</option>
+              <option value="12:30:00">12:30</option>
+              <option value="13:00:00">13:00</option>
+              <option value="13:30:00">13:30</option>
+              <option value="14:00:00">14:00</option>
+              <option value="14:30:00">14:30</option>
+              <option value="15:00:00">15:00</option>
+              <option value="15:30:00">15:30</option>
+              <option value="16:00:00">16:00</option>
+              <option value="16:30:00">16:30</option>
+              <option value="17:00:00">17:00</option>
+              <option value="17:30:00">17:30</option>
+              <option value="18:00:00">18:00</option>
+              <option value="18:30:00">18:30</option>
+              <option value="19:00:00">19:00</option>
+              <option value="19:30:00">19:30</option>
+              <option value="20:00:00">20:00</option>
+              <option value="20:30:00">20:30</option>
+              <option value="21:00:00">21:00</option>
+              <option value="21:30:00">21:30</option>
+              <option value="22:00:00">22:00</option>
+            </select>
+            <p className={styles.count_title}>수량 입력 (최대 99개)</p>
+            <input
+              ref={countInputRef}
+              type="text"
+              className={styles.count_input}
+              onChange={countChangeHandler}
+              maxLength="2"
+              spellCheck="false"
+              placeholder="수량 (숫자만 입력해주세요)"
+            />
+            <p className={styles.result_title}>입력 정보 확인</p>
+            <div
+              className={styles.result_view}
+            >{`${startDate.getFullYear()}년 ${
+              startDate.getMonth() + 1
+            }월 ${startDate.getDate()}일 ${time.slice(
+              0,
+              time.length - 3
+            )} | ${count}개`}</div>
+            <button
+              className={styles.save_button}
+              onClick={saveButtonClickHandler}
+            >
+              저장
+            </button>
+          </div>
+          <div className={styles.view_date_result_container}>
+            {dateDataList.map((item) => (
+              <AdminProgramUploadTimeItem
+                key={item.idx}
+                item={item}
+                deleteDateDataHandler={deleteDateDataHandler}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
     </section>
   );
 };
-export default AdminProgramUploadPage;
+
+export default AdminProgramEdit;
