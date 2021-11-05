@@ -1,5 +1,13 @@
 import React, { useState } from "react";
+import AdminProgramMissionUploadFour from "../adminProgramMissionUploadForm/adminProgramMissionUploadFour/adminProgramMissionUploadFour";
+import AdminProgramMissionUploadInstruction from "../adminProgramMissionUploadForm/adminProgramMissionUploadInstruction/adminProgramMissionUploadInstruction";
+import AdminProgramMissionUploadItemMission from "../adminProgramMissionUploadForm/adminProgramMissionUploadItemMission/adminProgramMissionUploadItemMission";
+import AdminProgramMissionUploadOx from "../adminProgramMissionUploadForm/adminProgramMissionUploadOx/adminProgramMissionUploadOx";
+import AdminProgramMissionUploadPhoto from "../adminProgramMissionUploadForm/adminProgramMissionUploadPhoto/adminProgramMissionUploadPhoto";
 import AdminProgramMissionUploadShort from "../adminProgramMissionUploadForm/adminProgramMissionUploadShort/adminProgramMissionUploadShort";
+import AdminProgramMissionUploadSurvey from "../adminProgramMissionUploadForm/adminProgramMissionUploadSurvey/adminProgramMissionUploadSurvey";
+import AdminProgramMissionUploadTopper from "../adminProgramMissionUploadForm/adminProgramMissionUploadTopper/adminProgramMissionUploadTopper";
+import AdminProgramMissionUploadVideo from "../adminProgramMissionUploadForm/adminProgramMissionUploadVideo/adminProgramMissionUploadVideo";
 import styles from "./adminProgramMissionPopup.module.css";
 
 const AdminProgramMissionPopup = ({ closeMissionPopupHandler }) => {
@@ -40,14 +48,58 @@ const AdminProgramMissionPopup = ({ closeMissionPopupHandler }) => {
             동영상 미션
           </div>
           <div className={styles.type_item} onClick={onTypeSelectHandler}>
-            아이템 미션
+            토퍼 미션
           </div>
           <div className={styles.type_item} onClick={onTypeSelectHandler}>
-            토퍼 미션
+            아이템 미션
           </div>
         </div>
       )}
-      {type === "단답형 미션" && <AdminProgramMissionUploadShort />}
+      {type === "단답형 미션" && (
+        <AdminProgramMissionUploadShort
+          closeMissionPopupHandler={closeMissionPopupHandler}
+        />
+      )}
+      {type === "OX 퀴즈 미션" && (
+        <AdminProgramMissionUploadOx
+          closeMissionPopupHandler={closeMissionPopupHandler}
+        />
+      )}
+      {type === "4지선다" && (
+        <AdminProgramMissionUploadFour
+          closeMissionPopupHandler={closeMissionPopupHandler}
+        />
+      )}
+      {type === "지시 미션" && (
+        <AdminProgramMissionUploadInstruction
+          closeMissionPopupHandler={closeMissionPopupHandler}
+        />
+      )}
+      {type === "설문 미션" && (
+        <AdminProgramMissionUploadSurvey
+          closeMissionPopupHandler={closeMissionPopupHandler}
+        />
+      )}
+      {type === "사진 미션" && (
+        <AdminProgramMissionUploadPhoto
+          closeMissionPopupHandler={closeMissionPopupHandler}
+        />
+      )}
+      {type === "동영상 미션" && (
+        <AdminProgramMissionUploadVideo
+          closeMissionPopupHandler={closeMissionPopupHandler}
+        />
+      )}
+      {type === "토퍼 미션" && (
+        <AdminProgramMissionUploadTopper
+          closeMissionPopupHandler={closeMissionPopupHandler}
+        />
+      )}
+      {type === "아이템 미션" && (
+        <AdminProgramMissionUploadItemMission
+          closeMissionPopupHandler={closeMissionPopupHandler}
+        />
+      )}
     </section>
   );
 };

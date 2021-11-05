@@ -1,7 +1,7 @@
 import React from "react";
-import styles from "./adminProgramMissionUploadShort.module.css";
+import styles from "./adminProgramMissionUploadFour.module.css";
 
-const AdminProgramMissionUploadShort = ({ closeMissionPopupHandler }) => {
+const AdminProgramMissionUploadFour = ({ closeMissionPopupHandler }) => {
   return (
     <form className={styles.form}>
       <div className={`${styles.photo_container} ${styles.container}`}>
@@ -28,6 +28,35 @@ const AdminProgramMissionUploadShort = ({ closeMissionPopupHandler }) => {
           spellCheck="false"
           placeholder="문제 내용"
         ></textarea>
+      </div>
+      <div className={`${styles.select_container} ${styles.container_large}`}>
+        <p className={styles.text}>선택지</p>
+        <div className={styles.input_container}>
+          <input
+            type="text"
+            className={styles.select_input}
+            spellCheck="false"
+            placeholder="1번 보기"
+          />
+          <input
+            type="text"
+            className={styles.select_input}
+            spellCheck="false"
+            placeholder="2번 보기"
+          />
+          <input
+            type="text"
+            className={styles.select_input}
+            spellCheck="false"
+            placeholder="3번 보기"
+          />
+          <input
+            type="text"
+            className={styles.select_input}
+            spellCheck="false"
+            placeholder="4번 보기"
+          />
+        </div>
       </div>
       <div className={`${styles.answer_container} ${styles.container}`}>
         <p className={styles.text}>미션 정답</p>
@@ -66,12 +95,10 @@ const AdminProgramMissionUploadShort = ({ closeMissionPopupHandler }) => {
       </div>
       <div className={`${styles.count_container} ${styles.container}`}>
         <p className={styles.text}>정답 입력 횟수</p>
-        <input
-          type="text"
-          className={styles.input}
-          spellCheck="false"
-          placeholder="정답 입력 횟수 (숫자로만 입력)"
-        />
+        <select className={styles.input}>
+          <option value="1">1</option>
+          <option value="2">2</option>
+        </select>
       </div>
       <div className={`${styles.button_container} ${styles.container}`}>
         <button className={styles.button}>등록</button>
@@ -83,4 +110,4 @@ const AdminProgramMissionUploadShort = ({ closeMissionPopupHandler }) => {
   );
 };
 
-export default AdminProgramMissionUploadShort;
+export default AdminProgramMissionUploadFour;

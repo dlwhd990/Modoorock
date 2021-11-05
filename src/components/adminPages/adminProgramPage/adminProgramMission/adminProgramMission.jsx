@@ -96,6 +96,8 @@ const AdminProgramMission = (props) => {
         <section className={styles.popup_filter}>
           <AdminProgramGamePopup
             closeGamePopupHandler={closeGamePopupHandler}
+            path={params}
+            attractionInfo={attractionInfo}
           />
         </section>
       )}

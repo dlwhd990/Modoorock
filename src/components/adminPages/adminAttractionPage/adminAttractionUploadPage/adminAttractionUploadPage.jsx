@@ -1,8 +1,6 @@
 import axios from "axios";
-import { result } from "lodash";
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
-import TemplateSlick from "../../../slick/templateSlick/templateSlick";
 import styles from "./adminAttractionUploadPage.module.css";
 
 const AdminAttractionUploadPage = ({ user, backgroundList }) => {
@@ -14,115 +12,12 @@ const AdminAttractionUploadPage = ({ user, backgroundList }) => {
   const [templatePopupOn, setTemplatePopupOn] = useState(false);
   const [mainBgPopupOn, setMainBgPopupOn] = useState(false);
   const [gameBgPopupOn, setGameBgPopupOn] = useState(false);
-  const [templateValue, setTemplateValue] = useState(null);
-  const [templateTempValue, setTemplateTempValue] = useState(null);
-  const [templateButtonList, setTemplateButtonList] = useState({
-    1: [
-      {
-        idx: 0,
-        name: "게임시작",
-      },
-      {
-        idx: 1,
-        name: "게임설명",
-      },
-      {
-        idx: 2,
-        name: "점수확인",
-      },
-      {
-        idx: 3,
-        name: "지도",
-      },
-    ],
-    2: [
-      {
-        idx: 0,
-        name: "게임시작",
-      },
-      {
-        idx: 1,
-        name: "게임설명",
-      },
-      {
-        idx: 2,
-        name: "점수확인",
-      },
-      {
-        idx: 3,
-        name: "지도",
-      },
-      {
-        idx: 4,
-        name: "5번버튼",
-      },
-    ],
-    3: [
-      {
-        idx: 3,
-        name: "지도",
-      },
-      {
-        idx: 1,
-        name: "게임설명",
-      },
-      {
-        idx: 2,
-        name: "점수확인",
-      },
-      {
-        idx: 0,
-        name: "게임시작",
-      },
-    ],
-    4: [
-      {
-        idx: 0,
-        name: "게임시작",
-      },
-      {
-        idx: 3,
-        name: "지도",
-      },
-      {
-        idx: 2,
-        name: "점수확인",
-      },
-      {
-        idx: 1,
-        name: "게임설명",
-      },
-    ],
-  });
-  const [templateList, setTemplateList] = useState([
-    {
-      idx: 1,
-      name: "1번 템플릿",
-      image: "/Modoorock/Images/templateImages/office.jpeg",
-    },
-    {
-      idx: 2,
-      name: "2번 템플릿",
-      image: "/Modoorock/Images/templateImages/about_us_top.png",
-    },
-    {
-      idx: 3,
-      name: "3번 템플릿",
-      image: "/Modoorock/Images/templateImages/service_right.png",
-    },
-    {
-      idx: 4,
-      name: "4번 템플릿",
-      image: "/Modoorock/Images/templateImages/modoorock.png",
-    },
-  ]);
   const [nowTemplateButtonOrder, setNowTemplateButtonOrder] = useState(null);
   const [backgroundNameList, setBackgroundNameList] = useState(null);
   const [mainBackground, setMainBackground] = useState(null);
   const [gameBackground, setGameBackground] = useState(null);
   const [tmpMainBackground, setTmpMainBackground] = useState(null);
   const [tmpGameBackground, setTmpGameBackground] = useState(null);
-  const backgroundBaseUrl = backgroundList[0];
 
   const onFileInputChangeHandler = (e) => {
     let reader = new FileReader();
@@ -138,6 +33,7 @@ const AdminAttractionUploadPage = ({ user, backgroundList }) => {
 
   const insertAttraction = (userData) => {
     const formData = new FormData();
+    console.log(previewImage.file);
     formData.append("name", name);
     formData.append("area", area);
     formData.append("content", content);
@@ -217,18 +113,6 @@ const AdminAttractionUploadPage = ({ user, backgroundList }) => {
     setGameBgPopupOn(!gameBgPopupOn);
   };
 
-  const templateTempSelectHandler = (idx) => {
-    setTemplateTempValue(idx);
-  };
-
-  const templateValueSettingHandler = () => {
-    templateTempValue && setTemplateValue(templateTempValue);
-    templateTempValue &&
-      setNowTemplateButtonOrder(templateButtonList[templateTempValue]);
-    setTemplateTempValue(null);
-    setTemplatePopupOn(false);
-  };
-
   const initialDnDState = {
     draggedFrom: null,
     draggedTo: null,
@@ -285,6 +169,16 @@ const AdminAttractionUploadPage = ({ user, backgroundList }) => {
     });
   };
 
+  const templateButtonSelectHandler = (e) => {
+    const idx = e.currentTarget.dataset.num;
+    const name = e.currentTarget.innerText;
+    if (!nowTemplateButtonOrder) {
+      setNowTemplateButtonOrder([{ idx, name }]);
+      return;
+    }
+    setNowTemplateButtonOrder([...nowTemplateButtonOrder, { idx, name }]);
+  };
+
   const makeBackgroundNameList = () => {
     setBackgroundNameList(backgroundList.slice(1));
   };
@@ -309,7 +203,6 @@ const AdminAttractionUploadPage = ({ user, backgroundList }) => {
 
   useEffect(() => {
     makeBackgroundNameList();
-    console.log(backgroundList);
   }, []);
 
   return (
@@ -412,11 +305,8 @@ const AdminAttractionUploadPage = ({ user, backgroundList }) => {
       <section className={styles.template_setting_container}>
         <h1 className={styles.section_title}>템플릿 등록</h1>
         <div className={styles.form_content}>
-          <p className={styles.form_text}>템플릿 설정</p>
+          <p className={styles.form_text}>버튼 추가</p>
           <div className={styles.template_input_container}>
-            <p className={styles.template_selected}>{`선택된 템플릿 번호: ${
-              templateValue ? templateValue : "없음"
-            }`}</p>
             <button
               className={styles.template_popup_on_button}
               onClick={templatePopupHandler}
@@ -485,7 +375,7 @@ const AdminAttractionUploadPage = ({ user, backgroundList }) => {
             <section className={styles.template_preview}>
               {mainBackground && (
                 <img
-                  src={`${backgroundBaseUrl}/${mainBackground}`}
+                  src={`${process.env.REACT_APP_BASEURL}-images/bg/${mainBackground}`}
                   alt=""
                   className={styles.background_preview}
                 />
@@ -494,7 +384,7 @@ const AdminAttractionUploadPage = ({ user, backgroundList }) => {
             <section className={styles.template_preview}>
               {gameBackground && (
                 <img
-                  src={`${backgroundBaseUrl}/${gameBackground}`}
+                  src={`${process.env.REACT_APP_BASEURL}-images/bg/${gameBackground}`}
                   alt=""
                   className={styles.background_preview}
                 />
@@ -517,19 +407,39 @@ const AdminAttractionUploadPage = ({ user, backgroundList }) => {
             </div>
 
             <div className={styles.template_popup_main}>
-              <TemplateSlick
-                viewItems={templateList}
-                templateTempSelectHandler={templateTempSelectHandler}
-                templateTempValue={templateTempValue}
-              />
-            </div>
-            <div className={styles.select_button_container}>
-              <button
-                className={styles.select_button}
-                onClick={templateValueSettingHandler}
+              <div
+                className={styles.template_popup_select}
+                data-num={1}
+                onClick={templateButtonSelectHandler}
               >
-                선택
-              </button>
+                게임시작
+              </div>
+              <div
+                className={styles.template_popup_select}
+                data-num={2}
+                onClick={templateButtonSelectHandler}
+              >
+                게임설명
+              </div>
+              <div
+                className={styles.template_popup_select}
+                data-num={3}
+                onClick={templateButtonSelectHandler}
+              >
+                랭킹보기
+              </div>
+              <div
+                className={styles.template_popup_select}
+                data-num={4}
+                onClick={templateButtonSelectHandler}
+              >
+                지도
+              </div>
+              <div
+                className={styles.template_popup_select}
+                data-num={5}
+                onClick={templateButtonSelectHandler}
+              ></div>
             </div>
           </div>
         </section>
@@ -550,7 +460,7 @@ const AdminAttractionUploadPage = ({ user, backgroundList }) => {
                   <img
                     key={item}
                     data-name={item}
-                    src={`${backgroundBaseUrl}/${item}`}
+                    src={`${process.env.REACT_APP_BASEURL}-images/bg/${item}`}
                     alt="background_image"
                     className={`${
                       tmpMainBackground === item
@@ -588,7 +498,7 @@ const AdminAttractionUploadPage = ({ user, backgroundList }) => {
                   <img
                     key={item}
                     data-name={item}
-                    src={`${backgroundBaseUrl}/${item}`}
+                    src={`${process.env.REACT_APP_BASEURL}-images/bg/${item}`}
                     alt="background_image"
                     className={`${
                       tmpGameBackground === item

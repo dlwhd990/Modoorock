@@ -239,7 +239,7 @@ const App = (props) => {
 
   const getProgramList = () => {
     axios
-      .post(`${process.env.REACT_APP_BASEURL}/exp/getexplist`, {
+      .post(`${process.env.REACT_APP_BASEURL}/exp/getexpthemelist`, {
         theme: "전체",
       })
       .then((response) => setProgramList(response.data))

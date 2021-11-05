@@ -26,25 +26,18 @@ const AdminProgramPage = (props) => {
               return;
             }
             setAttractionInfo(response.data);
+            loadProgramList(response.data.idx);
           });
       })
       .catch((err) => console.error(err));
   };
 
-  const loadProgramList = () => {
+  const loadProgramList = (idx) => {
     axios
-      .post(`${process.env.REACT_APP_BASEURL}/exp/getexplist`, {
-        theme: "전체",
+      .post(`${process.env.REACT_APP_BASEURL}/exp/getexpattractionlist`, {
+        attractionIdx: idx,
       })
-      .then((response) => {
-        const result = [];
-        response.data.forEach((item) => {
-          if (item.attractionIdx === parseInt(path_three)) {
-            result.push(item);
-          }
-        });
-        setMyProgramList(result);
-      })
+      .then((response) => setMyProgramList(response.data))
       .catch((err) => console.error(err));
   };
 
@@ -55,7 +48,6 @@ const AdminProgramPage = (props) => {
 
   useEffect(() => {
     loadAttractionInfo();
-    loadProgramList();
   }, []);
 
   return (

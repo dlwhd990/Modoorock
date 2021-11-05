@@ -3,9 +3,6 @@
   padding: 40px;
   padding-top: 20px;
   height: 520px;
-  overflow-y: scroll;
-  box-shadow: 0 0 5px lightgray;
-  border-radius: 8px;
 }
 
 .container {

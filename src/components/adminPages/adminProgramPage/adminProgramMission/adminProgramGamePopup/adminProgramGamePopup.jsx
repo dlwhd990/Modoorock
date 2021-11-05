@@ -1,9 +1,41 @@
-import React from "react";
+import axios from "axios";
+import React, { useRef } from "react";
 import styles from "./adminProgramGamePopup.module.css";
 
-const AdminProgramMissionPopup = ({ closeGamePopupHandler }) => {
+const AdminProgramGamePopup = ({
+  closeGamePopupHandler,
+  path,
+  attractionInfo,
+}) => {
+  const gameNumberRef = useRef();
+
+  const uploadGame = (userIdx, password) => {
+    axios
+      .post(`${process.env.REACT_APP_BASEURL}/game/insertgame`, {
+        expIdx: parseInt(path.path_five),
+        userIdx,
+        password,
+      })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((err) => console.error(err));
+  };
+
   const onSubmitHandler = (e) => {
     e.preventDefault();
+    axios
+      .post(`${process.env.REACT_APP_BASEURL}/user/session`)
+      .then((response) => {
+        if (
+          response.data !== "" &&
+          attractionInfo.userIdx === response.data.idx
+        ) {
+          const password = gameNumberRef.current.value;
+          uploadGame(response.data.idx, password);
+        }
+      })
+      .catch((err) => console.error(err));
   };
   return (
     <section className={styles.popup}>
@@ -17,6 +49,7 @@ const AdminProgramMissionPopup = ({ closeGamePopupHandler }) => {
       <form className={styles.form}>
         <p className={styles.text}>게임 번호</p>
         <input
+          ref={gameNumberRef}
           type="text"
           className={styles.input}
           spellCheck="false"
@@ -30,4 +63,4 @@ const AdminProgramMissionPopup = ({ closeGamePopupHandler }) => {
   );
 };
 
-export default AdminProgramMissionPopup;
+export default AdminProgramGamePopup;
