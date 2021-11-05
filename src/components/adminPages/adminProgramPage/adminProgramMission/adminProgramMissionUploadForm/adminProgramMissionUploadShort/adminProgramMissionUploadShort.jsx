@@ -66,12 +66,18 @@ const AdminProgramMissionUploadShort = ({ closeMissionPopupHandler }) => {
       </div>
       <div className={`${styles.count_container} ${styles.container}`}>
         <p className={styles.text}>정답 입력 횟수</p>
-        <input
-          type="text"
-          className={styles.input}
-          spellCheck="false"
-          placeholder="정답 입력 횟수 (숫자로만 입력)"
-        />
+        <select className={styles.input}>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+          <option value="10">10</option>
+        </select>
       </div>
       <div className={`${styles.button_container} ${styles.container}`}>
         <button className={styles.button}>등록</button>

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import AdminProgramMissionItem from "../adminProgramMissionItem/adminProgramMissionItem";
 import styles from "./adminProgramGameItem.module.css";
 
-const AdminProgramGameItem = ({ openMissionPopupHandler }) => {
+const AdminProgramGameItem = ({ item, openMissionPopupHandler }) => {
   const [viewDetail, setViewDetail] = useState(false);
   const viewDetailHandler = () => {
     setViewDetail(!viewDetail);
@@ -12,7 +12,7 @@ const AdminProgramGameItem = ({ openMissionPopupHandler }) => {
     <div className={styles.game_item}>
       <div className={styles.game_top} onClick={viewDetailHandler}>
         <div className={styles.division}>게임</div>
-        <p className={styles.game_number}>1173</p>
+        <p className={styles.game_number}>{item.password}</p>
         <button
           className={styles.add_mission_button}
           onClick={openMissionPopupHandler}

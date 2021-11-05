@@ -2,6 +2,7 @@ import React from "react";
 import { useHistory, useParams } from "react-router";
 import styles from "./mypage.module.css";
 import MypageMain from "./mypageMain/mypageMain";
+import MypagePayment from "./mypagePayment/mypagePayment";
 
 const Mypage = ({ user }) => {
   const history = useHistory();
@@ -81,7 +82,7 @@ const Mypage = ({ user }) => {
         </p>
       </div>
       <section className={styles.main}>
-        <MypageMain user={user} />
+        {path === "main" ? <MypageMain user={user} /> : <MypagePayment />}
       </section>
     </section>
   );

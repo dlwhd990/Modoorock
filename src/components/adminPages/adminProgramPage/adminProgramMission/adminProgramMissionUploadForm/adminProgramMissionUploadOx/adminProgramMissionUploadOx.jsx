@@ -31,12 +31,10 @@ const AdminProgramMissionUploadOx = ({ closeMissionPopupHandler }) => {
       </div>
       <div className={`${styles.answer_container} ${styles.container}`}>
         <p className={styles.text}>미션 정답</p>
-        <input
-          type="text"
-          className={styles.input}
-          spellCheck="false"
-          placeholder="정답"
-        />
+        <select className={styles.input}>
+          <option value="O">O</option>
+          <option value="X">X</option>
+        </select>
       </div>
       <div className={`${styles.desc_container} ${styles.container_large}`}>
         <p className={styles.text}>정답 설명</p>

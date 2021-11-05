@@ -10,6 +10,7 @@ const AdminProgramGamePopup = ({
   const gameNumberRef = useRef();
 
   const uploadGame = (userIdx, password) => {
+    console.log(password);
     axios
       .post(`${process.env.REACT_APP_BASEURL}/game/insertgame`, {
         expIdx: parseInt(path.path_five),
@@ -17,13 +18,26 @@ const AdminProgramGamePopup = ({
         password,
       })
       .then((response) => {
-        console.log(response);
+        window.alert("게임이 생성되었습니다.");
+        closeGamePopupHandler();
       })
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        console.error(err);
+        window.alert("중복된 번호입니다. 다른 번호를 사용해주세요");
+      });
   };
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
+    const password = gameNumberRef.current.value;
+    if (password.length !== 4) {
+      window.alert("게임 번호는 4자리 숫자여야 합니다.");
+      return;
+    }
+    if (parseInt(password).toString().length !== password.length) {
+      window.alert("숫자만 입력해주세요");
+      return;
+    }
     axios
       .post(`${process.env.REACT_APP_BASEURL}/user/session`)
       .then((response) => {
@@ -31,7 +45,6 @@ const AdminProgramGamePopup = ({
           response.data !== "" &&
           attractionInfo.userIdx === response.data.idx
         ) {
-          const password = gameNumberRef.current.value;
           uploadGame(response.data.idx, password);
         }
       })
@@ -54,6 +67,7 @@ const AdminProgramGamePopup = ({
           className={styles.input}
           spellCheck="false"
           placeholder="게임 번호 (4자리 숫자)"
+          maxLength="4"
         />
         <button className={styles.submit_button} onClick={onSubmitHandler}>
           확인

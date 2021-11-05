@@ -10,6 +10,7 @@ const AdminProgramMission = (props) => {
   const params = useParams();
   const [item, setItem] = useState(null);
   const [attractionInfo, setAttractionInfo] = useState(null);
+  const [gameList, setGameList] = useState(null);
   const [gamePopupOn, setGamePopupOn] = useState(false);
   const [missionPopupOn, setMissionPopupOn] = useState(false);
 
@@ -19,6 +20,15 @@ const AdminProgramMission = (props) => {
         idx: parseInt(params.path_three),
       })
       .then((response) => setAttractionInfo(response.data))
+      .catch((err) => console.error(err));
+  };
+
+  const loadGameList = () => {
+    axios
+      .post(`${process.env.REACT_APP_BASEURL}/game/getgamelist`, {
+        expIdx: parseInt(params.path_five),
+      })
+      .then((response) => setGameList(response.data))
       .catch((err) => console.error(err));
   };
 
@@ -60,6 +70,7 @@ const AdminProgramMission = (props) => {
             }
             setItem(response.data);
             loadAttractionInfo();
+            loadGameList();
           });
       })
       .catch((err) => console.error(err));
@@ -82,15 +93,14 @@ const AdminProgramMission = (props) => {
         </button>
       </section>
       <section className={styles.game_list}>
-        <AdminProgramGameItem
-          openMissionPopupHandler={openMissionPopupHandler}
-        />
-        <AdminProgramGameItem
-          openMissionPopupHandler={openMissionPopupHandler}
-        />
-        <AdminProgramGameItem
-          openMissionPopupHandler={openMissionPopupHandler}
-        />
+        {gameList &&
+          gameList.map((item) => (
+            <AdminProgramGameItem
+              key={item.idx}
+              item={item}
+              openMissionPopupHandler={openMissionPopupHandler}
+            />
+          ))}
       </section>
       {gamePopupOn && (
         <section className={styles.popup_filter}>

@@ -49,6 +49,7 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  animation: appear 0.6s;
 }
 
 .home_icon,
