@@ -59,6 +59,7 @@ const Faq = ({ articles, getFaqList }) => {
       return;
     }
     setHeaderSelect(e.target.innerText);
+
     setNumbering(1);
     const tmp = [];
     if (e.target.innerText === "All") {
@@ -178,21 +179,21 @@ const Faq = ({ articles, getFaqList }) => {
         </p>
         <p
           className={`${
-            headerSelect === "주문/배송/반품"
+            headerSelect === "주문/결제"
               ? `${styles.header_item} ${styles.header_on}`
               : `${styles.header_item} ${styles.header_off}`
           }`}
         >
-          주문/배송/반품
+          주문/결제
         </p>
         <p
           className={`${
-            headerSelect === "멤버쉽"
+            headerSelect === "회원정보"
               ? `${styles.header_item} ${styles.header_on}`
               : `${styles.header_item} ${styles.header_off}`
           }`}
         >
-          멤버쉽
+          회원정보
         </p>
         <p
           className={`${

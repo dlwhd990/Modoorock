@@ -1,15 +1,9 @@
 import axios from "axios";
-import React, { useEffect, useState, forwardRef, useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useHistory, useParams } from "react-router";
 import styles from "./adminProgramUploadPage.module.css";
 import StarRatingComponent from "react-star-rating-component";
-import DatePicker, { registerLocale, setDefaultLocale } from "react-datepicker";
-import ko from "date-fns/locale/ko";
-import "../../../../../node_modules/react-datepicker/dist/react-datepicker.css";
 
-registerLocale("ko", ko);
-
-// 이 페이지 url 타고 타 사용자가 접근하는 것 막아야함 => 방법은 나중에 생각
 const AdminProgramUploadPage = ({ user }) => {
   const history = useHistory();
   const params = useParams();
@@ -17,6 +11,7 @@ const AdminProgramUploadPage = ({ user }) => {
   const priceRef = useRef();
   const themeRef = useRef();
   const contentRef = useRef();
+  const detailContentRef = useRef();
   const countInputRef = useRef();
   const [previewImage, setPreviewImage] = useState(null);
   const [subImages, setSubImages] = useState(null);
@@ -86,6 +81,7 @@ const AdminProgramUploadPage = ({ user }) => {
     const title = titleRef.current.value;
     const price = priceRef.current.value;
     const content = contentRef.current.value;
+    const detailContent = detailContentRef.current.value;
     const theme = themeRef.current.value;
     const files = [...subImages, previewImage.file];
 
@@ -95,6 +91,7 @@ const AdminProgramUploadPage = ({ user }) => {
     formData.append("title", title);
     formData.append("price", price);
     formData.append("content", content);
+    formData.append("detailContent", detailContent);
     formData.append("theme", theme);
     files.forEach((file) => {
       formData.append("files", file);
@@ -123,10 +120,23 @@ const AdminProgramUploadPage = ({ user }) => {
     const price = priceRef.current.value;
     const content = contentRef.current.value;
     const theme = themeRef.current.value;
+    const detailContent = detailContentRef.current.value;
     const files = subImages &&
       previewImage && [...subImages, previewImage.file];
-    if (!title || !price || !content || !theme || !files || files.length < 4) {
+    if (
+      !title ||
+      !price ||
+      !content ||
+      !theme ||
+      !detailContent ||
+      !files ||
+      files.length < 4
+    ) {
       window.alert("모든 정보를 입력해주세요");
+      return;
+    }
+    if (files.length > 4) {
+      window.alert("서브 이미지는 3장까지만 첨부 가능합니다.");
       return;
     }
     axios
@@ -317,12 +327,6 @@ const AdminProgramUploadPage = ({ user }) => {
                 placeholder="상품 소개"
               ></textarea>
             </div>
-            <button
-              className={styles.submit_button}
-              onClick={submitButtonHandler}
-            >
-              업로드
-            </button>
           </form>
           <section className={styles.image_preview_container}>
             <p className={styles.image_preview_title}>미리보기</p>
@@ -364,6 +368,19 @@ const AdminProgramUploadPage = ({ user }) => {
             </section>
           </section>
         </section>
+        <div className={styles.detail_content_container}>
+          <p className={styles.detail_content_text}>상품 상세 소개</p>
+          <textarea
+            ref={detailContentRef}
+            className={styles.detail_content}
+          ></textarea>
+          <button
+            className={styles.submit_button}
+            onClick={submitButtonHandler}
+          >
+            업로드
+          </button>
+        </div>
       </section>
     </section>
   );

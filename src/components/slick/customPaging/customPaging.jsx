@@ -94,34 +94,15 @@ export default class CustomPaging extends Component {
     return (
       <div className="custom_paging_container">
         <Slider {...settings}>
-          <div>
-            <img
-              src={`${process.env.REACT_APP_BASEURL}-images/Exp/${imageList[0]}`}
-              alt="slide_image"
-              className="image"
-            />
-          </div>
-          <div>
-            <img
-              src={`${process.env.REACT_APP_BASEURL}-images/Exp/${imageList[1]}`}
-              alt="slide_image"
-              className="image"
-            />
-          </div>
-          <div>
-            <img
-              src={`${process.env.REACT_APP_BASEURL}-images/Exp/${imageList[2]}`}
-              alt="slide_image"
-              className="image"
-            />
-          </div>
-          <div>
-            <img
-              src={`${process.env.REACT_APP_BASEURL}-images/Exp/${imageList[3]}`}
-              alt="slide_image"
-              className="image"
-            />
-          </div>
+          {imageList.map((item) => (
+            <div key={item}>
+              <img
+                src={`${process.env.REACT_APP_BASEURL}-images/Exp/${item}`}
+                alt="slide_image"
+                className="image"
+              />
+            </div>
+          ))}
         </Slider>
       </div>
     );

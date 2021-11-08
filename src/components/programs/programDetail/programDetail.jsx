@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import { useHistory, useParams } from "react-router";
+import { useParams } from "react-router";
 import CustomPaging from "../../slick/customPaging/customPaging";
 import styles from "./programDetail.module.css";
 import ProgramReview from "./programReview/programReview";
@@ -7,14 +7,12 @@ import ReactStars from "react-rating-stars-component";
 import axios from "axios";
 import LoadingPage from "../../loadingPage/loadingPage";
 
-// 이미지 확대 시킬건지 (작으면 설명 잘 안보이니까)
-const ProgramDetail = ({ programList, reviewList }) => {
+const ProgramDetail = ({ reviewList }) => {
   const [program, setProgram] = useState(null);
   const [imageList, setImageList] = useState(null);
   const [review, setReview] = useState([]);
   const [statSeparate, setStatSeparate] = useState([]);
   const [reviewAvg, setReviewAvg] = useState(null);
-  const history = useHistory();
   const { path } = useParams();
   const titleRef = useRef();
   const contentRef = useRef();
@@ -161,6 +159,20 @@ const ProgramDetail = ({ programList, reviewList }) => {
                 </button>
               </div>
             </div>
+          </section>
+          <section className={styles.detail_content_container}>
+            <section className={styles.detail_content_main}>
+              {imageList && (
+                <img
+                  src={`${process.env.REACT_APP_BASEURL}-images/Exp/${imageList[0]}`}
+                  alt="main_image"
+                  className={styles.detail_content_main_image}
+                />
+              )}
+              <p className={styles.detail_content_text}>
+                {program.detailContent}
+              </p>
+            </section>
           </section>
           <section className={styles.review_container}>
             <div className={styles.review_top_container}>

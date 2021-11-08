@@ -1,5 +1,4 @@
 import axios from "axios";
-import { set } from "js-cookie";
 import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router";
 import AdminProgramItem from "./adminProgramItem/adminProgramItem";

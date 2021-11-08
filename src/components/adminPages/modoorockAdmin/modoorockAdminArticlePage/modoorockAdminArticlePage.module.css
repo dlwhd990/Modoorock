@@ -21,6 +21,7 @@
   color: white;
   padding: 10px 20px;
   cursor: pointer;
+  opacity: 0.7;
 }
 
 .first {
@@ -33,5 +34,5 @@
 }
 
 .on {
-  opacity: 0.7;
+  opacity: 1;
 }

@@ -191,7 +191,7 @@ const AdminMain = ({ userLogout }) => {
             </header>
             <section className={styles.content_container}>
               {params.path_five && params.path_four === "mission" && (
-                <AdminProgramMission />
+                <AdminProgramMission user={user} />
               )}
               {params.path_five && params.path_four === "edit" && (
                 <AdminProgramEdit />

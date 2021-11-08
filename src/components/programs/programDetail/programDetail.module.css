@@ -168,6 +168,33 @@
   background-color: var(--color-light-blue);
 }
 
+.detail_content_container {
+  width: 85%;
+  margin: auto;
+  margin-bottom: 90px;
+  animation: appear 0.6s;
+}
+
+.detail_content_main {
+  width: 100%;
+  min-height: 40vh;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.detail_content_main_image {
+  border-radius: 8px;
+  box-shadow: 1px 2px 3px lightgray;
+}
+
+.detail_content_text {
+  margin-top: 100px;
+  white-space: pre-line;
+  font-size: 18px;
+}
+
 .review_container {
   width: 85%;
   margin: auto;
@@ -176,6 +203,7 @@
 }
 
 .review_top_container {
+  height: 61px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -217,7 +245,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin-top: 40px;
+  margin-top: 30px;
 }
 
 .stat_container {
@@ -284,9 +312,10 @@
 }
 
 .inquire_top_container {
+  height: 61px;
   width: 85%;
   margin: auto;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
   box-shadow: 1px 3px 8px var(--color-light-divide-line);
   border-radius: 4px;
   padding: 16px;

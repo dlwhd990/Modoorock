@@ -10,7 +10,11 @@ import AdminProgramMissionUploadTopper from "../adminProgramMissionUploadForm/ad
 import AdminProgramMissionUploadVideo from "../adminProgramMissionUploadForm/adminProgramMissionUploadVideo/adminProgramMissionUploadVideo";
 import styles from "./adminProgramMissionPopup.module.css";
 
-const AdminProgramMissionPopup = ({ closeMissionPopupHandler }) => {
+const AdminProgramMissionPopup = ({
+  closeMissionPopupHandler,
+  user,
+  gameIdx,
+}) => {
   const [type, setType] = useState(null);
   const onTypeSelectHandler = (e) => {
     setType(e.currentTarget.innerText);
@@ -58,46 +62,56 @@ const AdminProgramMissionPopup = ({ closeMissionPopupHandler }) => {
       {type === "단답형 미션" && (
         <AdminProgramMissionUploadShort
           closeMissionPopupHandler={closeMissionPopupHandler}
+          user={user}
         />
       )}
       {type === "OX 퀴즈 미션" && (
         <AdminProgramMissionUploadOx
           closeMissionPopupHandler={closeMissionPopupHandler}
+          user={user}
+          gameIdx={gameIdx}
         />
       )}
       {type === "4지선다" && (
         <AdminProgramMissionUploadFour
           closeMissionPopupHandler={closeMissionPopupHandler}
+          user={user}
         />
       )}
       {type === "지시 미션" && (
         <AdminProgramMissionUploadInstruction
           closeMissionPopupHandler={closeMissionPopupHandler}
+          user={user}
         />
       )}
       {type === "설문 미션" && (
         <AdminProgramMissionUploadSurvey
           closeMissionPopupHandler={closeMissionPopupHandler}
+          user={user}
         />
       )}
       {type === "사진 미션" && (
         <AdminProgramMissionUploadPhoto
           closeMissionPopupHandler={closeMissionPopupHandler}
+          user={user}
         />
       )}
       {type === "동영상 미션" && (
         <AdminProgramMissionUploadVideo
           closeMissionPopupHandler={closeMissionPopupHandler}
+          user={user}
         />
       )}
       {type === "토퍼 미션" && (
         <AdminProgramMissionUploadTopper
           closeMissionPopupHandler={closeMissionPopupHandler}
+          user={user}
         />
       )}
       {type === "아이템 미션" && (
         <AdminProgramMissionUploadItemMission
           closeMissionPopupHandler={closeMissionPopupHandler}
+          user={user}
         />
       )}
     </section>

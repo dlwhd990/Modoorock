@@ -148,7 +148,7 @@ const Header = ({ user, userLogout }) => {
                   : `${styles.menu_item_title} ${styles.off}`
               }`}
             >
-              프로그램
+              체험상품
             </div>
             <ul
               className={`${
@@ -171,7 +171,7 @@ const Header = ({ user, userLogout }) => {
                   window.scrollTo({ top: 0 });
                 }}
               >
-                프로그램 소개
+                상품 목록
               </li>
             </ul>
           </li>

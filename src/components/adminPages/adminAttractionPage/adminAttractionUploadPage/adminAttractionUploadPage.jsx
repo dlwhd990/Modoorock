@@ -173,9 +173,11 @@ const AdminAttractionUploadPage = ({ user, backgroundList }) => {
     const idx = e.currentTarget.dataset.num;
     const name = e.currentTarget.innerText;
     if (!nowTemplateButtonOrder) {
+      templatePopupHandler();
       setNowTemplateButtonOrder([{ idx, name }]);
       return;
     }
+    templatePopupHandler();
     setNowTemplateButtonOrder([...nowTemplateButtonOrder, { idx, name }]);
   };
 
@@ -403,7 +405,7 @@ const AdminAttractionUploadPage = ({ user, backgroundList }) => {
               <div onClick={templatePopupHandler}>
                 <i className={`${styles.close_popup_button} fas fa-times`}></i>
               </div>
-              <p className={styles.popup_title}>템플릿 설정</p>
+              <p className={styles.popup_title}>버튼 추가</p>
             </div>
 
             <div className={styles.template_popup_main}>
@@ -439,7 +441,9 @@ const AdminAttractionUploadPage = ({ user, backgroundList }) => {
                 className={styles.template_popup_select}
                 data-num={5}
                 onClick={templateButtonSelectHandler}
-              ></div>
+              >
+                모름
+              </div>
             </div>
           </div>
         </section>

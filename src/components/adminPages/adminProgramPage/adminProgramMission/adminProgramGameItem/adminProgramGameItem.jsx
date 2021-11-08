@@ -15,6 +15,7 @@ const AdminProgramGameItem = ({ item, openMissionPopupHandler }) => {
         <p className={styles.game_number}>{item.password}</p>
         <button
           className={styles.add_mission_button}
+          data-where={item.idx}
           onClick={openMissionPopupHandler}
         >
           <i className={`${styles.add_button_icon} fas fa-plus`}></i>

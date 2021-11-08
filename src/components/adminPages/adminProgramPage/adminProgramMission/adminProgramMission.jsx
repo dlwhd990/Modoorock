@@ -6,7 +6,7 @@ import styles from "./adminProgramMission.module.css";
 import AdminProgramGamePopup from "./adminProgramGamePopup/adminProgramGamePopup";
 import AdminProgramMissionPopup from "./adminProgramMissionPopup/adminProgramMissionPopup";
 
-const AdminProgramMission = (props) => {
+const AdminProgramMission = ({ user }) => {
   const params = useParams();
   const [item, setItem] = useState(null);
   const [attractionInfo, setAttractionInfo] = useState(null);
@@ -28,7 +28,7 @@ const AdminProgramMission = (props) => {
       .post(`${process.env.REACT_APP_BASEURL}/game/getgamelist`, {
         expIdx: parseInt(params.path_five),
       })
-      .then((response) => setGameList(response.data))
+      .then((response) => setGameList(response.data.reverse()))
       .catch((err) => console.error(err));
   };
 
@@ -42,7 +42,7 @@ const AdminProgramMission = (props) => {
 
   const openMissionPopupHandler = (e) => {
     e.stopPropagation();
-    setMissionPopupOn(true);
+    setMissionPopupOn(parseInt(e.currentTarget.dataset.where));
   };
 
   const closeMissionPopupHandler = () => {
@@ -106,8 +106,8 @@ const AdminProgramMission = (props) => {
         <section className={styles.popup_filter}>
           <AdminProgramGamePopup
             closeGamePopupHandler={closeGamePopupHandler}
-            path={params}
             attractionInfo={attractionInfo}
+            loadGameList={loadGameList}
           />
         </section>
       )}
@@ -115,6 +115,8 @@ const AdminProgramMission = (props) => {
         <section className={styles.popup_filter}>
           <AdminProgramMissionPopup
             closeMissionPopupHandler={closeMissionPopupHandler}
+            user={user}
+            gameIdx={missionPopupOn}
           />
         </section>
       )}

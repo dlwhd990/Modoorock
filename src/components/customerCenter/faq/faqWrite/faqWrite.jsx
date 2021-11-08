@@ -51,11 +51,11 @@ const FaqWrite = () => {
             <option value="상품" className={styles.type}>
               상품
             </option>
-            <option value="주문/배송/반품" className={styles.type}>
-              주문/배송/반품
+            <option value="주문/결제" className={styles.type}>
+              주문/결제
             </option>
-            <option value="멤버쉽" className={styles.type}>
-              멤버쉽
+            <option value="회원정보" className={styles.type}>
+              회원정보
             </option>
             <option value="사이트 이용" className={styles.type}>
               사이트 이용

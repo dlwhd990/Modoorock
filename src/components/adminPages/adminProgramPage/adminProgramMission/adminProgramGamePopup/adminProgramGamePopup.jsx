@@ -6,11 +6,11 @@ const AdminProgramGamePopup = ({
   closeGamePopupHandler,
   path,
   attractionInfo,
+  loadGameList,
 }) => {
   const gameNumberRef = useRef();
 
   const uploadGame = (userIdx, password) => {
-    console.log(password);
     axios
       .post(`${process.env.REACT_APP_BASEURL}/game/insertgame`, {
         expIdx: parseInt(path.path_five),
@@ -19,6 +19,7 @@ const AdminProgramGamePopup = ({
       })
       .then((response) => {
         window.alert("게임이 생성되었습니다.");
+        loadGameList();
         closeGamePopupHandler();
       })
       .catch((err) => {
