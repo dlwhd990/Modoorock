@@ -122,7 +122,7 @@
 .content {
   margin: 0;
   margin-left: 50px;
-  word-break: keep-all;
+  word-break: break-all;
   white-space: pre-wrap;
 }
 

@@ -14,9 +14,21 @@ const ProgramDetail = ({ reviewList }) => {
   const [statSeparate, setStatSeparate] = useState([]);
   const [reviewAvg, setReviewAvg] = useState(null);
   const { path } = useParams();
-  const titleRef = useRef();
-  const contentRef = useRef();
   const toInquireRef = useRef();
+  const [inputValues, setInputValues] = useState({
+    title: "",
+    content: "",
+  });
+
+  const { title, content } = inputValues;
+
+  const inputValueChangeHandler = (e) => {
+    const { name, value } = e.target;
+    setInputValues({
+      ...inputValues,
+      [name]: value,
+    });
+  };
 
   const onSelectHandler = (e) => {};
 
@@ -44,16 +56,18 @@ const ProgramDetail = ({ reviewList }) => {
       .post(`${process.env.REACT_APP_BASEURL}/qna/insertqna`, {
         userIdx: res.data.idx,
         expIdx: parseInt(path),
-        title: titleRef.current.value,
-        content: contentRef.current.value,
+        title,
+        content,
       })
       .then((response) => {
         if (response.data === "success") {
           window.alert(
             "문의가 완료되었습니다. 해당 내용은 '문의게시판' 에서 열람 가능합니다."
           );
-          titleRef.current.value = "";
-          contentRef.current.value = "";
+          setInputValues({
+            title: "",
+            content: "",
+          });
         } else {
           window.alert("에러가 발생했습니다. 새로고침 후에 다시 시도해주세요.");
         }
@@ -65,10 +79,6 @@ const ProgramDetail = ({ reviewList }) => {
     axios
       .post(`${process.env.REACT_APP_BASEURL}/user/session`)
       .then((res) => {
-        console.log(res);
-        console.log(titleRef.current.value);
-        console.log(contentRef.current.value);
-
         if (res.data === "") {
           window.alert("로그인 후에 문의가 가능합니다.");
           return;
@@ -354,15 +364,15 @@ const ProgramDetail = ({ reviewList }) => {
             </section>
           </section>
           <section className={styles.inquire_top_container}>
-            <p ref={toInquireRef} className={styles.inquire_title}>
-              문의하기
-            </p>
+            <p className={styles.inquire_title}>문의하기</p>
           </section>
           <section ref={toInquireRef} className={styles.inquire_main_container}>
             <div className={styles.title_input_container}>
               <p className={styles.title_text}>제목</p>
               <input
-                ref={titleRef}
+                name="title"
+                onChange={inputValueChangeHandler}
+                value={title}
                 type="text"
                 className={styles.title_input}
                 spellCheck="false"
@@ -372,9 +382,9 @@ const ProgramDetail = ({ reviewList }) => {
             <div className={styles.content_input_container}>
               <p className={styles.content_text}>내용</p>
               <textarea
-                ref={contentRef}
                 name="content"
-                id="content"
+                onChange={inputValueChangeHandler}
+                value={content}
                 className={styles.content_input}
                 spellCheck="false"
                 placeholder="이 곳은 해당 체험상품에 대해 문의하는 곳입니다. 모두락 웹사이트에 대해 문의하시는 경우에는 '문의게시판' 을 이용해주세요."

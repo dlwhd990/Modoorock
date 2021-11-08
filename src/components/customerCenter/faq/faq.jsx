@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import FaqArticle from "./faqArticle/faqArticle";
 import styles from "./faq.module.css";

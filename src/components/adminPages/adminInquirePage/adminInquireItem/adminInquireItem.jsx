@@ -1,18 +1,17 @@
 import axios from "axios";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./adminInquireItem.module.css";
 
 const AdminInquireItem = ({ article, loadMyInquireList, user }) => {
   const [viewDetail, setViewDetail] = useState(false);
   const [program, setProgram] = useState(null);
-  const answerRef = useRef();
+  const [answer, setAnswer] = useState("");
 
   const viewArticle = () => {
     setViewDetail(!viewDetail);
   };
 
   const answerSubmitHandler = () => {
-    const answer = answerRef.current.value;
     if (answer === "") {
       window.alert("답변 내용을 입력해주세요");
       return;
@@ -42,6 +41,10 @@ const AdminInquireItem = ({ article, loadMyInquireList, user }) => {
       })
       .then((response) => setProgram(response.data))
       .catch((err) => console.error(err));
+  };
+
+  const setAnswerHandler = (e) => {
+    setAnswer(e.target.value);
   };
 
   useEffect(() => {
@@ -94,10 +97,10 @@ const AdminInquireItem = ({ article, loadMyInquireList, user }) => {
           ) : (
             <div className={styles.write_answer_input_and_button_container}>
               <textarea
-                ref={answerRef}
                 name="answer"
                 id="answer"
                 className={styles.write_answer_input}
+                onChange={setAnswerHandler}
                 spellCheck="false"
                 placeholder="답변내용"
               ></textarea>

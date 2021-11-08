@@ -1,19 +1,28 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./mypageMain.module.css";
 import axios from "axios";
 
 const MypageMain = ({ user, sessionCheck }) => {
-  const pwRef = useRef();
-  const newPwRef = useRef();
-  const newPwConfirmRef = useRef();
-  const nameRef = useRef();
-  const phoneRef = useRef();
-  const authNumRef = useRef();
+  const [inputValues, setInputValues] = useState({
+    pw: "",
+    newPw: "",
+    newPwConfirm: "",
+    name: "",
+    phone: "",
+    authNum: "",
+  });
+
+  const { pw, newPw, newPwConfirm, name, phone, authNum } = inputValues;
+
+  const inputValueChangeHandler = (e) => {
+    const { name, value } = e.target;
+    setInputValues({
+      ...inputValues,
+      [name]: value,
+    });
+  };
 
   const onPasswordChangeHandler = () => {
-    const password = pwRef.current.value;
-    const newPw = newPwRef.current.value;
-    const newPwConfirm = newPwConfirmRef.current.value;
     //암호화된 패스워드와 사용자가 입력한 패스워드가 일치하는지 확인하는 과정 필요
     if (newPw !== newPwConfirm) {
       window.alert("새로운 비밀번호와 확인이 일치하지 않습니다.");
@@ -35,7 +44,6 @@ const MypageMain = ({ user, sessionCheck }) => {
   };
 
   const onPhoneChangeHandler = () => {
-    const phone = phoneRef.current.value;
     //비밀번호를 보내야 한다면 원래 비밀번호는 암호화되어있어 모르기 때문에 문제생김
     axios
       .post(`${process.env.REACT_APP_BASEURL}/user/modifyinfo`, {
@@ -48,8 +56,12 @@ const MypageMain = ({ user, sessionCheck }) => {
   };
 
   useEffect(() => {
-    nameRef.current.value = user.name;
-    phoneRef.current.value = user.phone;
+    sessionCheck();
+    setInputValues({
+      ...inputValues,
+      name: user.name,
+      phone: user.phone,
+    });
   }, []);
   return (
     <section className={styles.mypage_main}>
@@ -68,7 +80,9 @@ const MypageMain = ({ user, sessionCheck }) => {
         <div className={styles.input_container}>
           <p className={styles.input_title}>이름</p>
           <input
-            ref={nameRef}
+            name="name"
+            onChange={inputValueChangeHandler}
+            value={name}
             type="text"
             className={styles.input}
             spellCheck="false"
@@ -79,7 +93,9 @@ const MypageMain = ({ user, sessionCheck }) => {
         <div className={styles.input_container}>
           <p className={styles.input_title}>비밀번호</p>
           <input
-            ref={pwRef}
+            name="pw"
+            onChange={inputValueChangeHandler}
+            value={pw}
             type="password"
             className={styles.input}
             spellCheck="false"
@@ -87,7 +103,9 @@ const MypageMain = ({ user, sessionCheck }) => {
           />
           <p className={styles.input_title}>새로운 비밀번호</p>
           <input
-            ref={newPwRef}
+            name="newPw"
+            onChange={inputValueChangeHandler}
+            value={newPw}
             type="password"
             className={styles.input}
             spellCheck="false"
@@ -97,7 +115,9 @@ const MypageMain = ({ user, sessionCheck }) => {
 
           <div className={styles.button_and_input}>
             <input
-              ref={newPwConfirmRef}
+              name="newPwConfirm"
+              onChange={inputValueChangeHandler}
+              value={newPwConfirm}
               type="password"
               className={styles.input}
               spellCheck="false"
@@ -112,7 +132,9 @@ const MypageMain = ({ user, sessionCheck }) => {
 
           <div className={styles.button_and_input}>
             <input
-              ref={phoneRef}
+              name="phone"
+              onChange={inputValueChangeHandler}
+              value={phone}
               type="text"
               className={styles.input}
               spellCheck="false"
@@ -126,7 +148,9 @@ const MypageMain = ({ user, sessionCheck }) => {
 
           <div className={styles.button_and_input}>
             <input
-              ref={authNumRef}
+              name="authNum"
+              onChange={inputValueChangeHandler}
+              value={authNum}
               type="text"
               className={styles.input}
               spellCheck="false"

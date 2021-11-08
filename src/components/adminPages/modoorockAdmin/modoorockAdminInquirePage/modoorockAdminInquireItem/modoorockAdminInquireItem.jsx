@@ -1,11 +1,15 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./modoorockAdminInquireItem.module.css";
 import axios from "axios";
 
 const ModoorockAdminInquireItem = ({ article, loadInquireList }) => {
   const [viewDetail, setViewDetail] = useState(false);
   const [writerId, setWriterId] = useState(null);
-  const answerRef = useRef();
+  const [answer, setAnswer] = useState("");
+
+  const answerChangeHandler = (e) => {
+    setAnswer(e.target.value);
+  };
 
   const viewArticle = () => {
     setViewDetail(!viewDetail);
@@ -21,7 +25,6 @@ const ModoorockAdminInquireItem = ({ article, loadInquireList }) => {
   };
 
   const answerSubmitHandler = () => {
-    const answer = answerRef.current.value;
     if (answer === "") {
       window.alert("답변 내용을 입력해주세요");
       return;
@@ -113,9 +116,8 @@ const ModoorockAdminInquireItem = ({ article, loadInquireList }) => {
           ) : (
             <div className={styles.write_answer_input_and_button_container}>
               <textarea
-                ref={answerRef}
-                name="answer"
-                id="answer"
+                onChange={answerChangeHandler}
+                value={answer}
                 className={styles.write_answer_input}
                 spellCheck="false"
                 placeholder="답변내용"

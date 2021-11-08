@@ -1,15 +1,32 @@
-import { React, useRef } from "react";
+import { React, useState } from "react";
 import styles from "./faqWrite.module.css";
 import axios from "axios";
 import { useHistory } from "react-router";
 
 const FaqWrite = () => {
   const history = useHistory();
-  const typeRef = useRef();
-  const titleRef = useRef();
-  const contentRef = useRef();
+  const [inputValues, setInputValues] = useState({
+    title: "",
+    content: "",
+    type: "상품",
+  });
+  const { title, content, type } = inputValues;
+
+  const inputValueChangeHandler = (e) => {
+    const { name, value } = e.target;
+    setInputValues({
+      ...inputValues,
+      [name]: value,
+    });
+  };
+
   const writeSubmitHandler = (e) => {
     e.preventDefault();
+
+    if (title === "" || content === "") {
+      window.alert("제목과 내용을 입력해주세요");
+      return;
+    }
 
     axios
       .post(`${process.env.REACT_APP_BASEURL}/user/session`)
@@ -19,9 +36,6 @@ const FaqWrite = () => {
           return;
         }
 
-        const type = typeRef.current.value;
-        const title = titleRef.current.value;
-        const content = contentRef.current.value;
         axios
           .post(`${process.env.REACT_APP_BASEURL}/faq/insertfaq`, {
             type,
@@ -43,9 +57,9 @@ const FaqWrite = () => {
         <div className={styles.type_select_container}>
           <p className={styles.type_text}>분류</p>
           <select
-            ref={typeRef}
             name="type"
-            id="type"
+            onChange={inputValueChangeHandler}
+            value={type}
             className={styles.type_select}
           >
             <option value="상품" className={styles.type}>
@@ -65,7 +79,9 @@ const FaqWrite = () => {
         <div className={styles.title_input_container}>
           <p className={styles.title_text}>제목</p>
           <input
-            ref={titleRef}
+            name="title"
+            onChange={inputValueChangeHandler}
+            value={title}
             type="text"
             className={styles.title_input}
             spellCheck="false"
@@ -75,9 +91,9 @@ const FaqWrite = () => {
         <div className={styles.content_input_container}>
           <p className={styles.content_text}>내용</p>
           <textarea
-            ref={contentRef}
             name="content"
-            id="content"
+            onChange={inputValueChangeHandler}
+            value={content}
             className={styles.content_input}
             spellCheck="false"
             placeholder="내용"

@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import styles from "./adminProgramMissionUploadOx.module.css";
 
 const AdminProgramMissionUploadOx = ({
@@ -7,11 +7,15 @@ const AdminProgramMissionUploadOx = ({
   user,
   gameIdx,
 }) => {
-  const titleRef = useRef();
-  const contentRef = useRef();
-  const answerRef = useRef();
-  const answerDescRef = useRef();
-  const pointRef = useRef();
+  const [inputValues, setInputValues] = useState({
+    title: "",
+    content: "",
+    answer: "",
+    answerContent: "",
+    point: "",
+  });
+
+  const { title, content, answer, answerContent, point } = inputValues;
 
   const [thumbnail, setThumbnail] = useState(null);
   const onFileInputHandler = (e) => {
@@ -22,6 +26,14 @@ const AdminProgramMissionUploadOx = ({
       setThumbnail(file);
     };
     file && reader.readAsDataURL(file);
+  };
+
+  const inputChangeHandler = (e) => {
+    const { value, name } = e.target;
+    setInputValues({
+      ...inputValues,
+      [name]: value,
+    });
   };
 
   const insertOx = (e) => {
@@ -37,11 +49,11 @@ const AdminProgramMissionUploadOx = ({
         formData.append("gameIdx", parseInt(gameIdx));
         formData.append("typeIdx", 2);
         formData.append("userIdx", response.data.idx);
-        formData.append("point", parseInt(pointRef.current.value));
-        formData.append("title", titleRef.current.value);
-        formData.append("content", contentRef.current.value);
-        formData.append("answer", answerRef.current.value);
-        formData.append("answer_content", answerDescRef.current.value);
+        formData.append("point", parseInt(point));
+        formData.append("title", title);
+        formData.append("content", content);
+        formData.append("answer", answer);
+        formData.append("answerContent", answerContent);
         formData.append("files", thumbnail);
 
         axios
@@ -69,9 +81,11 @@ const AdminProgramMissionUploadOx = ({
       <div className={`${styles.title_container} ${styles.container}`}>
         <p className={styles.text}>미션 제목</p>
         <input
-          ref={titleRef}
+          name="title"
           type="text"
           className={styles.input}
+          onChange={inputChangeHandler}
+          value={title}
           spellCheck="false"
           placeholder="제목"
         />
@@ -79,15 +93,22 @@ const AdminProgramMissionUploadOx = ({
       <div className={`${styles.content_container} ${styles.container_large}`}>
         <p className={styles.text}>미션 내용</p>
         <textarea
-          ref={contentRef}
+          name="content"
           className={styles.textarea}
+          onChange={inputChangeHandler}
+          value={content}
           spellCheck="false"
           placeholder="문제 내용"
         ></textarea>
       </div>
       <div className={`${styles.answer_container} ${styles.container}`}>
         <p className={styles.text}>미션 정답</p>
-        <select className={styles.input} ref={answerRef}>
+        <select
+          className={styles.input}
+          name="answer"
+          onChange={inputChangeHandler}
+          value={answer}
+        >
           <option value="O">O</option>
           <option value="X">X</option>
         </select>
@@ -95,7 +116,9 @@ const AdminProgramMissionUploadOx = ({
       <div className={`${styles.desc_container} ${styles.container_large}`}>
         <p className={styles.text}>정답 설명</p>
         <textarea
-          ref={answerDescRef}
+          name="answerContent"
+          onChange={inputChangeHandler}
+          value={answerContent}
           className={styles.textarea}
           spellCheck="false"
           placeholder="정답 설명"
@@ -104,7 +127,9 @@ const AdminProgramMissionUploadOx = ({
       <div className={`${styles.score_container} ${styles.container}`}>
         <p className={styles.text}>점수 설정</p>
         <input
-          ref={pointRef}
+          name="point"
+          onChange={inputChangeHandler}
+          value={point}
           type="text"
           className={styles.input}
           spellCheck="false"

@@ -1,11 +1,24 @@
 import axios from "axios";
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import ModoorockAdminAdItem from "./modoorockAdminAdItem/modoorockAdminAdItem";
 import styles from "./modoorockAdminAdPage.module.css";
 
 const ModoorockAdminAdPage = ({ advertiseList, loadAdvertiseList }) => {
-  const adTitleRef = useRef();
-  const adUrlRef = useRef();
+  const [inputValues, setInputValues] = useState({
+    title: "",
+    content: "",
+  });
+
+  const { title, content } = inputValues;
+
+  const inputValueChangeHandler = (e) => {
+    const { name, value } = e.target;
+    setInputValues({
+      ...inputValues,
+      [name]: value,
+    });
+  };
+
   const [adThumbnail, setAdThumbnail] = useState(null);
   const onFileInputHandler = (e) => {
     let reader = new FileReader();
@@ -18,8 +31,6 @@ const ModoorockAdminAdPage = ({ advertiseList, loadAdvertiseList }) => {
   };
 
   const onAdvertisementUploadHandler = () => {
-    const title = adTitleRef.current.value;
-    const content = adUrlRef.current.value;
     if (title === "" || content === "" || !adThumbnail) {
       window.alert("모든 정보를 입력한 후에 업로드 가능합니다.");
       return;
@@ -48,11 +59,23 @@ const ModoorockAdminAdPage = ({ advertiseList, loadAdvertiseList }) => {
         <h1 className={styles.title}>홍보영상 업로드</h1>
         <div className={styles.input_container}>
           <p className={styles.text}>제목</p>
-          <input ref={adTitleRef} type="text" className={styles.text_input} />
+          <input
+            name="title"
+            onChange={inputValueChangeHandler}
+            value={title}
+            type="text"
+            className={styles.text_input}
+          />
         </div>
         <div className={styles.input_container}>
           <p className={styles.text}>주소 (URL)</p>
-          <input ref={adUrlRef} type="text" className={styles.text_input} />
+          <input
+            name="content"
+            onChange={inputValueChangeHandler}
+            value={content}
+            type="text"
+            className={styles.text_input}
+          />
         </div>
         <div className={styles.input_container}>
           <p className={styles.text}>썸네일</p>

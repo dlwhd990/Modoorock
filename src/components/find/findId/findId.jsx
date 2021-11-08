@@ -1,18 +1,22 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import styles from "./findId.module.css";
 import { useHistory } from "react-router";
 
 const FindId = (props) => {
-  const phoneRef = useRef();
+  const [phone, setPhone] = useState("");
   const history = useHistory();
+
+  const phoneChangeHandler = (e) => {
+    setPhone(e.target.value);
+  };
 
   const findIdHandler = (e) => {
     e.preventDefault();
-    if (phoneRef.current.value === "") {
+    if (phone === "") {
       window.alert("핸드폰 번호를 입력해주세요");
       return;
     }
-    history.push(`/find/id/${phoneRef.current.value}`);
+    history.push(`/find/id/${phone}`);
   };
 
   return (
@@ -23,7 +27,8 @@ const FindId = (props) => {
           <div className={styles.phone_num_container}>
             <p className={styles.phone_num_text}>핸드폰 번호</p>
             <input
-              ref={phoneRef}
+              value={phone}
+              onChange={phoneChangeHandler}
               type="text"
               className={styles.phone_num_input}
               placeholder="핸드폰 번호"

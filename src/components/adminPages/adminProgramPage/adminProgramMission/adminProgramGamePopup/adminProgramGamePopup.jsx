@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useRef } from "react";
+import React, { useState } from "react";
 import styles from "./adminProgramGamePopup.module.css";
 
 const AdminProgramGamePopup = ({
@@ -8,7 +8,12 @@ const AdminProgramGamePopup = ({
   attractionInfo,
   loadGameList,
 }) => {
-  const gameNumberRef = useRef();
+  console.log(path);
+  const [password, setPassword] = useState("");
+
+  const passwordChangeHandler = (e) => {
+    setPassword(e.target.value);
+  };
 
   const uploadGame = (userIdx, password) => {
     axios
@@ -30,7 +35,6 @@ const AdminProgramGamePopup = ({
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    const password = gameNumberRef.current.value;
     if (password.length !== 4) {
       window.alert("게임 번호는 4자리 숫자여야 합니다.");
       return;
@@ -63,9 +67,9 @@ const AdminProgramGamePopup = ({
       <form className={styles.form}>
         <p className={styles.text}>게임 번호</p>
         <input
-          ref={gameNumberRef}
           type="text"
           className={styles.input}
+          onChange={passwordChangeHandler}
           spellCheck="false"
           placeholder="게임 번호 (4자리 숫자)"
           maxLength="4"

@@ -1,14 +1,31 @@
-import { React, useRef } from "react";
+import { React, useState } from "react";
 import styles from "./inquireWrite.module.css";
 import axios from "axios";
 import { useHistory } from "react-router";
 
 const InquireWrite = () => {
   const history = useHistory();
-  const titleRef = useRef();
-  const contentRef = useRef();
+  const [inputValues, setInputValues] = useState({
+    title: "",
+    content: "",
+  });
+  const { title, content } = inputValues;
+
+  const inputValueChangeHandler = (e) => {
+    const { name, value } = e.target;
+    setInputValues({
+      ...inputValues,
+      [name]: value,
+    });
+  };
+
   const writeSubmitHandler = (e) => {
     e.preventDefault();
+
+    if (title === "" || content === "") {
+      window.alert("제목과 내용을 입력해주세요");
+      return;
+    }
 
     axios
       .post(`${process.env.REACT_APP_BASEURL}/user/session`)
@@ -17,8 +34,7 @@ const InquireWrite = () => {
           window.alert("로그인 후에 글 작성이 가능합니다.");
           return;
         }
-        const title = titleRef.current.value;
-        const content = contentRef.current.value;
+
         const userIdx = response.data.idx;
         axios
           .post(`${process.env.REACT_APP_BASEURL}/qna/insertqna`, {
@@ -41,7 +57,9 @@ const InquireWrite = () => {
         <div className={styles.title_input_container}>
           <p className={styles.title_text}>제목</p>
           <input
-            ref={titleRef}
+            name="title"
+            onChange={inputValueChangeHandler}
+            value={title}
             type="text"
             className={styles.title_input}
             spellCheck="false"
@@ -51,9 +69,9 @@ const InquireWrite = () => {
         <div className={styles.content_input_container}>
           <p className={styles.content_text}>내용</p>
           <textarea
-            ref={contentRef}
             name="content"
-            id="content"
+            onChange={inputValueChangeHandler}
+            value={content}
             className={styles.content_input}
             spellCheck="false"
             placeholder="내용"

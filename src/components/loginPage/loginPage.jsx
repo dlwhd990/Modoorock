@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import LoadingSpinnerWhite from "../loadingSpinner/loadingSpinnerWhite/loadingSpinnerWhite";
 import styles from "./loginPage.module.css";
@@ -8,9 +8,21 @@ axios.defaults.withCredentials = true;
 
 const LoginPage = () => {
   const history = useHistory();
-  const idRef = useRef();
-  const pwRef = useRef();
   const [loadingOn, setLoadingOn] = useState(false);
+  const [inputValues, setInputValues] = useState({
+    id: "",
+    pw: "",
+  });
+
+  const { id, pw } = inputValues;
+
+  const inputValueChangeHandler = (e) => {
+    const { name, value } = e.target;
+    setInputValues({
+      ...inputValues,
+      [name]: value,
+    });
+  };
 
   const refresh = () => {
     window.location.href = "/";
@@ -20,10 +32,7 @@ const LoginPage = () => {
   const loginSubmitHandler = async (e) => {
     e.preventDefault();
 
-    const id = idRef.current.value;
-    const password = pwRef.current.value;
-
-    if (id === "" || password === "") {
+    if (id === "" || pw === "") {
       window.alert("아이디와 비밀번호를 입력해주세요");
       return;
     }
@@ -35,7 +44,7 @@ const LoginPage = () => {
         `${process.env.REACT_APP_BASEURL}/user/login`,
         {
           id,
-          password,
+          password: pw,
         },
         { withCredentials: true }
       )
@@ -61,14 +70,18 @@ const LoginPage = () => {
         <form className={styles.main}>
           <div className={styles.input_container}>
             <input
-              ref={idRef}
+              name="id"
+              onChange={inputValueChangeHandler}
+              value={id}
               type="text"
               className={styles.input}
               placeholder="아이디"
               spellCheck="false"
             />
             <input
-              ref={pwRef}
+              name="pw"
+              onChange={inputValueChangeHandler}
+              value={pw}
               type="password"
               className={styles.input}
               placeholder="비밀번호"

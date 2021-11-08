@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router";
 import styles from "./adminProgramUploadPage.module.css";
 import StarRatingComponent from "react-star-rating-component";
@@ -7,23 +7,32 @@ import StarRatingComponent from "react-star-rating-component";
 const AdminProgramUploadPage = ({ user }) => {
   const history = useHistory();
   const params = useParams();
-  const titleRef = useRef();
-  const priceRef = useRef();
-  const themeRef = useRef();
-  const contentRef = useRef();
-  const detailContentRef = useRef();
-  const countInputRef = useRef();
+  const [inputValues, setInputValues] = useState({
+    title: "",
+    price: "",
+    theme: "",
+    content: "",
+    detailContent: "",
+  });
+
+  const { title, price, theme, content, detailContent } = inputValues;
+
   const [previewImage, setPreviewImage] = useState(null);
   const [subImages, setSubImages] = useState(null);
-  const [name, setName] = useState("");
-  const [content, setContent] = useState("");
-  const [theme, setTheme] = useState("");
-  const [price, setPrice] = useState("");
-  const [startDate, setStartDate] = useState(new Date());
-  const [time, setTime] = useState("");
-  const [count, setCount] = useState("");
-  const [dateDataList, setDateDataList] = useState([]);
+  //const countInputRef = useRef();
+  //const [startDate, setStartDate] = useState(new Date());
+  //const [time, setTime] = useState("");
+  //const [count, setCount] = useState("");
+  //const [dateDataList, setDateDataList] = useState([]);
   const [attractionInfo, setAttractionInfo] = useState(null);
+
+  const inputValueChangeHandler = (e) => {
+    const { name, value } = e.target;
+    setInputValues({
+      ...inputValues,
+      [name]: value,
+    });
+  };
 
   const loadAttractionInfo = () => {
     axios
@@ -78,16 +87,11 @@ const AdminProgramUploadPage = ({ user }) => {
   }, [subImages, previewImage]);
 
   const insertProgramHandler = (userIdx) => {
-    const title = titleRef.current.value;
-    const price = priceRef.current.value;
-    const content = contentRef.current.value;
-    const detailContent = detailContentRef.current.value;
-    const theme = themeRef.current.value;
     const files = [...subImages, previewImage.file];
 
     const formData = new FormData();
     formData.append("userIdx", userIdx);
-    formData.append("attractionIdx", params.path_three);
+    formData.append("attractionIdx", parseInt(params.path_three));
     formData.append("title", title);
     formData.append("price", price);
     formData.append("content", content);
@@ -116,11 +120,6 @@ const AdminProgramUploadPage = ({ user }) => {
 
   const submitButtonHandler = (e) => {
     e.preventDefault();
-    const title = titleRef.current.value;
-    const price = priceRef.current.value;
-    const content = contentRef.current.value;
-    const theme = themeRef.current.value;
-    const detailContent = detailContentRef.current.value;
     const files = subImages &&
       previewImage && [...subImages, previewImage.file];
     if (
@@ -145,7 +144,10 @@ const AdminProgramUploadPage = ({ user }) => {
         console.log(response.data);
         if (response.data === "") {
           window.alert("로그인 후에 사용해주세요");
-        } else if (response.data.idType !== 1) {
+        } else if (
+          response.data.idType !== 1 ||
+          response.data.idx !== user.idx
+        ) {
           window.alert("권한이 없습니다. 다시 로그인 후에 사용해주세요");
         } else {
           const userIdx = response.data.idx;
@@ -154,85 +156,65 @@ const AdminProgramUploadPage = ({ user }) => {
       });
   };
 
-  const nameChangeHandler = (e) => {
-    setName(e.target.value);
-  };
-
-  const themeChangeHandler = (e) => {
-    setTheme(e.target.value);
-  };
-
-  const contentChangeHandler = (e) => {
-    setContent(e.target.value);
-  };
-
-  const priceChangeHandler = (e) => {
-    if (isNaN(parseInt(e.target.value))) {
-      setPrice("");
-      return;
-    }
-    setPrice(parseInt(e.target.value).toLocaleString("ko-KR"));
-  };
-
-  const timeChangeHandler = (e) => {
-    setTime(e.target.value);
-  };
-
-  const countChangeHandler = (e) => {
-    setCount(e.target.value);
-  };
-
-  const saveButtonClickHandler = () => {
-    if (time === "") {
-      window.alert("시간을 선택해주세요");
-      return;
-    }
-    if (count === "") {
-      window.alert("수량을 입력해주세요");
-      return;
-    }
-    if (isNaN(parseInt(count))) {
-      window.alert("수량에는 숫자만 입력해주세요");
-      return;
-    }
-
-    setDateDataList(() => {
-      const year = startDate.getFullYear();
-      let month = startDate.getMonth() + 1;
-      let date = startDate.getDate();
-
-      if (month < 10) {
-        month = "0" + month.toString();
-      }
-
-      if (date < 10) {
-        date = "0" + date.toString();
-      }
-
-      const selectedTime = `${year}-${month}-${date} ${time}`;
-      const listLength = dateDataList.length;
-      const newElement = {
-        idx: listLength === 0 ? 0 : dateDataList[listLength - 1].idx + 1,
-        time: selectedTime,
-        amount: parseInt(count),
-      };
-      const result = [...dateDataList, newElement];
-      console.log(result);
-      countInputRef.current.value = "";
-      setCount("");
-      return result;
-    });
-  };
-
-  const deleteDateDataHandler = (e) => {
-    const result = [];
-
-    dateDataList.forEach((item) => {
-      parseInt(e.target.dataset.idx) !== item.idx && result.push(item);
-    });
-    setDateDataList(result);
-    console.log(result);
-  };
+  //const timeChangeHandler = (e) => {
+  //  setTime(e.target.value);
+  //};
+  //
+  //const countChangeHandler = (e) => {
+  //  setCount(e.target.value);
+  //};
+  //
+  //const saveButtonClickHandler = () => {
+  //  if (time === "") {
+  //    window.alert("시간을 선택해주세요");
+  //    return;
+  //  }
+  //  if (count === "") {
+  //    window.alert("수량을 입력해주세요");
+  //    return;
+  //  }
+  //  if (isNaN(parseInt(count))) {
+  //    window.alert("수량에는 숫자만 입력해주세요");
+  //    return;
+  //  }
+  //
+  //  setDateDataList(() => {
+  //    const year = startDate.getFullYear();
+  //    let month = startDate.getMonth() + 1;
+  //    let date = startDate.getDate();
+  //
+  //    if (month < 10) {
+  //      month = "0" + month.toString();
+  //    }
+  //
+  //    if (date < 10) {
+  //      date = "0" + date.toString();
+  //    }
+  //
+  //    const selectedTime = `${year}-${month}-${date} ${time}`;
+  //    const listLength = dateDataList.length;
+  //    const newElement = {
+  //      idx: listLength === 0 ? 0 : dateDataList[listLength - 1].idx + 1,
+  //      time: selectedTime,
+  //      amount: parseInt(count),
+  //    };
+  //    const result = [...dateDataList, newElement];
+  //    console.log(result);
+  //    countInputRef.current.value = "";
+  //    setCount("");
+  //    return result;
+  //  });
+  //};
+  //
+  //const deleteDateDataHandler = (e) => {
+  //  const result = [];
+  //
+  //  dateDataList.forEach((item) => {
+  //    parseInt(e.target.dataset.idx) !== item.idx && result.push(item);
+  //  });
+  //  setDateDataList(result);
+  //  console.log(result);
+  //};
 
   useEffect(() => {
     loadAttractionInfo();
@@ -278,10 +260,11 @@ const AdminProgramUploadPage = ({ user }) => {
             <div className={styles.form_content}>
               <p className={styles.form_text}>체험상품 명</p>
               <input
-                ref={titleRef}
+                name="title"
+                onChange={inputValueChangeHandler}
+                value={title}
                 type="text"
                 className={styles.form_input}
-                onChange={nameChangeHandler}
                 spellCheck="false"
                 placeholder="체험상품 명"
               />
@@ -289,10 +272,11 @@ const AdminProgramUploadPage = ({ user }) => {
             <div className={styles.form_content}>
               <p className={styles.form_text}>체험상품 가격</p>
               <input
-                ref={priceRef}
+                name="price"
+                onChange={inputValueChangeHandler}
+                value={price}
                 type="text"
                 className={styles.form_input}
-                onChange={priceChangeHandler}
                 spellCheck="false"
                 placeholder="체험상품 가격 (숫자만으로 입력)"
               />
@@ -300,11 +284,10 @@ const AdminProgramUploadPage = ({ user }) => {
             <div className={styles.form_content}>
               <p className={styles.form_text}>체험상품 테마</p>
               <select
-                ref={themeRef}
                 name="theme"
-                id="theme"
+                onChange={inputValueChangeHandler}
+                value={theme}
                 className={styles.theme_select}
-                onChange={themeChangeHandler}
               >
                 <option value="">테마선택</option>
                 <option value="농촌체험">농촌체험</option>
@@ -318,11 +301,10 @@ const AdminProgramUploadPage = ({ user }) => {
             <div className={styles.form_content_textarea}>
               <p className={styles.form_text}>상품 소개</p>
               <textarea
-                ref={contentRef}
                 name="content"
-                id="content"
+                onChange={inputValueChangeHandler}
+                value={content}
                 className={styles.form_textarea}
-                onChange={contentChangeHandler}
                 spellCheck="false"
                 placeholder="상품 소개"
               ></textarea>
@@ -343,7 +325,7 @@ const AdminProgramUploadPage = ({ user }) => {
               </div>
               <div className={styles.text_container}>
                 <div className={styles.name_container}>
-                  <p className={styles.name}>{name}</p>
+                  <p className={styles.name}>{title}</p>
                 </div>
 
                 <div className={styles.desc_container}>
@@ -371,8 +353,12 @@ const AdminProgramUploadPage = ({ user }) => {
         <div className={styles.detail_content_container}>
           <p className={styles.detail_content_text}>상품 상세 소개</p>
           <textarea
-            ref={detailContentRef}
+            name="detailContent"
+            onChange={inputValueChangeHandler}
+            value={detailContent}
             className={styles.detail_content}
+            spellCheck="false"
+            placeholder="자세한 설명 및 주의사항을 적어주세요"
           ></textarea>
           <button
             className={styles.submit_button}

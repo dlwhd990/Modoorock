@@ -1,53 +1,66 @@
-import React, { useRef } from "react";
+import React, { useState } from "react";
 import styles from "./signup.module.css";
 import axios from "axios";
 
 const Signup = (props) => {
-  const signupAgreeRef = useRef();
-  const infoCollectionAgreeRef = useRef();
-  const idRef = useRef();
-  const pwRef = useRef();
-  const pwConfirmRef = useRef();
-  const nameRef = useRef();
-  const phoneRef = useRef();
+  const [checkValues, setCheckValues] = useState({
+    signupAgree: false,
+    infoCollectionAgree: false,
+  });
 
-  async function callAPI(address, options) {
-    const response = await fetch(address, options);
-    const body = await response.json();
-    return body;
-  }
+  const [inputValues, setInputValues] = useState({
+    id: "",
+    pw: "",
+    pwConfirm: "",
+    name: "",
+    phone: "",
+  });
+
+  const { id, pw, pwConfirm, name, phone } = inputValues;
+
+  const { signupAgree, infoCollectionAgree } = checkValues;
+
+  const inputValueChangeHandler = (e) => {
+    const { name, value } = e.target;
+    setInputValues({
+      ...inputValues,
+      [name]: value,
+    });
+  };
+
+  const checkValueChangeHandler = (e) => {
+    const { name, checked } = e.target;
+    setCheckValues({
+      ...checkValues,
+      [name]: checked,
+    });
+  };
 
   const allAgreeHandler = (e) => {
     if (e.target.checked) {
-      signupAgreeRef.current.checked = true;
-      infoCollectionAgreeRef.current.checked = true;
+      setCheckValues({
+        signupAgree: true,
+        infoCollectionAgree: true,
+      });
     } else {
-      signupAgreeRef.current.checked = false;
-      infoCollectionAgreeRef.current.checked = false;
+      setCheckValues({
+        signupAgree: false,
+        infoCollectionAgree: false,
+      });
     }
   };
 
   const signupSubmitHandler = (e) => {
     e.preventDefault();
 
-    if (
-      !(
-        signupAgreeRef.current.checked && infoCollectionAgreeRef.current.checked
-      )
-    ) {
+    if (!(signupAgree && infoCollectionAgree)) {
       window.alert("약관에 모두 동의하셔야 가입이 가능합니다.");
       return;
     }
 
-    const id = idRef.current.value;
-    const password = pwRef.current.value;
-    const pwConfirm = pwConfirmRef.current.value;
-    const name = nameRef.current.value;
-    const phone = phoneRef.current.value;
-
     if (
       id.length === 0 ||
-      password.length === 0 ||
+      pw.length === 0 ||
       name.length === 0 ||
       phone.length === 0
     ) {
@@ -55,7 +68,7 @@ const Signup = (props) => {
       return;
     }
 
-    if (password !== pwConfirm) {
+    if (pw !== pwConfirm) {
       window.alert("비밀번호와 비밀번호 확인이 동일하지 않습니다.");
       return;
     }
@@ -63,7 +76,7 @@ const Signup = (props) => {
     axios
       .post(`${process.env.REACT_APP_BASEURL}/user/register`, {
         id,
-        password,
+        password: pw,
         name,
         phone,
       })
@@ -94,7 +107,9 @@ const Signup = (props) => {
           <div className={styles.input_container}>
             <p className={styles.input_title}>아이디</p>
             <input
-              ref={idRef}
+              name="id"
+              onChange={inputValueChangeHandler}
+              value={id}
               type="id"
               className={`${styles.input} ${styles.id_input}`}
               placeholder="아이디 (영문, 숫자 조합의 4~12자리)"
@@ -104,7 +119,9 @@ const Signup = (props) => {
           <div className={styles.input_container}>
             <p className={styles.input_title}>비밀번호</p>
             <input
-              ref={pwRef}
+              name="pw"
+              onChange={inputValueChangeHandler}
+              value={pw}
               type="password"
               className={`${styles.input} ${styles.password_input}`}
               placeholder="비밀번호 (영문, 숫자, 특수문자 조합의 8~16자)"
@@ -114,7 +131,9 @@ const Signup = (props) => {
           <div className={styles.input_container}>
             <p className={styles.input_title}>비밀번호 확인</p>
             <input
-              ref={pwConfirmRef}
+              name="pwConfirm"
+              onChange={inputValueChangeHandler}
+              value={pwConfirm}
               type="password"
               className={`${styles.input} ${styles.password_confirm_input}`}
               placeholder="비밀번호 확인"
@@ -124,7 +143,9 @@ const Signup = (props) => {
           <div className={styles.input_container}>
             <p className={styles.input_title}>이름</p>
             <input
-              ref={nameRef}
+              name="name"
+              onChange={inputValueChangeHandler}
+              value={name}
               type="text"
               className={`${styles.input} ${styles.name_input}`}
               placeholder="이름"
@@ -135,7 +156,9 @@ const Signup = (props) => {
           <div className={styles.input_container}>
             <p className={styles.input_title}>핸드폰 번호</p>
             <input
-              ref={phoneRef}
+              name="phone"
+              onChange={inputValueChangeHandler}
+              value={phone}
               type="text"
               className={`${styles.input} ${styles.phone_num_input}`}
               placeholder="핸드폰 번호"
@@ -169,8 +192,11 @@ const Signup = (props) => {
               className={`${styles.separate_agree} ${styles.separate_agree_top}`}
             >
               <input
-                ref={signupAgreeRef}
+                name="signupAgree"
+                onChange={checkValueChangeHandler}
+                value={signupAgree}
                 type="checkbox"
+                checked={signupAgree}
                 className={styles.agree_input}
               />
               <span className={styles.agree_desc}>
@@ -182,8 +208,11 @@ const Signup = (props) => {
               className={`${styles.separate_agree} ${styles.separate_agree_bottom}`}
             >
               <input
-                ref={infoCollectionAgreeRef}
+                name="infoCollectionAgree"
+                onChange={checkValueChangeHandler}
+                value={infoCollectionAgree}
                 type="checkbox"
+                checked={infoCollectionAgree}
                 className={styles.agree_input}
               />
               <span className={styles.agree_desc}>

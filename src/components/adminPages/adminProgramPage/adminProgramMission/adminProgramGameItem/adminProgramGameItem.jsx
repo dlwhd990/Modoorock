@@ -1,12 +1,27 @@
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import AdminProgramMissionItem from "../adminProgramMissionItem/adminProgramMissionItem";
 import styles from "./adminProgramGameItem.module.css";
 
 const AdminProgramGameItem = ({ item, openMissionPopupHandler }) => {
   const [viewDetail, setViewDetail] = useState(false);
+  const [missionList, setMissionList] = useState(null);
   const viewDetailHandler = () => {
     setViewDetail(!viewDetail);
   };
+
+  useEffect(() => {
+    const getMissionList = () => {
+      axios
+        .post(`${process.env.REACT_APP_BASEURL}/mission/getmissionlist`, {
+          gameIdx: item.idx,
+        })
+        .then((response) => setMissionList(response.data))
+        .catch((err) => console.error(err));
+    };
+
+    getMissionList();
+  }, []);
 
   return (
     <div className={styles.game_item}>
@@ -26,8 +41,10 @@ const AdminProgramGameItem = ({ item, openMissionPopupHandler }) => {
       </div>
       {viewDetail && (
         <div className={styles.detail}>
-          <AdminProgramMissionItem />
-          <AdminProgramMissionItem />
+          {missionList &&
+            missionList.map((item) => (
+              <AdminProgramMissionItem key={item.idx} item={item} />
+            ))}
         </div>
       )}
     </div>

@@ -108,6 +108,7 @@ const AdminProgramMission = ({ user }) => {
             closeGamePopupHandler={closeGamePopupHandler}
             attractionInfo={attractionInfo}
             loadGameList={loadGameList}
+            path={params}
           />
         </section>
       )}

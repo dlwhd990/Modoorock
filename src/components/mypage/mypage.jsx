@@ -4,7 +4,7 @@ import styles from "./mypage.module.css";
 import MypageMain from "./mypageMain/mypageMain";
 import MypagePayment from "./mypagePayment/mypagePayment";
 
-const Mypage = ({ user }) => {
+const Mypage = ({ user, sessionCheck }) => {
   const history = useHistory();
   const { path } = useParams();
 
@@ -82,7 +82,11 @@ const Mypage = ({ user }) => {
         </p>
       </div>
       <section className={styles.main}>
-        {path === "main" ? <MypageMain user={user} /> : <MypagePayment />}
+        {path === "main" ? (
+          <MypageMain user={user} sessionCheck={sessionCheck} />
+        ) : (
+          <MypagePayment />
+        )}
       </section>
     </section>
   );
