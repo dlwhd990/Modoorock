@@ -83,42 +83,63 @@ const AdminProgramMissionPopup = ({
         <AdminProgramMissionUploadFour
           closeMissionPopupHandler={closeMissionPopupHandler}
           user={user}
+          gameIdx={gameIdx}
+          loadMissionList={loadMissionList}
+          setMissionLoaderHandler={setMissionLoaderHandler}
         />
       )}
       {type === "지시 미션" && (
         <AdminProgramMissionUploadInstruction
           closeMissionPopupHandler={closeMissionPopupHandler}
           user={user}
+          gameIdx={gameIdx}
+          loadMissionList={loadMissionList}
+          setMissionLoaderHandler={setMissionLoaderHandler}
         />
       )}
       {type === "설문 미션" && (
         <AdminProgramMissionUploadSurvey
           closeMissionPopupHandler={closeMissionPopupHandler}
           user={user}
+          gameIdx={gameIdx}
+          loadMissionList={loadMissionList}
+          setMissionLoaderHandler={setMissionLoaderHandler}
         />
       )}
       {type === "사진 미션" && (
         <AdminProgramMissionUploadPhoto
           closeMissionPopupHandler={closeMissionPopupHandler}
           user={user}
+          gameIdx={gameIdx}
+          loadMissionList={loadMissionList}
+          setMissionLoaderHandler={setMissionLoaderHandler}
         />
       )}
       {type === "동영상 미션" && (
         <AdminProgramMissionUploadVideo
           closeMissionPopupHandler={closeMissionPopupHandler}
           user={user}
+          gameIdx={gameIdx}
+          loadMissionList={loadMissionList}
+          setMissionLoaderHandler={setMissionLoaderHandler}
         />
       )}
       {type === "토퍼 미션" && (
         <AdminProgramMissionUploadTopper
           closeMissionPopupHandler={closeMissionPopupHandler}
           user={user}
+          gameIdx={gameIdx}
+          loadMissionList={loadMissionList}
+          setMissionLoaderHandler={setMissionLoaderHandler}
         />
       )}
       {type === "아이템 미션" && (
         <AdminProgramMissionUploadItemMission
           closeMissionPopupHandler={closeMissionPopupHandler}
           user={user}
+          gameIdx={gameIdx}
+          loadMissionList={loadMissionList}
+          setMissionLoaderHandler={setMissionLoaderHandler}
         />
       )}
     </section>

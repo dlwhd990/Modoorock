@@ -15,7 +15,7 @@ const AdminProgramMissionUploadShort = ({
     answer: "",
     answerContent: "",
     point: "",
-    count: "",
+    count: "1",
   });
 
   const { title, content, answer, answerContent, point, count } = inputValues;
@@ -84,13 +84,13 @@ const AdminProgramMissionUploadShort = ({
         formData.append("content", content);
         formData.append("answer", answer);
         formData.append("answerContent", answerContent);
-        formData.append("count", count);
+        formData.append("count", parseInt(count));
         formData.append("files", thumbnail);
-        hint_one !== "" && formData.append("hint", hint_one);
-        hint_two !== "" && formData.append("hint", hint_two);
-        hint_three !== "" && formData.append("hint", hint_three);
-        hint_four !== "" && formData.append("hint", hint_four);
-        hint_five !== "" && formData.append("hint", hint_five);
+        hint_one !== "" && formData.append("inputHint", hint_one);
+        hint_two !== "" && formData.append("inputHint", hint_two);
+        hint_three !== "" && formData.append("inputHint", hint_three);
+        hint_four !== "" && formData.append("inputHint", hint_four);
+        hint_five !== "" && formData.append("inputHint", hint_five);
 
         axios
           .post(

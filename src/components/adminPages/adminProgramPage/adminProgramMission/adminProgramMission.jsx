@@ -39,6 +39,7 @@ const AdminProgramMission = ({ user }) => {
         gameIdx,
       })
       .then((response) => {
+        console.log(response.data);
         setting && setting(response.data);
       })
       .catch((err) => console.error(err));

@@ -1,16 +1,98 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./adminProgramMissionUploadVideo.module.css";
+import axios from "axios";
 
-const AdminProgramMissionUploadVideo = ({ closeMissionPopupHandler }) => {
+const AdminProgramMissionUploadVideo = ({
+  loadMissionList,
+  setMissionLoaderHandler,
+  closeMissionPopupHandler,
+  user,
+  gameIdx,
+}) => {
+  const [inputValues, setInputValues] = useState({
+    title: "",
+    content: "",
+    point: "",
+  });
+
+  const { title, content, point } = inputValues;
+
+  const [thumbnail, setThumbnail] = useState(null);
+  const onFileInputHandler = (e) => {
+    let reader = new FileReader();
+    let file = e.target.files[0];
+
+    reader.onloadend = () => {
+      setThumbnail(file);
+    };
+    file && reader.readAsDataURL(file);
+  };
+
+  const inputChangeHandler = (e) => {
+    const { value, name } = e.target;
+    setInputValues({
+      ...inputValues,
+      [name]: value,
+    });
+  };
+
+  const insertVideoMission = (e) => {
+    e.preventDefault();
+    axios
+      .post(`${process.env.REACT_APP_BASEURL}/user/session`)
+      .then((response) => {
+        if (response.data === "" || response.data.idx !== user.idx) {
+          window.alert("권한이 없습니다.");
+          return;
+        }
+        const formData = new FormData();
+        formData.append("gameIdx", parseInt(gameIdx));
+        formData.append("typeIdx", 6);
+        formData.append("userIdx", response.data.idx);
+        formData.append("point", parseInt(point));
+        formData.append("title", title);
+        formData.append("content", content);
+        formData.append("files", thumbnail);
+
+        axios
+          .post(
+            `${process.env.REACT_APP_BASEURL}/mission/insertmission`,
+            formData
+          )
+          .then((response) => {
+            if (response.data === "success") {
+              window.alert("미션 업로드에 성공했습니다.");
+              loadMissionList();
+              closeMissionPopupHandler();
+              setMissionLoaderHandler();
+              return;
+            }
+            window.alert(
+              "에러가 발생했습니다. 새로고침 후에 다시 시도해주세요"
+            );
+          })
+          .catch((err) => console.error(err));
+      })
+      .catch((err) => console.error(err));
+  };
+
   return (
     <form className={styles.form}>
       <div className={`${styles.photo_container} ${styles.container}`}>
         <p className={styles.text}>미션 동영상</p>
-        <input type="file" accept="video/*" className={styles.file_input} />
+        <input
+          onChange={onFileInputHandler}
+          type="file"
+          accept="video/*"
+          className={styles.file_input}
+        />
       </div>
       <div className={`${styles.title_container} ${styles.container}`}>
         <p className={styles.text}>미션 제목</p>
         <input
+          name="title"
+          onChange={inputChangeHandler}
+          value={title}
           type="text"
           className={styles.input}
           spellCheck="false"
@@ -20,6 +102,9 @@ const AdminProgramMissionUploadVideo = ({ closeMissionPopupHandler }) => {
       <div className={`${styles.content_container} ${styles.container_large}`}>
         <p className={styles.text}>미션 내용</p>
         <textarea
+          name="content"
+          onChange={inputChangeHandler}
+          value={content}
           className={styles.textarea}
           spellCheck="false"
           placeholder="문제 내용"
@@ -28,6 +113,9 @@ const AdminProgramMissionUploadVideo = ({ closeMissionPopupHandler }) => {
       <div className={`${styles.score_container} ${styles.container}`}>
         <p className={styles.text}>점수 설정</p>
         <input
+          name="point"
+          onChange={inputChangeHandler}
+          value={point}
           type="text"
           className={styles.input}
           spellCheck="false"
@@ -35,7 +123,9 @@ const AdminProgramMissionUploadVideo = ({ closeMissionPopupHandler }) => {
         />
       </div>
       <div className={`${styles.button_container} ${styles.container}`}>
-        <button className={styles.button}>등록</button>
+        <button className={styles.button} onClick={insertVideoMission}>
+          등록
+        </button>
         <button className={styles.button} onClick={closeMissionPopupHandler}>
           취소
         </button>
