@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import styles from "./adminProgramMissionUploadOx.module.css";
 
 const AdminProgramMissionUploadOx = ({
+  getMissionList,
   closeMissionPopupHandler,
   user,
   gameIdx,
@@ -61,7 +62,16 @@ const AdminProgramMissionUploadOx = ({
             `${process.env.REACT_APP_BASEURL}/mission/insertmission`,
             formData
           )
-          .then((response) => console.log(response))
+          .then((response) => {
+            if (response.data === "success") {
+              window.alert("미션 업로드에 성공했습니다.");
+              closeMissionPopupHandler();
+              return;
+            }
+            window.alert(
+              "에러가 발생했습니다. 새로고침 후에 다시 시도해주세요"
+            );
+          })
           .catch((err) => console.error(err));
       })
       .catch((err) => console.error(err));

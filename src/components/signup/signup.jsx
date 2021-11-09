@@ -3,6 +3,8 @@ import styles from "./signup.module.css";
 import axios from "axios";
 
 const Signup = (props) => {
+  const [checkedPhone, setCheckedPhone] = useState(null);
+  const [disable, setDisable] = useState(false);
   const [checkValues, setCheckValues] = useState({
     signupAgree: false,
     infoCollectionAgree: false,
@@ -14,9 +16,10 @@ const Signup = (props) => {
     pwConfirm: "",
     name: "",
     phone: "",
+    authNum: "",
   });
 
-  const { id, pw, pwConfirm, name, phone } = inputValues;
+  const { id, pw, pwConfirm, name, phone, authNum } = inputValues;
 
   const { signupAgree, infoCollectionAgree } = checkValues;
 
@@ -50,6 +53,44 @@ const Signup = (props) => {
     }
   };
 
+  const sendSmsHandler = () => {
+    if (phone === "") {
+      window.alert("핸드폰 번호를 먼저 입력해주세요");
+      return;
+    }
+    if (phone.length !== 11) {
+      window.alert("핸드폰 번호를 다시 확인해주세요");
+      return;
+    }
+    for (let i = 0; i < phone.length; i++) {
+      if (isNaN(parseInt(phone.charAt(i)))) {
+        window.alert("숫자만 입력해주세요");
+        return;
+      }
+    }
+    axios
+      .post(`${process.env.REACT_APP_BASEURL}/user/requestsms`, {
+        phone,
+      })
+      .then((response) => window.alert("인증번호가 발송되었습니다."))
+      .catch((err) => console.error(err));
+  };
+
+  const authNumCheckHandler = () => {
+    axios
+      .post(`${process.env.REACT_APP_BASEURL}/user/checksms`, {
+        to: phone,
+        content: authNum,
+      })
+      .then((response) => {
+        if (response.data === "success") {
+          window.alert("인증이 완료되었습니다.");
+          setCheckedPhone(phone);
+          setDisable(true);
+        }
+      });
+  };
+
   const signupSubmitHandler = (e) => {
     e.preventDefault();
 
@@ -73,15 +114,21 @@ const Signup = (props) => {
       return;
     }
 
+    if (!checkedPhone) {
+      window.alert("핸드폰 인증이 완료되지 않았습니다.");
+      return;
+    }
+
     axios
       .post(`${process.env.REACT_APP_BASEURL}/user/register`, {
         id,
         password: pw,
         name,
-        phone,
+        phone: checkedPhone,
       })
       .then((response) => {
         const resData = response.data;
+        console.log(resData);
         if (resData === "duplicate") {
           window.alert(
             "아이디 또는 핸드폰 번호가 중복됩니다. 다른 아이디로 회원가입 해주세요"
@@ -92,7 +139,7 @@ const Signup = (props) => {
         if (resData === "success") {
           window.alert("회원가입이 완료되었습니다. 로그인을 해주세요.");
           window.location.href = "/";
-        } // 핸드폰인증, 중복확인 등 작업 더 완료되면 추가
+        }
       })
       .catch((error) => console.error(error));
   };
@@ -163,19 +210,35 @@ const Signup = (props) => {
               className={`${styles.input} ${styles.phone_num_input}`}
               placeholder="핸드폰 번호"
               spellCheck="false"
+              disabled={disable}
             />
-            <button className={styles.get_auth_num_button}>
+            <button
+              type="button"
+              className={styles.get_auth_num_button}
+              onClick={sendSmsHandler}
+            >
               인증번호 받기
             </button>
           </div>
           <div className={styles.input_container}>
             <p className={styles.input_title}>인증번호</p>
             <input
+              name="authNum"
+              onChange={inputValueChangeHandler}
+              value={authNum}
               type="text"
-              className={`${styles.input} ${styles.auth_num_input}`}
+              className={`${styles.input} ${styles.phone_num_input}`}
               placeholder="인증번호"
               spellCheck="false"
+              disabled={disable}
             />
+            <button
+              type="button"
+              className={styles.get_auth_num_button}
+              onClick={authNumCheckHandler}
+            >
+              인증번호 확인
+            </button>
           </div>
         </section>
         <section className={styles.agree_part}>

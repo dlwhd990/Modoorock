@@ -28,7 +28,15 @@
 
 .mission_type_and_name {
   margin: auto;
+  max-width: 60%;
   font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  word-wrap: break-word;
+  word-break: break-all;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
 }
 
 .add_mission_button {

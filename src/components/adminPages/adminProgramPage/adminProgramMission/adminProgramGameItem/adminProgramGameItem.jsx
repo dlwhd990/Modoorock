@@ -3,11 +3,33 @@ import React, { useEffect, useState } from "react";
 import AdminProgramMissionItem from "../adminProgramMissionItem/adminProgramMissionItem";
 import styles from "./adminProgramGameItem.module.css";
 
-const AdminProgramGameItem = ({ item, openMissionPopupHandler }) => {
+const AdminProgramGameItem = ({
+  item,
+  openMissionPopupHandler,
+  loadGameList,
+}) => {
   const [viewDetail, setViewDetail] = useState(false);
   const [missionList, setMissionList] = useState(null);
+
   const viewDetailHandler = () => {
     setViewDetail(!viewDetail);
+  };
+
+  const onDeleteHandler = (e) => {
+    e.stopPropagation();
+    axios
+      .post(`${process.env.REACT_APP_BASEURL}/game/deletegame`, {
+        idx: item.idx,
+      })
+      .then((response) => {
+        if (response.data === "success") {
+          window.alert("삭제가 완료되었습니다.");
+          loadGameList();
+        } else {
+          window.alert("에러가 발생했습니다. 새로고침 후에 다시 시도해주세요");
+        }
+      })
+      .catch((err) => console.error(err));
   };
 
   useEffect(() => {
@@ -35,7 +57,10 @@ const AdminProgramGameItem = ({ item, openMissionPopupHandler }) => {
         >
           <i className={`${styles.add_button_icon} fas fa-plus`}></i>
         </button>
-        <button className={styles.delete_mission_button}>
+        <button
+          className={styles.delete_mission_button}
+          onClick={onDeleteHandler}
+        >
           <i className={`${styles.delete_button_icon} fas fa-times`}></i>
         </button>
       </div>

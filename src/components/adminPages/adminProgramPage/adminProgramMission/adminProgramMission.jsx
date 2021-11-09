@@ -99,6 +99,7 @@ const AdminProgramMission = ({ user }) => {
               key={item.idx}
               item={item}
               openMissionPopupHandler={openMissionPopupHandler}
+              loadGameList={loadGameList}
             />
           ))}
       </section>
