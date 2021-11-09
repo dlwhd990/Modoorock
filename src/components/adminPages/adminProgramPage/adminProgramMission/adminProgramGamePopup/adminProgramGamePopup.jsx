@@ -8,7 +8,6 @@ const AdminProgramGamePopup = ({
   attractionInfo,
   loadGameList,
 }) => {
-  console.log(path);
   const [password, setPassword] = useState("");
 
   const passwordChangeHandler = (e) => {

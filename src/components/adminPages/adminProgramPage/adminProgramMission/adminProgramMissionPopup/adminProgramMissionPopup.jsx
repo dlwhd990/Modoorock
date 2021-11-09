@@ -11,7 +11,8 @@ import AdminProgramMissionUploadVideo from "../adminProgramMissionUploadForm/adm
 import styles from "./adminProgramMissionPopup.module.css";
 
 const AdminProgramMissionPopup = ({
-  getMissionList,
+  loadMissionList,
+  setMissionLoaderHandler,
   closeMissionPopupHandler,
   user,
   gameIdx,
@@ -71,7 +72,8 @@ const AdminProgramMissionPopup = ({
           closeMissionPopupHandler={closeMissionPopupHandler}
           user={user}
           gameIdx={gameIdx}
-          getMissionList={getMissionList}
+          loadMissionList={loadMissionList}
+          setMissionLoaderHandler={setMissionLoaderHandler}
         />
       )}
       {type === "4지선다" && (

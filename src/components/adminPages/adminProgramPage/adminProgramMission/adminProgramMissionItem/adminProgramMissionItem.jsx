@@ -4,7 +4,7 @@ import styles from "./adminProgramMissionItem.module.css";
 
 // 미션도 디테일 보는것이 필요?
 // mission_type_and_name = 임시
-const AdminProgramMissionItem = ({ item }) => {
+const AdminProgramMissionItem = ({ item, setMissionLoaderHandler }) => {
   const [data, setData] = useState(null);
   const [typeName, setTypeName] = useState(null);
 
@@ -24,6 +24,7 @@ const AdminProgramMissionItem = ({ item }) => {
       })
       .then((response) => {
         if (response.data === "success") {
+          setMissionLoaderHandler();
           window.alert("삭제되었습니다.");
         } else {
           window.alert("에러가 발생했습니다. 새로고침 후에 다시 시도해주세요");

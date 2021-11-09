@@ -13,6 +13,7 @@ const AdminProgramMission = ({ user }) => {
   const [gameList, setGameList] = useState(null);
   const [gamePopupOn, setGamePopupOn] = useState(false);
   const [missionPopupOn, setMissionPopupOn] = useState(false);
+  const [missionLoader, setMissionLoader] = useState(false);
 
   const loadAttractionInfo = () => {
     axios
@@ -30,6 +31,21 @@ const AdminProgramMission = ({ user }) => {
       })
       .then((response) => setGameList(response.data.reverse()))
       .catch((err) => console.error(err));
+  };
+
+  const loadMissionList = (gameIdx, setting) => {
+    axios
+      .post(`${process.env.REACT_APP_BASEURL}/mission/getmissionlist`, {
+        gameIdx,
+      })
+      .then((response) => {
+        setting && setting(response.data);
+      })
+      .catch((err) => console.error(err));
+  };
+
+  const setMissionLoaderHandler = () => {
+    setMissionLoader(!missionLoader);
   };
 
   const openGamePopupHandler = () => {
@@ -100,6 +116,9 @@ const AdminProgramMission = ({ user }) => {
               item={item}
               openMissionPopupHandler={openMissionPopupHandler}
               loadGameList={loadGameList}
+              loadMissionList={loadMissionList}
+              missionLoader={missionLoader}
+              setMissionLoaderHandler={setMissionLoaderHandler}
             />
           ))}
       </section>
@@ -118,6 +137,8 @@ const AdminProgramMission = ({ user }) => {
           <AdminProgramMissionPopup
             closeMissionPopupHandler={closeMissionPopupHandler}
             user={user}
+            loadMissionList={loadMissionList}
+            setMissionLoaderHandler={setMissionLoaderHandler}
             gameIdx={missionPopupOn}
           />
         </section>

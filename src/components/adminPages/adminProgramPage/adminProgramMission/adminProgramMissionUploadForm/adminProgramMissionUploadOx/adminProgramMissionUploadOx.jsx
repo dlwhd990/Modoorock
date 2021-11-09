@@ -3,7 +3,8 @@ import React, { useState } from "react";
 import styles from "./adminProgramMissionUploadOx.module.css";
 
 const AdminProgramMissionUploadOx = ({
-  getMissionList,
+  loadMissionList,
+  setMissionLoaderHandler,
   closeMissionPopupHandler,
   user,
   gameIdx,
@@ -65,7 +66,9 @@ const AdminProgramMissionUploadOx = ({
           .then((response) => {
             if (response.data === "success") {
               window.alert("미션 업로드에 성공했습니다.");
+              loadMissionList();
               closeMissionPopupHandler();
+              setMissionLoaderHandler();
               return;
             }
             window.alert(

@@ -7,6 +7,9 @@ const AdminProgramGameItem = ({
   item,
   openMissionPopupHandler,
   loadGameList,
+  loadMissionList,
+  missionLoader,
+  setMissionLoaderHandler,
 }) => {
   const [viewDetail, setViewDetail] = useState(false);
   const [missionList, setMissionList] = useState(null);
@@ -32,18 +35,13 @@ const AdminProgramGameItem = ({
       .catch((err) => console.error(err));
   };
 
-  useEffect(() => {
-    const getMissionList = () => {
-      axios
-        .post(`${process.env.REACT_APP_BASEURL}/mission/getmissionlist`, {
-          gameIdx: item.idx,
-        })
-        .then((response) => setMissionList(response.data))
-        .catch((err) => console.error(err));
-    };
+  const setMissionListHandler = (data) => {
+    setMissionList(data);
+  };
 
-    getMissionList();
-  }, []);
+  useEffect(() => {
+    loadMissionList(item.idx, setMissionListHandler);
+  }, [missionLoader]);
 
   return (
     <div className={styles.game_item}>
@@ -68,7 +66,11 @@ const AdminProgramGameItem = ({
         <div className={styles.detail}>
           {missionList &&
             missionList.map((item) => (
-              <AdminProgramMissionItem key={item.idx} item={item} />
+              <AdminProgramMissionItem
+                key={item.idx}
+                item={item}
+                setMissionLoaderHandler={setMissionLoaderHandler}
+              />
             ))}
         </div>
       )}

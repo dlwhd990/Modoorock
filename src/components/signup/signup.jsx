@@ -87,7 +87,9 @@ const Signup = (props) => {
           window.alert("인증이 완료되었습니다.");
           setCheckedPhone(phone);
           setDisable(true);
+          return;
         }
+        window.alert("인증번호가 다릅니다.");
       });
   };
 
@@ -128,11 +130,12 @@ const Signup = (props) => {
       })
       .then((response) => {
         const resData = response.data;
-        console.log(resData);
-        if (resData === "duplicate") {
-          window.alert(
-            "아이디 또는 핸드폰 번호가 중복됩니다. 다른 아이디로 회원가입 해주세요"
-          ); //두개 나눌 수 있을 지
+        if (resData === "idDuplicate") {
+          window.alert("아이디가 중복됩니다.");
+          return;
+        }
+        if (resData === "phoneDuplicate") {
+          window.alert("이미 가입된 핸드폰 번호입니다.");
           return;
         }
 
