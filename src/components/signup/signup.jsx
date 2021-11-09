@@ -3,6 +3,7 @@ import styles from "./signup.module.css";
 import axios from "axios";
 
 const Signup = (props) => {
+  const [checkedId, setCheckedId] = useState(null);
   const [checkedPhone, setCheckedPhone] = useState(null);
   const [disable, setDisable] = useState(false);
   const [checkValues, setCheckValues] = useState({
@@ -39,6 +40,26 @@ const Signup = (props) => {
     });
   };
 
+  const idDupCheckHandler = () => {
+    if (id.length < 4 || id.length > 12) {
+      window.alert("아이디는 4~12자리로 입력해주세요");
+      return;
+    }
+    axios
+      .post(`${process.env.REACT_APP_BASEURL}/user/useridvalid`, {
+        id,
+      })
+      .then((response) => {
+        if (response.data === "OK") {
+          window.alert("사용 가능한 아이디입니다.");
+          setCheckedId(id);
+          return;
+        }
+        window.alert("이미 사용중인 아이디입니다.");
+      })
+      .catch((err) => console.error(err));
+  };
+
   const allAgreeHandler = (e) => {
     if (e.target.checked) {
       setCheckValues({
@@ -69,10 +90,21 @@ const Signup = (props) => {
       }
     }
     axios
-      .post(`${process.env.REACT_APP_BASEURL}/user/requestsms`, {
+      .post(`${process.env.REACT_APP_BASEURL}/user/userphonevalid`, {
         phone,
       })
-      .then((response) => window.alert("인증번호가 발송되었습니다."))
+      .then((response) => {
+        if (response.data !== "OK") {
+          window.alert("이미 사용중인 핸드폰 번호입니다.");
+          return;
+        }
+        axios
+          .post(`${process.env.REACT_APP_BASEURL}/user/requestsms`, {
+            phone,
+          })
+          .then((response) => window.alert("인증번호가 발송되었습니다."))
+          .catch((err) => console.error(err));
+      })
       .catch((err) => console.error(err));
   };
 
@@ -116,6 +148,14 @@ const Signup = (props) => {
       return;
     }
 
+    if (pw.length < 8 || pw.length > 16) {
+      window.alert("비밀번호는 8~16자리여야 합니다.");
+    }
+
+    if (!checkedId) {
+      window.alert("아이디 중복확인이 완료되지 않았습니다.");
+    }
+
     if (!checkedPhone) {
       window.alert("핸드폰 인증이 완료되지 않았습니다.");
       return;
@@ -123,24 +163,15 @@ const Signup = (props) => {
 
     axios
       .post(`${process.env.REACT_APP_BASEURL}/user/register`, {
-        id,
+        id: checkedId,
         password: pw,
         name,
         phone: checkedPhone,
       })
       .then((response) => {
         const resData = response.data;
-        if (resData === "idDuplicate") {
-          window.alert("아이디가 중복됩니다.");
-          return;
-        }
-        if (resData === "phoneDuplicate") {
-          window.alert("이미 가입된 핸드폰 번호입니다.");
-          return;
-        }
-
         if (resData === "success") {
-          window.alert("회원가입이 완료되었습니다. 로그인을 해주세요.");
+          window.alert("회원가입이 완료되었습니다.");
           window.location.href = "/";
         }
       })
@@ -161,10 +192,17 @@ const Signup = (props) => {
               onChange={inputValueChangeHandler}
               value={id}
               type="id"
-              className={`${styles.input} ${styles.id_input}`}
-              placeholder="아이디 (영문, 숫자 조합의 4~12자리)"
+              className={`${styles.input} ${styles.phone_num_input}`}
+              placeholder="아이디 (4~12자)"
               spellCheck="false"
             />
+            <button
+              type="button"
+              className={styles.get_auth_num_button}
+              onClick={idDupCheckHandler}
+            >
+              중복확인
+            </button>
           </div>
           <div className={styles.input_container}>
             <p className={styles.input_title}>비밀번호</p>
@@ -174,7 +212,7 @@ const Signup = (props) => {
               value={pw}
               type="password"
               className={`${styles.input} ${styles.password_input}`}
-              placeholder="비밀번호 (영문, 숫자, 특수문자 조합의 8~16자)"
+              placeholder="비밀번호 (8~16자)"
               spellCheck="false"
             />
           </div>

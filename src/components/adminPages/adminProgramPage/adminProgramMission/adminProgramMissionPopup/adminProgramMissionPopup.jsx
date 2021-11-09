@@ -65,6 +65,9 @@ const AdminProgramMissionPopup = ({
         <AdminProgramMissionUploadShort
           closeMissionPopupHandler={closeMissionPopupHandler}
           user={user}
+          gameIdx={gameIdx}
+          loadMissionList={loadMissionList}
+          setMissionLoaderHandler={setMissionLoaderHandler}
         />
       )}
       {type === "OX 퀴즈 미션" && (

@@ -286,6 +286,16 @@ const Header = ({ user, userLogout }) => {
           }`}
           onClick={onToggleHandler}
         >
+          <div
+            className={styles.profile_container}
+            onClick={() => {
+              history.push("/mypage/main");
+              window.scrollTo({ top: 0 });
+            }}
+          >
+            <i className={`${styles.user_icon} far fa-user`}></i>
+            <span className={styles.signup}>마이페이지</span>
+          </div>
           <span
             className={styles.logout}
             onClick={() => {
@@ -294,15 +304,6 @@ const Header = ({ user, userLogout }) => {
           >
             로그아웃
           </span>
-          <div
-            className={styles.profile_container}
-            onClick={() => {
-              history.push("/mypage/main");
-              window.scrollTo({ top: 0 });
-            }}
-          >
-            <span className={styles.signup}>{`${user.id}님`}</span>
-          </div>
         </div>
       ) : (
         <div

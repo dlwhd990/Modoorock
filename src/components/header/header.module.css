@@ -115,11 +115,17 @@
   flex-direction: row;
   align-items: center;
   cursor: pointer;
+  margin-right: 50px;
+}
+
+.user_icon {
+  margin-right: 6px;
+  font-size: 18px;
 }
 
 .logout {
   white-space: nowrap;
-  margin-right: 50px;
+
   cursor: pointer;
 }
 
