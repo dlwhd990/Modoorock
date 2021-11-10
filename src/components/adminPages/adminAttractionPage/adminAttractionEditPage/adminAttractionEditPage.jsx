@@ -1,10 +1,12 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router";
-import styles from "./adminAttractionUploadPage.module.css";
+import { useHistory, useParams } from "react-router";
+import styles from "./adminAttractionEditPage.module.css";
 
-const AdminAttractionUploadPage = ({ user, backgroundList }) => {
+const AdminAttractionEditPage = ({ user, backgroundList }) => {
   const history = useHistory();
+  const params = useParams();
+  const [item, setItem] = useState(null);
   const [previewImage, setPreviewImage] = useState(null);
   const [name, setName] = useState("");
   const [content, setContent] = useState("");
@@ -18,6 +20,23 @@ const AdminAttractionUploadPage = ({ user, backgroundList }) => {
   const [gameBackground, setGameBackground] = useState(null);
   const [tmpMainBackground, setTmpMainBackground] = useState(null);
   const [tmpGameBackground, setTmpGameBackground] = useState(null);
+  const buttonNameList = [
+    "",
+    "게임시작",
+    "게임설명",
+    "랭킹보기",
+    "지도",
+    "홈페이지",
+  ];
+
+  const getOriginalData = () => {
+    axios
+      .post(`${process.env.REACT_APP_BASEURL}/attraction/getattractioninfo`, {
+        idx: parseInt(params.path_three),
+      })
+      .then((response) => setItem(response.data))
+      .catch((err) => console.error(err));
+  };
 
   const onFileInputChangeHandler = (e) => {
     let reader = new FileReader();
@@ -33,11 +52,31 @@ const AdminAttractionUploadPage = ({ user, backgroundList }) => {
 
   const insertAttraction = (userData) => {
     const formData = new FormData();
+    //json으로 보내기 테스트
+    //if (previewImage.file === "") {
+    //  axios
+    //    .post(`${process.env.REACT_APP_BASEURL}/attraction/updateattraction`, {
+    //      name,
+    //      area,
+    //      content,
+    //      userIdx: userData.idx,
+    //      photo: item.photo,
+    //      mainPhoto: mainBackground,
+    //      gamePhoto: gameBackground,
+    //      menuOrderList: nowTemplateButtonOrder,
+    //    })
+    //    .then((response) => console.log(response));
+    //  return;
+    //}
     formData.append("name", name);
     formData.append("area", area);
     formData.append("content", content);
     formData.append("userIdx", userData.idx);
-    formData.append("files", previewImage.file);
+    if (previewImage.file !== "") {
+      formData.append("files", previewImage.file);
+    } else {
+      formData.append("photo", item.photo);
+    }
     formData.append("mainPhoto", mainBackground);
     formData.append("gamePhoto", gameBackground);
     nowTemplateButtonOrder.forEach((item) => {
@@ -46,7 +85,7 @@ const AdminAttractionUploadPage = ({ user, backgroundList }) => {
 
     axios
       .post(
-        `${process.env.REACT_APP_BASEURL}/attraction/insertattraction`,
+        `${process.env.REACT_APP_BASEURL}/attraction/updateattraction`,
         formData
       )
       .then((res) => {
@@ -189,7 +228,6 @@ const AdminAttractionUploadPage = ({ user, backgroundList }) => {
       }
     }
     templatePopupHandler();
-    console.log(nowTemplateButtonOrder);
     setNowTemplateButtonOrder([...nowTemplateButtonOrder, { idx, name }]);
   };
 
@@ -224,8 +262,31 @@ const AdminAttractionUploadPage = ({ user, backgroundList }) => {
   };
 
   useEffect(() => {
+    getOriginalData();
     makeBackgroundNameList();
   }, []);
+
+  useEffect(() => {
+    if (!item) {
+      return;
+    }
+    setName(item.name);
+    setArea(item.area);
+    setContent(item.content);
+    setPreviewImage({
+      file: "",
+      previewURL: `${process.env.REACT_APP_BASEURL}-images/Attraction/${item.photo}`,
+    });
+    setMainBackground(item.mainPhoto);
+    setGameBackground(item.gamePhoto);
+    const tmp = item.menuOrder.split("#");
+    const result = [];
+    tmp.forEach((item) => {
+      result.push({ idx: item, name: buttonNameList[item] });
+    });
+    console.log(result);
+    setNowTemplateButtonOrder(result);
+  }, [item]);
 
   return (
     <section className={styles.attraction_upload_page}>
@@ -234,13 +295,16 @@ const AdminAttractionUploadPage = ({ user, backgroundList }) => {
           <div className={styles.icon_container_one}>
             <i className={`${styles.head_icon} fas fa-map-marker-alt`}></i>
           </div>
-          <p className={styles.title}>관광지 추가</p>
+          <p className={styles.title}>관광지 수정</p>
         </div>
       </section>
       <section className={styles.main}>
         <h1 className={styles.section_title}>관광지 정보 입력</h1>
         <div className={styles.main_container}>
           <form className={styles.main_form}>
+            <p className={styles.form_sub_text}>
+              이미지를 업로드 하지 않으면 기존의 이미지로 유지됩니다.
+            </p>
             <div className={styles.form_content}>
               <p className={styles.form_text}>관광지 이미지</p>
               <input
@@ -256,6 +320,7 @@ const AdminAttractionUploadPage = ({ user, backgroundList }) => {
                 type="text"
                 className={styles.form_input}
                 onChange={nameChangeHandler}
+                value={name}
                 spellCheck="false"
                 placeholder="관광지 명"
               />
@@ -265,6 +330,7 @@ const AdminAttractionUploadPage = ({ user, backgroundList }) => {
               <select
                 name="area"
                 id="area"
+                value={area}
                 className={styles.area_select}
                 onChange={areaChangeHandler}
               >
@@ -290,6 +356,7 @@ const AdminAttractionUploadPage = ({ user, backgroundList }) => {
             <div className={styles.form_content_textarea}>
               <p className={styles.form_text}>관광지 소개</p>
               <textarea
+                value={content}
                 name="content"
                 id="content"
                 className={styles.form_textarea}
@@ -326,6 +393,9 @@ const AdminAttractionUploadPage = ({ user, backgroundList }) => {
       </section>
       <section className={styles.template_setting_container}>
         <h1 className={styles.section_title}>템플릿 등록</h1>
+        <p className={styles.form_sub_text}>
+          이미지를 업로드 하지 않으면 기존의 이미지로 유지됩니다.
+        </p>
         <div className={styles.form_content}>
           <p className={styles.form_text}>버튼 추가</p>
           <div className={styles.template_input_container}>
@@ -552,4 +622,4 @@ const AdminAttractionUploadPage = ({ user, backgroundList }) => {
   );
 };
 
-export default AdminAttractionUploadPage;
+export default AdminAttractionEditPage;

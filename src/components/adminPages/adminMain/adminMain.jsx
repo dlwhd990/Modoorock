@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router";
 import LoadingPage from "../../loadingPage/loadingPage";
+import AdminAttractionEditPage from "../adminAttractionPage/adminAttractionEditPage/adminAttractionEditPage";
 import AdminAttractionPage from "../adminAttractionPage/adminAttractionPage";
 import AdminAttractionUploadPage from "../adminAttractionPage/adminAttractionUploadPage/adminAttractionUploadPage";
 import AdminFirstPage from "../adminFirstPage/adminFirstPage";
@@ -199,6 +200,16 @@ const AdminMain = ({ userLogout }) => {
               {params.path_four && params.path_four === "add" && (
                 <AdminProgramUploadPage user={user} />
               )}
+              {!params.path_four &&
+                params.path_three &&
+                params.path_two === "edit" &&
+                params.path === "attraction" &&
+                backgroundList && (
+                  <AdminAttractionEditPage
+                    user={user}
+                    backgroundList={backgroundList}
+                  />
+                )}
               {!params.path_four &&
                 params.path_three &&
                 params.path_two === "view" &&

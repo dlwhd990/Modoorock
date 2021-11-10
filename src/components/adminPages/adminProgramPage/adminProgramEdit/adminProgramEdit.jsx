@@ -15,22 +15,32 @@ const AdminProgramEdit = (props) => {
   const [item, setItem] = useState(null);
   const history = useHistory();
   const params = useParams();
-  const titleRef = useRef();
-  const priceRef = useRef();
-  const themeRef = useRef();
-  const contentRef = useRef();
+  const [inputValues, setInputValues] = useState({
+    title: "",
+    price: "",
+    theme: "",
+    content: "",
+    detailContent: "",
+  });
+
+  const { title, price, theme, content, detailContent } = inputValues;
+
   const countInputRef = useRef();
   const [previewImage, setPreviewImage] = useState(null);
   const [subImages, setSubImages] = useState(null);
-  const [name, setName] = useState("");
-  const [content, setContent] = useState("");
-  const [theme, setTheme] = useState("");
-  const [price, setPrice] = useState("");
   const [startDate, setStartDate] = useState(new Date());
   const [time, setTime] = useState("");
   const [count, setCount] = useState("");
   const [dateDataList, setDateDataList] = useState([]);
   const [attractionInfo, setAttractionInfo] = useState(null);
+
+  const inputValueChangeHandler = (e) => {
+    const { name, value } = e.target;
+    setInputValues({
+      ...inputValues,
+      [name]: value,
+    });
+  };
 
   const loadAttractionInfo = () => {
     axios
@@ -38,6 +48,18 @@ const AdminProgramEdit = (props) => {
         idx: parseInt(params.path_three),
       })
       .then((response) => setAttractionInfo(response.data))
+      .catch((err) => console.error(err));
+  };
+
+  const loadTimeTableList = () => {
+    axios
+      .post(
+        `${process.env.REACT_APP_BASEURL}/exptimetable/getexptimetablelist`,
+        {
+          expIdx: parseInt(params.path_five),
+        }
+      )
+      .then((response) => setDateDataList(response.data))
       .catch((err) => console.error(err));
   };
 
@@ -86,25 +108,24 @@ const AdminProgramEdit = (props) => {
   ));
 
   const insertProgramHandler = (userIdx) => {
-    const title = titleRef.current.value;
-    const price = priceRef.current.value;
-    const content = contentRef.current.value;
-    const theme = themeRef.current.value;
-    const files = [...subImages, previewImage.file];
-
     const formData = new FormData();
     formData.append("userIdx", userIdx);
     formData.append("attractionIdx", params.path_three);
     formData.append("title", title);
     formData.append("price", price);
     formData.append("content", content);
+    formData.append("detailContent", content);
     formData.append("theme", theme);
-    files.forEach((file) => {
-      formData.append("files", file);
-    });
+    subImages &&
+      subImages.forEach((file) => {
+        formData.append("files", file);
+      });
+    previewImage.file !== ""
+      ? formData.append("files", previewImage.file)
+      : formData.append("photo", item.photo);
 
     axios
-      .post(`${process.env.REACT_APP_BASEURL}/exp/insertexp`, formData)
+      .post(`${process.env.REACT_APP_BASEURL}/exp/modifyexp`, formData)
       .then((response) => {
         if (response.data === "success") {
           window.alert("성공적으로 업로드되었습니다.");
@@ -118,13 +139,7 @@ const AdminProgramEdit = (props) => {
 
   const submitButtonHandler = (e) => {
     e.preventDefault();
-    const title = titleRef.current.value;
-    const price = priceRef.current.value;
-    const content = contentRef.current.value;
-    const theme = themeRef.current.value;
-    const files = subImages &&
-      previewImage && [...subImages, previewImage.file];
-    if (!title || !price || !content || !theme || !files || files.length < 4) {
+    if (!title || !price || !content || !theme) {
       window.alert("모든 정보를 입력해주세요");
       return;
     }
@@ -142,34 +157,6 @@ const AdminProgramEdit = (props) => {
       });
   };
 
-  const nameChangeHandler = (e) => {
-    setName(e.target.value);
-  };
-
-  const themeChangeHandler = (e) => {
-    setTheme(e.target.value);
-  };
-
-  const contentChangeHandler = (e) => {
-    setContent(e.target.value);
-  };
-
-  const priceChangeHandler = (e) => {
-    if (isNaN(parseInt(e.target.value))) {
-      setPrice("");
-      return;
-    }
-    setPrice(parseInt(e.target.value).toLocaleString("ko-KR"));
-  };
-
-  const timeChangeHandler = (e) => {
-    setTime(e.target.value);
-  };
-
-  const countChangeHandler = (e) => {
-    setCount(e.target.value);
-  };
-
   const saveButtonClickHandler = () => {
     if (time === "") {
       window.alert("시간을 선택해주세요");
@@ -184,41 +171,54 @@ const AdminProgramEdit = (props) => {
       return;
     }
 
-    setDateDataList(() => {
-      const year = startDate.getFullYear();
-      let month = startDate.getMonth() + 1;
-      let date = startDate.getDate();
+    const year = startDate.getFullYear();
+    let month = startDate.getMonth() + 1;
+    let date = startDate.getDate();
 
-      if (month < 10) {
-        month = "0" + month.toString();
-      }
+    if (month < 10) {
+      month = "0" + month.toString();
+    }
 
-      if (date < 10) {
-        date = "0" + date.toString();
-      }
+    if (date < 10) {
+      date = "0" + date.toString();
+    }
 
-      const selectedTime = `${year}-${month}-${date} ${time}`;
-      const listLength = dateDataList.length;
-      const newElement = {
-        idx: listLength === 0 ? 0 : dateDataList[listLength - 1].idx + 1,
-        time: selectedTime,
-        amount: parseInt(count),
-      };
-      const result = [...dateDataList, newElement];
-      countInputRef.current.value = "";
-      setCount("");
-      return result;
-    });
+    const selectedTime = `${year}-${month}-${date} ${time}`;
+
+    axios
+      .post(
+        `${process.env.REACT_APP_BASEURL}/exptimetable/insertexptimetable`,
+        {
+          expIdx: parseInt(params.path_five),
+          time: selectedTime,
+          amount: parseInt(count),
+        }
+      )
+      .then((response) => {
+        console.log(response);
+        loadTimeTableList();
+      });
+
+    countInputRef.current.value = "";
+    setCount("");
   };
 
   const deleteDateDataHandler = (e) => {
-    const result = [];
-
-    dateDataList.forEach((item) => {
-      parseInt(e.target.dataset.idx) !== item.idx && result.push(item);
-    });
+    const result = dateDataList.filter(
+      (item) => parseInt(e.target.dataset.idx) !== item.idx
+    );
     setDateDataList(result);
   };
+
+  const timeChangeHandler = (e) => {
+    setTime(e.target.value);
+  };
+
+  const countChangeHandler = (e) => {
+    setCount(e.target.value);
+  };
+
+  const timeTableUploadHandler = () => {};
 
   useEffect(() => {
     axios
@@ -245,21 +245,22 @@ const AdminProgramEdit = (props) => {
             const mainImage = imageList.filter((item) =>
               item.includes("_main")
             );
-
+            console.log(data);
             setItem(data);
-            setName(data.title);
-            setPrice(data.price);
-            setTheme(data.theme);
-            setContent(data.content);
+            const { title, price, theme, content, detailContent } = data;
+            setInputValues({
+              title,
+              price,
+              theme,
+              content,
+              detailContent,
+            });
             setPreviewImage({
-              file: null,
+              file: "",
               previewURL: `${process.env.REACT_APP_BASEURL}-images/Exp/${mainImage}`,
             });
-            titleRef.current && (titleRef.current.value = data.title);
-            priceRef.current && (priceRef.current.value = data.price);
-            contentRef.current && (contentRef.current.value = data.content);
-            themeRef.current && (themeRef.current.value = data.theme);
           });
+        loadTimeTableList();
       })
       .catch((err) => console.error(err));
   }, []);
@@ -281,6 +282,15 @@ const AdminProgramEdit = (props) => {
         <h1 className={styles.section_title}>체험상품 정보 입력</h1>
         <section className={styles.main_container}>
           <form className={styles.main_form}>
+            <p className={styles.form_sub_text}>
+              이미지를 업로드 하지 않으면 기존의 이미지로 유지됩니다.
+            </p>
+            <p className={styles.form_sub_text}>
+              주의) 서브 이미지 중 일부만 변경을 원할 경우에도
+            </p>
+            <div className={styles.form_sub_text}>
+              3장의 사진을 함께 업로드해야 합니다.
+            </div>
             <div className={styles.form_content}>
               <p className={styles.form_text}>메인 이미지</p>
               <input
@@ -303,10 +313,11 @@ const AdminProgramEdit = (props) => {
             <div className={styles.form_content}>
               <p className={styles.form_text}>체험상품 명</p>
               <input
-                ref={titleRef}
+                name="title"
+                onChange={inputValueChangeHandler}
+                value={title}
                 type="text"
                 className={styles.form_input}
-                onChange={nameChangeHandler}
                 spellCheck="false"
                 placeholder="체험상품 명"
               />
@@ -314,10 +325,11 @@ const AdminProgramEdit = (props) => {
             <div className={styles.form_content}>
               <p className={styles.form_text}>체험상품 가격</p>
               <input
-                ref={priceRef}
+                name="price"
+                onChange={inputValueChangeHandler}
+                value={price}
                 type="text"
                 className={styles.form_input}
-                onChange={priceChangeHandler}
                 spellCheck="false"
                 placeholder="체험상품 가격 (숫자만으로 입력)"
               />
@@ -325,11 +337,11 @@ const AdminProgramEdit = (props) => {
             <div className={styles.form_content}>
               <p className={styles.form_text}>체험상품 테마</p>
               <select
-                ref={themeRef}
                 name="theme"
+                onChange={inputValueChangeHandler}
+                value={theme}
                 id="theme"
                 className={styles.theme_select}
-                onChange={themeChangeHandler}
               >
                 <option value="">테마선택</option>
                 <option value="농촌체험">농촌체험</option>
@@ -343,21 +355,14 @@ const AdminProgramEdit = (props) => {
             <div className={styles.form_content_textarea}>
               <p className={styles.form_text}>상품 소개</p>
               <textarea
-                ref={contentRef}
                 name="content"
-                id="content"
+                onChange={inputValueChangeHandler}
+                value={content}
                 className={styles.form_textarea}
-                onChange={contentChangeHandler}
                 spellCheck="false"
                 placeholder="상품 소개"
               ></textarea>
             </div>
-            <button
-              className={styles.submit_button}
-              onClick={submitButtonHandler}
-            >
-              업로드
-            </button>
           </form>
           <section className={styles.image_preview_container}>
             <p className={styles.image_preview_title}>미리보기</p>
@@ -374,7 +379,7 @@ const AdminProgramEdit = (props) => {
               </div>
               <div className={styles.text_container}>
                 <div className={styles.name_container}>
-                  <p className={styles.name}>{name}</p>
+                  <p className={styles.name}>{title}</p>
                 </div>
 
                 <div className={styles.desc_container}>
@@ -399,6 +404,23 @@ const AdminProgramEdit = (props) => {
             </section>
           </section>
         </section>
+        <div className={styles.detail_content_container}>
+          <p className={styles.detail_content_text}>상품 상세 소개</p>
+          <textarea
+            name="detailContent"
+            onChange={inputValueChangeHandler}
+            value={detailContent}
+            className={styles.detail_content}
+            spellCheck="false"
+            placeholder="자세한 설명 및 주의사항을 적어주세요"
+          ></textarea>
+          <button
+            className={styles.submit_button}
+            onClick={submitButtonHandler}
+          >
+            업로드
+          </button>
+        </div>
       </section>
       <section className={styles.date_select_section}>
         <h1 className={styles.section_title}>일정 및 수량 입력</h1>

@@ -479,6 +479,11 @@
 
 .background_selected {
   border: 2px solid var(--color-light-blue);
+  color: var(--color-desc);
+}
+
+.form_sub_text {
+  font-size: var(--font-size-small);
 }
 
 @keyframes appear {

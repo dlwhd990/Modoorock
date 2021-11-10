@@ -9,6 +9,11 @@ const AdminAttractionItem = ({ item }) => {
     history.push(`/admin/attraction/view/${item.idx}`);
   };
 
+  const onEditButtonHandler = (e) => {
+    e.stopPropagation();
+    history.push(`/admin/attraction/edit/${item.idx}`);
+  };
+
   return (
     <div className={styles.item} onClick={itemClickHandler}>
       <div className={styles.main}>
@@ -26,7 +31,7 @@ const AdminAttractionItem = ({ item }) => {
       </div>
 
       <div className={styles.button_container}>
-        <div className={styles.button_edit}>
+        <div className={styles.button_edit} onClick={onEditButtonHandler}>
           <div className={styles.button_head}>
             <i className={`${styles.edit_icon} far fa-edit`}></i>
           </div>

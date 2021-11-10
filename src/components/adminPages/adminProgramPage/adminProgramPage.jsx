@@ -74,6 +74,7 @@ const AdminProgramPage = (props) => {
               key={item.idx}
               item={item}
               attractionIdx={path_three}
+              loadProgramList={loadProgramList}
             />
           ))}
       </section>
