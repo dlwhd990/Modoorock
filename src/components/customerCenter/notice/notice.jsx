@@ -7,6 +7,7 @@ import axios from "axios";
 const Notice = ({ articles, getNoticeList }) => {
   const history = useHistory();
   const searchInputRef = useRef();
+  const [searchInput, setSearchInput] = useState("");
   const [pageList, setPageList] = useState([]);
   const [listList, setListList] = useState([]);
   const [numbering, setNumbering] = useState(1);
@@ -72,22 +73,26 @@ const Notice = ({ articles, getNoticeList }) => {
       .catch((err) => console.error(err));
   };
 
+  const searchInputChangeHandler = (e) => {
+    console.log(e.target.value);
+    setSearchInput(e.target.value);
+  };
+
   const onSearchHandler = () => {
-    if (!searchInputRef.current) {
+    if (searchInput === "") {
       window.alert("검색어를 입력해주세요");
       return;
     }
-    const query = searchInputRef.current.value;
-    if (query === "") {
+
+    if (searchInput === "") {
       window.alert("검색어를 입력하세요");
       return;
-    } else if (query === "?" || query === "#") {
+    } else if (searchInput === "?" || searchInput === "#") {
       window.alert("?, #는 검색할 수 없습니다.");
       return;
     }
-    searchInputRef.current.value = "";
-    history.push(`/customer/notice/search/${query}`); //수정예정
-    window.scrollTo({ top: 0 });
+
+    history.push(`/customer/notice/search/${searchInput}`);
     getNoticeList();
   };
 
@@ -133,6 +138,7 @@ const Notice = ({ articles, getNoticeList }) => {
       <section className={styles.top}>
         <section className={styles.search}>
           <input
+            onChange={searchInputChangeHandler}
             ref={searchInputRef}
             type="text"
             className={styles.search_text_input}
@@ -167,19 +173,20 @@ const Notice = ({ articles, getNoticeList }) => {
               <i className="fas fa-chevron-left"></i>
             </li>
           )}
-          {sliceList.map((num) => (
-            <li
-              key={num}
-              className={
-                numbering === num
-                  ? `${styles.page_number} ${styles.page_on}`
-                  : `${styles.page_number} ${styles.page_off}`
-              }
-              onClick={pageNumberClick}
-            >
-              {num}
-            </li>
-          ))}
+          {sliceList &&
+            sliceList.map((num) => (
+              <li
+                key={num}
+                className={
+                  numbering === num
+                    ? `${styles.page_number} ${styles.page_on}`
+                    : `${styles.page_number} ${styles.page_off}`
+                }
+                onClick={pageNumberClick}
+              >
+                {num}
+              </li>
+            ))}
           {listList.length > 5 && (
             <li className={styles.arrow} onClick={moveBackward}>
               <i className="fas fa-chevron-right"></i>
