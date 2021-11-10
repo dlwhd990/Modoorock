@@ -434,6 +434,11 @@
   font-size: var(--font-size-mini-title);
   color: var(--color-desc);
   cursor: pointer;
+  transition: 150ms all ease-in;
+}
+
+.template_button_icon:hover {
+  color: red;
 }
 
 .template_preview_container {

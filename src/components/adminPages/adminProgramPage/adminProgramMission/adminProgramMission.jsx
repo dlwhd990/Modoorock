@@ -38,10 +38,7 @@ const AdminProgramMission = ({ user }) => {
       .post(`${process.env.REACT_APP_BASEURL}/mission/getmissionlist`, {
         gameIdx,
       })
-      .then((response) => {
-        console.log(response.data);
-        setting && setting(response.data);
-      })
+      .then((response) => setting && setting(response.data))
       .catch((err) => console.error(err));
   };
 

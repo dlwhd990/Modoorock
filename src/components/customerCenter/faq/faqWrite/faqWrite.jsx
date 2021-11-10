@@ -43,7 +43,6 @@ const FaqWrite = () => {
             content,
           })
           .then((response) => {
-            console.log(response);
             history.push("/customer/faq");
             window.scrollTo({ top: 0 });
           })

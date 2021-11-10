@@ -57,7 +57,6 @@ const AdminProgramEdit = (props) => {
         file: newFile,
         previewURL: reader.result,
       });
-      console.log(newFile, reader.result);
     };
     file && reader.readAsDataURL(file);
   };
@@ -78,11 +77,6 @@ const AdminProgramEdit = (props) => {
     setSubImages(result);
     readFile(0);
   };
-
-  useEffect(() => {
-    console.log(subImages);
-    console.log(previewImage);
-  }, [subImages, previewImage]);
 
   //date picker custom input
   const ExampleCustomInput = forwardRef(({ value, onClick }, ref) => (
@@ -108,10 +102,6 @@ const AdminProgramEdit = (props) => {
     files.forEach((file) => {
       formData.append("files", file);
     });
-
-    for (let value of formData.values()) {
-      console.log(value);
-    }
 
     axios
       .post(`${process.env.REACT_APP_BASEURL}/exp/insertexp`, formData)
@@ -141,7 +131,6 @@ const AdminProgramEdit = (props) => {
     axios
       .post(`${process.env.REACT_APP_BASEURL}/user/session`)
       .then((response) => {
-        console.log(response.data);
         if (response.data === "") {
           window.alert("로그인 후에 사용해주세요");
         } else if (response.data.idType !== 1) {
@@ -216,7 +205,6 @@ const AdminProgramEdit = (props) => {
         amount: parseInt(count),
       };
       const result = [...dateDataList, newElement];
-      console.log(result);
       countInputRef.current.value = "";
       setCount("");
       return result;
@@ -230,7 +218,6 @@ const AdminProgramEdit = (props) => {
       parseInt(e.target.dataset.idx) !== item.idx && result.push(item);
     });
     setDateDataList(result);
-    console.log(result);
   };
 
   useEffect(() => {

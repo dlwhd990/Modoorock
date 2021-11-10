@@ -71,7 +71,7 @@ const Header = ({ user, userLogout }) => {
 
       <div className={styles.logo_container}>
         <img
-          src="/Modoorock/images/logo_dark.png"
+          src="/modoorock/images/logo_dark.png"
           alt="logo"
           className={styles.logo}
           onClick={() => {

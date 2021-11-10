@@ -1,6 +1,6 @@
 .find_id_form {
   width: 500px;
-  height: 350px;
+  height: 450px;
   border: 1px solid lightgray;
   border-radius: 8px;
   box-shadow: 5px 5px 10px lightgray;
@@ -17,7 +17,7 @@
 
 .phone_num_container {
   height: 30px;
-  margin: 70px 0;
+  margin: 150px 0 100px 0;
   display: flex;
   flex-direction: row;
   align-items: center;

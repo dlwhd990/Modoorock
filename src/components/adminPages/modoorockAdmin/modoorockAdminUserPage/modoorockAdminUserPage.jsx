@@ -3,7 +3,6 @@ import ModoorockAdminUserItem from "./modoorockAdminUserItem/modoorockAdminUserI
 import styles from "./modoorockAdminUserPage.module.css";
 
 const ModoorockAdminUserPage = ({ userList, loadUserList }) => {
-  console.log(userList);
   return (
     <section className={styles.user_page}>
       <div className={styles.main}>

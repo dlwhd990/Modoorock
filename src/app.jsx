@@ -269,7 +269,7 @@ const App = (props) => {
   // 방법 찾을 때  까지 header+footer 모두에게 붙임 (admin 페이지에서는 안떠야하기 때문에)
   return (
     <section className={styles.app}>
-      <BrowserRouter basename={process.env.PUBLIC_URL}>
+      <BrowserRouter>
         <Route exact path="/">
           <Header user={user} userLogout={userLogout} />
           <Mainpage

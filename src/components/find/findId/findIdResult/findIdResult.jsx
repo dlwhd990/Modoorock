@@ -15,7 +15,6 @@ const FindIdResult = (props) => {
         phone,
       })
       .then((response) => {
-        console.log(response.data);
         if (response.data !== "IDNOTFOUND") {
           setResultId(response.data);
         } else {

@@ -10,7 +10,6 @@ const ModoorockAdminBackgroundUploadPage = (props) => {
     let file = e.target.files[0];
     reader.onloadend = () => {
       setBackground(file);
-      console.log(file);
     };
     file && reader.readAsDataURL(file);
   };

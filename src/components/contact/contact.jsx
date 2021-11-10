@@ -70,7 +70,7 @@ const Contact = (props) => {
         <div className={styles.office_info_container}>
           <div className={styles.office_image_container}>
             <img
-              src="/Modoorock/images/office.jpeg"
+              src="/modoorock/images/office.jpeg"
               alt="office"
               className={styles.office_image}
             />

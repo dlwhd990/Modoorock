@@ -46,7 +46,6 @@ const AdminProgramMissionUploadTopper = ({
         file: newFile,
         previewURL: reader.result,
       });
-      console.log(newFile, reader.result);
     };
     file && reader.readAsDataURL(file);
   };

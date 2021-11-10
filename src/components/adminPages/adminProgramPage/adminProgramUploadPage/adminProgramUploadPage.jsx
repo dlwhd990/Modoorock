@@ -59,7 +59,6 @@ const AdminProgramUploadPage = ({ user }) => {
         file: newFile,
         previewURL: reader.result,
       });
-      console.log(newFile, reader.result);
     };
     file && reader.readAsDataURL(file);
   };
@@ -81,11 +80,6 @@ const AdminProgramUploadPage = ({ user }) => {
     readFile(0);
   };
 
-  useEffect(() => {
-    console.log(subImages);
-    console.log(previewImage);
-  }, [subImages, previewImage]);
-
   const insertProgramHandler = (userIdx) => {
     const files = [...subImages, previewImage.file];
 
@@ -100,10 +94,6 @@ const AdminProgramUploadPage = ({ user }) => {
     files.forEach((file) => {
       formData.append("files", file);
     });
-
-    for (let value of formData.values()) {
-      console.log(value);
-    }
 
     axios
       .post(`${process.env.REACT_APP_BASEURL}/exp/insertexp`, formData)
@@ -141,7 +131,6 @@ const AdminProgramUploadPage = ({ user }) => {
     axios
       .post(`${process.env.REACT_APP_BASEURL}/user/session`)
       .then((response) => {
-        console.log(response.data);
         if (response.data === "") {
           window.alert("로그인 후에 사용해주세요");
         } else if (

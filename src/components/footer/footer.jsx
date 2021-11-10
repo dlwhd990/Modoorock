@@ -7,7 +7,7 @@ const Footer = (props) => {
       <div className={styles.company_information}>
         <div className={styles.logo_container}>
           <img
-            src="/Modoorock/images/logo_blue.png"
+            src="/modoorock/images/logo_blue.png"
             alt=""
             className={styles.logo}
           />

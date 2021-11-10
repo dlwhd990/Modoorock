@@ -33,7 +33,6 @@ const AdminAttractionUploadPage = ({ user, backgroundList }) => {
 
   const insertAttraction = (userData) => {
     const formData = new FormData();
-    console.log(previewImage.file);
     formData.append("name", name);
     formData.append("area", area);
     formData.append("content", content);
@@ -172,10 +171,22 @@ const AdminAttractionUploadPage = ({ user, backgroundList }) => {
   const templateButtonSelectHandler = (e) => {
     const idx = e.currentTarget.dataset.num;
     const name = e.currentTarget.innerText;
+
     if (!nowTemplateButtonOrder) {
       templatePopupHandler();
       setNowTemplateButtonOrder([{ idx, name }]);
       return;
+    }
+
+    if (nowTemplateButtonOrder.length === 5) {
+      window.alert("버튼은 5개까지 등록 가능합니다.");
+      return;
+    }
+    for (let i = 0; i < nowTemplateButtonOrder.length; i++) {
+      if (nowTemplateButtonOrder[i].idx === idx) {
+        window.alert("이미 존재하는 버튼은 다시 추가할 수 없습니다.");
+        return;
+      }
     }
     templatePopupHandler();
     setNowTemplateButtonOrder([...nowTemplateButtonOrder, { idx, name }]);
@@ -201,6 +212,14 @@ const AdminAttractionUploadPage = ({ user, backgroundList }) => {
   const saveMainBackground = () => {
     setMainBackground(tmpMainBackground);
     setMainBgPopupOn(false);
+  };
+
+  const buttonDeleteHandler = (e) => {
+    const result = [];
+    nowTemplateButtonOrder.forEach((item) => {
+      item.idx !== e.currentTarget.dataset.num && result.push(item);
+    });
+    setNowTemplateButtonOrder(result);
   };
 
   useEffect(() => {
@@ -351,7 +370,9 @@ const AdminAttractionUploadPage = ({ user, backgroundList }) => {
                 <p className={styles.button_order_setting_main_header_name}>
                   버튼명
                 </p>
-                <p className={styles.button_order_setting_main_header_edit}></p>
+                <p className={styles.button_order_setting_main_header_edit}>
+                  삭제
+                </p>
               </div>
               {nowTemplateButtonOrder &&
                 nowTemplateButtonOrder.map((item, index) => (
@@ -366,9 +387,11 @@ const AdminAttractionUploadPage = ({ user, backgroundList }) => {
                   >
                     <p className={styles.template_button_id}>{item.idx}</p>
                     <p className={styles.template_button_name}>{item.name}</p>
-                    <i
-                      className={`${styles.template_button_icon} fas fa-arrows-alt-v`}
-                    ></i>
+                    <div data-num={item.idx} onClick={buttonDeleteHandler}>
+                      <i
+                        className={`${styles.template_button_icon} fas fa-times`}
+                      ></i>
+                    </div>
                   </div>
                 ))}
             </section>

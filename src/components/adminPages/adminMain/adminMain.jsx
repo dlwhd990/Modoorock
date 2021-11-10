@@ -103,7 +103,7 @@ const AdminMain = ({ userLogout }) => {
               }}
             >
               <img
-                src="/Modoorock/images/modoorock.png"
+                src="/modoorock/images/modoorock.png"
                 alt="logo"
                 className={styles.logo}
               />

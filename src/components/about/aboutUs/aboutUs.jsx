@@ -45,12 +45,12 @@ const AboutUs = (props) => {
           <div className={styles.about_us_main}>
             <div className={styles.about_us_main_image_container}>
               <img
-                src="/Modoorock/images/about_us_main_image.png"
+                src="/modoorock/images/about_us_main_image.png"
                 alt="main_image"
                 className={styles.about_us_main_image}
               />
               <img
-                src="/Modoorock/images/about_middle_circle.png"
+                src="/modoorock/images/about_middle_circle.png"
                 alt=""
                 className={styles.about_us_main_circle}
               />
@@ -194,24 +194,24 @@ const AboutUs = (props) => {
               {" "}
               <div className={styles.about_us_partners_image_box}>
                 <img
-                  src="/Modoorock/images/about_partners_1.png"
+                  src="/modoorock/images/about_partners_1.png"
                   alt="partners_image"
                   className={styles.about_us_partners_image}
                 />
                 <img
-                  src="/Modoorock/images/about_partners_2.png"
+                  src="/modoorock/images/about_partners_2.png"
                   alt="partners_image"
                   className={styles.about_us_partners_image}
                 />
               </div>
               <div className={styles.about_us_partners_image_box}>
                 <img
-                  src="/Modoorock/images/about_partners_3.png"
+                  src="/modoorock/images/about_partners_3.png"
                   alt="partners_image"
                   className={styles.about_us_partners_image}
                 />
                 <img
-                  src="/Modoorock/images/about_partners_4.png"
+                  src="/modoorock/images/about_partners_4.png"
                   alt="partners_image"
                   className={styles.about_us_partners_image}
                 />
@@ -220,24 +220,24 @@ const AboutUs = (props) => {
             <div className={styles.about_us_partners_image_four_div}>
               <div className={styles.about_us_partners_image_box}>
                 <img
-                  src="/Modoorock/images/about_partners_5.png"
+                  src="/modoorock/images/about_partners_5.png"
                   alt="partners_image"
                   className={styles.about_us_partners_image}
                 />
                 <img
-                  src="/Modoorock/images/about_partners_6.png"
+                  src="/modoorock/images/about_partners_6.png"
                   alt="partners_image"
                   className={styles.about_us_partners_image}
                 />
               </div>
               <div className={styles.about_us_partners_image_box}>
                 <img
-                  src="/Modoorock/images/about_partners_7.png"
+                  src="/modoorock/images/about_partners_7.png"
                   alt="partners_image"
                   className={styles.about_us_partners_image}
                 />
                 <img
-                  src="/Modoorock/images/about_partners_8.png"
+                  src="/modoorock/images/about_partners_8.png"
                   alt="partners_image"
                   className={styles.about_us_partners_image}
                 />
@@ -250,7 +250,7 @@ const AboutUs = (props) => {
           <p className={styles.about_us_map_subtitle}>오시는 길</p>
           <div className={styles.short_divide_line_under_title}></div>
           <img
-            src="/Modoorock/images/about_map.png"
+            src="/modoorock/images/about_map.png"
             alt="partners_image"
             className={styles.about_us_map_image}
           />

@@ -67,7 +67,7 @@ const MypageMain = ({ user, sessionCheck }) => {
     <section className={styles.mypage_main}>
       <div className={styles.top}>
         <img
-          src="/Modoorock/images/profile_default.png"
+          src="/modoorock/images/profile_default.png"
           alt="profile"
           className={styles.profile_image}
         />

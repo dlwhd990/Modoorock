@@ -27,7 +27,7 @@ const ModoorockAdmin = (props) => {
       .then((response) => {
         if (response.data === "" || response.data.idType !== 2) {
           window.alert("권한이 없습니다.");
-          window.location.href = "/Modoorock";
+          window.location.href = "/modoorock";
         } else {
           loadAttractionList();
           loadUserList();
@@ -114,7 +114,7 @@ const ModoorockAdmin = (props) => {
     <section className={styles.main}>
       <header className={styles.header}>
         <img
-          src="/Modoorock/images/modoorock.png"
+          src="/modoorock/images/modoorock.png"
           alt="logo"
           className={styles.logo}
           onClick={() => {

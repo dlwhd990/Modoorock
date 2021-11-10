@@ -14,7 +14,7 @@ function NextArrow(props) {
   }, [window.innerWidth]);
   return (
     <img
-      src="/Modoorock/images/arrow-right.png"
+      src="/modoorock/images/arrow-right.png"
       alt="arrow"
       className={`${className} arrow`}
       style={{
@@ -43,7 +43,7 @@ function PrevArrow(props) {
   }, [window.innerWidth]);
   return (
     <img
-      src="/Modoorock/images/arrow-left.png"
+      src="/modoorock/images/arrow-left.png"
       alt="arrow"
       className={`${className} arrow`}
       style={{
@@ -64,7 +64,6 @@ function PrevArrow(props) {
 export default class CustomPaging extends Component {
   render() {
     const { imageList } = this.props;
-    console.log(imageList);
     const settings = {
       customPaging: function (i) {
         return (

@@ -43,7 +43,6 @@ const InquireWrite = () => {
             userIdx,
           })
           .then((response) => {
-            console.log(response);
             history.push("/customer/inquire");
             window.scrollTo({ top: 0 });
           })

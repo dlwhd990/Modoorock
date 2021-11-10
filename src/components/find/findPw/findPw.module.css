@@ -1,6 +1,6 @@
 .find_pw_form {
   width: 500px;
-  height: 350px;
+  height: 450px;
   border: 1px solid lightgray;
   border-radius: 8px;
   box-shadow: 5px 5px 10px lightgray;
@@ -16,7 +16,9 @@
 
 .id_input_container,
 .phone_num_container,
-.auth_num_container {
+.auth_num_container,
+.new_pw_container,
+.new_pw_confirm_container {
   margin: 15px 0;
   display: flex;
   flex-direction: row;
@@ -26,7 +28,7 @@
 .id_input_text,
 .phone_num_text,
 .auth_num_text {
-  width: 100px;
+  width: 120px;
   margin: 0;
 }
 
