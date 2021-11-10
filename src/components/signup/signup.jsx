@@ -172,7 +172,7 @@ const Signup = (props) => {
         const resData = response.data;
         if (resData === "success") {
           window.alert("회원가입이 완료되었습니다.");
-          window.location.href = "/";
+          window.location.href = "/modoorock";
         }
       })
       .catch((error) => console.error(error));

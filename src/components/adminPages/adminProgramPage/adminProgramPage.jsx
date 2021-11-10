@@ -21,7 +21,7 @@ const AdminProgramPage = (props) => {
           .then((res) => {
             if (res.data.idx !== response.data.userIdx) {
               window.alert("이 페이지에 접근할 권한이 없습니다.");
-              window.location.href = "/";
+              window.location.href = "/modoorock";
               return;
             }
             setAttractionInfo(response.data);

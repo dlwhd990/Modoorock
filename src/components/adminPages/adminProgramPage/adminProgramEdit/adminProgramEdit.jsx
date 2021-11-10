@@ -228,7 +228,7 @@ const AdminProgramEdit = (props) => {
       .then((response) => {
         if (response.data.attractionIdx !== parseInt(params.path_three)) {
           window.alert("잘못된 접근입니다.");
-          window.location.href = "/";
+          window.location.href = "/modoorock";
           return;
         }
         axios
@@ -236,7 +236,7 @@ const AdminProgramEdit = (props) => {
           .then((res) => {
             if (res.data.idx !== response.data.userIdx) {
               window.alert("접근 권한이 없습니다.");
-              window.location.href = "/";
+              window.location.href = "/modoorock";
               return;
             }
             loadAttractionInfo();

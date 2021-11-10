@@ -14,12 +14,14 @@ const SearchResultPage = ({ noticeArticles, getNoticeList }) => {
   const [sliceList, setSliceList] = useState(null);
   const [resultArticles, setResultArticles] = useState(null);
   const [cursor, setCursor] = useState(0);
+  const [articles, setArticles] = useState(
+    noticeArticles.filter((item) => item.title.includes(query))
+  );
 
   useEffect(() => {
     getNoticeList();
   }, []);
 
-  const articles = noticeArticles.filter((item) => item.title.includes(query));
   useEffect(() => {
     // 무한 state변경 문제 해결 + 검색어 입력해주세요 안뜨게
     let pagelength = 0;
@@ -55,6 +57,7 @@ const SearchResultPage = ({ noticeArticles, getNoticeList }) => {
     setListList(list);
     setResultArticles(articles);
     setSliceList(list.slice(0, 5));
+    console.log(list.slice(0, 5));
   }, [articles]);
 
   const pageNumberClick = (e) => {

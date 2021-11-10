@@ -25,7 +25,7 @@ const LoginPage = () => {
   };
 
   const refresh = () => {
-    window.location.href = "/";
+    window.location.href = "/modoorock";
     return;
   };
 
