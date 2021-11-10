@@ -36,7 +36,10 @@ const AdminProgramPage = (props) => {
       .post(`${process.env.REACT_APP_BASEURL}/exp/getexpattractionlist`, {
         attractionIdx: idx,
       })
-      .then((response) => setMyProgramList(response.data))
+      .then((response) => {
+        console.log(response.data);
+        setMyProgramList(response.data);
+      })
       .catch((err) => console.error(err));
   };
 

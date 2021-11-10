@@ -46,13 +46,13 @@ const AdminProgramUploadPage = ({ user }) => {
   const onFileInputChangeHandler = (e) => {
     const reader = new FileReader();
     const file = e.target.files[0];
-    const blob = file && file.slice(0, file.size, "image/png");
+    const blob = file && file.slice(0, file.size, "image");
     if (!blob) {
       return;
     }
     const fileName = file.name.split(".");
     const newFile = new File([blob], `${fileName[0]}_main.${fileName[1]}`, {
-      type: "image/png",
+      type: "image",
     });
     reader.onloadend = () => {
       setPreviewImage({

@@ -47,7 +47,7 @@ const AdminProgramMissionUploadVideo = ({
         }
         const formData = new FormData();
         formData.append("gameIdx", parseInt(gameIdx));
-        formData.append("typeIdx", 6);
+        formData.append("typeIdx", 7);
         formData.append("userIdx", response.data.idx);
         formData.append("point", parseInt(point));
         formData.append("title", title);
