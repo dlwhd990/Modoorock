@@ -1,10 +1,10 @@
 import React, { useEffect, useState, useRef } from "react";
-import styles from "./searchResultPage.module.css";
+import styles from "./inquireSearchPage.module.css";
 import { useHistory, useParams } from "react-router";
 import axios from "axios";
-import NoticeArticle from "../notice/noticeArticle/noticeArticle";
+import InquireArticle from "../inquireArticle/inquireArticle";
 
-const SearchResultPage = ({ noticeArticles, getNoticeList }) => {
+const InquireSearchPage = ({ inquireArticles, getInquireList }) => {
   const history = useHistory();
   const { query } = useParams();
   const searchInputRef = useRef();
@@ -16,10 +16,10 @@ const SearchResultPage = ({ noticeArticles, getNoticeList }) => {
   const [cursor, setCursor] = useState(0);
 
   useEffect(() => {
-    getNoticeList();
+    getInquireList();
   }, []);
 
-  const articles = noticeArticles.filter((item) => item.title.includes(query));
+  const articles = inquireArticles.filter((item) => item.title.includes(query));
 
   useEffect(() => {
     let pagelength = 0;
@@ -89,8 +89,8 @@ const SearchResultPage = ({ noticeArticles, getNoticeList }) => {
       return;
     }
     searchInputRef.current.value = "";
-    history.push(`/customer/notice/search/${query}`);
-    getNoticeList();
+    history.push(`/customer/inquire/search/${query}`);
+    getInquireList();
   };
 
   const keyHandler = (e) => {
@@ -140,7 +140,7 @@ const SearchResultPage = ({ noticeArticles, getNoticeList }) => {
       <section className={styles.select_bar_container}>
         <div className={styles.select_button}>검색결과</div>
       </section>
-      <h1 className={styles.title}>공지사항 검색결과</h1>
+      <h1 className={styles.title}>문의게시판 검색결과</h1>
       <div className={styles.route_button_container}>
         <div
           className={styles.home_icon_container}
@@ -170,7 +170,7 @@ const SearchResultPage = ({ noticeArticles, getNoticeList }) => {
             window.scrollTo({ top: 0 });
           }}
         >
-          공지사항 검색결과
+          문의게시판 검색결과
         </p>
       </div>
       <section className={styles.qna}>
@@ -197,10 +197,10 @@ const SearchResultPage = ({ noticeArticles, getNoticeList }) => {
         <section className={styles.body}>
           {pageList.length > 1 &&
             pageList[numbering].map((index) => (
-              <NoticeArticle
+              <InquireArticle
                 key={resultArticles[index].idx}
                 article={resultArticles[index]}
-                where="notice"
+                where="inquire"
               />
             ))}
         </section>
@@ -240,4 +240,4 @@ const SearchResultPage = ({ noticeArticles, getNoticeList }) => {
   );
 };
 
-export default SearchResultPage;
+export default InquireSearchPage;

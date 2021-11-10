@@ -90,8 +90,7 @@ const Inquire = ({ articles, getInquireList, user }) => {
       return;
     }
     searchInputRef.current.value = "";
-    history.push(`/customer/inquire/search/${query}`); //수정
-    window.scrollTo({ top: 0 });
+    history.push(`/customer/inquire/search/${query}`);
     getInquireList();
   };
 

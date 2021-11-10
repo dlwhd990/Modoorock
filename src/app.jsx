@@ -22,6 +22,7 @@ import AdminMain from "./components/adminPages/adminMain/adminMain";
 import NoticeView from "./components/customerCenter/notice/noticeView/noticeView";
 import ModoorockAdmin from "./components/adminPages/modoorockAdmin/modoorockAdmin";
 import SearchResultPage from "./components/customerCenter/searchResultPage/searchResultPage";
+import InquireSearchPage from "./components/customerCenter/inquire/inquireSearchPage/inquireSearchPage";
 
 axios.defaults.withCredentials = true;
 
@@ -355,6 +356,16 @@ const App = (props) => {
             <SearchResultPage
               noticeArticles={noticeArticles}
               getNoticeList={getNoticeList}
+            />
+          )}
+          <Footer />
+        </Route>
+        <Route exact path="/customer/inquire/search/:query">
+          <Header user={user} userLogout={userLogout} />
+          {inquireArticles && (
+            <InquireSearchPage
+              inquireArticles={inquireArticles}
+              getInquireList={getInquireList}
             />
           )}
           <Footer />
