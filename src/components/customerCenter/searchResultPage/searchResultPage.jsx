@@ -14,16 +14,14 @@ const SearchResultPage = ({ noticeArticles, getNoticeList }) => {
   const [sliceList, setSliceList] = useState(null);
   const [resultArticles, setResultArticles] = useState(null);
   const [cursor, setCursor] = useState(0);
-  const [articles, setArticles] = useState(
-    noticeArticles.filter((item) => item.title.includes(query))
-  );
 
   useEffect(() => {
     getNoticeList();
   }, []);
 
+  const articles = noticeArticles.filter((item) => item.title.includes(query));
+
   useEffect(() => {
-    // 무한 state변경 문제 해결 + 검색어 입력해주세요 안뜨게
     let pagelength = 0;
     const articleKeyList = Object.keys(articles).reverse();
     if (articleKeyList.length % 10 === 0) {
@@ -57,8 +55,7 @@ const SearchResultPage = ({ noticeArticles, getNoticeList }) => {
     setListList(list);
     setResultArticles(articles);
     setSliceList(list.slice(0, 5));
-    console.log(list.slice(0, 5));
-  }, [articles]);
+  }, [query]);
 
   const pageNumberClick = (e) => {
     setNumbering(parseInt(e.target.textContent));
@@ -115,7 +112,8 @@ const SearchResultPage = ({ noticeArticles, getNoticeList }) => {
   }, [searchInputRef]);
 
   useEffect(() => {
-    setSliceList(listList.slice(cursor, cursor + 5));
+    listList.slice(cursor, cursor + 5).length !== 0 &&
+      setSliceList(listList.slice(cursor, cursor + 5));
     setNumbering(cursor + 1);
   }, [cursor]);
 
@@ -133,11 +131,9 @@ const SearchResultPage = ({ noticeArticles, getNoticeList }) => {
     setCursor(cursor + 5);
   };
 
-  //useEffect(() => {
-  //공지사항 => 타입 필요없음 (모두 관리자 글이기 때문에 작성자 항목 삭제)
-  //FAQ => 실시간 검색으로 사용할까 생각중, 또는 타입을 상품, 사이트 이용 이런걸로 할지
-  //문의게시판 => 자기글만 보는건지부터 확인
-  //},[])
+  useEffect(() => {
+    console.log(sliceList, listList);
+  }, [sliceList, listList]);
   return (
     <section className={styles.search_result}>
       <section className={styles.customer_top_banner}></section>
