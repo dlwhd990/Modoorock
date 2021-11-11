@@ -8,7 +8,6 @@ import axios from "axios";
 import LoadingPage from "../../loadingPage/loadingPage";
 
 const ProgramDetail = ({ reviewList, toss }) => {
-  const history = useHistory();
   const [program, setProgram] = useState(null);
   const [imageList, setImageList] = useState(null);
   const [review, setReview] = useState([]);
@@ -33,10 +32,21 @@ const ProgramDetail = ({ reviewList, toss }) => {
 
   const onSelectHandler = (e) => {};
 
+  function uuid() {
+    return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(
+      /[xy]/g,
+      function (c) {
+        var r = (Math.random() * 16) | 0,
+          v = c === "x" ? r : (r & 0x3) | 0x8;
+        return v.toString(16);
+      }
+    );
+  }
+
   const goPurchasePage = (amount, orderName, customerName) => {
     toss({
       amount,
-      orderId: "51v14fa00dsfs",
+      orderId: uuid(),
       orderName,
       customerName,
       successUrl: window.location.origin + "/success",

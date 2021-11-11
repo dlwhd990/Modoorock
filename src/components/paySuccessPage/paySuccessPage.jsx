@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 import LoadingPage from "../loadingPage/loadingPage";
 import styles from "./paySuccessPage.module.css";
 
-const PaySuccessPage = (props) => {
+const PaySuccessPage = () => {
   const history = useHistory();
   const [loadingOn, setLoadingOn] = useState(true);
   function getParam(sname) {
@@ -27,6 +27,7 @@ const PaySuccessPage = (props) => {
 
     return sval;
   }
+
   useEffect(() => {
     const paymentKey = getParam("paymentKey");
     const orderId = getParam("orderId");
@@ -48,8 +49,9 @@ const PaySuccessPage = (props) => {
         }
       )
       .then((response) => {
-        console.log(response.status);
-        response.status === 200 && setLoadingOn(false);
+        if (response.status === 200) {
+          setLoadingOn(false);
+        }
       });
   }, []);
   return (

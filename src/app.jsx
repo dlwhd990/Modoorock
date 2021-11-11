@@ -44,7 +44,6 @@ const App = (props) => {
   const [faqArticles, setFaqArticles] = useState(null);
   const [noticeArticles, setNoticeArticles] = useState(null);
   const [inquireArticles, setInquireArticles] = useState(null);
-
   const [reviewList, setReviewList] = useState([
     {
       idx: 0,
