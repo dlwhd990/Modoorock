@@ -33,16 +33,32 @@ const ProgramDetail = ({ reviewList, toss }) => {
 
   const onSelectHandler = (e) => {};
 
-  const goPurchasePage = () => {
-    //history.push("/"); //경로설정
+  const goPurchasePage = (amount, orderName, customerName) => {
     toss({
-      amount: 100,
-      orderId: "iWeB_-MPG2v2JwhIj28K6",
-      orderName: "토스 티셔츠 외 2건",
-      customerName: "박토스",
+      amount,
+      orderId: "51v14fa00dsfs",
+      orderName,
+      customerName,
       successUrl: window.location.origin + "/success",
       failUrl: window.location.origin + "/fail",
     });
+  };
+
+  const onReservationHandler = () => {
+    if (!program) {
+      return;
+    }
+    axios
+      .post(`${process.env.REACT_APP_BASEURL}/user/session`)
+      .then((response) => {
+        if (response.data === "") {
+          window.alert("로그인 후에 예약 가능합니다.");
+          return;
+        }
+        const user = response.data;
+        goPurchasePage(program.price, program.title, user.name);
+      })
+      .catch((err) => console.log(err));
   };
 
   const loadProgramInfo = () => {
@@ -175,7 +191,7 @@ const ProgramDetail = ({ reviewList, toss }) => {
               <div className={styles.button_container}>
                 <button
                   className={styles.reservation_button}
-                  onClick={goPurchasePage}
+                  onClick={onReservationHandler}
                 >
                   예약하기
                 </button>
