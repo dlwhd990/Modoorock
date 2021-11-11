@@ -156,7 +156,7 @@ const Programs = ({ areaList, programList, reviewList }) => {
         </div>
       </section>
       <section className={styles.programs_container}>
-        <h1 className={styles.title}>프로그램 소개</h1>
+        <h1 className={styles.title}>체험 상품</h1>
         <div className={styles.route_button_container}>
           <div
             className={styles.home_icon_container}
@@ -176,7 +176,7 @@ const Programs = ({ areaList, programList, reviewList }) => {
               window.scrollTo({ top: 0 });
             }}
           >
-            프로그램
+            체험상품
           </p>
           <i className={`${styles.arrow_icon} fas fa-chevron-right`}></i>
           <p
@@ -186,7 +186,7 @@ const Programs = ({ areaList, programList, reviewList }) => {
               window.scrollTo({ top: 0 });
             }}
           >
-            프로그램 소개
+            상품 목록
           </p>
         </div>
         <section className={styles.main_container}>

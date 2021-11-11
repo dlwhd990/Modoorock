@@ -301,7 +301,7 @@ const AdminAttractionEditPage = ({ user, backgroundList }) => {
       <section className={styles.main}>
         <h1 className={styles.section_title}>관광지 정보 입력</h1>
         <div className={styles.main_container}>
-          <form className={styles.main_form}>
+          <div className={styles.main_form}>
             <p className={styles.form_sub_text}>
               이미지를 업로드 하지 않으면 기존의 이미지로 유지됩니다.
             </p>
@@ -365,7 +365,7 @@ const AdminAttractionEditPage = ({ user, backgroundList }) => {
                 placeholder="관광지 소개"
               ></textarea>
             </div>
-          </form>
+          </div>
           <div className={styles.image_preview_container}>
             <p className={styles.image_preview_title}>미리보기</p>
             <section className={styles.area_item}>

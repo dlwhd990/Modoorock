@@ -23,10 +23,17 @@ import NoticeView from "./components/customerCenter/notice/noticeView/noticeView
 import ModoorockAdmin from "./components/adminPages/modoorockAdmin/modoorockAdmin";
 import SearchResultPage from "./components/customerCenter/searchResultPage/searchResultPage";
 import InquireSearchPage from "./components/customerCenter/inquire/inquireSearchPage/inquireSearchPage";
+import { loadTossPayments } from "@tosspayments/sdk";
 
 axios.defaults.withCredentials = true;
 
 const App = (props) => {
+  const clientKey = "test_ck_P24xLea5zVAwJ5MWnzy8QAMYNwW6";
+  async function toss(options) {
+    const tossPayments = await loadTossPayments(clientKey);
+    tossPayments.requestPayment("카드", options);
+  }
+
   const [introVideos, setIntroVideos] = useState([]);
 
   const [areaList, setAreaList] = useState(null);
@@ -308,7 +315,11 @@ const App = (props) => {
         </Route>
         <Route exact path="/programs/view/:path">
           <Header user={user} userLogout={userLogout} />
-          <ProgramDetail programList={programList} reviewList={reviewList} />
+          <ProgramDetail
+            programList={programList}
+            reviewList={reviewList}
+            toss={toss}
+          />
           <Footer />
         </Route>
         <Route exact path="/programs/:path">

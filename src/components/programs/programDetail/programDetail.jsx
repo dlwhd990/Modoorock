@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import { useParams } from "react-router";
+import { useHistory, useParams } from "react-router";
 import CustomPaging from "../../slick/customPaging/customPaging";
 import styles from "./programDetail.module.css";
 import ProgramReview from "./programReview/programReview";
@@ -7,7 +7,8 @@ import ReactStars from "react-rating-stars-component";
 import axios from "axios";
 import LoadingPage from "../../loadingPage/loadingPage";
 
-const ProgramDetail = ({ reviewList }) => {
+const ProgramDetail = ({ reviewList, toss }) => {
+  const history = useHistory();
   const [program, setProgram] = useState(null);
   const [imageList, setImageList] = useState(null);
   const [review, setReview] = useState([]);
@@ -31,6 +32,18 @@ const ProgramDetail = ({ reviewList }) => {
   };
 
   const onSelectHandler = (e) => {};
+
+  const goPurchasePage = () => {
+    //history.push("/"); //경로설정
+    toss({
+      amount: 100,
+      orderId: "iWeB_-MPG2v2JwhIj28K6",
+      orderName: "토스 티셔츠 외 2건",
+      customerName: "박토스",
+      successUrl: window.location.origin + "/success",
+      failUrl: window.location.origin + "/fail",
+    });
+  };
 
   const loadProgramInfo = () => {
     axios
@@ -160,7 +173,12 @@ const ProgramDetail = ({ reviewList }) => {
                 <p className={styles.content}>{program && program.content}</p>
               </div>
               <div className={styles.button_container}>
-                <button className={styles.reservation_button}>예약하기</button>
+                <button
+                  className={styles.reservation_button}
+                  onClick={goPurchasePage}
+                >
+                  예약하기
+                </button>
                 <button
                   className={styles.inquire_button}
                   onClick={inquireButtonHandler}

@@ -16,7 +16,7 @@ const AdminProgramUploadTimeItem = ({ item, deleteDateDataHandler }) => {
         <p
           className={styles.delete_button}
           data-idx={item.idx}
-          onClick={deleteDateDataHandler}
+          onClick={() => deleteDateDataHandler(item.idx)}
         >
           삭제
         </p>

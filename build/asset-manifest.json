@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/modoorock/static/css/main.486aa428.chunk.css",
-    "main.js": "/modoorock/static/js/main.5c43b417.chunk.js",
-    "main.js.map": "/modoorock/static/js/main.5c43b417.chunk.js.map",
-    "runtime-main.js": "/modoorock/static/js/runtime-main.c4afc3b4.js",
-    "runtime-main.js.map": "/modoorock/static/js/runtime-main.c4afc3b4.js.map",
+    "main.css": "/modoorock/static/css/main.531d43db.chunk.css",
+    "main.js": "/modoorock/static/js/main.5b27739f.chunk.js",
+    "main.js.map": "/modoorock/static/js/main.5b27739f.chunk.js.map",
+    "runtime-main.js": "/modoorock/static/js/runtime-main.113aaada.js",
+    "runtime-main.js.map": "/modoorock/static/js/runtime-main.113aaada.js.map",
     "static/css/2.10a05fba.chunk.css": "/modoorock/static/css/2.10a05fba.chunk.css",
-    "static/js/2.5143aee2.chunk.js": "/modoorock/static/js/2.5143aee2.chunk.js",
-    "static/js/2.5143aee2.chunk.js.map": "/modoorock/static/js/2.5143aee2.chunk.js.map",
+    "static/js/2.74c23e69.chunk.js": "/modoorock/static/js/2.74c23e69.chunk.js",
+    "static/js/2.74c23e69.chunk.js.map": "/modoorock/static/js/2.74c23e69.chunk.js.map",
     "index.html": "/modoorock/index.html",
     "static/css/2.10a05fba.chunk.css.map": "/modoorock/static/css/2.10a05fba.chunk.css.map",
-    "static/css/main.486aa428.chunk.css.map": "/modoorock/static/css/main.486aa428.chunk.css.map",
-    "static/js/2.5143aee2.chunk.js.LICENSE.txt": "/modoorock/static/js/2.5143aee2.chunk.js.LICENSE.txt",
+    "static/css/main.531d43db.chunk.css.map": "/modoorock/static/css/main.531d43db.chunk.css.map",
+    "static/js/2.74c23e69.chunk.js.LICENSE.txt": "/modoorock/static/js/2.74c23e69.chunk.js.LICENSE.txt",
     "static/media/index.css": "/modoorock/static/media/SCDream9.c8e7afd8.otf",
     "static/media/introduce.module.css": "/modoorock/static/media/about_top_banner.e04dd856.png",
     "static/media/aboutUs.module.css": "/modoorock/static/media/about_us_background.f8260a65.png",
@@ -20,10 +20,10 @@
     "static/media/slick-theme.css": "/modoorock/static/media/slick.c94f7671.ttf"
   },
   "entrypoints": [
-    "static/js/runtime-main.c4afc3b4.js",
+    "static/js/runtime-main.113aaada.js",
     "static/css/2.10a05fba.chunk.css",
-    "static/js/2.5143aee2.chunk.js",
-    "static/css/main.486aa428.chunk.css",
-    "static/js/main.5c43b417.chunk.js"
+    "static/js/2.74c23e69.chunk.js",
+    "static/css/main.531d43db.chunk.css",
+    "static/js/main.5b27739f.chunk.js"
   ]
 }

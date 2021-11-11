@@ -203,11 +203,16 @@ const AdminProgramEdit = (props) => {
     setCount("");
   };
 
-  const deleteDateDataHandler = (e) => {
-    const result = dateDataList.filter(
-      (item) => parseInt(e.target.dataset.idx) !== item.idx
-    );
-    setDateDataList(result);
+  const deleteDateDataHandler = (idx) => {
+    axios
+      .post(
+        `${process.env.REACT_APP_BASEURL}/exptimetable/deleteexptimetable`,
+        {
+          idx,
+        }
+      )
+      .then((response) => loadTimeTableList())
+      .catch((err) => console.error(err));
   };
 
   const timeChangeHandler = (e) => {
@@ -281,7 +286,7 @@ const AdminProgramEdit = (props) => {
       <section className={styles.main}>
         <h1 className={styles.section_title}>체험상품 정보 입력</h1>
         <section className={styles.main_container}>
-          <form className={styles.main_form}>
+          <section className={styles.main_form}>
             <p className={styles.form_sub_text}>
               이미지를 업로드 하지 않으면 기존의 이미지로 유지됩니다.
             </p>
@@ -363,7 +368,7 @@ const AdminProgramEdit = (props) => {
                 placeholder="상품 소개"
               ></textarea>
             </div>
-          </form>
+          </section>
           <section className={styles.image_preview_container}>
             <p className={styles.image_preview_title}>미리보기</p>
             <section className={styles.program_item}>
@@ -494,6 +499,7 @@ const AdminProgramEdit = (props) => {
               time.length - 3
             )} | ${count}개`}</div>
             <button
+              type="button"
               className={styles.save_button}
               onClick={saveButtonClickHandler}
             >
