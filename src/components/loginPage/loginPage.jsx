@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import LoadingSpinnerWhite from "../loadingSpinner/loadingSpinnerWhite/loadingSpinnerWhite";
 import styles from "./loginPage.module.css";
@@ -9,12 +9,33 @@ axios.defaults.withCredentials = true;
 const LoginPage = () => {
   const history = useHistory();
   const [loadingOn, setLoadingOn] = useState(false);
+  const [idSave, setIdSave] = useState(() => {
+    if (localStorage.getItem("id")) {
+      return true;
+    }
+    return false;
+  });
+
+  useEffect(() => {
+    const id = localStorage.getItem("id");
+    if (id) {
+      setInputValues({
+        ...inputValues,
+        id,
+      });
+    }
+  }, []);
+
   const [inputValues, setInputValues] = useState({
     id: "",
     pw: "",
   });
 
   const { id, pw } = inputValues;
+
+  const idSaveHandler = (e) => {
+    setIdSave(!idSave);
+  };
 
   const inputValueChangeHandler = (e) => {
     const { name, value } = e.target;
@@ -49,8 +70,9 @@ const LoginPage = () => {
         { withCredentials: true }
       )
       .then((response) => {
-        console.log(response);
         if (response.data === "loggedin") {
+          idSave && localStorage.setItem("id", id);
+          !idSave && localStorage.removeItem("id");
           window.alert("로그인 되었습니다.");
           refresh();
         } else {
@@ -63,6 +85,7 @@ const LoginPage = () => {
         console.error(err);
       });
   };
+
   return (
     <section className={styles.login_page}>
       <section className={styles.container}>
@@ -94,7 +117,12 @@ const LoginPage = () => {
         </form>
         <div className={styles.id_save_find_container}>
           <div className={styles.id_save_container}>
-            <input type="checkbox" className={styles.id_save_checkbox} />
+            <input
+              type="checkbox"
+              checked={idSave}
+              onChange={idSaveHandler}
+              className={styles.id_save_checkbox}
+            />
             <span className={styles.id_save_text}>아이디 저장</span>
           </div>
           <div className={styles.id_pw_find_container}>
