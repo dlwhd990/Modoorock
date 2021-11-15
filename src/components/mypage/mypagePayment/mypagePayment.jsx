@@ -84,7 +84,7 @@ const MypagePayment = (props) => {
         <div className={styles.review}>리뷰작성</div>
       </section>
       <section className={styles.body}>
-        {userExpList &&
+        {userExpList && userExpList.length > 0 ? (
           userExpList.map((item, index) => (
             <MypagePaymentItem
               key={item.purchaseData.idx}
@@ -93,7 +93,10 @@ const MypagePayment = (props) => {
               len={userExpList.length}
               popupValueChangeHandler={popupValueChangeHandler}
             />
-          ))}
+          ))
+        ) : (
+          <p className={styles.nothing}>결제 내역이 없습니다.</p>
+        )}
       </section>
       {popupValue && (
         <div className={styles.filter}>

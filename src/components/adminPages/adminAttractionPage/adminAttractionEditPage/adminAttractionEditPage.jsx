@@ -31,11 +31,30 @@ const AdminAttractionEditPage = ({ user, backgroundList }) => {
 
   const getOriginalData = () => {
     axios
-      .post(`${process.env.REACT_APP_BASEURL}/attraction/getattractioninfo`, {
-        idx: parseInt(params.path_three),
-      })
-      .then((response) => setItem(response.data))
-      .catch((err) => console.error(err));
+      .post(`${process.env.REACT_APP_BASEURL}/user/session`)
+      .then((response) => {
+        if (response.data === "") {
+          window.alert("접근 권한이 없습니다.");
+          window.location.href = "/modoorock";
+          return;
+        }
+        axios
+          .post(
+            `${process.env.REACT_APP_BASEURL}/attraction/getattractioninfo`,
+            {
+              idx: parseInt(params.path_three),
+            }
+          )
+          .then((res) => {
+            if (res.data.userIdx !== response.data.idx) {
+              window.alert("접근 권한이 없습니다.");
+              window.location.href = "/modoorock";
+              return;
+            }
+            setItem(res.data);
+          })
+          .catch((err) => console.error(err));
+      });
   };
 
   const onFileInputChangeHandler = (e) => {
