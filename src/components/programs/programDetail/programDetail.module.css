@@ -63,7 +63,7 @@
 
 .text_container {
   flex-basis: 50%;
-  padding: 90px 50px;
+  padding: 90px 50px 0 50px;
   padding-left: 2%;
   display: flex;
   flex-direction: column;
@@ -139,17 +139,16 @@
 }
 
 .button_container {
-  width: 78%;
+  width: 100%;
+  margin-top: 20px;
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
-  position: absolute;
-  bottom: 80px;
+  justify-content: space-between;
 }
 
 .reservation_button,
 .inquire_button {
-  width: 43%;
+  width: 47.5%;
   height: 45px;
   outline: none;
   border: none;
@@ -383,23 +382,18 @@
   padding: 4px 6px;
 }
 
-.submit_button_container {
-  width: 100%;
-  text-align: end;
-  margin-top: 20px;
+.button_and_time_select {
+  width: 70%;
+  position: absolute;
+  bottom: 60px;
 }
 
-.submit_button {
-  width: 90px;
-  height: 40px;
-  outline: none;
-  border: none;
-  background-color: var(--color-theme);
-  color: white;
+.time_select {
+  width: 100%;
+  height: 30px;
   font-size: var(--font-size-normal);
-  font-size: 500;
+  border: 1px solid var(--color-light-border);
   border-radius: 4px;
-  cursor: pointer;
 }
 
 @keyframes appear {

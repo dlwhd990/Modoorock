@@ -1,18 +1,22 @@
 import React, { useEffect, useState, useRef } from "react";
-import { useHistory, useParams } from "react-router";
+import { useParams } from "react-router";
 import CustomPaging from "../../slick/customPaging/customPaging";
 import styles from "./programDetail.module.css";
 import ProgramReview from "./programReview/programReview";
 import ReactStars from "react-rating-stars-component";
 import axios from "axios";
 import LoadingPage from "../../loadingPage/loadingPage";
+import { times } from "lodash";
 
-const ProgramDetail = ({ reviewList, toss }) => {
+const ProgramDetail = ({ getReviewList, toss }) => {
   const [program, setProgram] = useState(null);
+  const [reviewList, setReviewList] = useState(null);
   const [imageList, setImageList] = useState(null);
   const [review, setReview] = useState([]);
   const [statSeparate, setStatSeparate] = useState([]);
   const [reviewAvg, setReviewAvg] = useState(null);
+  const [expTimeTableList, setExpTimeTableList] = useState(null);
+  const [selectedTime, setSelectedTime] = useState(null);
   const { path } = useParams();
   const toInquireRef = useRef();
   const [inputValues, setInputValues] = useState({
@@ -30,6 +34,10 @@ const ProgramDetail = ({ reviewList, toss }) => {
     });
   };
 
+  const timeSelectHandler = (e) => {
+    setSelectedTime(e.target.value);
+  };
+
   const onSelectHandler = (e) => {};
 
   function uuid() {
@@ -43,10 +51,13 @@ const ProgramDetail = ({ reviewList, toss }) => {
     );
   }
 
-  const goPurchasePage = (amount, orderName, customerName) => {
+  const goPurchasePage = (amount, orderName, customerName, expIdx, userIdx) => {
+    const orderId = uuid();
+    const data = [expIdx, userIdx];
+    sessionStorage.setItem(orderId, JSON.stringify(data));
     toss({
       amount,
-      orderId: uuid(),
+      orderId,
       orderName,
       customerName,
       successUrl: window.location.origin + "/success",
@@ -66,7 +77,13 @@ const ProgramDetail = ({ reviewList, toss }) => {
           return;
         }
         const user = response.data;
-        goPurchasePage(program.price, program.title, user.name);
+        goPurchasePage(
+          program.price,
+          program.title,
+          user.name,
+          program.idx,
+          user.idx
+        );
       })
       .catch((err) => console.log(err));
   };
@@ -127,13 +144,46 @@ const ProgramDetail = ({ reviewList, toss }) => {
       .catch((err) => console.error(err));
   };
 
+  const reviewListHandler = (data) => {
+    setReviewList(data);
+  };
+
+  const loadExpTimeTableList = () => {
+    axios
+      .post(
+        `${process.env.REACT_APP_BASEURL}/exptimetable/getexptimetablelist`,
+        {
+          expIdx: program.idx,
+        }
+      )
+      .then((response) =>
+        setExpTimeTableList(
+          response.data.sort((a, b) => (a.time > b.time ? 1 : -1))
+        )
+      )
+      .catch((err) => console.error(err));
+  };
+
   useEffect(() => {
+    loadProgramInfo();
+  }, []);
+
+  useEffect(() => {
+    program && loadExpTimeTableList();
+    program && getReviewList(program.idx, reviewListHandler);
+  }, [program]);
+
+  useEffect(() => {
+    if (!reviewList) {
+      return;
+    }
+
     const result = [];
     const separate = [0, 0, 0, 0, 0];
     let total = 0;
-    loadProgramInfo();
+
     reviewList.forEach((item) => {
-      item.exp_idx === parseInt(path) &&
+      item.expIdx === parseInt(path) &&
         result.push(item) &&
         (total += item.stars) &&
         (separate[item.stars - 1] += 1);
@@ -150,7 +200,7 @@ const ProgramDetail = ({ reviewList, toss }) => {
       }
       return (total / result.length).toFixed(1);
     });
-  }, []);
+  }, [reviewList]);
 
   return (
     <section className={styles.program_detail}>
@@ -198,19 +248,32 @@ const ProgramDetail = ({ reviewList, toss }) => {
                 </div>
                 <p className={styles.content}>{program && program.content}</p>
               </div>
-              <div className={styles.button_container}>
-                <button
-                  className={styles.reservation_button}
-                  onClick={onReservationHandler}
-                >
-                  예약하기
-                </button>
-                <button
-                  className={styles.inquire_button}
-                  onClick={inquireButtonHandler}
-                >
-                  문의하기
-                </button>
+              <div className={styles.button_and_time_select}>
+                <select className={styles.time_select}>
+                  <option value="">예매 시간 선택</option>
+                  {expTimeTableList &&
+                    expTimeTableList.map((item) => (
+                      <option key={item.idx} value={item.time}>
+                        {`${item.time.slice(0, 16)} [잔여수량: ${
+                          item.amount
+                        }개]`}
+                      </option>
+                    ))}
+                </select>
+                <div className={styles.button_container}>
+                  <button
+                    className={styles.reservation_button}
+                    onClick={onReservationHandler}
+                  >
+                    예약하기
+                  </button>
+                  <button
+                    className={styles.inquire_button}
+                    onClick={inquireButtonHandler}
+                  >
+                    문의하기
+                  </button>
+                </div>
               </div>
             </div>
           </section>

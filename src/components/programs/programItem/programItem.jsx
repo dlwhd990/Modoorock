@@ -3,7 +3,8 @@ import { useHistory } from "react-router";
 import styles from "./programItem.module.css";
 import StarRatingComponent from "react-star-rating-component";
 
-const ProgramItem = ({ item, reviewList }) => {
+const ProgramItem = ({ item, getReviewList }) => {
+  const [reviewList, setReviewList] = useState(null);
   const [reviewCount, setReviewCount] = useState(0);
   const [reviewStarAvg, setReviewStarAvg] = useState((0).toFixed(1));
   const history = useHistory();
@@ -14,12 +15,23 @@ const ProgramItem = ({ item, reviewList }) => {
     window.scrollTo({ top: 0 });
   };
 
+  const reviewListHandler = (data) => {
+    setReviewList(data);
+  };
+
   useEffect(() => {
+    getReviewList(item.idx, reviewListHandler);
+  }, []);
+
+  useEffect(() => {
+    if (!reviewList) {
+      return;
+    }
     let count = 0;
     let total = 0;
 
     reviewList.forEach((reviewItem) => {
-      reviewItem.exp_idx === item.idx &&
+      reviewItem.expIdx === item.idx &&
         (count += 1) &&
         (total += reviewItem.stars);
     });
@@ -30,7 +42,7 @@ const ProgramItem = ({ item, reviewList }) => {
     const imageList = item.photo.split("#");
     const main = imageList.filter((item) => item.includes("_main"));
     setMainImage(main);
-  }, []);
+  }, [reviewList]);
   return (
     <section className={styles.program_item} onClick={onItemClick}>
       <div className={styles.image_container}>

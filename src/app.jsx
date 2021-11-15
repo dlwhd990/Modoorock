@@ -262,6 +262,15 @@ const App = (props) => {
       .catch((err) => console.error(err));
   };
 
+  const getReviewList = (expIdx, setState) => {
+    axios
+      .post(`${process.env.REACT_APP_BASEURL}/review/getreviewlist`, {
+        expIdx,
+      })
+      .then((response) => setState(response.data))
+      .catch((err) => console.error(err));
+  };
+
   useEffect(() => {
     sessionCheck();
     getNoticeList();
@@ -317,7 +326,7 @@ const App = (props) => {
           <Header user={user} userLogout={userLogout} />
           <ProgramDetail
             programList={programList}
-            reviewList={reviewList}
+            getReviewList={getReviewList}
             toss={toss}
           />
           <Footer />
@@ -339,7 +348,7 @@ const App = (props) => {
             <Attraction
               programList={programList}
               areaList={areaList}
-              reviewList={reviewList}
+              getReviewList={getReviewList}
             />
           )}
           <Footer />

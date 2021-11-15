@@ -74,11 +74,11 @@ const Notice = ({ articles, getNoticeList }) => {
   };
 
   const searchInputChangeHandler = (e) => {
-    console.log(e.target.value);
     setSearchInput(e.target.value);
   };
 
   const onSearchHandler = () => {
+    console.log(searchInput);
     if (searchInput === "") {
       window.alert("검색어를 입력해주세요");
       return;

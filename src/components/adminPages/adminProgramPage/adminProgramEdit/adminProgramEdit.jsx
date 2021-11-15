@@ -59,7 +59,11 @@ const AdminProgramEdit = (props) => {
           expIdx: parseInt(params.path_five),
         }
       )
-      .then((response) => setDateDataList(response.data))
+      .then((response) =>
+        setDateDataList(
+          response.data.sort((a, b) => (a.time > b.time ? 1 : -1))
+        )
+      )
       .catch((err) => console.error(err));
   };
 

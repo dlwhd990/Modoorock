@@ -4,7 +4,7 @@ import { debounce } from "lodash";
 import ProgramItem from "../programItem/programItem";
 import styles from "./attraction.module.css";
 
-const Attraction = ({ programList, areaList, reviewList }) => {
+const Attraction = ({ programList, areaList, getReviewList }) => {
   const history = useHistory();
   const { path } = useParams();
   const [attractionProgramList, setAttractionProgramList] = useState(null);
@@ -171,7 +171,7 @@ const Attraction = ({ programList, areaList, reviewList }) => {
               key={item.idx}
               item={item}
               areaList={areaList}
-              reviewList={reviewList}
+              getReviewList={getReviewList}
             />
           ))}
         </section>
