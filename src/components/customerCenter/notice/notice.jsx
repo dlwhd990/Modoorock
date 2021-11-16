@@ -104,11 +104,11 @@ const Notice = ({ articles, getNoticeList }) => {
   };
 
   useEffect(() => {
-    window.addEventListener("keydown", keyHandler);
+    window.addEventListener("keypress", keyHandler);
     return () => {
-      window.removeEventListener("keydown", keyHandler);
+      window.removeEventListener("keypress", keyHandler);
     };
-  }, []);
+  }, [keyHandler]);
 
   useEffect(() => {
     searchInputRef && searchInputRef.current.focus();
@@ -139,6 +139,7 @@ const Notice = ({ articles, getNoticeList }) => {
         <section className={styles.search}>
           <input
             onChange={searchInputChangeHandler}
+            value={searchInput}
             ref={searchInputRef}
             type="text"
             className={styles.search_text_input}

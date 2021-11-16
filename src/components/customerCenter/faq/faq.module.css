@@ -157,3 +157,38 @@
     font-size: var(--font-size-small);
   }
 }
+
+@media screen and (max-width: 780px) {
+  .write_form {
+    width: 100%;
+  }
+
+  .write {
+    margin-top: 20px;
+  }
+
+  .title_text {
+    font-size: var(--font-size-normal);
+  }
+
+  .content_input_container {
+    margin-top: 20px;
+  }
+
+  .content_text {
+    font-size: var(--font-size-normal);
+  }
+  .page_number {
+    font-size: var(--font-size-normal);
+  }
+
+  .write_button {
+    width: 4.5rem;
+    height: 2rem;
+    font-size: var(--font-size-normal);
+    font-weight: 500;
+    position: absolute;
+    top: 60px;
+    right: 20px;
+  }
+}
