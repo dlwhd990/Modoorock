@@ -6,7 +6,6 @@ import ProgramReview from "./programReview/programReview";
 import ReactStars from "react-rating-stars-component";
 import axios from "axios";
 import LoadingPage from "../../loadingPage/loadingPage";
-import { times } from "lodash";
 
 const ProgramDetail = ({ getReviewList, toss }) => {
   const [program, setProgram] = useState(null);
@@ -51,9 +50,25 @@ const ProgramDetail = ({ getReviewList, toss }) => {
     );
   }
 
-  const goPurchasePage = (amount, orderName, customerName, expIdx, userIdx) => {
+  const goPurchasePage = (
+    amount,
+    orderName,
+    customerName,
+    expIdx,
+    userIdx,
+    selectedTime
+  ) => {
+    const confirm = window.confirm(
+      `상품명: ${orderName} \n결제금액: ${amount}원 \n예약시간: ${selectedTime.slice(
+        0,
+        16
+      )} \n\n 정말로 결제하시겠습니까?`
+    );
+    if (!confirm) {
+      return;
+    }
     const orderId = uuid();
-    const data = [expIdx, userIdx];
+    const data = [expIdx, userIdx, selectedTime];
     sessionStorage.setItem(orderId, JSON.stringify(data));
     toss({
       amount,
@@ -69,6 +84,10 @@ const ProgramDetail = ({ getReviewList, toss }) => {
     if (!program) {
       return;
     }
+    if (!selectedTime) {
+      window.alert("예약 시간을 선택해주세요");
+      return;
+    }
     axios
       .post(`${process.env.REACT_APP_BASEURL}/user/session`)
       .then((response) => {
@@ -82,7 +101,8 @@ const ProgramDetail = ({ getReviewList, toss }) => {
           program.title,
           user.name,
           program.idx,
-          user.idx
+          user.idx,
+          selectedTime
         );
       })
       .catch((err) => console.log(err));
@@ -249,8 +269,12 @@ const ProgramDetail = ({ getReviewList, toss }) => {
                 <p className={styles.content}>{program && program.content}</p>
               </div>
               <div className={styles.button_and_time_select}>
-                <select className={styles.time_select}>
-                  <option value="">예매 시간 선택</option>
+                <select
+                  onChange={timeSelectHandler}
+                  value={selectedTime}
+                  className={styles.time_select}
+                >
+                  <option value={null}>예매 시간 선택</option>
                   {expTimeTableList &&
                     expTimeTableList.map((item) => (
                       <option key={item.idx} value={item.time}>

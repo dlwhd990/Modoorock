@@ -74,7 +74,7 @@ const Attraction = ({ programList, areaList, getReviewList }) => {
           className={`${styles.select_button} ${styles.on}`}
           onClick={onSelectHandler}
         >
-          프로그램 소개
+          상품 목록
         </div>
       </section>
       <section className={styles.attraction_container}>
@@ -110,7 +110,7 @@ const Attraction = ({ programList, areaList, getReviewList }) => {
               window.scrollTo({ top: 0 });
             }}
           >
-            프로그램 소개
+            상품 목록
           </p>
           <i className={`${styles.arrow_icon} fas fa-chevron-right`}></i>
           <p

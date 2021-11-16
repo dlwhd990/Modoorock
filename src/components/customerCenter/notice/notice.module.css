@@ -211,3 +211,63 @@
     opacity: 1;
   }
 }
+
+@media screen and (max-width: 780px) {
+  .qna {
+    width: 95%;
+    margin-top: 50px;
+  }
+
+  .search {
+    width: 95%;
+    margin: auto;
+  }
+
+  .search_text_input {
+    width: 82%;
+    margin: 0;
+    font-size: var(--font-size-small);
+  }
+
+  .search_button {
+    width: 17%;
+  }
+
+  .header {
+    height: 60px;
+    font-size: var(--font-size-small);
+  }
+
+  .division {
+    display: none;
+  }
+
+  .title {
+    margin: 0;
+    flex-basis: 65%;
+    text-align: start;
+  }
+
+  .writer {
+    flex-basis: 15%;
+    text-align: start;
+  }
+
+  .date {
+    flex-basis: 20%;
+  }
+
+  .page_number {
+    font-size: var(--font-size-normal);
+  }
+
+  .write_button {
+    width: 4.5rem;
+    height: 2rem;
+    font-size: var(--font-size-normal);
+    font-weight: 500;
+    position: absolute;
+    top: 60px;
+    right: 20px;
+  }
+}

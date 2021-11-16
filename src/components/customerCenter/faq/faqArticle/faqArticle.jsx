@@ -10,12 +10,15 @@ const FaqArticle = ({ article }) => {
   };
 
   return (
-    <section className={styles.articlePreview}>
+    <section className={styles.article_preview}>
       <section className={styles.q_container} onClick={viewArticle}>
         <div className={styles.q}>Q</div>
         <div className={styles.type}>{article.type}</div>
         <div className={styles.title}>{article.title}</div>
-        <div className={styles.date}>{article.date}</div>
+        <div className={styles.date}>{`${article.date.slice(
+          0,
+          4
+        )}/${article.date.slice(5, 7)}/${article.date.slice(8, 10)}`}</div>
       </section>
 
       <section

@@ -85,7 +85,32 @@
     width: 150px;
     height: 150px;
   }
+
   .program_data_container {
     width: 150px;
+    padding: 12px 10px;
+  }
+
+  .program_title {
+    font-size: var(--font-size-small);
+    margin-bottom: 4px;
+  }
+
+  .star_container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .rate_data {
+    margin-left: 0;
+    margin-top: 4px;
+    font-size: var(--font-size-mobile-small);
+  }
+
+  .review_count_text {
+    font-size: var(--font-size-mobile-small);
+  }
+  .program_price {
+    font-size: var(--font-size-small);
   }
 }

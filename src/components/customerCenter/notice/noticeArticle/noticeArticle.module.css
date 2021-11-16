@@ -1,7 +1,7 @@
-.articlePreview {
+.article_preview {
   display: flex;
   flex-direction: row;
-  padding: 1rem;
+  padding: var(--font-size-normal);
   font-weight: bolder;
   color: rgb(77, 77, 77);
   border-top: 2px solid rgb(235, 235, 235);
@@ -58,5 +58,31 @@
   }
   to {
     opacity: 1;
+  }
+}
+
+@media screen and (max-width: 780px) {
+  .article_preview {
+    font-size: var(--font-size-mobile-small);
+  }
+
+  .division {
+    display: none;
+  }
+
+  .title {
+    text-align: start;
+    flex-basis: 65%;
+    margin: 0;
+    padding-right: 12px;
+  }
+
+  .writer {
+    flex-basis: 15%;
+    text-align: start;
+  }
+
+  .date {
+    flex-basis: 20%;
   }
 }

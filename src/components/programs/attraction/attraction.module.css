@@ -9,7 +9,7 @@
 }
 
 .select_bar_container {
-  height: 58px;
+  height: 6vh;
   background-color: var(--color-theme);
   display: flex;
   flex-direction: row;

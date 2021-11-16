@@ -140,7 +140,7 @@
 
 .button_container {
   width: 100%;
-  margin-top: 20px;
+  margin-top: 25px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -394,6 +394,7 @@
   font-size: var(--font-size-normal);
   border: 1px solid var(--color-light-border);
   border-radius: 4px;
+  background-color: white;
 }
 
 @keyframes appear {
@@ -421,7 +422,6 @@
     flex-direction: column;
     height: auto;
     width: 90%;
-    margin-top: 68px;
   }
 
   .image_container {
@@ -443,29 +443,45 @@
 
   .content {
     font-size: 15px;
+    margin-top: 20px;
   }
 
-  .button_container {
-    width: 90%;
+  .button_and_time_select {
+    width: 80%;
     position: static;
-    margin-top: 20px;
+    margin-bottom: 80px;
+  }
+
+  .detail_content_main {
+    padding: 0;
+  }
+
+  .detail_content_main_image {
+    width: 90%;
+    margin: auto;
+    margin-top: 50px;
+  }
+
+  .detail_content_text {
+    margin-top: 40px;
+    font-size: 3vw;
   }
 }
 
 @media screen and (max-width: 780px) {
   .program_detail {
-    margin-top: 63px;
-    background-color: var(--color-smoke-white);
+    margin-top: 64px;
   }
-
   .program_detail_main {
+    width: 100%;
+    border-radius: 0;
     overflow-x: hidden;
     box-shadow: none;
-    transform: translateY(-50px);
     margin-bottom: 0;
+    margin-top: 1px;
   }
   .text_data_box {
-    width: 90%;
+    width: 80%;
   }
   .button_container {
     width: 100%;
@@ -475,16 +491,20 @@
     background-color: white;
     padding: 30px 7% 60px 7%;
   }
+
+  .button_and_time_select {
+    width: 80%;
+  }
+
+  .price {
+    font-size: var(--font-size-big);
+  }
 }
 
 @media screen and (max-width: 640px) {
-  .program_detail {
-    background-color: var(--color-smoke-white);
-  }
   .program_detail_main {
     overflow-x: hidden;
     box-shadow: none;
-    transform: translateY(-50px);
     margin-bottom: 0;
   }
 
@@ -515,7 +535,6 @@
   }
   .text_container {
     padding: 0;
-    padding-bottom: 50px;
   }
 
   .content {

@@ -10,11 +10,14 @@ const NoticeArticle = ({ article }) => {
   };
 
   return (
-    <section className={styles.articlePreview} onClick={viewArticle}>
+    <section className={styles.article_preview} onClick={viewArticle}>
       <div className={styles.division}>공지</div>
       <div className={styles.title}>{article.title}</div>
       <div className={styles.writer}>관리자</div>
-      <div className={styles.date}>{article.date}</div>
+      <div className={styles.date}>{`${article.date.slice(
+        0,
+        4
+      )}/${article.date.slice(5, 7)}/${article.date.slice(8, 10)}`}</div>
     </section>
   );
 };

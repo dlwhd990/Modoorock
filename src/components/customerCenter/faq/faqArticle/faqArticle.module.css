@@ -1,4 +1,4 @@
-.articlePreview {
+.article_preview {
   display: flex;
   flex-direction: column;
   font-weight: bolder;
@@ -36,6 +36,7 @@
   white-space: nowrap;
   -moz-white-space: nowrap;
   overflow: hidden;
+  padding-right: 12px;
 }
 
 .date {
@@ -70,5 +71,22 @@
   }
   to {
     opacity: 1;
+  }
+}
+
+@media screen and (max-width: 780px) {
+  .article_preview {
+    font-size: var(--font-size-mobile-small);
+  }
+
+  .q_container {
+    padding-left: 16px;
+  }
+  .q {
+    flex-basis: 6%;
+  }
+
+  .type {
+    flex-basis: 24%;
   }
 }

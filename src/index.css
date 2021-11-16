@@ -31,13 +31,14 @@ code {
     monospace;
 }
 
-@keyframes appear {
-  0% {
-    transform: translateY(-20px);
-    opacity: 0;
+@media screen and (max-width: 1250px) {
+  body {
+    font-size: 15px;
   }
-  100% {
-    transform: translateY(0);
-    opacity: 1;
+}
+
+@media screen and (max-width: 780px) {
+  body {
+    font-size: 14px;
   }
 }

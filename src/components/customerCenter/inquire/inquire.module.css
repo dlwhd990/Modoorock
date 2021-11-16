@@ -219,3 +219,62 @@
     opacity: 1;
   }
 }
+
+@media screen and (max-width: 780px) {
+  .inquire {
+    width: 95%;
+    margin-top: 50px;
+  }
+
+  .search {
+    width: 95%;
+    margin: auto;
+  }
+
+  .search_text_input {
+    width: 82%;
+    margin: 0;
+    font-size: var(--font-size-small);
+  }
+
+  .search_button {
+    width: 17%;
+  }
+
+  .header {
+    height: 60px;
+    font-size: var(--font-size-small);
+  }
+
+  .division {
+    flex-basis: 22%;
+  }
+
+  .title {
+    margin: 0;
+    flex-basis: 55%;
+    text-align: start;
+  }
+
+  .writer {
+    display: none;
+  }
+
+  .date {
+    flex-basis: 23%;
+  }
+
+  .page_number {
+    font-size: var(--font-size-normal);
+  }
+
+  .write_button {
+    width: 8rem;
+    height: 2rem;
+    font-size: var(--font-size-normal);
+    font-weight: 500;
+    position: absolute;
+    top: 60px;
+    right: 20px;
+  }
+}

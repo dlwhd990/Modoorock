@@ -17,11 +17,11 @@ const WriteMain = () => {
       return;
     }
     if (e.currentTarget.innerText === "공지사항") {
-      history.push("/customer/notice/write");
+      history.push("/customer/notice");
     } else if (e.currentTarget.innerText === "문의게시판") {
-      history.push("/customer/inquire/write");
+      history.push("/customer/inquire");
     } else if (e.currentTarget.innerText === "FAQ") {
-      history.push("/customer/faq/write");
+      history.push("/customer/faq");
     }
   };
   return (

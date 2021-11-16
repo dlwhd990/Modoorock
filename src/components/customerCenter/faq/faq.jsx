@@ -157,7 +157,6 @@ const Faq = ({ articles, getFaqList }) => {
 
   return (
     <section className={styles.notice}>
-      <section className={styles.top}></section>
       <section className={styles.header} onClick={headerSelectHandler}>
         <p
           className={`${

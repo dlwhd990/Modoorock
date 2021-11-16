@@ -152,7 +152,7 @@ const Programs = ({ areaList, programList, reviewList }) => {
           className={`${styles.select_button} ${styles.on}`}
           onClick={onSelectHandler}
         >
-          프로그램 소개
+          상품 목록
         </div>
       </section>
       <section className={styles.programs_container}>
