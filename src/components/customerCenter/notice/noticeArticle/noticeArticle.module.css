@@ -14,7 +14,7 @@
   animation: appear 0.6s;
 }
 
-.articlePreview:hover {
+.article_preview:hover {
   background-color: rgb(247, 247, 247);
 }
 
@@ -84,5 +84,8 @@
 
   .date {
     flex-basis: 20%;
+  }
+  .article_preview:hover {
+    background-color: white;
   }
 }

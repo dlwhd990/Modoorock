@@ -26,7 +26,6 @@
 
 .title {
   flex-basis: 50%;
-  text-align: center;
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
@@ -55,4 +54,38 @@
 .already {
   background-color: rgb(242, 197, 166);
   color: white;
+}
+
+@media screen and (max-width: 780px) {
+  .item {
+    font-size: var(--font-size-mobile-small);
+    padding: 16px 4px;
+  }
+  .num {
+    flex-basis: 8%;
+    text-align: center;
+    margin-right: 1%;
+  }
+  .date {
+    flex-basis: 18%;
+    text-align: center;
+  }
+
+  .title {
+    flex-basis: 40%;
+    padding-right: 8px;
+    margin-left: 3%;
+  }
+
+  .price {
+    flex-basis: 15%;
+    text-align: start;
+  }
+
+  .review {
+    flex-basis: 15%;
+    text-align: start;
+    text-align: center;
+    line-height: 24px;
+  }
 }

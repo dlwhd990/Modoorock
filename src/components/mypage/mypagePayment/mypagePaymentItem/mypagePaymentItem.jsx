@@ -10,7 +10,13 @@ const MypagePaymentItem = ({ item, index, len, popupValueChangeHandler }) => {
   return (
     <div className={styles.item}>
       <div className={styles.num}>{len - index}</div>
-      <div className={styles.date}>{item.purchaseData.payDate}</div>
+      <div className={styles.date}>{`${item.purchaseData.payDate.slice(
+        0,
+        4
+      )}/${item.purchaseData.payDate.slice(
+        5,
+        7
+      )}/${item.purchaseData.payDate.slice(8, 10)}`}</div>
       <div
         className={styles.title}
         data-idx={item.expData.idx}

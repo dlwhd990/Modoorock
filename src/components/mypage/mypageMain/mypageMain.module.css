@@ -13,6 +13,9 @@
 }
 
 .profile_image {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
   margin-right: 40px;
 }
 
@@ -50,7 +53,8 @@
   margin: 16px 0 6px 0;
 }
 
-.input {
+.input,
+.input_short {
   width: 380px;
   height: 40px;
   outline: none;
@@ -88,5 +92,42 @@
   100% {
     transform: translateY(0);
     opacity: 1;
+  }
+}
+
+@media screen and (max-width: 780px) {
+  .mypage_main {
+    width: 100%;
+    margin-top: 30px;
+  }
+
+  .main {
+    padding: 25px 30px;
+  }
+
+  .top {
+    width: 100%;
+    margin-left: 0;
+    justify-content: center;
+    padding-left: 0;
+    padding-bottom: 0;
+  }
+
+  .profile_image {
+    width: 120px;
+    height: 120px;
+    margin-right: 25px;
+  }
+
+  .input {
+    width: 100%;
+  }
+
+  .input_short {
+    width: 70%;
+  }
+  .button {
+    width: 27%;
+    font-size: var(--font-size-mobile-small);
   }
 }

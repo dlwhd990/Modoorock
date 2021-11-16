@@ -119,7 +119,7 @@ const MypageMain = ({ user, sessionCheck }) => {
               onChange={inputValueChangeHandler}
               value={newPwConfirm}
               type="password"
-              className={styles.input}
+              className={styles.input_short}
               spellCheck="false"
               placeholder="새로운 비밀번호 확인"
             />
@@ -136,7 +136,7 @@ const MypageMain = ({ user, sessionCheck }) => {
               onChange={inputValueChangeHandler}
               value={phone}
               type="text"
-              className={styles.input}
+              className={styles.input_short}
               spellCheck="false"
               placeholder="핸드폰번호"
             />
@@ -152,7 +152,7 @@ const MypageMain = ({ user, sessionCheck }) => {
               onChange={inputValueChangeHandler}
               value={authNum}
               type="text"
-              className={styles.input}
+              className={styles.input_short}
               spellCheck="false"
               placeholder="인증번호"
             />

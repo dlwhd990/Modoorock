@@ -212,4 +212,7 @@
     width: 70px;
     right: 4px;
   }
+  .inquire:hover {
+    background-color: white;
+  }
 }

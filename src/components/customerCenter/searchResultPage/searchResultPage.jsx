@@ -140,7 +140,7 @@ const SearchResultPage = ({ noticeArticles, getNoticeList }) => {
       <section className={styles.select_bar_container}>
         <div className={styles.select_button}>검색결과</div>
       </section>
-      <h1 className={styles.title}>공지사항 검색결과</h1>
+      <h1 className={styles.search_title}>공지사항 검색결과</h1>
       <div className={styles.route_button_container}>
         <div
           className={styles.home_icon_container}
