@@ -27,6 +27,7 @@
   width: 112px;
   height: 80px;
   box-shadow: 0 0 5px lightgray;
+  border-radius: 4px;
 }
 
 .slick-dots {
@@ -96,17 +97,19 @@
 
   .slick-dots .dot_image,
   .slick-dots li {
-    width: 112px;
+    width: 93px;
     height: 80px;
     box-shadow: 0 0 5px lightgray;
   }
-
   .slick-dots {
     transform: translateY(75px);
   }
 }
 
 @media screen and (max-width: 640px) {
+  .custom_paging_container {
+    height: 400px;
+  }
   .custom_paging_container .slick-slider,
   .custom_paging_container .slick-list,
   .custom_paging_container .slick-track {
@@ -139,11 +142,14 @@
   }
 
   .slick-dots {
-    transform: translateY(60px);
+    transform: translateY(25px);
   }
 }
 
 @media screen and (max-width: 440px) {
+  .custom_paging_container {
+    height: 360px;
+  }
   .custom_paging_container .slick-slider,
   .custom_paging_container .slick-list,
   .custom_paging_container .slick-track {
@@ -156,12 +162,12 @@
   }
   .custom_paging_container .slick-active .slick-current {
     width: 350px;
-    height: 300px;
+    height: 330px;
   }
 
   .slick-slide .image {
-    width: 350px;
-    height: 300px;
+    width: 390px;
+    height: 330px;
     margin: auto;
     margin-top: 10px;
     border-radius: 16px;
@@ -169,12 +175,12 @@
 
   .slick-dots .dot_image,
   .slick-dots li {
-    width: 60px;
+    width: 70px;
     height: 60px;
     box-shadow: 0 0 5px lightgray;
   }
 
   .slick-dots {
-    transform: translateY(35px);
+    transform: translateY(25px);
   }
 }

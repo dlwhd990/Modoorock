@@ -15,7 +15,19 @@ const ProgramDetail = ({ getReviewList, toss }) => {
   const [statSeparate, setStatSeparate] = useState([]);
   const [reviewAvg, setReviewAvg] = useState(null);
   const [expTimeTableList, setExpTimeTableList] = useState(null);
-  const [selectedTime, setSelectedTime] = useState(null);
+  const [selectedTime, setSelectedTime] = useState("");
+  const [starSize, setStarSize] = useState(() => {
+    const width = window.innerWidth;
+    if (width > 1250) {
+      return 28;
+    } else if (width > 1000) {
+      return 24;
+    } else if (width > 800) {
+      return 20;
+    } else {
+      return 18;
+    }
+  });
   const { path } = useParams();
   const toInquireRef = useRef();
   const [inputValues, setInputValues] = useState({
@@ -84,7 +96,7 @@ const ProgramDetail = ({ getReviewList, toss }) => {
     if (!program) {
       return;
     }
-    if (!selectedTime) {
+    if (selectedTime === "") {
       window.alert("예약 시간을 선택해주세요");
       return;
     }
@@ -222,6 +234,27 @@ const ProgramDetail = ({ getReviewList, toss }) => {
     });
   }, [reviewList]);
 
+  const starSizeChangeHandler = (e) => {
+    const width = window.innerWidth;
+
+    if (width > 1250) {
+      setStarSize(28);
+    } else if (width > 1000) {
+      setStarSize(24);
+    } else if (width > 800) {
+      setStarSize(20);
+    } else {
+      setStarSize(18);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("resize", starSizeChangeHandler);
+    return () => {
+      window.removeEventListener("resize", starSizeChangeHandler);
+    };
+  }, []);
+
   return (
     <section className={styles.program_detail}>
       <section className={styles.top_banner}></section>
@@ -251,7 +284,7 @@ const ProgramDetail = ({ getReviewList, toss }) => {
                       <ReactStars
                         count={5}
                         edit={false}
-                        size={28}
+                        size={starSize}
                         value={parseFloat(reviewAvg)}
                         activeColor="#ffd700"
                         isHalf={true}
@@ -274,7 +307,7 @@ const ProgramDetail = ({ getReviewList, toss }) => {
                   value={selectedTime}
                   className={styles.time_select}
                 >
-                  <option value={null}>예매 시간 선택</option>
+                  <option value="">예매 시간 선택</option>
                   {expTimeTableList &&
                     expTimeTableList.map((item) => (
                       <option key={item.idx} value={item.time}>
@@ -326,7 +359,7 @@ const ProgramDetail = ({ getReviewList, toss }) => {
                 <ReactStars
                   count={5}
                   edit={false}
-                  size={24}
+                  size={starSize}
                   value={parseFloat(reviewAvg)}
                   activeColor="#ffd700"
                   isHalf={true}
@@ -348,7 +381,7 @@ const ProgramDetail = ({ getReviewList, toss }) => {
                       <ReactStars
                         count={5}
                         edit={false}
-                        size={28}
+                        size={starSize}
                         value={parseFloat(reviewAvg)}
                         activeColor="#ffd700"
                         isHalf={true}

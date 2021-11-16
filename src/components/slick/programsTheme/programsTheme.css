@@ -40,6 +40,18 @@
 
 @media screen and (max-width: 800px) {
   .slick_programs_container .slick-list {
-    width: 88%;
+    width: 95%;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .slick_programs_container .slick-slider,
+  .slick_programs_container .slick-list,
+  .slick_programs_container .slick-track {
+    width: 100%;
+    margin: auto;
+  }
+  .slick_programs_container .slick-list {
+    width: 95%;
   }
 }

@@ -1,5 +1,4 @@
 .contact {
-  min-height: 1800px;
   margin-top: 78px;
   background-color: white;
 }
@@ -36,13 +35,46 @@
   background-color: white;
 }
 
-.title,
+.top_main {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.item_container {
+  margin: 0 40px;
+  width: 25%;
+  text-align: center;
+}
+
+.icon {
+  font-size: 72px;
+  color: var(--color-theme);
+}
+
+.item_desc {
+  width: 80%;
+  margin: auto;
+  margin-top: 40px;
+  font-size: var(--font-size-big);
+}
+
+.for_mobile_container {
+  display: none;
+}
+
+.top_title,
 .bottom_title {
   margin-top: 120px;
   text-align: center;
   font-size: var(--font-size-title);
   font-weight: 500;
   margin-bottom: 40px;
+}
+
+.top_title {
+  font-size: var(--font-size-big-title);
+  margin-bottom: 100px;
 }
 
 .route_button_container {
@@ -221,6 +253,13 @@
 }
 
 @media screen and (max-width: 780px) {
+  .for_web_container {
+    display: none;
+  }
+
+  .for_mobile_container {
+    display: block;
+  }
   .contact {
     margin-top: 63px;
   }
