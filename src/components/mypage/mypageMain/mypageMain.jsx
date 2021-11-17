@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import styles from "./mypageMain.module.css";
 import axios from "axios";
 
-const MypageMain = ({ user, sessionCheck }) => {
+const MypageMain = ({ user, sessionCheck, userLogout }) => {
+  const [disabled, setDisabled] = useState(false);
   const [inputValues, setInputValues] = useState({
-    pw: "",
     newPw: "",
     newPwConfirm: "",
     name: "",
@@ -12,7 +12,7 @@ const MypageMain = ({ user, sessionCheck }) => {
     authNum: "",
   });
 
-  const { pw, newPw, newPwConfirm, name, phone, authNum } = inputValues;
+  const { newPw, newPwConfirm, name, phone, authNum } = inputValues;
 
   const inputValueChangeHandler = (e) => {
     const { name, value } = e.target;
@@ -22,36 +22,124 @@ const MypageMain = ({ user, sessionCheck }) => {
     });
   };
 
+  const passwordChange = (sessionUser) => {
+    axios
+      .post(`${process.env.REACT_APP_BASEURL}/user/modifypassword`, {
+        id: sessionUser.id,
+        phone: sessionUser.phone,
+        password: newPw,
+      })
+      .then((response) => {
+        if (response.data === "success") {
+          window.alert("비밀번호가 변경되었습니다. 다시 로그인해주세요");
+          userLogout(true);
+        } else {
+          window.alert("에러가 발생했습니다. 새로고침 후에 다시 시도해주세요.");
+        }
+      })
+      .catch((err) => console.error(err));
+  };
+
   const onPasswordChangeHandler = () => {
-    //암호화된 패스워드와 사용자가 입력한 패스워드가 일치하는지 확인하는 과정 필요
+    if (newPw.length < 8 || newPw.length > 16) {
+      window.alert("비밀번호는 8~16자 사이여야 합니다.");
+      return;
+    }
     if (newPw !== newPwConfirm) {
       window.alert("새로운 비밀번호와 확인이 일치하지 않습니다.");
       return;
     }
+    axios
+      .post(`${process.env.REACT_APP_BASEURL}/user/session`)
+      .then((response) => {
+        if (response.data === "" || response.data.idx !== user.idx) {
+          window.alert("변경 권한이 없습니다.");
+          return;
+        }
+        passwordChange(response.data);
+      });
+  };
+
+  const sendSmsHandler = () => {
+    if (phone === "") {
+      window.alert("핸드폰 번호를 먼저 입력해주세요");
+      return;
+    }
+    if (phone.length !== 11) {
+      window.alert("핸드폰 번호를 다시 확인해주세요");
+      return;
+    }
+    for (let i = 0; i < phone.length; i++) {
+      if (isNaN(parseInt(phone.charAt(i)))) {
+        window.alert("숫자만 입력해주세요");
+        return;
+      }
+    }
 
     axios
-      .post(`${process.env.REACT_APP_BASEURL}/user/modifyinfo`, {
-        id: user.id,
-        phone: user.phone,
-        password: newPw,
+      .post(`${process.env.REACT_APP_BASEURL}/user/userphonevalid`, {
+        phone,
       })
-      .then((response) => console.log(response))
+      .then((response) => {
+        if (response.data !== "OK") {
+          window.alert("이미 가입된 번호입니다.");
+          return;
+        }
+        axios
+          .post(`${process.env.REACT_APP_BASEURL}/user/requestsms`, {
+            phone,
+          })
+          .then((response) => {
+            window.alert("인증번호가 발송되었습니다.");
+            setDisabled(true);
+          })
+          .catch((err) => console.error(err));
+      })
       .catch((err) => console.error(err));
   };
 
-  const onSmsHandler = () => {
-    //보류
+  const phoneChange = (sessionUser) => {
+    axios
+      .post(`${process.env.REACT_APP_BASEURL}/user/modifyphone`, {
+        id: sessionUser.id,
+        phone,
+      })
+      .then((response) => {
+        if (response.data === "success") {
+          window.alert("핸드폰 번호가 변경되었습니다. 다시 로그인해주세요.");
+          window.location.href = "/modoorock";
+        } else {
+          window.alert("에러가 발생했습니다. 새로고침 후에 다시 시도해주세요.");
+        }
+      })
+      .catch((err) => console.error(err));
+  };
+
+  const authNumCheck = (sessionUser) => {
+    axios
+      .post(`${process.env.REACT_APP_BASEURL}/user/checksms`, {
+        to: phone,
+        content: authNum,
+      })
+      .then((response) => {
+        if (response.data === "success") {
+          phoneChange(sessionUser);
+        } else {
+          window.alert("인증번호가 다릅니다. 다시 시도해주세요.");
+        }
+      });
   };
 
   const onPhoneChangeHandler = () => {
-    //비밀번호를 보내야 한다면 원래 비밀번호는 암호화되어있어 모르기 때문에 문제생김
     axios
-      .post(`${process.env.REACT_APP_BASEURL}/user/modifyinfo`, {
-        id: user.id,
-        phone,
-        password: "dww",
+      .post(`${process.env.REACT_APP_BASEURL}/user/session`)
+      .then((response) => {
+        if (response.data === "" || response.data.idx !== user.idx) {
+          window.alert("변경 권한이 없습니다.");
+          return;
+        }
+        authNumCheck(response.data);
       })
-      .then((response) => console.log(response))
       .catch((err) => console.error(err));
   };
 
@@ -91,16 +179,6 @@ const MypageMain = ({ user, sessionCheck }) => {
           />
         </div>
         <div className={styles.input_container}>
-          <p className={styles.input_title}>비밀번호</p>
-          <input
-            name="pw"
-            onChange={inputValueChangeHandler}
-            value={pw}
-            type="password"
-            className={styles.input}
-            spellCheck="false"
-            placeholder="비밀번호"
-          />
           <p className={styles.input_title}>새로운 비밀번호</p>
           <input
             name="newPw"
@@ -109,7 +187,7 @@ const MypageMain = ({ user, sessionCheck }) => {
             type="password"
             className={styles.input}
             spellCheck="false"
-            placeholder="새로운 비밀번호"
+            placeholder="새로운 비밀번호 (8~16자)"
           />
           <p className={styles.input_title}>새로운 비밀번호 확인</p>
 
@@ -123,12 +201,14 @@ const MypageMain = ({ user, sessionCheck }) => {
               spellCheck="false"
               placeholder="새로운 비밀번호 확인"
             />
-            <button className={styles.button}>비밀번호 변경</button>
+            <button className={styles.button} onClick={onPasswordChangeHandler}>
+              비밀번호 변경
+            </button>
           </div>
         </div>
 
         <div className={styles.input_container}>
-          <p className={styles.input_title}>핸드폰번호</p>
+          <p className={styles.input_title}>변경할 핸드폰번호</p>
 
           <div className={styles.button_and_input}>
             <input
@@ -138,9 +218,12 @@ const MypageMain = ({ user, sessionCheck }) => {
               type="text"
               className={styles.input_short}
               spellCheck="false"
-              placeholder="핸드폰번호"
+              placeholder="변경할 핸드폰번호"
+              disabled={disabled}
             />
-            <button className={styles.button}>인증번호 받기</button>
+            <button className={styles.button} onClick={sendSmsHandler}>
+              인증번호 받기
+            </button>
           </div>
         </div>
         <div className={styles.input_container}>
@@ -156,7 +239,9 @@ const MypageMain = ({ user, sessionCheck }) => {
               spellCheck="false"
               placeholder="인증번호"
             />
-            <button className={styles.button}>인증 후 변경</button>
+            <button className={styles.button} onClick={onPhoneChangeHandler}>
+              인증 후 변경
+            </button>
           </div>
         </div>
       </div>

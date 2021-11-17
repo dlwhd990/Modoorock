@@ -1,8 +1,8 @@
 import React from "react";
 import { useHistory } from "react-router";
 import styles from "./mypagePaymentItem.module.css";
-
 const MypagePaymentItem = ({ item, index, len, popupValueChangeHandler }) => {
+  console.log(item);
   const history = useHistory();
   const goToExp = (e) => {
     history.push(`/programs/view/${e.target.dataset.idx}`);
@@ -22,24 +22,36 @@ const MypagePaymentItem = ({ item, index, len, popupValueChangeHandler }) => {
         data-idx={item.expData.idx}
         onClick={goToExp}
       >
-        {item.expData.title}
+        {item.expData !== "" ? item.expData.title : "판매 종료된 체험상품"}
       </div>
       <div className={styles.price}>
-        {`${item.expData.price.toLocaleString("ko-KR")}원`}
+        {`${item.expData && `${item.expData.price.toLocaleString("ko-KR")}원`}`}
       </div>
       <div
         className={`${
-          item.purchaseData.reviewCheck === 0
+          item.expData === ""
+            ? `${styles.review} ${styles.already}`
+            : item.purchaseData.reviewCheck === 0
             ? `${styles.review} ${styles.write}`
             : `${styles.review} ${styles.already}`
         }`}
         data-userexpidx={item.purchaseData.idx}
         data-expidx={item.expData.idx}
         data-exp={item.expData.title}
-        data-check={item.purchaseData.reviewCheck === 0 ? "on" : "off"}
+        data-check={
+          item.expData === ""
+            ? "off"
+            : item.purchaseData.reviewCheck === 0
+            ? "on"
+            : "off"
+        }
         onClick={popupValueChangeHandler}
       >
-        {item.purchaseData.reviewCheck === 0 ? "리뷰작성" : "작성완료"}
+        {item.expData === ""
+          ? "작성불가"
+          : item.purchaseData.reviewCheck === 0
+          ? "리뷰작성"
+          : "작성완료"}
       </div>
     </div>
   );

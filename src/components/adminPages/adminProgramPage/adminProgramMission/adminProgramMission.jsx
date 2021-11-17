@@ -5,6 +5,7 @@ import AdminProgramGameItem from "./adminProgramGameItem/adminProgramGameItem";
 import styles from "./adminProgramMission.module.css";
 import AdminProgramGamePopup from "./adminProgramGamePopup/adminProgramGamePopup";
 import AdminProgramMissionPopup from "./adminProgramMissionPopup/adminProgramMissionPopup";
+import AdminProgramItemUploadPopup from "./adminProgramItemUploadPopup/adminProgramItemUploadPopup";
 
 const AdminProgramMission = ({ user }) => {
   const params = useParams();
@@ -13,6 +14,7 @@ const AdminProgramMission = ({ user }) => {
   const [gameList, setGameList] = useState(null);
   const [gamePopupOn, setGamePopupOn] = useState(false);
   const [missionPopupOn, setMissionPopupOn] = useState(false);
+  const [itemUploadPopupOn, setItemUploadPopupOn] = useState(false);
   const [missionLoader, setMissionLoader] = useState(false);
 
   const loadAttractionInfo = () => {
@@ -61,6 +63,15 @@ const AdminProgramMission = ({ user }) => {
 
   const closeMissionPopupHandler = () => {
     setMissionPopupOn(false);
+  };
+
+  const openAddItemPopupHandler = (e) => {
+    e.stopPropagation();
+    setItemUploadPopupOn(e.currentTarget.dataset.missionidx);
+  };
+
+  const closeAddItemPopupHandler = () => {
+    setItemUploadPopupOn(false);
   };
 
   useEffect(() => {
@@ -117,6 +128,7 @@ const AdminProgramMission = ({ user }) => {
               loadMissionList={loadMissionList}
               missionLoader={missionLoader}
               setMissionLoaderHandler={setMissionLoaderHandler}
+              openAddItemPopupHandler={openAddItemPopupHandler}
             />
           ))}
       </section>
@@ -138,6 +150,15 @@ const AdminProgramMission = ({ user }) => {
             loadMissionList={loadMissionList}
             setMissionLoaderHandler={setMissionLoaderHandler}
             gameIdx={missionPopupOn}
+          />
+        </section>
+      )}
+      {itemUploadPopupOn && (
+        <section className={styles.popup_filter}>
+          <AdminProgramItemUploadPopup
+            user={user}
+            closeAddItemPopupHandler={closeAddItemPopupHandler}
+            missionIdx={itemUploadPopupOn}
           />
         </section>
       )}

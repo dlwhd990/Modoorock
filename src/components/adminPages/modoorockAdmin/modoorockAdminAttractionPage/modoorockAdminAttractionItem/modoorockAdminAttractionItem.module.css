@@ -1,19 +1,28 @@
 .item {
+  margin-bottom: 30px;
+}
+
+.attraction_container {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  padding: 0 3%;
+  padding: 0 20px;
   height: 230px;
-  margin-bottom: 30px;
+  margin-bottom: 1px;
   background-color: white;
   box-shadow: 0 0 5px lightgray;
   border-radius: 8px;
+  cursor: pointer;
+}
+
+.attraction_container:hover {
+  background-color: rgb(253, 253, 253);
 }
 
 .image_container {
-  width: 20%;
-  height: 85%;
+  width: 300px;
+  height: 200px;
   box-shadow: 0 0 5px lightgray;
   border-radius: 4px;
 }
@@ -96,4 +105,9 @@
   border-radius: 4px;
   cursor: pointer;
   box-shadow: 1px 2px 3px lightgray;
+  transition: 140ms all ease-in;
+}
+
+.delete_button:hover {
+  background-color: red;
 }

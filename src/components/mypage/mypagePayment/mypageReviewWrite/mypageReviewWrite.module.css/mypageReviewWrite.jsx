@@ -11,6 +11,13 @@ const MypageReviewWrite = ({
   sessionCheckForLoadPurchaseList,
 }) => {
   const [stars, setStars] = useState(0);
+  const [starSize, setStarSize] = useState(() => {
+    if (window.innerWidth > 780) {
+      return 36;
+    } else {
+      return 30;
+    }
+  });
   const [comment, setComment] = useState("");
 
   const starValueChangeHandler = (e) => {
@@ -77,7 +84,7 @@ const MypageReviewWrite = ({
           <ReactStars
             count={5}
             edit={true}
-            size={36}
+            size={starSize}
             onChange={starValueChangeHandler}
             activeColor="#ffd700"
             emptyIcon={<i className="far fa-star"></i>}

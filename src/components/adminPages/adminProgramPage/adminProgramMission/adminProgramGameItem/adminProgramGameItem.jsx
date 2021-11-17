@@ -10,6 +10,7 @@ const AdminProgramGameItem = ({
   loadMissionList,
   missionLoader,
   setMissionLoaderHandler,
+  openAddItemPopupHandler,
 }) => {
   const [viewDetail, setViewDetail] = useState(false);
   const [missionList, setMissionList] = useState(null);
@@ -70,6 +71,7 @@ const AdminProgramGameItem = ({
                 key={item.idx}
                 item={item}
                 setMissionLoaderHandler={setMissionLoaderHandler}
+                openAddItemPopupHandler={openAddItemPopupHandler}
               />
             ))}
         </div>

@@ -3,8 +3,9 @@ import { useHistory, useParams } from "react-router";
 import styles from "./mypage.module.css";
 import MypageMain from "./mypageMain/mypageMain";
 import MypagePayment from "./mypagePayment/mypagePayment";
+import MyPagePoint from "./myPagePoint/myPagePoint";
 
-const Mypage = ({ user, sessionCheck }) => {
+const Mypage = ({ user, sessionCheck, userLogout }) => {
   const history = useHistory();
   const { path } = useParams();
 
@@ -13,6 +14,8 @@ const Mypage = ({ user, sessionCheck }) => {
       history.push("/mypage/main");
     } else if (e.currentTarget.innerText === "결제내역") {
       history.push("/mypage/payment");
+    } else if (e.currentTarget.innerText === "포인트내역") {
+      history.push("/mypage/point");
     }
   };
 
@@ -40,9 +43,23 @@ const Mypage = ({ user, sessionCheck }) => {
         >
           결제내역
         </div>
+        <div
+          className={
+            path === "point"
+              ? `${styles.select_button} ${styles.on}`
+              : `${styles.select_button} ${styles.off}`
+          }
+          onClick={onSelectHandler}
+        >
+          포인트내역
+        </div>
       </section>
       <h1 className={styles.title}>
-        {path === "main" ? "내 정보" : "결제내역"}
+        {path === "main"
+          ? "내 정보"
+          : path === "payment"
+          ? "결제내역"
+          : "포인트내역"}
       </h1>
       <div className={styles.route_button_container}>
         <div
@@ -78,14 +95,24 @@ const Mypage = ({ user, sessionCheck }) => {
             window.scrollTo({ top: 0 });
           }}
         >
-          {path === "main" ? "내 정보" : "결제내역"}
+          {path === "main"
+            ? "내 정보"
+            : path === "payment"
+            ? "결제내역"
+            : "포인트내역"}
         </p>
       </div>
       <section className={styles.main}>
         {path === "main" ? (
-          <MypageMain user={user} sessionCheck={sessionCheck} />
-        ) : (
+          <MypageMain
+            user={user}
+            sessionCheck={sessionCheck}
+            userLogout={userLogout}
+          />
+        ) : path === "payment" ? (
           <MypagePayment />
+        ) : (
+          <MyPagePoint />
         )}
       </section>
     </section>

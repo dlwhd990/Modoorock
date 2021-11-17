@@ -1,0 +1,140 @@
+.popup {
+  width: 800px;
+  height: 700px;
+  background-color: white;
+  border: 1px solid lightgray;
+  padding: 40px;
+  border-radius: 8px;
+  animation: popupAppear 0.6s;
+  position: relative;
+}
+
+.popup_top {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.popup_title {
+  font-size: var(--font-size-title);
+  font-weight: 500;
+  margin: 0;
+  margin-right: 14px;
+}
+
+.popup_subtitle {
+  margin: 0;
+  color: var(--color-desc);
+}
+
+.close_popup_button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: var(--font-size-title);
+  cursor: pointer;
+  transition: 100ms all ease-in;
+}
+
+.close_popup_button:hover {
+  color: red;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.file_container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 30px;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.container_large {
+  display: flex;
+  flex-direction: row;
+}
+
+.button_container {
+  margin-top: 50px;
+  justify-content: center;
+}
+
+.text {
+  width: 120px;
+  margin: 0;
+}
+
+.file_input {
+  width: 500px;
+  border-radius: 4px;
+}
+
+.input {
+  width: 500px;
+  height: 30px;
+  border: 1px solid var(--color-light-border);
+  padding: 2px 4px;
+  font-size: var(--font-size-normal);
+  border-radius: 4px;
+}
+
+.textarea {
+  resize: none;
+  width: 500px;
+  height: 70px;
+  border: 1px solid var(--color-light-border);
+  padding: 4px;
+  font-size: var(--font-size-normal);
+  border-radius: 4px;
+}
+
+.button {
+  display: block;
+  width: 87%;
+  height: 35px;
+  outline: none;
+  border: none;
+  margin: auto;
+  margin-top: 6px;
+  font-size: var(--font-size-normal);
+  color: white;
+  background-color: var(--color-admin-theme);
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.list {
+  width: 87%;
+  height: 252px;
+  box-shadow: 2px 3px 5px lightgray;
+  border-radius: 8px;
+  margin: auto;
+  margin-top: 20px;
+  overflow-y: scroll;
+  border: 1px solid rgb(230, 230, 230);
+}
+
+@keyframes popupAppear {
+  0% {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

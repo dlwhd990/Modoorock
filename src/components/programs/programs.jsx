@@ -299,13 +299,13 @@ const Programs = ({ areaList, programList, reviewList }) => {
                 </div>
                 <div
                   className={`${
-                    regionValue === "충남"
+                    regionValue === "충남·대전"
                       ? `${styles.region_select} ${styles.region_on}`
                       : `${styles.region_select}`
                   }`}
                   onClick={regionChangeHandler}
                 >
-                  충남
+                  충남·대전
                 </div>
                 <div
                   className={`${
@@ -319,33 +319,13 @@ const Programs = ({ areaList, programList, reviewList }) => {
                 </div>
                 <div
                   className={`${
-                    regionValue === "대전"
+                    regionValue === "경북·대구"
                       ? `${styles.region_select} ${styles.region_on}`
                       : `${styles.region_select}`
                   }`}
                   onClick={regionChangeHandler}
                 >
-                  대전
-                </div>
-                <div
-                  className={`${
-                    regionValue === "경북"
-                      ? `${styles.region_select} ${styles.region_on}`
-                      : `${styles.region_select}`
-                  }`}
-                  onClick={regionChangeHandler}
-                >
-                  경북
-                </div>
-                <div
-                  className={`${
-                    regionValue === "대구"
-                      ? `${styles.region_select} ${styles.region_on}`
-                      : `${styles.region_select}`
-                  }`}
-                  onClick={regionChangeHandler}
-                >
-                  대구
+                  경북·대구
                 </div>
                 <div
                   className={`${
@@ -369,23 +349,13 @@ const Programs = ({ areaList, programList, reviewList }) => {
                 </div>
                 <div
                   className={`${
-                    regionValue === "전남"
+                    regionValue === "전남·광주"
                       ? `${styles.region_select} ${styles.region_on}`
                       : `${styles.region_select}`
                   }`}
                   onClick={regionChangeHandler}
                 >
-                  전남
-                </div>
-                <div
-                  className={`${
-                    regionValue === "광주"
-                      ? `${styles.region_select} ${styles.region_on}`
-                      : `${styles.region_select}`
-                  }`}
-                  onClick={regionChangeHandler}
-                >
-                  광주
+                  전남·광주
                 </div>
                 <div
                   className={`${

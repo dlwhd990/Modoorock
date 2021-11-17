@@ -2,9 +2,11 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import styles from "./adminProgramMissionItem.module.css";
 
-// 미션도 디테일 보는것이 필요?
-// mission_type_and_name = 임시
-const AdminProgramMissionItem = ({ item, setMissionLoaderHandler }) => {
+const AdminProgramMissionItem = ({
+  item,
+  setMissionLoaderHandler,
+  openAddItemPopupHandler,
+}) => {
   const [data, setData] = useState(null);
   const [typeName, setTypeName] = useState(null);
 
@@ -87,9 +89,15 @@ const AdminProgramMissionItem = ({ item, setMissionLoaderHandler }) => {
         <p className={styles.mission_type_and_name}>
           {typeName && data && `${typeName} - ${data.title}`}
         </p>
-        <button className={styles.add_mission_button}>
-          <i className={`${styles.add_button_icon} fas fa-edit`}></i>
-        </button>
+        {item.typeIdx === 9 && (
+          <button
+            className={styles.add_mission_button}
+            data-missionidx={item.idx}
+            onClick={openAddItemPopupHandler}
+          >
+            <i className={`${styles.add_button_icon} fas fa-edit`}></i>
+          </button>
+        )}
         <button
           className={styles.delete_mission_button}
           onClick={onDeleteHandler}

@@ -73,3 +73,36 @@
 .close_button_icon:hover {
   color: red;
 }
+
+@media screen and (max-width: 780px) {
+  .page {
+    width: 95%;
+    height: 530px;
+    margin-top: 40px;
+  }
+
+  .title {
+    font-size: var(--font-size-big);
+  }
+
+  .exp_info {
+    font-size: var(--font-size-small);
+  }
+
+  .container {
+    padding: 0;
+  }
+
+  .text {
+    font-size: var(--font-size-small);
+  }
+
+  .part {
+    margin: 16px 0;
+  }
+
+  .textarea {
+    height: 190px;
+    font-size: var(--font-size-small);
+  }
+}

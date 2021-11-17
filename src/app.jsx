@@ -191,12 +191,12 @@ const App = (props) => {
       .catch((err) => console.error(err));
   };
 
-  const userLogout = () => {
+  const userLogout = (check) => {
     axios
       .post(`${process.env.REACT_APP_BASEURL}/user/logout`)
       .then(() => {
         setUser(false);
-        window.alert("안전하게 로그아웃 되었습니다.");
+        !check && window.alert("안전하게 로그아웃 되었습니다.");
         window.location.href = "/modoorock";
       })
       .catch((err) => console.error(err));
@@ -407,7 +407,13 @@ const App = (props) => {
         </Route>
         <Route exact path="/mypage/:path">
           <Header user={user} userLogout={userLogout} />
-          {user && <Mypage user={user} sessionCheck={sessionCheck} />}
+          {user && (
+            <Mypage
+              user={user}
+              sessionCheck={sessionCheck}
+              userLogout={userLogout}
+            />
+          )}
           <Footer />
         </Route>
         <Route exact path="/admin/:path">

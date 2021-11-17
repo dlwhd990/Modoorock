@@ -545,6 +545,7 @@
     box-shadow: none;
     margin-bottom: 0;
     margin-top: 1px;
+    animation: none;
   }
   .image_container {
     padding-bottom: 0;

@@ -229,6 +229,7 @@ const ModoorockAdmin = (props) => {
             userList={userList}
             programList={programList}
             loadAttractionList={loadAttractionList}
+            loadProgramList={loadProgramList}
           />
         )
       ) : path === "inquire" ? (

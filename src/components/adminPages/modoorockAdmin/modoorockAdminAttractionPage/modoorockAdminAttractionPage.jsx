@@ -7,6 +7,7 @@ const ModoorockAdminAttractionPage = ({
   userList,
   programList,
   loadAttractionList,
+  loadProgramList,
 }) => {
   return (
     <section className={styles.attraction_page}>
@@ -19,6 +20,7 @@ const ModoorockAdminAttractionPage = ({
             userList={userList}
             programList={programList}
             loadAttractionList={loadAttractionList}
+            loadProgramList={loadProgramList}
           />
         ))}
       </section>
