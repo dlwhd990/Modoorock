@@ -189,7 +189,6 @@ const AdminAttractionUploadPage = ({ user, backgroundList }) => {
       }
     }
     templatePopupHandler();
-    console.log(nowTemplateButtonOrder);
     setNowTemplateButtonOrder([...nowTemplateButtonOrder, { idx, name }]);
   };
 

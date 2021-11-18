@@ -131,9 +131,6 @@ const InquireSearchPage = ({ inquireArticles, getInquireList }) => {
     setCursor(cursor + 5);
   };
 
-  useEffect(() => {
-    console.log(sliceList, listList);
-  }, [sliceList, listList]);
   return (
     <section className={styles.search_result}>
       <section className={styles.customer_top_banner}></section>

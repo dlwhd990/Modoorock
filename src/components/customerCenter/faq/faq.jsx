@@ -241,7 +241,7 @@ const Faq = ({ articles, getFaqList }) => {
         </ul>
 
         <button className={styles.write_button} onClick={goWrite}>
-          글쓰기
+          작성
         </button>
       </section>
     </section>

@@ -2,7 +2,6 @@ import React from "react";
 import { useHistory } from "react-router";
 import styles from "./mypagePaymentItem.module.css";
 const MypagePaymentItem = ({ item, index, len, popupValueChangeHandler }) => {
-  console.log(item);
   const history = useHistory();
   const goToExp = (e) => {
     history.push(`/programs/view/${e.target.dataset.idx}`);

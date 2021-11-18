@@ -51,6 +51,16 @@
   transition: 120ms all ease-in;
 }
 
+.add_mission_button_none {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+  border-radius: 50%;
+  outline: none;
+  border: none;
+  background-color: transparent;
+}
+
 .delete_mission_button {
   width: 30px;
   height: 30px;

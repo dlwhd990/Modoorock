@@ -198,10 +198,7 @@ const AdminProgramEdit = (props) => {
           amount: parseInt(count),
         }
       )
-      .then((response) => {
-        console.log(response);
-        loadTimeTableList();
-      });
+      .then((response) => loadTimeTableList());
 
     countInputRef.current.value = "";
     setCount("");
@@ -254,7 +251,6 @@ const AdminProgramEdit = (props) => {
             const mainImage = imageList.filter((item) =>
               item.includes("_main")
             );
-            console.log(data);
             setItem(data);
             const { title, price, theme, content, detailContent } = data;
             setInputValues({

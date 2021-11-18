@@ -35,7 +35,7 @@ const PaySuccessPage = () => {
         userIdx,
         reservationDate,
       })
-      .then((response) => console.log(response))
+      .then((response) => console.log("DD"))
       .catch((err) => console.error(err));
   };
 

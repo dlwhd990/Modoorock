@@ -54,7 +54,6 @@ const ModoorockAdminAttractionItem = ({
       }
     });
     setMyProgramList(myList);
-    console.log(myList);
     setProgramCount(count);
   }, [programList]);
 

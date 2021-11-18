@@ -189,6 +189,27 @@
 
   .inquire_div_and_title_container {
     font-size: var(--font-size-mobile-small);
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .slash {
+    display: none;
+  }
+
+  .inquire_div,
+  .program_title {
+    margin: 2px 0;
+    margin-bottom: 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    word-wrap: break-word;
+    word-break: break-all;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+  }
+
+  .program_title {
   }
 
   .inquire_container,

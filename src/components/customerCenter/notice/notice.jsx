@@ -78,7 +78,6 @@ const Notice = ({ articles, getNoticeList }) => {
   };
 
   const onSearchHandler = () => {
-    console.log(searchInput);
     if (searchInput === "") {
       window.alert("검색어를 입력해주세요");
       return;
@@ -195,7 +194,7 @@ const Notice = ({ articles, getNoticeList }) => {
           )}
         </ul>
         <button className={styles.write_button} onClick={goWrite}>
-          글쓰기
+          작성
         </button>
       </section>
     </section>

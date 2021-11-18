@@ -110,9 +110,9 @@ const Mypage = ({ user, sessionCheck, userLogout }) => {
             userLogout={userLogout}
           />
         ) : path === "payment" ? (
-          <MypagePayment />
+          <MypagePayment user={user} />
         ) : (
-          <MyPagePoint />
+          <MyPagePoint user={user} />
         )}
       </section>
     </section>

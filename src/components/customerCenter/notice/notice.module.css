@@ -153,12 +153,12 @@
 }
 
 .write_button {
-  background-color: #39a2e8;
+  background-color: var(--color-admin-theme);
   border: none;
   border-radius: 4px;
-  width: 5.2rem;
-  height: 2.2rem;
-  font-size: 1.2rem;
+  width: 4rem;
+  height: 2rem;
+  font-size: var(--font-size-normal);
   outline: none;
   cursor: pointer;
   position: absolute;

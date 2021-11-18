@@ -60,7 +60,6 @@ const MypageReviewWrite = ({
             idx: userExpIdx,
           })
           .then((res) => {
-            console.log(res.data.userIdx, response.data.idx);
             if (res.data.userIdx !== response.data.idx) {
               window.alert("작성 권한이 없습니다.");
               return;

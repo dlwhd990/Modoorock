@@ -89,7 +89,7 @@ const AdminProgramMissionItem = ({
         <p className={styles.mission_type_and_name}>
           {typeName && data && `${typeName} - ${data.title}`}
         </p>
-        {item.typeIdx === 9 && (
+        {item.typeIdx === 9 ? (
           <button
             className={styles.add_mission_button}
             data-missionidx={item.idx}
@@ -97,6 +97,8 @@ const AdminProgramMissionItem = ({
           >
             <i className={`${styles.add_button_icon} fas fa-edit`}></i>
           </button>
+        ) : (
+          <button className={styles.add_mission_button_none}></button>
         )}
         <button
           className={styles.delete_mission_button}

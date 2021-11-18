@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styles from "./adminProgramItemUploadPopup.module.css";
 import axios from "axios";
 import AdminProgramItemUploadItem from "./adminProgramItemUploadItem/adminProgramItemUploadItem";
@@ -8,6 +8,7 @@ const AdminProgramItemUploadPopup = ({
   missionIdx,
   user,
 }) => {
+  const fileInputRef = useRef();
   const [itemList, setItemList] = useState(null);
   const [inputValues, setInputValues] = useState({
     title: "",
@@ -27,6 +28,10 @@ const AdminProgramItemUploadPopup = ({
       setThumbnail(file);
     };
     file && reader.readAsDataURL(file);
+  };
+
+  const resetFileInputHandler = () => {
+    fileInputRef.current.value = null;
   };
 
   const inputChangeHandler = (e) => {
@@ -63,6 +68,7 @@ const AdminProgramItemUploadPopup = ({
                 content: "",
                 point: "",
               });
+              resetFileInputHandler();
               setThumbnail(null);
               loadItemList();
               return;
@@ -101,6 +107,7 @@ const AdminProgramItemUploadPopup = ({
         <div className={styles.file_container}>
           <p className={styles.text}>미션 사진</p>
           <input
+            ref={fileInputRef}
             type="file"
             accept="image/jpg,image/png,image/jpeg,image/webp"
             className={styles.file_input}

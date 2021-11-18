@@ -117,7 +117,7 @@ const ProgramDetail = ({ getReviewList, toss }) => {
           selectedTime
         );
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.error(err));
   };
 
   const loadProgramInfo = () => {

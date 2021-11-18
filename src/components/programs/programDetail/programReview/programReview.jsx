@@ -19,7 +19,7 @@ const ProgramReview = ({ review }) => {
           }
           setUser(tmp);
         })
-        .catch((err) => console.log(err));
+        .catch((err) => console.error(err));
     };
     findUserId();
   }, []);

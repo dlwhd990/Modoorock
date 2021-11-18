@@ -280,8 +280,23 @@ const App = (props) => {
     getIntroVideos();
   }, []);
 
+  //테스트
+  const test = () => {
+    axios
+      .post(`${process.env.REACT_APP_BASEURL}/user/addpoint`, {
+        idx: user.idx,
+        point: 400,
+        log: "미션완료",
+      })
+      .then((response) => console.log(response))
+      .catch((err) => console.error(err));
+  };
+
   useEffect(() => {
     user && getInquireList();
+    //테스트
+    //user && test();
+    user && console.log(user);
   }, [user]);
 
   // 방법 찾을 때  까지 header+footer 모두에게 붙임 (admin 페이지에서는 안떠야하기 때문에)

@@ -47,7 +47,7 @@
 
 .about_us_main {
   height: 600px;
-  padding: 0 50px;
+  padding: 0 50px 0 320px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -258,6 +258,7 @@
   .about_us_main {
     display: flex;
     flex-direction: column;
+    padding: 0 50px;
     margin-top: 140px;
     height: 500px;
   }

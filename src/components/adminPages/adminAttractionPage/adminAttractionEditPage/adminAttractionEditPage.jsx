@@ -303,7 +303,6 @@ const AdminAttractionEditPage = ({ user, backgroundList }) => {
     tmp.forEach((item) => {
       result.push({ idx: item, name: buttonNameList[item] });
     });
-    console.log(result);
     setNowTemplateButtonOrder(result);
   }, [item]);
 
