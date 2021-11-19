@@ -559,7 +559,7 @@ const ProgramDetail = ({ getReviewList, toss }) => {
                 className={styles.submit_button}
                 onClick={writeSubmitHandler}
               >
-                글쓰기
+                글작성
               </button>
             </div>
           </section>

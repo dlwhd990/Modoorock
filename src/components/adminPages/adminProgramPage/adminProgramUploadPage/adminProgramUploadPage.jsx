@@ -39,7 +39,14 @@ const AdminProgramUploadPage = ({ user }) => {
       .post(`${process.env.REACT_APP_BASEURL}/attraction/getattractioninfo`, {
         idx: parseInt(params.path_three),
       })
-      .then((response) => setAttractionInfo(response.data))
+      .then((response) => {
+        if (response.data === "") {
+          window.alert("접근 권한이 없습니다.");
+          window.location.href = "/modoorock/admin/attraction";
+          return;
+        }
+        setAttractionInfo(response.data);
+      })
       .catch((err) => console.error(err));
   };
 
@@ -333,7 +340,9 @@ const AdminProgramUploadPage = ({ user }) => {
                   <span className={styles.review_count_text}>32개의 리뷰</span>
                 </div>
                 <div className={styles.price_container}>
-                  <p className={styles.price}>{`${price}원`}</p>
+                  <p className={styles.price}>{`${price.toLocaleString(
+                    "ko-KR"
+                  )}원`}</p>
                 </div>
               </div>
             </section>

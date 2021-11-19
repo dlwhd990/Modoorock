@@ -1,9 +1,14 @@
 import React from "react";
+import { useHistory } from "react-router";
 import styles from "./adminFirstPageInquireItem.module.css";
 
 const AdminFirstPageInquireItem = ({ item }) => {
+  const history = useHistory();
+  const goInquirePage = () => {
+    history.push("/admin/inquire");
+  };
   return (
-    <div className={styles.item}>
+    <div className={styles.item} onClick={goInquirePage}>
       <div className={styles.division}>
         <div
           className={`${

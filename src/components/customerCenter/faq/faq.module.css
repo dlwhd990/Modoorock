@@ -29,14 +29,47 @@
   transition: all 120ms ease-in;
 }
 
-.header {
+.header_bottom {
+  height: 75px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 1rem;
+  padding-left: 1.5rem;
+  font-weight: bolder;
+  color: rgb(77, 77, 77);
+  border: 3px;
+  border-style: solid;
+  border-image: linear-gradient(
+    90deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(0, 198, 121, 1) 0%,
+    rgba(0, 212, 255, 1) 100%
+  );
+  border-image: linear-gradient(
+    90deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(0, 198, 121, 1) 0%,
+    rgba(0, 198, 121, 1) 0%,
+    rgba(0, 212, 255, 1) 0%,
+    rgba(0, 198, 121, 1) 100%
+  );
+  border-image-slice: 1;
+  border-left: none;
+  border-right: none;
+  border-bottom: none;
+  font-weight: 400;
+  font-size: 18px;
+  color: #00c67a;
+}
+
+.header_top {
   display: flex;
   flex-direction: row;
   padding: 1rem 0.5rem;
   font-weight: bolder;
   color: rgb(77, 77, 77);
   margin-top: 32px;
-  border-bottom: 2px solid var(--color-light-border);
   font-weight: 400;
   font-size: 16px;
 }
@@ -52,6 +85,27 @@
 .header_on {
   color: black;
   border-bottom: 3px solid black;
+}
+
+.nothing {
+  flex-basis: 5%;
+}
+
+.type {
+  flex-basis: 22%;
+}
+
+.title {
+  flex-basis: 58%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  -moz-white-space: nowrap;
+  overflow: hidden;
+}
+
+.date {
+  flex-basis: 15%;
+  text-align: center;
 }
 
 .bottom {
@@ -86,12 +140,13 @@
 }
 
 .write_button {
+  width: auto;
   background-color: #39a2e8;
   border: none;
   border-radius: 4px;
-  width: 5.2rem;
-  height: 2.2rem;
+  padding: 4px 12px;
   font-size: 1.2rem;
+  font-weight: 400;
   outline: none;
   cursor: pointer;
   position: absolute;
@@ -108,17 +163,6 @@
 
 .write_a {
   color: white;
-}
-
-.report_filter {
-  z-index: 1;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgb(95, 95, 95);
-  opacity: 0.7;
 }
 
 .arrow {
@@ -150,8 +194,29 @@
     width: 95%;
   }
 
-  .header {
+  .header_top {
     margin-top: 12px;
+    padding-bottom: 10px;
+  }
+
+  .header_bottom {
+    height: 60px;
+    font-size: var(--font-size-small);
+    padding-left: 1rem;
+  }
+  .nothing {
+    flex-basis: 6%;
+  }
+  .type {
+    flex-basis: 24%;
+  }
+
+  .title {
+    margin-left: 3%;
+    flex-basis: 46%;
+  }
+  .date {
+    flex-basis: 21%;
   }
   .header_item {
     font-size: var(--font-size-small);

@@ -194,7 +194,7 @@ const Notice = ({ articles, getNoticeList }) => {
           )}
         </ul>
         <button className={styles.write_button} onClick={goWrite}>
-          작성
+          글작성
         </button>
       </section>
     </section>

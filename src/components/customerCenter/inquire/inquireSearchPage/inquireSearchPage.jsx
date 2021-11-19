@@ -229,7 +229,7 @@ const InquireSearchPage = ({ inquireArticles, getInquireList }) => {
             )}
           </ul>
           <button className={styles.write_button} onClick={goWrite}>
-            글쓰기
+            글작성
           </button>
         </section>
       </section>

@@ -3,8 +3,9 @@
   flex-direction: column;
   font-weight: bolder;
   color: rgb(77, 77, 77);
+  border-top: 2px solid rgb(235, 235, 235);
   border-bottom: 2px solid rgb(235, 235, 235);
-
+  margin-top: -2px;
   font-weight: 400;
   font-size: 16px;
   color: var(--color-article);
@@ -27,16 +28,15 @@
 }
 
 .type {
-  flex-basis: 25%;
+  flex-basis: 22%;
 }
 
 .title {
-  flex-basis: 60%;
+  flex-basis: 58%;
   text-overflow: ellipsis;
   white-space: nowrap;
   -moz-white-space: nowrap;
   overflow: hidden;
-  padding-right: 12px;
 }
 
 .date {
@@ -88,6 +88,18 @@
 
   .type {
     flex-basis: 24%;
+  }
+
+  .title {
+    margin-left: 3%;
+    flex-basis: 46%;
+  }
+
+  .date {
+    flex-basis: 21%;
+  }
+  .content {
+    padding: 10px 12px;
   }
   .q_container:hover {
     background-color: white;

@@ -1,4 +1,5 @@
 .user_page {
+  min-height: 100vh;
   margin-top: 80px;
   padding: 150px 0;
   background-color: var(--color-smoke-white);

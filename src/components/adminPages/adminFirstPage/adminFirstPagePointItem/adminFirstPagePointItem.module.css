@@ -19,7 +19,8 @@
   align-items: center;
 }
 
-.item_photo {
+.item_photo,
+.item_video {
   width: 37%;
   min-width: 37%;
   height: 95%;

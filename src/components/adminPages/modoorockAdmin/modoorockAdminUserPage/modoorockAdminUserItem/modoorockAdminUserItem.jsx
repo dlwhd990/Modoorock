@@ -45,7 +45,7 @@ const ModoorockAdminUserItem = ({ item, loadUserList }) => {
           ? "관광지관리자"
           : "모두락관리자"}
       </p>
-      <p className={styles.date}>2021-09-22</p>
+      <p className={styles.date}>{item.registryDate.slice(0, 10)}</p>
       <div className={styles.change_grade}>
         <button className={styles.change_grade_button} onClick={changeToUser}>
           일반회원

@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import styles from "./adminFirstPage.module.css";
 import AdminFirstPageAttractionItem from "./adminFirstPageAttractionItem/adminFirstPageAttractionItem";
 import AdminFirstPageInquireItem from "./adminFirstPageInquireItem/adminFirstPageInquireItem";
+import AdminFirstPagePointItem from "./adminFirstPagePointItem/adminFirstPagePointItem";
 
-const AdminFirstPage = ({ myAttractionList, myInquireList }) => {
+const AdminFirstPage = ({ myAttractionList, myInquireList, myPointList }) => {
   return (
     <section className={styles.first_page}>
       <section className={styles.top}>
@@ -52,10 +53,15 @@ const AdminFirstPage = ({ myAttractionList, myInquireList }) => {
             </div>
 
             <p className={styles.head_text}>
-              <span className={styles.head_text_big}>12</span> 개의 포인트 내역
+              <span className={styles.head_text_big}>12</span> 개의 심사 대기
+              포인트
             </p>
           </div>
-          <div className={styles.top_item_main}></div>
+          <div className={styles.top_item_main}>
+            {myPointList.map((item) => (
+              <AdminFirstPagePointItem key={item.userMissionIdx} item={item} />
+            ))}
+          </div>
         </div>
       </section>
       <section className={styles.bottom}></section>

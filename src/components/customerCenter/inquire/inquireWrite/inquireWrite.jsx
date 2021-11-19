@@ -77,7 +77,7 @@ const InquireWrite = () => {
           ></textarea>
         </div>
         <button className={styles.submit_button} onClick={writeSubmitHandler}>
-          글쓰기
+          글작성
         </button>
       </form>
     </section>

@@ -12,6 +12,7 @@ import AdminProgramEdit from "../adminProgramPage/adminProgramEdit/adminProgramE
 import AdminProgramMission from "../adminProgramPage/adminProgramMission/adminProgramMission";
 import AdminProgramPage from "../adminProgramPage/adminProgramPage";
 import AdminProgramUploadPage from "../adminProgramPage/adminProgramUploadPage/adminProgramUploadPage";
+import AdminReservationPage from "../adminReservationPage/adminReservationPage";
 import styles from "./adminMain.module.css";
 
 const AdminMain = ({ userLogout }) => {
@@ -25,7 +26,7 @@ const AdminMain = ({ userLogout }) => {
 
   const [myInquireList, setMyInquireList] = useState(null);
 
-  const [myPointList, setMyPointList] = useState([]);
+  const [myPointList, setMyPointList] = useState(null);
 
   const [backgroundList, setBackgroundList] = useState(null);
 
@@ -49,7 +50,7 @@ const AdminMain = ({ userLogout }) => {
             result.push(attraction);
           }
         });
-        setMyAttractionList(result);
+        setMyAttractionList(result.reverse());
       })
       .catch((err) => console.error(err));
   };
@@ -66,7 +67,16 @@ const AdminMain = ({ userLogout }) => {
   const loadBackgroundList = () => {
     axios
       .post(`${process.env.REACT_APP_BASEURL}/file/getbglist`)
-      .then((response) => setBackgroundList(response.data))
+      .then((response) => setBackgroundList(response.data.reverse()))
+      .catch((err) => console.error(err));
+  };
+
+  const loadPointList = () => {
+    axios
+      .post(`${process.env.REACT_APP_BASEURL}/exp/getconfirmlist`, {
+        userIdx: user.idx,
+      })
+      .then((response) => setMyPointList(response.data))
       .catch((err) => console.error(err));
   };
 
@@ -87,6 +97,7 @@ const AdminMain = ({ userLogout }) => {
     user && loadMyAttractionList();
     user && loadMyInquireList();
     user && loadBackgroundList();
+    user && loadPointList();
   }, [user]);
 
   return (
@@ -170,6 +181,22 @@ const AdminMain = ({ userLogout }) => {
                 </div>
                 <p className={styles.menu_text}>포인트 관리</p>
               </div>
+              <div
+                className={`${
+                  menuSelected === "reservation"
+                    ? `${styles.menu_item} ${styles.menu_item_on}`
+                    : `${styles.menu_item} ${styles.menu_item_off}`
+                }`}
+                data-value="reservation"
+                onClick={onButtonClickHandler}
+              >
+                <div className={styles.menu_icon_container}>
+                  <i
+                    className={`${styles.menu_icon} far fa-calendar-check`}
+                  ></i>
+                </div>
+                <p className={styles.menu_text}>예약 관리</p>
+              </div>
             </div>
           </section>
           <section className={styles.main_container}>
@@ -229,6 +256,7 @@ const AdminMain = ({ userLogout }) => {
                   <AdminFirstPage
                     myAttractionList={myAttractionList}
                     myInquireList={myInquireList}
+                    myPointList={myPointList}
                   />
                 )}
               {!params.path_two &&
@@ -250,6 +278,9 @@ const AdminMain = ({ userLogout }) => {
                 )}
               {!params.path_two && params.path === "point" && myPointList && (
                 <AdminPointPage myPointList={myPointList} />
+              )}
+              {!params.path_two && params.path === "reservation" && (
+                <AdminReservationPage />
               )}
             </section>
           </section>

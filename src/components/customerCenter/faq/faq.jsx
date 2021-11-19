@@ -157,7 +157,7 @@ const Faq = ({ articles, getFaqList }) => {
 
   return (
     <section className={styles.notice}>
-      <section className={styles.header} onClick={headerSelectHandler}>
+      <section className={styles.header_top} onClick={headerSelectHandler}>
         <p
           className={`${
             headerSelect === "All"
@@ -204,6 +204,12 @@ const Faq = ({ articles, getFaqList }) => {
           사이트 이용
         </p>
       </section>
+      <section className={styles.header_bottom}>
+        <div className={styles.nothing}></div>
+        <div className={styles.type}>구분</div>
+        <div className={styles.title}>제목</div>
+        <div className={styles.date}>작성일</div>
+      </section>
       <section className={styles.body}>
         {pageList.length > 1 &&
           pageList[numbering].map((index) => (
@@ -241,7 +247,7 @@ const Faq = ({ articles, getFaqList }) => {
         </ul>
 
         <button className={styles.write_button} onClick={goWrite}>
-          작성
+          글작성
         </button>
       </section>
     </section>

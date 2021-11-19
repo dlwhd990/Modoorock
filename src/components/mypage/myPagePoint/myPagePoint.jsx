@@ -11,7 +11,7 @@ const MyPagePoint = ({ user }) => {
         .post(`${process.env.REACT_APP_BASEURL}/user/getpointloglist`, {
           idx,
         })
-        .then((response) => setPointList(response.data))
+        .then((response) => setPointList(response.data.reverse()))
         .catch((err) => console.error(err));
     };
     const sessionUserCheck = () => {
@@ -26,7 +26,6 @@ const MyPagePoint = ({ user }) => {
         });
     };
     sessionUserCheck();
-    console.log(pointList);
   }, []);
   return (
     <section className={styles.list}>

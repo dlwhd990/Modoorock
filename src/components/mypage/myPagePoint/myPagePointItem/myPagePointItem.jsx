@@ -9,7 +9,7 @@ const MyPagePointItem = ({ item, index, len }) => {
         5,
         7
       )}/${item.date.slice(8, 10)}`}</div>
-      <div className={styles.content}>{item.content}</div>
+      <div className={styles.title}>{item.content}</div>
       <div className={styles.nothing}></div>
       <div
         className={`${

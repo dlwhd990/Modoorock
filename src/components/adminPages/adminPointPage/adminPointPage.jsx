@@ -1,4 +1,5 @@
 import React from "react";
+import AdminPointItem from "./adminPointItem/adminPointItem";
 import styles from "./adminPointPage.module.css";
 
 const AdminPointPage = ({ myPointList }) => {
@@ -12,10 +13,14 @@ const AdminPointPage = ({ myPointList }) => {
           <p className={styles.title}>포인트 관리</p>
           <p
             className={styles.subtitle}
-          >{`${myPointList.length} 개의 포인트 내역`}</p>
+          >{`${myPointList.length} 개의 심사 대기 포인트`}</p>
         </div>
       </section>
-      <section className={styles.main_list}></section>
+      <section className={styles.main_list}>
+        {myPointList.map((item) => (
+          <AdminPointItem key={item.userMissionIdx} item={item} />
+        ))}
+      </section>
     </section>
   );
 };

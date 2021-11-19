@@ -200,7 +200,7 @@ const Inquire = ({ articles, getInquireList, user }) => {
             )}
           </ul>
           <button className={styles.write_button} onClick={goWrite}>
-            모두락 이용문의
+            이용문의
           </button>
         </section>
       </section>

@@ -61,10 +61,10 @@ const WriteMain = () => {
       </section>
       <h1 className={styles.title}>
         {path === "notice"
-          ? "공지사항 글쓰기"
+          ? "공지사항 글작성"
           : path === "faq"
-          ? "FAQ 글쓰기"
-          : "문의게시판 글쓰기"}
+          ? "FAQ 글작성"
+          : "문의게시판 글작성"}
       </h1>
       <div className={styles.route_button_container}>
         <div
@@ -103,10 +103,10 @@ const WriteMain = () => {
           }}
         >
           {path === "notice"
-            ? "공지사항 글쓰기"
+            ? "공지사항 글작성"
             : path === "faq"
-            ? "FAQ 글쓰기"
-            : "문의게시판 글쓰기"}
+            ? "FAQ 글작성"
+            : "문의게시판 글작성"}
         </p>
       </div>
       <section className={styles.main}>

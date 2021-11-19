@@ -99,23 +99,23 @@
   }
 
   .num {
-    flex-basis: 8%;
-    margin-right: 0;
+    flex-basis: 10%;
     margin-right: 2%;
   }
 
   .date {
-    flex-basis: 20%;
+    flex-basis: 24%;
     text-align: center;
   }
 
   .title {
-    flex-basis: 60%;
-    text-align: start;
-    margin-left: 3%;
+    flex-basis: 47%;
   }
 
   .amount {
-    flex-basis: 10%;
+    flex-basis: 17%;
+  }
+  .nothing {
+    display: none;
   }
 }
