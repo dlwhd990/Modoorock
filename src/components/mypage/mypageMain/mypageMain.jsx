@@ -155,7 +155,11 @@ const MypageMain = ({ user, sessionCheck, userLogout }) => {
     <section className={styles.mypage_main}>
       <div className={styles.top}>
         <img
-          src="/modoorock/images/profile_default.png"
+          src={`${
+            user.photo
+              ? `${process.env.REACT_APP_BASEURL}-images/User/${user.photo}`
+              : "/modoorock/images/profile_default.png"
+          }`}
           alt="profile"
           className={styles.profile_image}
         />

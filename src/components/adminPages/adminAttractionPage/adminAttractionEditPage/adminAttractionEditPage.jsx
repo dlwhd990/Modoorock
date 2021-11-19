@@ -90,6 +90,7 @@ const AdminAttractionEditPage = ({ user, backgroundList }) => {
     formData.append("name", name);
     formData.append("area", area);
     formData.append("content", content);
+    formData.append("idx", parseInt(params.path_three));
     formData.append("userIdx", userData.idx);
     if (previewImage.file !== "") {
       formData.append("files", previewImage.file);
@@ -104,7 +105,7 @@ const AdminAttractionEditPage = ({ user, backgroundList }) => {
 
     axios
       .post(
-        `${process.env.REACT_APP_BASEURL}/attraction/updateattraction`,
+        `${process.env.REACT_APP_BASEURL}/attraction/modifyattraction`,
         formData
       )
       .then((res) => {

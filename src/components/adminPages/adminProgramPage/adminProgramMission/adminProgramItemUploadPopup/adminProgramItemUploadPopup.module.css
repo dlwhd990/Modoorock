@@ -1,6 +1,6 @@
 .popup {
   width: 800px;
-  height: 700px;
+  height: 730px;
   background-color: white;
   border: 1px solid lightgray;
   padding: 40px;
@@ -125,6 +125,10 @@
   margin-top: 20px;
   overflow-y: scroll;
   border: 1px solid rgb(230, 230, 230);
+}
+
+.qr_link {
+  text-align: center;
 }
 
 @keyframes popupAppear {

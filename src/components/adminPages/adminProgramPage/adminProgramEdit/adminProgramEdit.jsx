@@ -113,20 +113,27 @@ const AdminProgramEdit = (props) => {
 
   const insertProgramHandler = (userIdx) => {
     const formData = new FormData();
+    const originalImageList = item.photo.split("#");
+    const main = originalImageList.filter((item) => item.includes("_main"));
+    const sub = originalImageList.filter((item) => !item.includes("_main"));
+    console.log(main);
+    const subString = sub[0] + "#" + sub[1] + "#" + sub[2];
     formData.append("userIdx", userIdx);
+    formData.append("idx", parseInt(params.path_five));
     formData.append("attractionIdx", params.path_three);
     formData.append("title", title);
     formData.append("price", price);
     formData.append("content", content);
     formData.append("detailContent", content);
     formData.append("theme", theme);
-    subImages &&
-      subImages.forEach((file) => {
-        formData.append("files", file);
-      });
+    subImages
+      ? subImages.forEach((file) => {
+          formData.append("files", file);
+        })
+      : formData.append("photo", subString);
     previewImage.file !== ""
       ? formData.append("files", previewImage.file)
-      : formData.append("photo", item.photo);
+      : formData.append("photo", main);
 
     axios
       .post(`${process.env.REACT_APP_BASEURL}/exp/modifyexp`, formData)

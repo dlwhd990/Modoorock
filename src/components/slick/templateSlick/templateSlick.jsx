@@ -10,16 +10,16 @@ function NextArrow(props) {
 
   return (
     <img
-      src="/modoorock/images/arrow_next.png"
+      src="/modoorock/images/arrow-right.png"
       alt="arrow"
       className={`${className} arrow`}
       style={{
         ...style,
         display: "block",
-        width: 40,
-        height: 40,
+        width: 20,
+        height: 20,
         top: 270,
-        right: 0, //임시
+        right: 0,
         zIndex: 2,
       }}
       onClick={onClick}
@@ -32,18 +32,17 @@ function PrevArrow(props) {
 
   return (
     <img
-      src="/modoorock/images/arrow_prev.png"
+      src="/modoorock/images/arrow_left.png"
       alt="arrow"
       className={`${className} arrow`}
       style={{
         ...style,
         display: "block",
-        width: 40,
-        height: 40,
+        width: 20,
+        height: 20,
         top: 270,
-        left: 0, //임시
+        left: 0,
         zIndex: 2,
-        backgroundColor: "transparent",
       }}
       onClick={onClick}
     />

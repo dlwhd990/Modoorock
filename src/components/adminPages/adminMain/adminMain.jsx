@@ -28,6 +28,8 @@ const AdminMain = ({ userLogout }) => {
 
   const [myPointList, setMyPointList] = useState(null);
 
+  const [myReservationList, setMyReservationList] = useState(null);
+
   const [backgroundList, setBackgroundList] = useState(null);
 
   const [menuSelected, setMenuSelected] = useState(params.path);
@@ -80,6 +82,15 @@ const AdminMain = ({ userLogout }) => {
       .catch((err) => console.error(err));
   };
 
+  const loadReservationList = () => {
+    axios
+      .post(`${process.env.REACT_APP_BASEURL}/userexp/getusertimelist`, {
+        userIdx: user.idx,
+      })
+      .then((response) => setMyReservationList(response.data))
+      .catch((err) => console.error(err));
+  };
+
   useEffect(() => {
     axios
       .post(`${process.env.REACT_APP_BASEURL}/user/session`)
@@ -98,6 +109,7 @@ const AdminMain = ({ userLogout }) => {
     user && loadMyInquireList();
     user && loadBackgroundList();
     user && loadPointList();
+    user && loadReservationList();
   }, [user]);
 
   return (
@@ -279,9 +291,11 @@ const AdminMain = ({ userLogout }) => {
               {!params.path_two && params.path === "point" && myPointList && (
                 <AdminPointPage myPointList={myPointList} />
               )}
-              {!params.path_two && params.path === "reservation" && (
-                <AdminReservationPage />
-              )}
+              {!params.path_two &&
+                params.path === "reservation" &&
+                myReservationList && (
+                  <AdminReservationPage myReservationList={myReservationList} />
+                )}
             </section>
           </section>
         </section>

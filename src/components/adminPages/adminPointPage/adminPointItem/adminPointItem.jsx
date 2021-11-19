@@ -41,7 +41,9 @@ const AdminPointItem = ({ item }) => {
       .post(`${process.env.REACT_APP_BASEURL}/user/addpoint`, {
         point: item.point,
         idx: item.pointUserIdx,
-        log: `${item.title} - 사진미션`,
+        log: isVideo
+          ? `${item.title} - 동영상미션`
+          : `${item.title} - 사진미션`,
       })
       .then((response) => {
         console.log(response);

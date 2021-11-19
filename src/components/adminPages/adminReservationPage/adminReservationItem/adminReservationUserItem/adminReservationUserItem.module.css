@@ -1,0 +1,20 @@
+.item {
+  height: 110px;
+  font-size: var(--font-size-small);
+  border: 1px solid var(--color-light-divide-line);
+  padding: 0 6px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: rgb(253, 253, 253);
+}
+
+.id,
+.name,
+.phone {
+  margin: 0;
+}
+
+.name {
+  margin: 6px 0;
+}

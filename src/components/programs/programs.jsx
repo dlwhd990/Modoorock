@@ -397,12 +397,6 @@ const Programs = ({ areaList, programList, getReviewList }) => {
                         {theme.subtitle}
                       </span>
                     </div>
-                    <button
-                      className={styles.theme_show_all_button}
-                      value={theme.title}
-                    >
-                      더보기
-                    </button>
                   </div>
                   <div className={styles.theme_slick_container}>
                     <i

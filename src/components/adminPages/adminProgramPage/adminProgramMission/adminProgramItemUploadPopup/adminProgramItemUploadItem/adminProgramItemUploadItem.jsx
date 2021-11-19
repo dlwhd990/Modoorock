@@ -35,7 +35,9 @@ const AdminProgramItemUploadItem = ({ item, loadItemList }) => {
       <div className={styles.data_container}>
         <p className={styles.name}>{item.name}</p>
         <p className={styles.content}>{item.content}</p>
-        <p className={styles.point}>{`점수: ${item.point}점`}</p>
+        <p
+          className={styles.point}
+        >{`점수: ${item.point}점 | QR코드번호: ${item.idx}`}</p>
       </div>
     </div>
   );

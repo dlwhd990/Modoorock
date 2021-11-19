@@ -28,7 +28,7 @@ const AdminFirstPagePointItem = ({ item }) => {
   }, []);
 
   return (
-    <div className={styles.item} onClick={() => history.push("/admin/point")}>
+    <div className={styles.item}>
       <div className={styles.main}>
         {isVideo ? (
           <video controls className={styles.item_video}>
