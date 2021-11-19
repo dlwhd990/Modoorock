@@ -44,137 +44,6 @@ const App = (props) => {
   const [faqArticles, setFaqArticles] = useState(null);
   const [noticeArticles, setNoticeArticles] = useState(null);
   const [inquireArticles, setInquireArticles] = useState(null);
-  const [reviewList, setReviewList] = useState([
-    {
-      idx: 0,
-      user_idx: "보류",
-      exp_idx: 1,
-      stars: 3,
-      comment:
-        "너무재밌습니다너무재밌습니다너무재밌습니다너무재밌습니다너무재밌습니다너무재밌습니다너무재밌습니다너무재밌습니다너무재밌습니다너무재밌습니다너무재밌습니다너무재밌습니다너무재밌습니다너무재밌습니다너무재밌습니다너무재밌습니다너무재밌습니다너무재밌습니다너무재밌습니다너무재밌습니다너무재밌습니다너무재밌습니다너무재밌습니다너무재밌습니다너무재밌습니다너무재밌습니다",
-      date: "2021/06/10",
-    },
-    {
-      idx: 1,
-      user_idx: "보류",
-      exp_idx: 1,
-      stars: 4,
-      comment: "너무재밌습니다",
-      date: "2021/03/23",
-    },
-    {
-      idx: 2,
-      user_idx: "보류",
-      exp_idx: 2,
-      stars: 3,
-      comment: "너무재밌습니다",
-      date: "2021/04/13",
-    },
-    {
-      idx: 3,
-      user_idx: "보류",
-      exp_idx: 5,
-      stars: 5,
-      comment: "너무재밌습니다",
-      date: "2021/08/12",
-    },
-    {
-      idx: 4,
-      user_idx: "보류",
-      exp_idx: 3,
-      stars: 3,
-      comment: "너무재밌습니다",
-      date: "2021/07/17",
-    },
-    {
-      idx: 5,
-      user_idx: "보류",
-      exp_idx: 1,
-      stars: 4,
-      comment: "너무재밌습니다",
-      date: "2021/10/11",
-    },
-    {
-      idx: 6,
-      user_idx: "보류",
-      exp_idx: 4,
-      stars: 1,
-      comment: "너무재밌습니다",
-      date: "2021/10/13",
-    },
-    {
-      idx: 7,
-      user_idx: "보류",
-      exp_idx: 2,
-      stars: 2,
-      comment: "너무재밌습니다",
-      date: "2021/10/11",
-    },
-    {
-      idx: 8,
-      user_idx: "보류",
-      exp_idx: 3,
-      stars: 3,
-      comment: "너무재밌습니다",
-      date: "2021/10/13",
-    },
-    {
-      idx: 9,
-      user_idx: "보류",
-      exp_idx: 1,
-      stars: 4,
-      comment: "너무재밌습니다",
-      date: "2021/10/12",
-    },
-    {
-      idx: 10,
-      user_idx: "보류",
-      exp_idx: 5,
-      stars: 2,
-      comment: "너무재밌습니다",
-      date: "2021/10/13",
-    },
-    {
-      idx: 11,
-      user_idx: "보류",
-      exp_idx: 4,
-      stars: 5,
-      comment: "너무재밌습니다",
-      date: "2021/01/13",
-    },
-    {
-      idx: 12,
-      user_idx: "보류",
-      exp_idx: 1,
-      stars: 3,
-      comment: "너무재밌습니다",
-      date: "2021/10/01",
-    },
-    {
-      idx: 13,
-      user_idx: "보류",
-      exp_idx: 4,
-      stars: 5,
-      comment: "너무재밌습니다",
-      date: "2021/07/13",
-    },
-    {
-      idx: 14,
-      user_idx: "보류",
-      exp_idx: 3,
-      stars: 1,
-      comment: "너무재밌습니다",
-      date: "2021/09/13",
-    },
-    {
-      idx: 15,
-      user_idx: "보류",
-      exp_idx: 2,
-      stars: 4,
-      comment: "너무재밌습니다",
-      date: "2021/10/12",
-    },
-  ]);
 
   const [user, setUser] = useState(null);
 
@@ -293,7 +162,7 @@ const App = (props) => {
           <Mainpage
             programList={programList}
             viewItems={introVideos}
-            reviewList={reviewList}
+            getReviewList={getReviewList}
           />
           <Footer />
         </Route>
@@ -333,18 +202,18 @@ const App = (props) => {
         </Route>
         <Route exact path="/programs/:path">
           <Header user={user} userLogout={userLogout} />
-          {programList && areaList && reviewList && (
+          {programList && areaList && (
             <Programs
               areaList={areaList}
               programList={programList}
-              reviewList={reviewList}
+              getReviewList={getReviewList}
             />
           )}
           <Footer />
         </Route>
         <Route exact path="/programs/attraction/:path">
           <Header user={user} userLogout={userLogout} />
-          {programList && areaList && reviewList && (
+          {programList && areaList && (
             <Attraction
               programList={programList}
               areaList={areaList}

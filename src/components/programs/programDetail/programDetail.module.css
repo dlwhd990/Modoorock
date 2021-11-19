@@ -411,6 +411,7 @@
   border-radius: 4px;
   font-size: var(--font-size-normal);
   margin-top: 10px;
+  cursor: pointer;
 }
 
 @keyframes appear {

@@ -3,11 +3,12 @@ import { useHistory } from "react-router";
 import styles from "./mainProgramItem.module.css";
 import ReactStars from "react-rating-stars-component";
 
-const MainProgramItem = React.memo(({ item, reviewList }) => {
+const MainProgramItem = React.memo(({ item, getReviewList }) => {
   const history = useHistory();
   const [review, setReview] = useState([]);
   const [reviewAvg, setReviewAvg] = useState(null);
   const [mainImage, setMainImage] = useState(null);
+  const [reviewList, setReviewList] = useState(null);
 
   const moveToProgram = () => {
     history.push(`/programs/view/${item.idx}`);
@@ -15,17 +16,22 @@ const MainProgramItem = React.memo(({ item, reviewList }) => {
   };
 
   useEffect(() => {
+    getReviewList(item.idx, setReviewList);
     const imageList = item.photo.split("#");
     const main = imageList.filter((item) => item.includes("_main"));
     setMainImage(main);
   }, []);
 
   useEffect(() => {
+    if (!reviewList) {
+      return;
+    }
     const reviewResult = [];
     let total = 0;
 
     reviewList.forEach((reviewItem) => {
-      if (reviewItem.exp_idx === item.idx) {
+      console.log(reviewItem, item);
+      if (reviewItem.expIdx === item.idx) {
         reviewResult.push(reviewItem);
         total += reviewItem.stars;
       }

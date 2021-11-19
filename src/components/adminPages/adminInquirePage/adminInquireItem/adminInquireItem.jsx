@@ -6,6 +6,16 @@ const AdminInquireItem = ({ article, loadMyInquireList, user }) => {
   const [viewDetail, setViewDetail] = useState(false);
   const [program, setProgram] = useState(null);
   const [answer, setAnswer] = useState("");
+  const [writerId, setWriterId] = useState(null);
+
+  const getWriterId = () => {
+    axios
+      .post(`${process.env.REACT_APP_BASEURL}/user/getuserinfo`, {
+        idx: article.userIdx,
+      })
+      .then((response) => setWriterId(response.data.id))
+      .catch((err) => console.error(err));
+  };
 
   const viewArticle = () => {
     setViewDetail(!viewDetail);
@@ -49,6 +59,7 @@ const AdminInquireItem = ({ article, loadMyInquireList, user }) => {
 
   useEffect(() => {
     getProgramName();
+    getWriterId();
   }, []);
 
   return (
@@ -66,7 +77,7 @@ const AdminInquireItem = ({ article, loadMyInquireList, user }) => {
           </div>
         </div>
         <div className={styles.title}>{article.title}</div>
-        <div className={styles.writer}>dlwhd***</div>
+        <div className={styles.writer}>{writerId && writerId}</div>
         <div className={styles.date}>{article.date}</div>
       </section>
       <section

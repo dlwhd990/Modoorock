@@ -4,7 +4,7 @@ import SimpleSliderThree from "../slick/three/slickThree";
 import styles from "./mainpage.module.css";
 import MainProgramItem from "./mainProgramItem/mainProgramItem";
 
-const Mainpage = ({ programList, viewItems, reviewList }) => {
+const Mainpage = ({ programList, viewItems, getReviewList }) => {
   const history = useHistory();
   const [latestSixProgramList, setLatestSixProgramList] = useState([]);
   const goUpButtonHandler = () => {
@@ -77,7 +77,7 @@ const Mainpage = ({ programList, viewItems, reviewList }) => {
             <MainProgramItem
               key={item.idx}
               item={item}
-              reviewList={reviewList}
+              getReviewList={getReviewList}
             />
           ))}
         </div>

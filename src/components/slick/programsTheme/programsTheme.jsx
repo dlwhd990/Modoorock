@@ -98,7 +98,7 @@ export default class ProgramsThemeSlick extends Component {
         : 1,
   };
   render() {
-    const { viewItems, areaList, reviewList } = this.props;
+    const { viewItems, areaList, getReviewList } = this.props;
 
     const settings = {
       //autoplaySpeed: 3500,
@@ -121,7 +121,7 @@ export default class ProgramsThemeSlick extends Component {
               key={item.idx}
               item={item}
               areaList={areaList}
-              reviewList={reviewList}
+              getReviewList={getReviewList}
             />
           ))}
         </Slider>

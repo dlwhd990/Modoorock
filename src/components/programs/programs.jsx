@@ -5,7 +5,7 @@ import { debounce } from "lodash";
 import AreaItem from "./areaItem/areaItem";
 import ProgramsThemeSlick from "../slick/programsTheme/programsTheme";
 
-const Programs = ({ areaList, programList, reviewList }) => {
+const Programs = ({ areaList, programList, getReviewList }) => {
   const history = useHistory();
   const { path } = useParams();
   const [inputValue, setInputValue] = useState("");
@@ -415,42 +415,42 @@ const Programs = ({ areaList, programList, reviewList }) => {
                       <ProgramsThemeSlick
                         viewItems={themeDivision.rural}
                         areaList={areaList}
-                        reviewList={reviewList}
+                        getReviewList={getReviewList}
                       />
                     )}
                     {themeDivision && theme.title === "액티비티" && (
                       <ProgramsThemeSlick
                         viewItems={themeDivision.activity}
                         areaList={areaList}
-                        reviewList={reviewList}
+                        getReviewList={getReviewList}
                       />
                     )}
                     {themeDivision && theme.title === "단체" && (
                       <ProgramsThemeSlick
                         viewItems={themeDivision.group}
                         areaList={areaList}
-                        reviewList={reviewList}
+                        getReviewList={getReviewList}
                       />
                     )}
                     {themeDivision && theme.title === "친구" && (
                       <ProgramsThemeSlick
                         viewItems={themeDivision.friend}
                         areaList={areaList}
-                        reviewList={reviewList}
+                        getReviewList={getReviewList}
                       />
                     )}
                     {themeDivision && theme.title === "가족" && (
                       <ProgramsThemeSlick
                         viewItems={themeDivision.family}
                         areaList={areaList}
-                        reviewList={reviewList}
+                        getReviewList={getReviewList}
                       />
                     )}
                     {themeDivision && theme.title === "연인" && (
                       <ProgramsThemeSlick
                         viewItems={themeDivision.lover}
                         areaList={areaList}
-                        reviewList={reviewList}
+                        getReviewList={getReviewList}
                       />
                     )}
                   </div>

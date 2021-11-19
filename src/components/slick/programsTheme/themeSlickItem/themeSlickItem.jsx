@@ -3,10 +3,11 @@ import { useHistory } from "react-router";
 import styles from "./themeSlickItem.module.css";
 import StarRatingComponent from "react-star-rating-component";
 
-const ThemeSlickItem = ({ item, reviewList }) => {
+const ThemeSlickItem = ({ item, getReviewList }) => {
   const [reviewCount, setReviewCount] = useState(0);
   const [reviewStarAvg, setReviewStarAvg] = useState((0).toFixed(1));
   const [mainImage, setMainImage] = useState(null);
+  const [reviewList, setReviewList] = useState(null);
   const history = useHistory();
 
   const onItemClick = () => {
@@ -15,16 +16,7 @@ const ThemeSlickItem = ({ item, reviewList }) => {
   };
 
   useEffect(() => {
-    let count = 0;
-    let total = 0;
-
-    reviewList.forEach((reviewItem) => {
-      reviewItem.exp_idx === item.idx &&
-        (count += 1) &&
-        (total += reviewItem.stars);
-    });
-    setReviewCount(count);
-    count > 0 && setReviewStarAvg((total / count).toFixed(1));
+    getReviewList(item.idx, setReviewList);
 
     //이미지 설정
     const tmp = item.photo.split("#");
@@ -35,6 +27,22 @@ const ThemeSlickItem = ({ item, reviewList }) => {
       }
     });
   }, []);
+
+  useEffect(() => {
+    if (!reviewList) {
+      return;
+    }
+    let count = 0;
+    let total = 0;
+
+    reviewList.forEach((reviewItem) => {
+      reviewItem.expIdx === item.idx &&
+        (count += 1) &&
+        (total += reviewItem.stars);
+    });
+    setReviewCount(count);
+    count > 0 && setReviewStarAvg((total / count).toFixed(1));
+  }, [reviewList]);
   return (
     <section className={styles.theme_item} onClick={onItemClick}>
       <div className={styles.image_container}>
