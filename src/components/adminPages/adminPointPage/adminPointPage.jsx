@@ -2,7 +2,7 @@ import React from "react";
 import AdminPointItem from "./adminPointItem/adminPointItem";
 import styles from "./adminPointPage.module.css";
 
-const AdminPointPage = ({ myPointList }) => {
+const AdminPointPage = ({ myPointList, loadPointList }) => {
   return (
     <section className={styles.point_page}>
       <section className={styles.point_top}>
@@ -18,7 +18,11 @@ const AdminPointPage = ({ myPointList }) => {
       </section>
       <section className={styles.main_list}>
         {myPointList.map((item) => (
-          <AdminPointItem key={item.userMissionIdx} item={item} />
+          <AdminPointItem
+            key={item.userMissionIdx}
+            item={item}
+            loadPointList={loadPointList}
+          />
         ))}
       </section>
     </section>

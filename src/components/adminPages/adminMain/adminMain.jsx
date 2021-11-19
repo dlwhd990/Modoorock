@@ -78,7 +78,10 @@ const AdminMain = ({ userLogout }) => {
       .post(`${process.env.REACT_APP_BASEURL}/exp/getconfirmlist`, {
         userIdx: user.idx,
       })
-      .then((response) => setMyPointList(response.data))
+      .then((response) => {
+        const result = response.data.filter((item) => item.complete === 0);
+        setMyPointList(result);
+      })
       .catch((err) => console.error(err));
   };
 
@@ -289,7 +292,10 @@ const AdminMain = ({ userLogout }) => {
                   />
                 )}
               {!params.path_two && params.path === "point" && myPointList && (
-                <AdminPointPage myPointList={myPointList} />
+                <AdminPointPage
+                  myPointList={myPointList}
+                  loadPointList={loadPointList}
+                />
               )}
               {!params.path_two &&
                 params.path === "reservation" &&

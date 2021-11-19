@@ -53,8 +53,8 @@ const AdminFirstPage = ({ myAttractionList, myInquireList, myPointList }) => {
             </div>
 
             <p className={styles.head_text}>
-              <span className={styles.head_text_big}>12</span> 개의 심사 대기
-              포인트
+              <span className={styles.head_text_big}>{myPointList.length}</span>{" "}
+              개의 심사 대기 포인트
             </p>
           </div>
           <div className={styles.top_item_main}>

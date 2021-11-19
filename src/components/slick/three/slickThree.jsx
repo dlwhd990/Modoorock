@@ -18,13 +18,13 @@ function NextArrow(props) {
   }, [window.innerWidth]);
   return (
     <img
-      src="/modoorock/images/arrow_next.png"
+      src="/modoorock/images/arrow_next_1.png"
       alt="arrow"
       className={`${className} arrow`}
       style={{
         ...style,
         display: "block",
-        width: 40,
+        width: 70,
         height: 40,
         top: 115,
         right: arrowPosition,
@@ -49,13 +49,13 @@ function PrevArrow(props) {
   }, [window.innerWidth]);
   return (
     <img
-      src="/modoorock/images/arrow_prev.png"
+      src="/modoorock/images/arrow_prev_1.png"
       alt="arrow"
       className={`${className} arrow`}
       style={{
         ...style,
         display: "block",
-        width: 40,
+        width: 70,
         height: 40,
         top: 115,
         left: arrowPosition,

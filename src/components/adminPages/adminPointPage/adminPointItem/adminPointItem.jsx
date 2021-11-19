@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import styles from "./adminPointItem.module.css";
 
-const AdminPointItem = ({ item }) => {
+const AdminPointItem = ({ item, loadPointList }) => {
   const [userId, setUserId] = useState(null);
   const [isVideo, setIsVideo] = useState(() => {
     const n = item.file.length;
@@ -28,11 +28,11 @@ const AdminPointItem = ({ item }) => {
 
   const finishMission = () => {
     axios
-      .post(`${process.env.REACT_APP_BASEURL}/usermission`, {
+      .post(`${process.env.REACT_APP_BASEURL}/usermission/finishusermission`, {
         idx: item.userMissionIdx,
-        complete: 2,
+        point: item.point,
       })
-      .then((response) => console.log(response))
+      .then((response) => loadPointList())
       .catch((err) => console.error(err));
   };
 
