@@ -1,12 +1,31 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ModoorockAdminUserItem from "./modoorockAdminUserItem/modoorockAdminUserItem";
 import styles from "./modoorockAdminUserPage.module.css";
 
 const ModoorockAdminUserPage = ({ userList, loadUserList }) => {
+  const [inputValue, setInputValue] = useState("");
+  const [resultUserList, setResultUserList] = useState(userList);
+  const onInputValueChangeHandler = (e) => {
+    setInputValue(e.target.value);
+  };
+
+  useEffect(() => {
+    const result = userList.filter((user) => user.id.includes(inputValue));
+    setResultUserList(result);
+  }, [inputValue]);
+
   return (
     <section className={styles.user_page}>
       <div className={styles.main}>
-        <h1 className={styles.title}>회원관리</h1>
+        <div className={styles.top}>
+          <h1 className={styles.title}>회원관리</h1>
+          <input
+            value={inputValue}
+            onChange={onInputValueChangeHandler}
+            type="text"
+            className={styles.search_input}
+          />
+        </div>
         <section className={styles.header}>
           <p className={styles.idx}>번호</p>
           <p className={styles.id}>아이디</p>
@@ -17,7 +36,7 @@ const ModoorockAdminUserPage = ({ userList, loadUserList }) => {
           <p className={styles.change_grade}>권한변경</p>
         </section>
         <div className={styles.list}>
-          {userList.map((item) => (
+          {resultUserList.map((item) => (
             <ModoorockAdminUserItem
               key={item.idx}
               item={item}

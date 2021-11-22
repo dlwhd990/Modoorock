@@ -272,6 +272,7 @@ const AdminMain = ({ userLogout }) => {
                     myAttractionList={myAttractionList}
                     myInquireList={myInquireList}
                     myPointList={myPointList}
+                    loadPointList={loadPointList}
                   />
                 )}
               {!params.path_two &&

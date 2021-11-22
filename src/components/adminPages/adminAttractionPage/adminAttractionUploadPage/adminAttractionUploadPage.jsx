@@ -193,7 +193,7 @@ const AdminAttractionUploadPage = ({ user, backgroundList }) => {
   };
 
   const makeBackgroundNameList = () => {
-    setBackgroundNameList(backgroundList.slice(1));
+    setBackgroundNameList(backgroundList.slice(0, backgroundList.length - 1));
   };
 
   const selectMainBackgroundHandler = (e) => {

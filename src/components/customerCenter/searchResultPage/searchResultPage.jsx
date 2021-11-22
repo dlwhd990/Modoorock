@@ -142,7 +142,7 @@ const SearchResultPage = ({ noticeArticles, getNoticeList }) => {
         <div
           className={styles.home_icon_container}
           onClick={() => {
-            history.push("/modoorock");
+            history.push("/");
             window.scrollTo({ top: 0 });
           }}
         >

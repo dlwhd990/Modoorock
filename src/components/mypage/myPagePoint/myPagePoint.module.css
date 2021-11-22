@@ -43,6 +43,12 @@
   color: #00c67a;
 }
 
+.total_point {
+  text-align: end;
+  margin-right: 24px;
+  font-weight: 500;
+}
+
 .num {
   flex-basis: 6%;
   text-align: center;
@@ -74,6 +80,11 @@
   text-align: center;
 }
 
+.loading_target {
+  width: 100%;
+  height: 30px;
+}
+
 @keyframes appear {
   0% {
     transform: translateY(-20px);
@@ -96,6 +107,9 @@
     font-size: var(--font-size-mobile-small);
     padding: 4px;
     height: 60px;
+  }
+  .total_point {
+    margin-right: 16px;
   }
 
   .num {

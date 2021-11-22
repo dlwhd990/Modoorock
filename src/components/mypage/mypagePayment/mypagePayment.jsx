@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import styles from "./mypagePayment.module.css";
 import MypagePaymentItem from "./mypagePaymentItem/mypagePaymentItem";
-import MypageReviewWrite from "./mypageReviewWrite/mypageReviewWrite.module.css/mypageReviewWrite";
+import MypageReviewWrite from "./mypageReviewWrite/mypageReviewWrite";
 
 const MypagePayment = (props) => {
   const [purchaseList, setPurchaseList] = useState(null);
@@ -11,7 +11,7 @@ const MypagePayment = (props) => {
 
   const popupValueChangeHandler = (e) => {
     const dataset = e.currentTarget.dataset;
-    if (dataset.check === "off") {
+    if (dataset.check !== "on") {
       return;
     }
     setPopupValue({
@@ -52,24 +52,25 @@ const MypagePayment = (props) => {
     sessionCheckForLoadPurchaseList();
   }, []);
 
+  const loadExpInfo = async () => {
+    const result = [];
+    if (!purchaseList) {
+      return;
+    }
+    for (const item of purchaseList) {
+      await axios
+        .post(`${process.env.REACT_APP_BASEURL}/exp/getexpinfo`, {
+          idx: item.expIdx,
+        })
+        .then((response) =>
+          result.push({ purchaseData: item, expData: response.data })
+        )
+        .catch((err) => console.error(err));
+    }
+    setUserExpList(result.reverse());
+  };
+
   useEffect(() => {
-    const loadExpInfo = async () => {
-      const result = [];
-      if (!purchaseList) {
-        return;
-      }
-      for (const item of purchaseList) {
-        await axios
-          .post(`${process.env.REACT_APP_BASEURL}/exp/getexpinfo`, {
-            idx: item.expIdx,
-          })
-          .then((response) =>
-            result.push({ purchaseData: item, expData: response.data })
-          )
-          .catch((err) => console.error(err));
-      }
-      setUserExpList(result.reverse());
-    };
     loadExpInfo();
   }, [purchaseList]);
 
@@ -91,6 +92,7 @@ const MypagePayment = (props) => {
               item={item}
               index={index}
               len={userExpList.length}
+              loadExpInfo={loadExpInfo}
               popupValueChangeHandler={popupValueChangeHandler}
             />
           ))

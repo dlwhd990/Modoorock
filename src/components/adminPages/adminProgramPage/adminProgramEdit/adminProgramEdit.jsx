@@ -116,7 +116,6 @@ const AdminProgramEdit = (props) => {
     const originalImageList = item.photo.split("#");
     const main = originalImageList.filter((item) => item.includes("_main"));
     const sub = originalImageList.filter((item) => !item.includes("_main"));
-    console.log(main);
     const subString = sub[0] + "#" + sub[1] + "#" + sub[2];
     formData.append("userIdx", userIdx);
     formData.append("idx", parseInt(params.path_five));

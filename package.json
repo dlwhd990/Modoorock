@@ -1,5 +1,5 @@
 {
-  "homepage": "https://web.modoorock.com/modoorock/",
+  "homepage": "https://web.modoorock.com/modoorock",
   "name": "modoorock",
   "version": "0.1.0",
   "private": true,
@@ -64,5 +64,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "https://web.modoorock.com/modoorock/"
+  "proxy": "https://web.modoorock.com/modoorock"
 }

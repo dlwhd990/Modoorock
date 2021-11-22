@@ -52,8 +52,15 @@
 }
 
 .already {
+  background-color: rgb(248, 194, 230);
+  color: white;
+  cursor: default;
+}
+
+.delete {
   background-color: rgb(242, 197, 166);
   color: white;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 780px) {

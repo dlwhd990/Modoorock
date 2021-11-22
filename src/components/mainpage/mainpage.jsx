@@ -6,7 +6,20 @@ import MainProgramItem from "./mainProgramItem/mainProgramItem";
 
 const Mainpage = ({ programList, viewItems, getReviewList }) => {
   const history = useHistory();
+  const [inputValue, setInputValue] = useState("");
   const [latestSixProgramList, setLatestSixProgramList] = useState([]);
+
+  const onInputValueChangeHandler = (e) => {
+    setInputValue(e.target.value);
+  };
+
+  const onSearchHandler = () => {
+    history.push({
+      pathname: "/programs/theme",
+      state: { query: inputValue },
+    });
+  };
+
   const goUpButtonHandler = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
@@ -66,11 +79,15 @@ const Mainpage = ({ programList, viewItems, getReviewList }) => {
         <div className={styles.program_search_container}>
           <input
             type="text"
+            value={inputValue}
+            onChange={onInputValueChangeHandler}
             className={styles.search_input}
             placeholder="찾고 계신 상품을 검색해주세요."
             spellCheck="false"
           />
-          <i className={`${styles.search_icon} fas fa-search`}></i>
+          <div onClick={onSearchHandler}>
+            <i className={`${styles.search_icon} fas fa-search`}></i>
+          </div>
         </div>
         <div className={styles.program_list_container}>
           {latestSixProgramList.map((item) => (

@@ -131,6 +131,7 @@
   transition: 100ms all ease-in;
   margin-left: 10px;
   color: #2e9bd3;
+  cursor: pointer;
 }
 
 .program_list_container {

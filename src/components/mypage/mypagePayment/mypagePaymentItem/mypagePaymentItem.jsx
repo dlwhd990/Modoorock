@@ -1,8 +1,40 @@
+import axios from "axios";
 import React from "react";
 import { useHistory } from "react-router";
 import styles from "./mypagePaymentItem.module.css";
-const MypagePaymentItem = ({ item, index, len, popupValueChangeHandler }) => {
+const MypagePaymentItem = ({
+  item,
+  index,
+  len,
+  loadExpInfo,
+  popupValueChangeHandler,
+}) => {
   const history = useHistory();
+
+  const deleteReview = () => {
+    axios
+      .post(`${process.env.REACT_APP_BASEURL}/review/deletereview`, {
+        idx: item.idx,
+      })
+      .then((response) => {
+        if (response.data === "success") {
+          window.alert("삭제되었습니다.");
+          loadExpInfo();
+        } else {
+          window.alert("에러가 발생했습니다. 새로고침 후에 다시 시도해주세요");
+        }
+      })
+      .catch((err) => console.error(err));
+  };
+
+  const onButtonClickHandler = (e) => {
+    if (e.currentTarget.dataset.check === "on") {
+      popupValueChangeHandler();
+    } else if (e.currentTarget.dataset.check === "already") {
+      deleteReview();
+    }
+  };
+
   const goToExp = (e) => {
     history.push(`/programs/view/${e.target.dataset.idx}`);
   };
@@ -32,7 +64,7 @@ const MypagePaymentItem = ({ item, index, len, popupValueChangeHandler }) => {
             ? `${styles.review} ${styles.already}`
             : item.purchaseData.reviewCheck === 0
             ? `${styles.review} ${styles.write}`
-            : `${styles.review} ${styles.already}`
+            : `${styles.review} ${styles.delete}`
         }`}
         data-userexpidx={item.purchaseData.idx}
         data-expidx={item.expData.idx}
@@ -42,15 +74,15 @@ const MypagePaymentItem = ({ item, index, len, popupValueChangeHandler }) => {
             ? "off"
             : item.purchaseData.reviewCheck === 0
             ? "on"
-            : "off"
+            : "already"
         }
-        onClick={popupValueChangeHandler}
+        onClick={onButtonClickHandler}
       >
         {item.expData === ""
           ? "작성불가"
           : item.purchaseData.reviewCheck === 0
           ? "리뷰작성"
-          : "작성완료"}
+          : "리뷰삭제"}
       </div>
     </div>
   );
