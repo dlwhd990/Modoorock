@@ -24,7 +24,7 @@ function NextArrow(props) {
       style={{
         ...style,
         display: "block",
-        width: 70,
+        width: 50,
         height: 40,
         top: 115,
         right: arrowPosition,
@@ -55,7 +55,7 @@ function PrevArrow(props) {
       style={{
         ...style,
         display: "block",
-        width: 70,
+        width: 50,
         height: 40,
         top: 115,
         left: arrowPosition,

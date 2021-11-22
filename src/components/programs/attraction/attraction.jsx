@@ -3,8 +3,10 @@ import { useHistory, useParams } from "react-router";
 import { debounce } from "lodash";
 import ProgramItem from "../programItem/programItem";
 import styles from "./attraction.module.css";
+import axios from "axios";
+import { parse } from "date-fns/esm";
 
-const Attraction = ({ programList, areaList, getReviewList }) => {
+const Attraction = ({ areaList, getReviewList }) => {
   const history = useHistory();
   const { path } = useParams();
   const [attractionProgramList, setAttractionProgramList] = useState(null);
@@ -13,6 +15,27 @@ const Attraction = ({ programList, areaList, getReviewList }) => {
   const [areaData, setAreaData] = useState(null);
   const [sortValue, setSortValue] = useState("최신순");
 
+  const loadAreaInfo = () => {
+    axios
+      .post(`${process.env.REACT_APP_BASEURL}/attraction/getattractioninfo`, {
+        idx: parseInt(path),
+      })
+      .then((response) => setAreaData(response.data))
+      .catch((err) => console.error(err));
+  };
+
+  const loadProgramList = () => {
+    axios
+      .post(`${process.env.REACT_APP_BASEURL}/exp/getexpattractionlist`, {
+        attractionIdx: parseInt(path),
+      })
+      .then((response) => {
+        setAttractionProgramList(response.data);
+        setResultProgramList(response.data);
+      })
+      .catch((err) => console.error(err));
+  };
+
   const onSelectHandler = (e) => {
     if (e.currentTarget.innerText === "프로그램") {
       history.push(`/programs/area`);
@@ -20,7 +43,11 @@ const Attraction = ({ programList, areaList, getReviewList }) => {
   };
 
   const sortChangeHandler = (e) => {
-    setSortValue(e.currentTarget.innerText);
+    const sortType = e.currentTarget.innerText;
+    setSortValue(sortType);
+    if (sortType === "최신순") {
+      setResultProgramList(attractionProgramList);
+    } //이어서 하기
   };
 
   const onSearchHandler = () => {
@@ -40,31 +67,20 @@ const Attraction = ({ programList, areaList, getReviewList }) => {
   };
 
   useEffect(() => {
-    if (!areaList) {
-      return;
-    }
-    const result = [];
-    for (let i = 0; i < areaList.length; i++) {
-      if (areaList[i].idx === parseInt(path)) {
-        setAreaData(areaList[i]);
-        break;
-      }
-    }
-    programList.forEach((item) => {
-      item.attractionIdx === parseInt(path) && result.push(item);
-    });
-    setAttractionProgramList(result);
-    setResultProgramList(result);
-  }, [areaList]);
+    loadAreaInfo();
+    loadProgramList();
+  }, []);
 
-  const inputChangeHandler = debounce((e) => {
-    setResultProgramList([]);
+  const inputChangeHandler = (e) => {
     setInputValue(e.target.value);
-  }, 200);
+  };
 
   useEffect(() => {
-    attractionProgramList && onSearchHandler();
-  }, [inputValue]);
+    const inputToSearchHandler = debounce(() => {
+      onSearchHandler();
+    }, 200);
+    attractionProgramList && inputToSearchHandler();
+  }, [inputValue, sortValue]);
 
   return (
     <section className={styles.attraction}>
@@ -126,6 +142,7 @@ const Attraction = ({ programList, areaList, getReviewList }) => {
         <section className={styles.search_container}>
           <input
             type="text"
+            value={inputValue}
             className={styles.search_input}
             onChange={inputChangeHandler}
             placeholder="찾으시는 상품을 검색해보세요"
@@ -152,7 +169,7 @@ const Attraction = ({ programList, areaList, getReviewList }) => {
             }
             onClick={sortChangeHandler}
           >
-            인기순
+            리뷰많은순
           </li>
           <li
             className={

@@ -80,7 +80,7 @@ const AdminMain = ({ userLogout }) => {
       })
       .then((response) => {
         const result = response.data.filter((item) => item.complete === 0);
-        setMyPointList(result);
+        setMyPointList(result.reverse());
       })
       .catch((err) => console.error(err));
   };

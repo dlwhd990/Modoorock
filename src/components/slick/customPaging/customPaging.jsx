@@ -20,10 +20,8 @@ function NextArrow(props) {
       style={{
         ...style,
         display: arrow,
-        width: 40,
-        height: 40,
-        top: 350,
-        right: -15,
+        top: 370,
+        right: 0,
         zIndex: 2,
       }}
       onClick={onClick}
@@ -49,10 +47,8 @@ function PrevArrow(props) {
       style={{
         ...style,
         display: arrow,
-        width: 40,
-        height: 40,
-        top: 350,
-        left: -15,
+        top: 370,
+        left: 0,
         zIndex: 2,
         backgroundColor: "transparent",
       }}
@@ -64,13 +60,16 @@ function PrevArrow(props) {
 export default class CustomPaging extends Component {
   render() {
     const { imageList } = this.props;
+    const main = imageList.filter((item) => item.includes("_main."))[0];
+    const sub = imageList.filter((item) => !item.includes("_main."));
+    sub.unshift(main);
     const settings = {
       customPaging: function (i) {
         return (
           <a>
             <img
               src={`${process.env.REACT_APP_BASEURL}-images/Exp/${
-                imageList[i - 1 + 1]
+                sub[i - 1 + 1]
               }`}
               alt="select_image"
               className="dot_image"
@@ -93,7 +92,7 @@ export default class CustomPaging extends Component {
     return (
       <div className="custom_paging_container">
         <Slider {...settings}>
-          {imageList.map((item) => (
+          {sub.map((item) => (
             <div key={item}>
               <img
                 src={`${process.env.REACT_APP_BASEURL}-images/Exp/${item}`}

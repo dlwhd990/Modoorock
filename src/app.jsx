@@ -193,11 +193,7 @@ const App = (props) => {
         </Route>
         <Route exact path="/programs/view/:path">
           <Header user={user} userLogout={userLogout} />
-          <ProgramDetail
-            programList={programList}
-            getReviewList={getReviewList}
-            toss={toss}
-          />
+          <ProgramDetail getReviewList={getReviewList} toss={toss} />
           <Footer />
         </Route>
         <Route exact path="/programs/:path">
@@ -213,12 +209,8 @@ const App = (props) => {
         </Route>
         <Route exact path="/programs/attraction/:path">
           <Header user={user} userLogout={userLogout} />
-          {programList && areaList && (
-            <Attraction
-              programList={programList}
-              areaList={areaList}
-              getReviewList={getReviewList}
-            />
+          {areaList && (
+            <Attraction areaList={areaList} getReviewList={getReviewList} />
           )}
           <Footer />
         </Route>

@@ -46,7 +46,6 @@ const AdminPointItem = ({ item, loadPointList }) => {
           : `${item.title} - 사진미션`,
       })
       .then((response) => {
-        console.log(response);
         if (response.data !== "success") {
           window.alert("에러가 발생했습니다. 새로고침 후에 다시 시도해주세요");
           return;

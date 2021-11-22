@@ -179,3 +179,61 @@
 .close_icon:hover {
   color: red;
 }
+
+@media screen and (max-width: 780px) {
+  .signup {
+    width: 100%;
+    margin-top: 80px;
+  }
+  .signup_form {
+    width: 100%;
+    padding: 20px;
+  }
+
+  .signup_title {
+    font-size: var(--font-size-mini-title);
+    font-weight: 500;
+  }
+
+  .input_part {
+    width: 100%;
+  }
+
+  .signup_title_container {
+    width: 100%;
+  }
+
+  .input_container {
+    width: 100%;
+  }
+  .input_title {
+    width: 28%;
+    font-size: var(--font-size-small);
+  }
+  .input {
+    width: 70%;
+    font-size: var(--font-size-small);
+  }
+
+  .id_redup_check_button,
+  .get_auth_num_button {
+    width: 30%;
+    font-size: var(--font-size-small);
+  }
+
+  .phone_num_input {
+    width: 40%;
+  }
+
+  .separate_agree_container {
+    width: 100%;
+  }
+
+  .agree_part {
+    width: 100%;
+  }
+
+  .submit_button {
+    width: 100%;
+  }
+}
