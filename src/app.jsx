@@ -25,6 +25,7 @@ import SearchResultPage from "./components/customerCenter/searchResultPage/searc
 import InquireSearchPage from "./components/customerCenter/inquire/inquireSearchPage/inquireSearchPage";
 import { loadTossPayments } from "@tosspayments/sdk";
 import PaySuccessPage from "./components/paySuccessPage/paySuccessPage";
+import KakaoRedirect from "./components/loginPage/kakaoRedirect/kakaoRedirect";
 
 axios.defaults.withCredentials = true;
 
@@ -153,7 +154,6 @@ const App = (props) => {
     user && getInquireList();
   }, [user]);
 
-  // 방법 찾을 때  까지 header+footer 모두에게 붙임 (admin 페이지에서는 안떠야하기 때문에)
   return (
     <section className={styles.app}>
       <BrowserRouter basename={process.env.PUBLIC_URL}>
@@ -303,6 +303,9 @@ const App = (props) => {
         </Route>
         <Route exact path="/success">
           <PaySuccessPage />
+        </Route>
+        <Route exact path="/kakaoredirect">
+          <KakaoRedirect />
         </Route>
       </BrowserRouter>
     </section>

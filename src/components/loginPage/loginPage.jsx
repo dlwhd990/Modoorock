@@ -6,6 +6,14 @@ import styles from "./loginPage.module.css";
 
 axios.defaults.withCredentials = true;
 
+const { Kakao } = window;
+
+const loginWithKakao = () => {
+  Kakao.Auth.authorize({
+    redirectUri: "https://localhost:3000/modoorock/kakaoredirect",
+  });
+};
+
 const LoginPage = () => {
   const history = useHistory();
   const [loadingOn, setLoadingOn] = useState(false);
@@ -146,7 +154,20 @@ const LoginPage = () => {
           </div>
         </div>
         <div className={styles.sns_login_container}>
-          여기에 SNS로그인 버튼들
+          <a id="custom-login-btn" onClick={loginWithKakao}>
+            <img
+              alt="Kakao"
+              src="/modoorock/images/kakao_login_medium_narrow.png"
+              className={styles.kakao}
+            />
+          </a>
+          <a id="custom-login-btn" onClick={loginWithKakao}>
+            <img
+              alt="Kakao"
+              src="/modoorock/images/kakao_login_medium_narrow.png"
+              className={styles.kakao}
+            />
+          </a>
         </div>
         <div className={styles.signup_container}>
           <span className={styles.signup_message}>

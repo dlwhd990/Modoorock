@@ -15,7 +15,7 @@ const Contact = (props) => {
         <div className={styles.top_main}>
           <div className={styles.item_container}>
             <i className={`${styles.icon} far fa-paper-plane`}></i>
-            <p className={styles.item_desc}>example@example.com</p>
+            <p className={styles.item_desc}>modoorock@naver.com</p>
           </div>
           <div className={styles.item_container}>
             <i className={`${styles.icon} fas fa-map-marker-alt`}></i>
@@ -105,32 +105,6 @@ const Contact = (props) => {
             </div>
           </div>
         </section>
-      </section>
-
-      <section className={styles.bottom}>
-        <p className={styles.bottom_title}>LET'S TALK</p>
-        <div className={styles.bottom_main}>
-          <div className={styles.name_and_email_container}>
-            <div className={styles.name_container}>
-              <p className={styles.input_title}>What's Your Name</p>
-              <input type="text" className={styles.input} spellCheck="false" />
-            </div>
-            <div className={styles.email_container}>
-              <p className={styles.input_title}>Your Email</p>
-              <input type="text" className={styles.input} spellCheck="false" />
-            </div>
-          </div>
-          <div className={styles.project_container}>
-            <p className={styles.input_title}>Tell Us About Your Project</p>
-            <textarea
-              name="project"
-              id="project"
-              className={styles.project_input}
-              spellCheck="false"
-            ></textarea>
-          </div>
-          <button className={styles.submit_button}>SUBMIT</button>
-        </div>
       </section>
     </section>
   );

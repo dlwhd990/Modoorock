@@ -161,16 +161,7 @@ const Attraction = ({ areaList, getReviewList }) => {
           >
             최신순
           </li>
-          <li
-            className={
-              sortValue === "인기순"
-                ? `${styles.sort_button} ${styles.sort_on}`
-                : `${styles.sort_button}`
-            }
-            onClick={sortChangeHandler}
-          >
-            리뷰많은순
-          </li>
+
           <li
             className={
               sortValue === "평점높은순"
@@ -180,6 +171,16 @@ const Attraction = ({ areaList, getReviewList }) => {
             onClick={sortChangeHandler}
           >
             평점높은순
+          </li>
+          <li
+            className={
+              sortValue === "판매량"
+                ? `${styles.sort_last_button} ${styles.sort_on}`
+                : `${styles.sort_last_button}`
+            }
+            onClick={sortChangeHandler}
+          >
+            판매량
           </li>
         </ul>
         <section className={styles.attraction_list_container}>

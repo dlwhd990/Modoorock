@@ -80,4 +80,7 @@
   .route_button {
     margin: 0 8px;
   }
+  .select_button {
+    width: 30%;
+  }
 }

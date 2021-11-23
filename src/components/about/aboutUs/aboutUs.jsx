@@ -252,7 +252,12 @@ const AboutUs = (props) => {
           <img
             src="/modoorock/images/about_map.png"
             alt="partners_image"
-            className={styles.about_us_map_image}
+            className={`${styles.about_us_map_image} ${styles.map_mobile}`}
+          />
+          <img
+            src="/modoorock/images/map_web.png"
+            alt="partners_image"
+            className={`${styles.about_us_map_image} ${styles.map_web}`}
           />
         </section>
       </section>

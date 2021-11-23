@@ -14,6 +14,7 @@ const Mainpage = ({ programList, viewItems, getReviewList }) => {
   };
 
   const onSearchHandler = () => {
+    window.scrollTo({ top: 0 });
     history.push({
       pathname: "/programs/theme",
       state: { query: inputValue },
@@ -65,7 +66,7 @@ const Mainpage = ({ programList, viewItems, getReviewList }) => {
             <button
               className={styles.program_show_all_button}
               onClick={() => {
-                history.push("/programs/main");
+                history.push("/programs/theme");
                 window.scrollTo({ top: 0 });
               }}
             >

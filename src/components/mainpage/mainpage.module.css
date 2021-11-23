@@ -320,8 +320,9 @@
   }
 
   .program_show_all_button {
+    width: 100px;
     bottom: -50px;
-    left: calc(50vw - 45.065px);
+    left: calc(50vw - 50px);
   }
 
   .program_search_container {

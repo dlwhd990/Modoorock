@@ -57,7 +57,9 @@ const MyPagePoint = ({ user }) => {
   return (
     <section className={styles.list}>
       <section className={styles.top}>
-        <p className={styles.total_point}>{`내 포인트: ${user.totalPoint}`}</p>
+        <p
+          className={styles.total_point}
+        >{`내 포인트: ${user.totalPoint} 점`}</p>
       </section>
       <section className={styles.header}>
         <div className={styles.num}>번호</div>

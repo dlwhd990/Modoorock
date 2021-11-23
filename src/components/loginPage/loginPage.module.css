@@ -86,7 +86,19 @@
 }
 
 .sns_login_container {
-  height: 160px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 16px 0;
+}
+
+.kakao {
+  width: 215px;
+  cursor: pointer;
+  box-shadow: 2px 2px 3px lightgray;
+  border-radius: 10px;
+  background-color: transparent;
 }
 
 .signup_container {
@@ -126,5 +138,10 @@
 
   .submit_button {
     width: 30%;
+  }
+
+  .kakao {
+    width: 96%;
+    border-radius: 8px;
   }
 }

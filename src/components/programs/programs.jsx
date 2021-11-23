@@ -9,9 +9,10 @@ import ProgramsButton from "./programsButton/programsButton";
 const Programs = ({ areaList, programList, getReviewList }) => {
   const history = useHistory();
   const location = useLocation();
-  console.log(location.state);
   const { path } = useParams();
-  const [inputValue, setInputValue] = useState(""); //location.state 있으면 넣고 아니면 ""
+  const [inputValue, setInputValue] = useState(
+    location.state ? location.state.query : ""
+  ); //location.state 있으면 넣고 아니면 ""
   const [resultAreaList, setResultAreaList] = useState(areaList);
   const [resultProgramList, setResultProgramList] = useState(programList);
   const [switchValue, setSwitchValue] = useState("");
@@ -42,6 +43,7 @@ const Programs = ({ areaList, programList, getReviewList }) => {
     "가족",
     "연인",
   ];
+  const [sortValue, setSortValue] = useState("최신순");
 
   const onSelectHandler = (e) => {
     if (e.currentTarget.innerText === "프로그램") {
@@ -72,6 +74,12 @@ const Programs = ({ areaList, programList, getReviewList }) => {
 
   const onThemeChangeHandler = (e) => {
     setThemeValue(e.currentTarget.innerText);
+  };
+
+  const sortChangeHandler = (e) => {
+    const sortType = e.currentTarget.innerText;
+    setSortValue(sortType);
+    //이어서 하기
   };
 
   const inputChangeHandler = (e) => {
@@ -294,6 +302,39 @@ const Programs = ({ areaList, programList, getReviewList }) => {
                   />
                 ))}
               </section>
+              <ul className={styles.sort_button_container}>
+                <li
+                  className={
+                    sortValue === "최신순"
+                      ? `${styles.sort_button} ${styles.sort_on}`
+                      : `${styles.sort_button}`
+                  }
+                  onClick={sortChangeHandler}
+                >
+                  최신순
+                </li>
+
+                <li
+                  className={
+                    sortValue === "평점높은순"
+                      ? `${styles.sort_button} ${styles.sort_on}`
+                      : `${styles.sort_button}`
+                  }
+                  onClick={sortChangeHandler}
+                >
+                  평점높은순
+                </li>
+                <li
+                  className={
+                    sortValue === "판매량"
+                      ? `${styles.sort_last_button} ${styles.sort_on}`
+                      : `${styles.sort_last_button}`
+                  }
+                  onClick={sortChangeHandler}
+                >
+                  판매량
+                </li>
+              </ul>
               <section className={styles.program_list}>
                 {resultProgramList.length === 0 ? (
                   <p className={styles.no_attraction}>체험상품이 없습니다.</p>

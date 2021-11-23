@@ -47,7 +47,6 @@
 
 .about_us_main {
   height: 600px;
-  padding: 0 50px 0 320px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -77,7 +76,7 @@
 }
 
 .about_us_main_intro_container {
-  flex-basis: 53%;
+  flex-basis: 40%;
 }
 
 .about_us_main_intro {
@@ -222,6 +221,10 @@
   box-shadow: 0 0 10px lightgray;
 }
 
+.map_mobile {
+  display: none;
+}
+
 @keyframes appear {
   0% {
     opacity: 0;
@@ -328,5 +331,13 @@
 
   .about_us_map_image {
     width: 90%;
+  }
+
+  .map_web {
+    display: none;
+  }
+
+  .map_mobile {
+    display: block;
   }
 }

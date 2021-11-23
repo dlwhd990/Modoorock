@@ -244,6 +244,35 @@
   font-weight: 500;
 }
 
+.sort_button_container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  margin-top: 10px;
+  margin-bottom: 50px;
+}
+
+.sort_button {
+  margin-right: 55px;
+  color: var(--color-desc);
+  cursor: pointer;
+  font-size: var(--font-size-small);
+}
+
+.sort_last_button {
+  color: var(--color-desc);
+  cursor: pointer;
+  font-size: var(--font-size-small);
+  margin-right: 12%;
+}
+
+.sort_on {
+  color: var(--color-skyblue);
+  transition: 100ms all ease-in;
+}
+
 @keyframes appear {
   0% {
     transform: translateY(-20px);
@@ -329,6 +358,12 @@
   }
   .program_list {
     padding: 0;
+  }
+  .sort_button_container {
+    justify-content: center;
+  }
+  .sort_last_button {
+    margin-right: 10px;
   }
 }
 

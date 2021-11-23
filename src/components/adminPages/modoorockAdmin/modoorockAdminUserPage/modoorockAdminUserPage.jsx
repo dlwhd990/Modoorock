@@ -19,12 +19,15 @@ const ModoorockAdminUserPage = ({ userList, loadUserList }) => {
       <div className={styles.main}>
         <div className={styles.top}>
           <h1 className={styles.title}>회원관리</h1>
-          <input
-            value={inputValue}
-            onChange={onInputValueChangeHandler}
-            type="text"
-            className={styles.search_input}
-          />
+          <div className={styles.search_container}>
+            <input
+              value={inputValue}
+              onChange={onInputValueChangeHandler}
+              type="text"
+              className={styles.search_input}
+            />
+            <i className={`${styles.search_icon} fas fa-search`}></i>
+          </div>
         </div>
         <section className={styles.header}>
           <p className={styles.idx}>번호</p>
