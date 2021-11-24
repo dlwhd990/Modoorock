@@ -7,6 +7,7 @@ import ModoorockAdminArticlePage from "./modoorockAdminArticlePage/modoorockAdmi
 import ModoorockAdminAttractionPage from "./modoorockAdminAttractionPage/modoorockAdminAttractionPage";
 import ModoorockAdminBackgroundUploadPage from "./modoorockAdminBackgroundUploadPage/modoorockAdminBackgroundUploadPage";
 import ModoorockAdminInquirePage from "./modoorockAdminInquirePage/modoorockAdminInquirePage";
+import ModoorockAdminStatPage from "./modoorockAdminStatPage/modoorockAdminStatPage";
 import ModoorockAdminUserPage from "./modoorockAdminUserPage/modoorockAdminUserPage";
 
 const ModoorockAdmin = (props) => {
@@ -20,6 +21,7 @@ const ModoorockAdmin = (props) => {
   const [inquireList, setInquireList] = useState(null);
   const [advertiseList, setAdvertiseList] = useState(null);
   const [userList, setUserList] = useState(null);
+  const [expList, setExpList] = useState(null);
 
   const modoorockAdminCheck = () => {
     axios
@@ -30,6 +32,7 @@ const ModoorockAdmin = (props) => {
           window.location.href = "/modoorock";
         } else {
           loadAttractionList();
+          loadExpList();
           loadUserList();
           loadProgramList();
           loadInquireList();
@@ -103,6 +106,15 @@ const ModoorockAdmin = (props) => {
         type: "전체",
       })
       .then((response) => setFaqList(response.data.reverse()))
+      .catch((err) => console.error(err));
+  };
+
+  const loadExpList = () => {
+    axios
+      .post(`${process.env.REACT_APP_BASEURL}/exp/getexpthemelist`, {
+        theme: "전체",
+      })
+      .then((response) => setExpList(response.data))
       .catch((err) => console.error(err));
   };
 
@@ -259,6 +271,11 @@ const ModoorockAdmin = (props) => {
             loadNoticeList={loadNoticeList}
             loadFaqList={loadFaqList}
           />
+        )
+      ) : path === "stat" ? (
+        expList &&
+        userList && (
+          <ModoorockAdminStatPage expList={expList} userList={userList} />
         )
       ) : (
         <></>

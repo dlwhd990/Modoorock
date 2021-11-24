@@ -29,6 +29,10 @@ const MypageReviewWrite = ({
   };
 
   const submitReview = (userIdx) => {
+    if (stars === 0) {
+      window.alert("별점을 입력해주세요");
+      return;
+    }
     axios
       .post(`${process.env.REACT_APP_BASEURL}/review/insertreview`, {
         userIdx,

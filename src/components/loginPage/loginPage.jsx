@@ -5,12 +5,63 @@ import LoadingSpinnerWhite from "../loadingSpinner/loadingSpinnerWhite/loadingSp
 import styles from "./loginPage.module.css";
 
 axios.defaults.withCredentials = true;
-
 const { Kakao } = window;
 
+const socialLogin = (id, name, email, sns) => {
+  axios
+    .post(`${process.env.REACT_APP_BASEURL}/user/loginsns`, {
+      id,
+      name,
+      email,
+      sns,
+    })
+    .then((response) => {
+      if (response.data === "success") {
+        window.alert("회원가입이 완료되었습니다. 다시 로그인 해주세요");
+        window.location.href = "/modoorock/login";
+      } else if (response.data === "loggedin") {
+        window.location.href = "/";
+      } else {
+        window.alert("에러가 발생했습니다. 새로고침 후에 다시 시도해주세요.");
+      }
+    })
+    .catch((err) => console.error(err));
+};
+
+const getUserData = async () => {
+  Kakao.API.request({
+    url: "/v2/user/me",
+    success: function (res) {
+      socialLogin(
+        res.id.toString(),
+        res.kakao_account.profile.nickname,
+        res.kakao_account.email,
+        2
+      );
+    },
+    fail: function (error) {
+      //
+      window.alert("에러 발생");
+    },
+  });
+};
+
 const loginWithKakao = () => {
-  Kakao.Auth.authorize({
-    redirectUri: "https://localhost:3000/modoorock/kakaoredirect",
+  if (!Kakao) {
+    return;
+  }
+  //Kakao.Auth.authorize({
+  //  redirectUri: "https://localhost:3000/modoorock/kakaoredirect",
+  //});
+  Kakao.Auth.login({
+    success: function (response) {
+      Kakao.Auth.setAccessToken(response.access_token);
+      getUserData();
+      console.log(response);
+    },
+    fail: function (response) {
+      console.log(response);
+    },
   });
 };
 
@@ -31,6 +82,10 @@ const LoginPage = () => {
         ...inputValues,
         id,
       });
+    }
+    if (!Kakao.isInitialized()) {
+      Kakao.init(process.env.REACT_APP_KAKAO_JS_KEY);
+      console.log(Kakao.isInitialized());
     }
   }, []);
 
@@ -154,20 +209,30 @@ const LoginPage = () => {
           </div>
         </div>
         <div className={styles.sns_login_container}>
-          <a id="custom-login-btn" onClick={loginWithKakao}>
-            <img
-              alt="Kakao"
-              src="/modoorock/images/kakao_login_medium_narrow.png"
+          <div className={styles.sns_login_buttons}>
+            <a
+              id="custom-login-btn"
+              onClick={loginWithKakao}
               className={styles.kakao}
-            />
-          </a>
-          <a id="custom-login-btn" onClick={loginWithKakao}>
-            <img
-              alt="Kakao"
-              src="/modoorock/images/kakao_login_medium_narrow.png"
+            >
+              <img
+                className={styles.kakao_image}
+                alt="Kakao"
+                src="/modoorock/images/kakao_login_medium_narrow.png"
+              />
+            </a>
+            <a
+              id="custom-login-btn"
+              onClick={loginWithKakao}
               className={styles.kakao}
-            />
-          </a>
+            >
+              <img
+                className={styles.kakao_image}
+                alt="Kakao"
+                src="/modoorock/images/kakao_login_medium_narrow.png"
+              />
+            </a>
+          </div>
         </div>
         <div className={styles.signup_container}>
           <span className={styles.signup_message}>

@@ -9,11 +9,7 @@ const MypagePayment = (props) => {
   const [userExpList, setUserExpList] = useState(null);
   const [popupValue, setPopupValue] = useState(null);
 
-  const popupValueChangeHandler = (e) => {
-    const dataset = e.currentTarget.dataset;
-    if (dataset.check !== "on") {
-      return;
-    }
+  const popupValueChangeHandler = (dataset) => {
     setPopupValue({
       userExpIdx: dataset.userexpidx,
       expIdx: dataset.expidx,
@@ -94,6 +90,7 @@ const MypagePayment = (props) => {
               len={userExpList.length}
               loadExpInfo={loadExpInfo}
               popupValueChangeHandler={popupValueChangeHandler}
+              sessionCheckForLoadPurchaseList={sessionCheckForLoadPurchaseList}
             />
           ))
         ) : (

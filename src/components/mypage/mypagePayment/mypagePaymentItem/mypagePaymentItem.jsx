@@ -6,20 +6,22 @@ const MypagePaymentItem = ({
   item,
   index,
   len,
-  loadExpInfo,
   popupValueChangeHandler,
+  sessionCheckForLoadPurchaseList,
 }) => {
   const history = useHistory();
 
   const deleteReview = () => {
+    console.log(item);
     axios
       .post(`${process.env.REACT_APP_BASEURL}/review/deletereview`, {
-        idx: item.idx,
+        userExpIdx: item.purchaseData.idx,
       })
       .then((response) => {
+        console.log(response);
         if (response.data === "success") {
           window.alert("삭제되었습니다.");
-          loadExpInfo();
+          sessionCheckForLoadPurchaseList();
         } else {
           window.alert("에러가 발생했습니다. 새로고침 후에 다시 시도해주세요");
         }
@@ -28,10 +30,12 @@ const MypagePaymentItem = ({
   };
 
   const onButtonClickHandler = (e) => {
-    if (e.currentTarget.dataset.check === "on") {
-      popupValueChangeHandler();
-    } else if (e.currentTarget.dataset.check === "already") {
+    if (e.target.dataset.check === "already") {
       deleteReview();
+    } else if (e.target.dataset.check === "off") {
+      return;
+    } else {
+      popupValueChangeHandler(e.target.dataset);
     }
   };
 

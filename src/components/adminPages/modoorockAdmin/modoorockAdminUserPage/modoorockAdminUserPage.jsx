@@ -14,6 +14,15 @@ const ModoorockAdminUserPage = ({ userList, loadUserList }) => {
     setResultUserList(result);
   }, [inputValue]);
 
+  useEffect(() => {
+    if (inputValue === "") {
+      setResultUserList(userList);
+    } else {
+      const result = userList.filter((user) => user.id.includes(inputValue));
+      setResultUserList(result);
+    }
+  }, [userList]);
+
   return (
     <section className={styles.user_page}>
       <div className={styles.main}>

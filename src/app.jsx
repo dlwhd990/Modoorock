@@ -121,14 +121,14 @@ const App = (props) => {
       .post(`${process.env.REACT_APP_BASEURL}/exp/getexpthemelist`, {
         theme: "전체",
       })
-      .then((response) => setProgramList(response.data))
+      .then((response) => setProgramList(response.data.reverse()))
       .catch((err) => console.error(err));
   };
 
   const getIntroVideos = () => {
     axios
       .post(`${process.env.REACT_APP_BASEURL}/advertise/getadvertiselist`)
-      .then((response) => setIntroVideos(response.data))
+      .then((response) => setIntroVideos(response.data.reverse()))
       .catch((err) => console.error(err));
   };
 

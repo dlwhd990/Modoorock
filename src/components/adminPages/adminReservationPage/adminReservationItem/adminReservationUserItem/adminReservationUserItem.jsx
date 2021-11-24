@@ -18,10 +18,12 @@ const AdminReservationUserItem = ({ userIdx }) => {
       <p className={styles.name}>{user && `이름: ${user.name}`}</p>
       <p className={styles.phone}>
         {user &&
-          `연락처: ${user.phone.slice(0, 3)}-${user.phone.slice(
-            3,
-            7
-          )}-${user.phone.slice(7)}`}
+          (user.phone
+            ? `연락처: ${user.phone.slice(0, 3)}-${user.phone.slice(
+                3,
+                7
+              )}-${user.phone.slice(7)}`
+            : `연락처: ${user.email}`)}
       </p>
     </div>
   );

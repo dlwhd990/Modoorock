@@ -5,6 +5,7 @@ import { debounce } from "lodash";
 import AreaItem from "./areaItem/areaItem";
 import ProgramItem from "./programItem/programItem";
 import ProgramsButton from "./programsButton/programsButton";
+import axios from "axios";
 
 const Programs = ({ areaList, programList, getReviewList }) => {
   const history = useHistory();
@@ -12,7 +13,7 @@ const Programs = ({ areaList, programList, getReviewList }) => {
   const { path } = useParams();
   const [inputValue, setInputValue] = useState(
     location.state ? location.state.query : ""
-  ); //location.state 있으면 넣고 아니면 ""
+  );
   const [resultAreaList, setResultAreaList] = useState(areaList);
   const [resultProgramList, setResultProgramList] = useState(programList);
   const [switchValue, setSwitchValue] = useState("");
@@ -44,6 +45,7 @@ const Programs = ({ areaList, programList, getReviewList }) => {
     "연인",
   ];
   const [sortValue, setSortValue] = useState("최신순");
+  const [allReviewList, setAllReviewList] = useState();
 
   const onSelectHandler = (e) => {
     if (e.currentTarget.innerText === "프로그램") {
@@ -76,10 +78,99 @@ const Programs = ({ areaList, programList, getReviewList }) => {
     setThemeValue(e.currentTarget.innerText);
   };
 
+  const loadAllReviewList = () => {
+    axios
+      .post(`${process.env.REACT_APP_BASEURL}/review/getreviewlist`, {
+        expIdx: -1,
+      })
+      .then((response) => setAllReviewList(response.data))
+      .catch((err) => console.error(err));
+  };
+
+  const sortWithStar = (result) => {
+    const sortResult = [];
+    const scores = {};
+    const counts = {};
+    const tmp = [];
+    allReviewList.forEach((item) => {
+      result.forEach((data) => {
+        if (item.expIdx === data.idx) {
+          tmp.push(item);
+          return false;
+        }
+      });
+    });
+    tmp.forEach((item) => {
+      if (!scores[item.expIdx]) {
+        scores[item.expIdx] = item.stars;
+      } else {
+        scores[item.expIdx] += item.stars;
+      }
+      if (!counts[item.expIdx]) {
+        counts[item.expIdx] = 1;
+      } else {
+        counts[item.expIdx] += 1;
+      }
+    });
+
+    const keyList = Object.keys(scores);
+    keyList.forEach((key) => {
+      scores[key] = scores[key] / counts[key];
+    });
+    const sortable = [];
+    for (let scoreKey in scores) {
+      sortable.push([parseInt(scoreKey), scores[scoreKey]]);
+    }
+    result.forEach((item) => {
+      if (!scores[item.idx]) {
+        sortable.push([item.idx, 0]);
+      }
+    });
+    sortable.sort((a, b) => {
+      return b[1] - a[1];
+    });
+
+    sortable.forEach((item) => {
+      result.forEach((data) => {
+        if (data.idx === item[0]) {
+          sortResult.push(data);
+          return false;
+        }
+      });
+    });
+    return sortResult;
+  };
+
+  const sortHandler = (sortType, result) => {
+    if (sortType === "최신순") {
+      result.sort((a, b) => {
+        if (b.date > a.date) {
+          return 1;
+        } else if (b.date < a.date) {
+          return -1;
+        } else {
+          return 0;
+        }
+      });
+    } else if (sortType === "판매량") {
+      result.sort((a, b) => {
+        if (b.count > a.count) {
+          return 1;
+        } else if (b.count < a.count) {
+          return -1;
+        } else {
+          return 0;
+        }
+      });
+    } else if (sortType === "평점높은순") {
+      return sortWithStar(result);
+    }
+    return result;
+  };
+
   const sortChangeHandler = (e) => {
     const sortType = e.currentTarget.innerText;
     setSortValue(sortType);
-    //이어서 하기
   };
 
   const inputChangeHandler = (e) => {
@@ -113,7 +204,7 @@ const Programs = ({ areaList, programList, getReviewList }) => {
           (themeValue === programList[i].theme || themeValue === "전체") &&
             result.push(programList[i]);
         }
-        setResultProgramList(result);
+        setResultProgramList(sortHandler(sortValue, result));
         return;
       }
 
@@ -125,7 +216,7 @@ const Programs = ({ areaList, programList, getReviewList }) => {
           result.push(programList[i]);
         }
       }
-      setResultProgramList(result);
+      setResultProgramList(sortHandler(sortValue, result));
     }
   };
 
@@ -135,7 +226,7 @@ const Programs = ({ areaList, programList, getReviewList }) => {
 
   useEffect(() => {
     onSearchHandler();
-  }, [regionValue, themeValue]);
+  }, [regionValue, themeValue, sortValue]);
 
   useEffect(
     debounce(() => {
@@ -153,6 +244,7 @@ const Programs = ({ areaList, programList, getReviewList }) => {
   }, [switchValue]);
 
   useEffect(() => {
+    loadAllReviewList();
     if (path === "area") {
       setSwitchValue("지역별");
     } else if (path === "theme") {

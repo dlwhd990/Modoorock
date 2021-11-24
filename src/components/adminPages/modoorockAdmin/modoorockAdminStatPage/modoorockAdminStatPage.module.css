@@ -1,0 +1,50 @@
+.stat_page {
+  padding-top: 80px;
+  min-height: 100vh;
+  background-color: var(--color-smoke-white);
+}
+
+.container {
+  width: 70%;
+  height: auto;
+  margin: auto;
+  margin-top: 80px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  margin: 10px 0 20px 0;
+}
+
+.part {
+  flex-basis: 48%;
+  background-color: white;
+  padding: 20px;
+  border: var(--color-light-divide-line);
+  box-shadow: 3px 4px 5px lightgray;
+}
+
+.top {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.top_division {
+  flex-basis: 48.5%;
+}
+
+.item {
+  display: flex;
+  flex-direction: row;
+  padding: 12px 0;
+}
+
+.item_part {
+  flex-basis: 47.7%;
+  margin-left: 0.8%;
+}

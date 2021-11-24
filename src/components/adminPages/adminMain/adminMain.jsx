@@ -216,15 +216,6 @@ const AdminMain = ({ userLogout }) => {
           </section>
           <section className={styles.main_container}>
             <header className={styles.header}>
-              <div className={styles.header_search_container}>
-                <input
-                  type="text"
-                  className={styles.header_search}
-                  spellCheck="false"
-                  placeholder="검색"
-                />
-                <i className={`${styles.search_icon} fas fa-search`}></i>
-              </div>
               <div className={styles.logout_container}>
                 <p className={styles.user_name}>{`${user.name} 님`}</p>
                 <p className={styles.logout_button} onClick={userLogout}>

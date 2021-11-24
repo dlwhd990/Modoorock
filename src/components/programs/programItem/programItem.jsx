@@ -20,6 +20,10 @@ const ProgramItem = ({ item, getReviewList }) => {
   };
 
   useEffect(() => {
+    //사진 스플릿
+    const imageList = item.photo.split("#");
+    const main = imageList.filter((item) => item.includes("_main"));
+    setMainImage(main);
     getReviewList(item.idx, reviewListHandler);
   }, []);
 
@@ -37,11 +41,6 @@ const ProgramItem = ({ item, getReviewList }) => {
     });
     setReviewCount(count);
     count > 0 && setReviewStarAvg((total / count).toFixed(1));
-
-    //사진 스플릿
-    const imageList = item.photo.split("#");
-    const main = imageList.filter((item) => item.includes("_main"));
-    setMainImage(main);
   }, [reviewList]);
   return (
     <section className={styles.program_item} onClick={onItemClick}>

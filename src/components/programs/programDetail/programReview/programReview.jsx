@@ -13,11 +13,17 @@ const ProgramReview = ({ review }) => {
         })
         .then((response) => {
           const id = response.data.id;
-          let tmp = id.slice(0, 3);
-          for (let i = 0; i < id.length - 3; i++) {
-            tmp += "*";
+          console.log(id.slice(0, 6));
+          if (id.slice(0, 6) !== "kakao_") {
+            let tmp = id.slice(0, 3);
+            for (let i = 0; i < id.length - 3; i++) {
+              tmp += "*";
+            }
+            setUser(tmp);
+          } else {
+            let tmp = id.slice(0, 6) + id.slice(id.length - 3, id.length);
+            setUser(tmp);
           }
-          setUser(tmp);
         })
         .catch((err) => console.error(err));
     };

@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 
 const KakaoRedirect = (props) => {
   const { Kakao } = window;
@@ -12,6 +12,7 @@ const KakaoRedirect = (props) => {
     let sval = "";
 
     params = params.split("&");
+    console.log(params, "dasd");
     let temp;
 
     for (var i = 0; i < params.length; i++) {
@@ -56,7 +57,7 @@ const KakaoRedirect = (props) => {
         const xhr = new XMLHttpRequest();
         xhr.open(
           "POST",
-          `https://kauth.kakao.com/oauth/token?grant_type=authorization_code&client_id=${process.env.REACT_APP_KAKAO_KEY}&redirect_uri=https://localhost:3000/modoorock/kakaoredirect&code=${code}`
+          `https://kauth.kakao.com/oauth/token?grant_type=authorization_code&client_id=${process.env.REACT_APP_KAKAO_JS_KEY}&redirect_uri=https://localhost:3000/modoorock/kakaoredirect&code=${code}`
         );
         xhr.onload = () => {
           if (xhr.status === 200) {
@@ -75,7 +76,6 @@ const KakaoRedirect = (props) => {
       Kakao.API.request({
         url: "/v2/user/me",
         success: function (res) {
-          console.log(res);
           login(
             res.id.toString(),
             res.kakao_account.profile.nickname,
@@ -95,11 +95,7 @@ const KakaoRedirect = (props) => {
     });
   }, []);
 
-  return (
-    <div className="">
-      <span>카카오</span>
-    </div>
-  );
+  return <></>;
 };
 
 export default KakaoRedirect;

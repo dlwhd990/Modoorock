@@ -31,13 +31,7 @@ const Mainpage = ({ programList, viewItems, getReviewList }) => {
   };
 
   useEffect(() => {
-    programList &&
-      setLatestSixProgramList(
-        programList.slice(
-          Math.max(programList.length - 6, 0),
-          programList.length
-        )
-      );
+    programList && setLatestSixProgramList(programList.slice(0, 6));
   }, [programList]);
 
   return (

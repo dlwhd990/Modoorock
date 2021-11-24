@@ -35,9 +35,9 @@
     rgba(0, 198, 121, 1) 100%
   );
   border-image-slice: 1;
-  border-left: none;
-  border-right: none;
-  border-bottom: none;
+  border-left: 0;
+  border-right: 0;
+  border-bottom: 0;
   font-weight: 400;
   font-size: 18px;
   color: #00c67a;

@@ -123,16 +123,32 @@ const AdminProgramEdit = (props) => {
     formData.append("title", title);
     formData.append("price", price);
     formData.append("content", content);
-    formData.append("detailContent", content);
+    formData.append("detailContent", detailContent);
     formData.append("theme", theme);
-    subImages
-      ? subImages.forEach((file) => {
-          formData.append("files", file);
-        })
-      : formData.append("photo", subString);
-    previewImage.file !== ""
-      ? formData.append("files", previewImage.file)
-      : formData.append("photo", main);
+    //subImages
+    //  ? subImages.forEach((file) => {
+    //      formData.append("files", file);
+    //    })
+    //  : previewImage.file !== ""
+    //  ? formData.append("files", previewImage.file)
+    //  : formData.append("photo", main + "#" + subString);
+
+    if (!subImages && !previewImage.file) {
+      formData.append("photo", main + "#" + subString);
+    } else if (subImages && previewImage.file === "") {
+      subImages.forEach((file) => {
+        formData.append("files", file);
+      });
+      formData.append("photo", main);
+    } else if (!subImages && previewImage.file !== "") {
+      formData.append("photo", subString);
+      formData.append("files", previewImage.file);
+    } else {
+      subImages.forEach((file) => {
+        formData.append("files", file);
+      });
+      formData.append("files", previewImage.file);
+    }
 
     axios
       .post(`${process.env.REACT_APP_BASEURL}/exp/modifyexp`, formData)

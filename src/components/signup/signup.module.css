@@ -43,6 +43,7 @@
   border: 1px solid var(--color-light-border);
   padding: 4px 6px;
   outline: none;
+  border-radius: 0;
 }
 
 .input:focus {
@@ -51,6 +52,7 @@
 
 .phone_num_input {
   width: 280px;
+  border-radius: 0;
 }
 
 .id_redup_check_button,

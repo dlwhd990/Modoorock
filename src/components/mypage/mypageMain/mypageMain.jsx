@@ -164,52 +164,44 @@ const MypageMain = ({ user, sessionCheck, userLogout }) => {
           className={styles.profile_image}
         />
         <div className={styles.name_and_point}>
-          <p className={styles.name}>{`${user.id} 님`}</p>
+          <p className={styles.name}>{`${user.name} 님`}</p>
           <p className={styles.point}>{`보유 포인트: ${user.totalPoint}점`}</p>
         </div>
       </div>
       <div className={styles.main}>
-        <div className={styles.input_container}>
-          <p className={styles.input_title}>이름</p>
-          <input
-            name="name"
-            onChange={inputValueChangeHandler}
-            value={name}
-            type="text"
-            className={styles.input}
-            spellCheck="false"
-            placeholder="이름"
-            disabled="disabled"
-          />
-        </div>
-        <div className={styles.input_container}>
-          <p className={styles.input_title}>새로운 비밀번호</p>
-          <input
-            name="newPw"
-            onChange={inputValueChangeHandler}
-            value={newPw}
-            type="password"
-            className={styles.input}
-            spellCheck="false"
-            placeholder="새로운 비밀번호 (8~16자)"
-          />
-          <p className={styles.input_title}>새로운 비밀번호 확인</p>
-
-          <div className={styles.button_and_input}>
+        {user && user.sns === 0 && (
+          <div className={styles.input_container}>
+            <p className={styles.input_title}>새로운 비밀번호</p>
             <input
-              name="newPwConfirm"
+              name="newPw"
               onChange={inputValueChangeHandler}
-              value={newPwConfirm}
+              value={newPw}
               type="password"
-              className={styles.input_short}
+              className={styles.input}
               spellCheck="false"
-              placeholder="새로운 비밀번호 확인"
+              placeholder="새로운 비밀번호 (8~16자)"
             />
-            <button className={styles.button} onClick={onPasswordChangeHandler}>
-              비밀번호 변경
-            </button>
+            <p className={styles.input_title}>새로운 비밀번호 확인</p>
+
+            <div className={styles.button_and_input}>
+              <input
+                name="newPwConfirm"
+                onChange={inputValueChangeHandler}
+                value={newPwConfirm}
+                type="password"
+                className={styles.input_short}
+                spellCheck="false"
+                placeholder="새로운 비밀번호 확인"
+              />
+              <button
+                className={styles.button}
+                onClick={onPasswordChangeHandler}
+              >
+                비밀번호 변경
+              </button>
+            </div>
           </div>
-        </div>
+        )}
 
         <div className={styles.input_container}>
           <p className={styles.input_title}>변경할 핸드폰번호</p>
