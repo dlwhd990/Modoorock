@@ -14,3 +14,10 @@
   color: white;
   transition: 120ms all ease-in;
 }
+
+@media screen and (max-width: 780px) {
+  .region_select {
+    width: 45%;
+    margin: 10px 2.5%;
+  }
+}

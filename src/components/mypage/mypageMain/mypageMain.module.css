@@ -136,10 +136,10 @@
   }
 
   .input_short {
-    width: 70%;
+    width: 66%;
   }
   .button {
-    width: 27%;
+    width: 31%;
     font-size: var(--font-size-mobile-small);
   }
 }

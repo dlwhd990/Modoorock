@@ -14,6 +14,7 @@ const Attraction = ({ areaList, getReviewList }) => {
   const [resultProgramList, setResultProgramList] = useState([]);
   const [areaData, setAreaData] = useState(null);
   const [sortValue, setSortValue] = useState("최신순");
+  const [allReviewList, setAllReviewList] = useState();
 
   const loadAreaInfo = () => {
     axios
@@ -30,8 +31,10 @@ const Attraction = ({ areaList, getReviewList }) => {
         attractionIdx: parseInt(path),
       })
       .then((response) => {
-        setAttractionProgramList(response.data);
-        setResultProgramList(response.data);
+        console.log(response.data);
+        const reverseData = response.data.reverse();
+        setAttractionProgramList(reverseData);
+        setResultProgramList(reverseData);
       })
       .catch((err) => console.error(err));
   };
@@ -42,28 +45,110 @@ const Attraction = ({ areaList, getReviewList }) => {
     }
   };
 
+  const loadAllReviewList = () => {
+    axios
+      .post(`${process.env.REACT_APP_BASEURL}/review/getreviewlist`, {
+        expIdx: -1,
+      })
+      .then((response) => setAllReviewList(response.data))
+      .catch((err) => console.error(err));
+  };
+
   const sortChangeHandler = (e) => {
     const sortType = e.currentTarget.innerText;
     setSortValue(sortType);
+  };
+
+  const sortWithStar = (result) => {
+    const sortResult = [];
+    const scores = {};
+    const counts = {};
+    const tmp = [];
+    allReviewList.forEach((item) => {
+      result.forEach((data) => {
+        if (item.expIdx === data.idx) {
+          tmp.push(item);
+          return false;
+        }
+      });
+    });
+    tmp.forEach((item) => {
+      if (!scores[item.expIdx]) {
+        scores[item.expIdx] = item.stars;
+      } else {
+        scores[item.expIdx] += item.stars;
+      }
+      if (!counts[item.expIdx]) {
+        counts[item.expIdx] = 1;
+      } else {
+        counts[item.expIdx] += 1;
+      }
+    });
+
+    const keyList = Object.keys(scores);
+    keyList.forEach((key) => {
+      scores[key] = scores[key] / counts[key];
+    });
+    const sortable = [];
+    for (let scoreKey in scores) {
+      sortable.push([parseInt(scoreKey), scores[scoreKey]]);
+    }
+    result.forEach((item) => {
+      if (!scores[item.idx]) {
+        sortable.push([item.idx, 0]);
+      }
+    });
+    sortable.sort((a, b) => {
+      return b[1] - a[1];
+    });
+
+    sortable.forEach((item) => {
+      result.forEach((data) => {
+        if (data.idx === item[0]) {
+          sortResult.push(data);
+          return false;
+        }
+      });
+    });
+    return sortResult;
+  };
+
+  const sortHandler = (sortType, result) => {
     if (sortType === "최신순") {
-      setResultProgramList(attractionProgramList);
-    } //이어서 하기
+      result.sort((a, b) => {
+        if (b.date > a.date) {
+          return 1;
+        } else if (b.date < a.date) {
+          return -1;
+        } else {
+          return 0;
+        }
+      });
+    } else if (sortType === "판매량") {
+      result.sort((a, b) => {
+        if (b.count > a.count) {
+          return 1;
+        } else if (b.count < a.count) {
+          return -1;
+        } else {
+          return 0;
+        }
+      });
+    } else if (sortType === "평점높은순") {
+      return sortWithStar(result);
+    }
+    return result;
   };
 
   const onSearchHandler = () => {
     const result = [];
-
-    if (inputValue === "") {
-      setResultProgramList(attractionProgramList);
-      return;
-    }
 
     for (let i = 0; i < attractionProgramList.length; i++) {
       if (attractionProgramList[i].title.includes(inputValue)) {
         result.push(attractionProgramList[i]);
       }
     }
-    setResultProgramList(result);
+    setResultProgramList(sortHandler(sortValue, result));
   };
 
   useEffect(() => {
@@ -76,10 +161,14 @@ const Attraction = ({ areaList, getReviewList }) => {
   };
 
   useEffect(() => {
-    const inputToSearchHandler = debounce(() => {
-      onSearchHandler();
-    }, 200);
-    attractionProgramList && inputToSearchHandler();
+    loadAllReviewList();
+  }, []);
+
+  useEffect(() => {
+    if (!attractionProgramList) {
+      return;
+    }
+    onSearchHandler();
   }, [inputValue, sortValue]);
 
   return (
@@ -191,14 +280,15 @@ const Attraction = ({ areaList, getReviewList }) => {
           </li>
         </ul>
         <section className={styles.attraction_list_container}>
-          {resultProgramList.map((item) => (
-            <ProgramItem
-              key={item.idx}
-              item={item}
-              areaList={areaList}
-              getReviewList={getReviewList}
-            />
-          ))}
+          {resultProgramList &&
+            resultProgramList.map((item) => (
+              <ProgramItem
+                key={item.idx}
+                item={item}
+                areaList={areaList}
+                getReviewList={getReviewList}
+              />
+            ))}
         </section>
       </section>
     </section>

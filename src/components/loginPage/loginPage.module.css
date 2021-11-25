@@ -1,4 +1,5 @@
 .login_page {
+  width: 100%;
   margin-top: 80px;
   min-height: 100vh;
   display: flex;
@@ -115,6 +116,7 @@
 
 .signup_container {
   width: 87%;
+  left: 6.5%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -136,11 +138,13 @@
   background-color: var(--color-theme);
   color: white;
   cursor: pointer;
+  font-size: var(--font-size-small);
   border-radius: 4px;
 }
 
-@media screen and (max-width: 780px) {
+@media screen and (max-width: 500px) {
   .container {
+    width: 100%;
     margin-top: 80px;
     padding: 0 20px;
   }
@@ -154,5 +158,10 @@
 
   .kakao {
     width: 48.5%;
+  }
+
+  .go_signup_button {
+    width: 28%;
+    font-size: var(--font-size-small);
   }
 }

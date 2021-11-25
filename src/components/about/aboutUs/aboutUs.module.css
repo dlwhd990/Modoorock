@@ -255,14 +255,14 @@
 
   .about_us_main_container {
     margin-top: 10px;
-    height: 2200px;
+    height: 2260px;
   }
 
   .about_us_main {
     display: flex;
     flex-direction: column;
     padding: 0 50px;
-    margin-top: 140px;
+    margin-top: 150px;
     height: 500px;
   }
 

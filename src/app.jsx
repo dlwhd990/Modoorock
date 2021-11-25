@@ -65,7 +65,7 @@ const App = (props) => {
       .post(`${process.env.REACT_APP_BASEURL}/user/logout`)
       .then(() => {
         setUser(false);
-        !check && window.alert("안전하게 로그아웃 되었습니다.");
+        !check && window.alert("로그아웃 되었습니다.");
         window.location.href = "/modoorock";
       })
       .catch((err) => console.error(err));

@@ -21,7 +21,7 @@ const socialLogin = (id, name, email, sns) => {
         window.alert("회원가입이 완료되었습니다. 다시 로그인 해주세요");
         window.location.href = "/modoorock/login";
       } else if (response.data === "loggedin") {
-        window.location.href = "/";
+        window.location.href = "/modoorock";
       } else {
         window.alert("에러가 발생했습니다. 새로고침 후에 다시 시도해주세요.");
       }

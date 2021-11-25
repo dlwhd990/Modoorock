@@ -284,6 +284,16 @@
   }
 }
 
+@media screen and (max-width: 1000px) {
+  .search_input {
+    width: 70%;
+  }
+
+  .search_icon {
+    width: 30%;
+  }
+}
+
 @media screen and (max-width: 780px) {
   .programs {
     margin-top: 63px;
@@ -316,10 +326,19 @@
 
   .search_input {
     font-size: var(--font-size-normal);
+    width: 80%;
+  }
+
+  .search_icon {
+    width: 20%;
   }
 
   .switch_button_container {
     width: 85%;
+  }
+
+  .region_select_container {
+    justify-content: flex-start;
   }
 
   .region_select_toggle {

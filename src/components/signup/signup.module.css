@@ -142,6 +142,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 12;
 }
 
 .signup_popup {
@@ -220,7 +221,7 @@
   .id_redup_check_button,
   .get_auth_num_button {
     width: 30%;
-    font-size: var(--font-size-small);
+    font-size: var(--font-size-mobile-small);
   }
 
   .phone_num_input {
@@ -237,5 +238,22 @@
 
   .submit_button {
     width: 100%;
+  }
+
+  .signup_popup {
+    width: 80%;
+    height: 73vh;
+    margin-top: 5vh;
+    padding: 0;
+  }
+
+  .popup_title {
+    padding: 3.5vh 20px 0 20px;
+    font-size: 18px;
+  }
+
+  .signup_popup_container {
+    box-shadow: none;
+    height: 55vh;
   }
 }
