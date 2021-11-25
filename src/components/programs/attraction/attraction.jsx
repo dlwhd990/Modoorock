@@ -4,7 +4,7 @@ import { debounce } from "lodash";
 import ProgramItem from "../programItem/programItem";
 import styles from "./attraction.module.css";
 import axios from "axios";
-import { parse } from "date-fns/esm";
+import HelmetComponent from "../../../helmetComponent";
 
 const Attraction = ({ areaList, getReviewList }) => {
   const history = useHistory();
@@ -84,6 +84,13 @@ const Attraction = ({ areaList, getReviewList }) => {
 
   return (
     <section className={styles.attraction}>
+      {areaData && (
+        <HelmetComponent
+          title={`${areaData.name} 투어 패키지`}
+          desc={`${areaData.name} 투어 패키지`}
+          url={`https://web.modoorock.com/modoorock/programs/attraction/${areaData.idx}`}
+        ></HelmetComponent>
+      )}
       <section className={styles.attraction_top_banner}></section>
       <section className={styles.select_bar_container}>
         <div
