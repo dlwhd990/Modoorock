@@ -5,14 +5,18 @@ import styles from "./mypagePaymentItem.module.css";
 const MypagePaymentItem = ({
   item,
   index,
-  len,
   popupValueChangeHandler,
   sessionCheckForLoadPurchaseList,
 }) => {
   const history = useHistory();
 
   const deleteReview = () => {
-    console.log(item);
+    const confirm = window.confirm(
+      "정말로 삭제하시겠습니까? 리뷰는 삭제 후에 다시 작성할 수 있습니다."
+    );
+    if (!confirm) {
+      return;
+    }
     axios
       .post(`${process.env.REACT_APP_BASEURL}/review/deletereview`, {
         userExpIdx: item.purchaseData.idx,
@@ -44,7 +48,7 @@ const MypagePaymentItem = ({
   };
   return (
     <div className={styles.item}>
-      <div className={styles.num}>{len - index}</div>
+      <div className={styles.num}>{parseInt(index) + 1}</div>
       <div className={styles.date}>{`${item.purchaseData.payDate.slice(
         0,
         4

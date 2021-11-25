@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styles from "./mypageMain.module.css";
 import axios from "axios";
+import HelmetComponent from "../../../helmetComponent";
 
 const MypageMain = ({ user, sessionCheck, userLogout }) => {
   const [disabled, setDisabled] = useState(false);
@@ -153,6 +154,11 @@ const MypageMain = ({ user, sessionCheck, userLogout }) => {
   }, []);
   return (
     <section className={styles.mypage_main}>
+      <HelmetComponent
+        title="마이페이지"
+        desc="모두락 마이페이지"
+        url="https://web.modoorock.com/modoorock/mypage/main"
+      />
       <div className={styles.top}>
         <img
           src={`${

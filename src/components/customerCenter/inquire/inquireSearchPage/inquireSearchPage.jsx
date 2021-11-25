@@ -3,11 +3,13 @@ import styles from "./inquireSearchPage.module.css";
 import { useHistory, useParams } from "react-router";
 import axios from "axios";
 import InquireArticle from "../inquireArticle/inquireArticle";
+import HelmetComponent from "../../../../helmetComponent";
 
 const InquireSearchPage = ({ inquireArticles, getInquireList }) => {
   const history = useHistory();
   const { query } = useParams();
   const searchInputRef = useRef();
+  const [searchInput, setSearchInput] = useState("");
   const [pageList, setPageList] = useState([]);
   const [listList, setListList] = useState([]);
   const [numbering, setNumbering] = useState(1);
@@ -61,6 +63,10 @@ const InquireSearchPage = ({ inquireArticles, getInquireList }) => {
     setNumbering(parseInt(e.target.textContent));
   };
 
+  const searchInputChangeHandler = (e) => {
+    setSearchInput(e.target.value);
+  };
+
   const goWrite = () => {
     axios
       .post(`${process.env.REACT_APP_BASEURL}/user/session`)
@@ -76,24 +82,23 @@ const InquireSearchPage = ({ inquireArticles, getInquireList }) => {
   };
 
   const onSearchHandler = () => {
-    if (!searchInputRef.current) {
+    console.log(searchInput);
+    if (!searchInput) {
       window.alert("검색어를 입력해주세요");
       return;
     }
-    const query = searchInputRef.current.value;
-    if (query === "") {
-      window.alert("검색어를 입력하세요");
-      return;
-    } else if (query === "?" || query === "#") {
+    if (searchInput === "?" || searchInput === "#") {
       window.alert("?, #는 검색할 수 없습니다.");
       return;
     }
+    setSearchInput("");
     searchInputRef.current.value = "";
-    history.push(`/customer/inquire/search/${query}`);
+    history.push(`/customer/inquire/search/${searchInput}`);
     getInquireList();
   };
 
   const keyHandler = (e) => {
+    console.log(e.key);
     if (e.key !== "Enter") {
       return;
     }
@@ -101,11 +106,11 @@ const InquireSearchPage = ({ inquireArticles, getInquireList }) => {
   };
 
   useEffect(() => {
-    window.addEventListener("keydown", keyHandler);
+    window.addEventListener("keypress", keyHandler);
     return () => {
-      window.removeEventListener("keydown", keyHandler);
+      window.removeEventListener("keypress", keyHandler);
     };
-  }, []);
+  }, [keyHandler]);
 
   useEffect(() => {
     searchInputRef && searchInputRef.current.focus();
@@ -133,6 +138,13 @@ const InquireSearchPage = ({ inquireArticles, getInquireList }) => {
 
   return (
     <section className={styles.search_result}>
+      {query && (
+        <HelmetComponent
+          title="문의게시판 검색결과"
+          desc={`문의게시판 검색결과-${query}`}
+          url={`https://web.modoorock.com/modoorock/customer/inquire/search/${query}`}
+        />
+      )}
       <section className={styles.customer_top_banner}></section>
       <section className={styles.select_bar_container}>
         <div className={styles.select_button}>검색결과</div>
@@ -174,6 +186,8 @@ const InquireSearchPage = ({ inquireArticles, getInquireList }) => {
         <section className={styles.top}>
           <section className={styles.search}>
             <input
+              onChange={searchInputChangeHandler}
+              value={searchInput}
               ref={searchInputRef}
               type="text"
               className={styles.search_text_input}
@@ -200,6 +214,9 @@ const InquireSearchPage = ({ inquireArticles, getInquireList }) => {
                 where="inquire"
               />
             ))}
+          {pageList.length === 1 && (
+            <p className={styles.nothing}>검색 결과가 없습니다.</p>
+          )}
         </section>
         <section className={styles.bottom}>
           <ul className={styles.page_numbers}>

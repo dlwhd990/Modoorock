@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styles from "./signup.module.css";
 import axios from "axios";
+import HelmetComponent from "../../helmetComponent";
 
 const Signup = (props) => {
   const signup_text = `
@@ -354,6 +355,11 @@ const Signup = (props) => {
   };
   return (
     <section className={styles.signup}>
+      <HelmetComponent
+        title="회원가입"
+        desc="모두락의 회원이 되어 다양한 액티비티 미션투어 체험 상품을 경험해보세요"
+        url="https://web.modoorock.com/modoorock/signup"
+      />
       <form className={styles.signup_form}>
         <div className={styles.signup_title_container}>
           <h1 className={styles.signup_title}>모두락 회원가입</h1>

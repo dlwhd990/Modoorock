@@ -3,20 +3,18 @@ import { useHistory } from "react-router-dom";
 import InquireArticle from "./inquireArticle/inquireArticle";
 import styles from "./inquire.module.css";
 import axios from "axios";
+import HelmetComponent from "../../../helmetComponent";
 
 const Inquire = ({ articles, getInquireList, user }) => {
   const history = useHistory();
   const searchInputRef = useRef();
+  const [searchInput, setSearchInput] = useState("");
   const [pageList, setPageList] = useState([]);
   const [listList, setListList] = useState([]);
   const [numbering, setNumbering] = useState(1);
   const [sliceList, setSliceList] = useState([]);
   const [resultArticles, setResultArticles] = useState(articles);
   const [cursor, setCursor] = useState(0);
-
-  useEffect(() => {
-    getInquireList();
-  }, []);
 
   useEffect(() => {
     if (!user) {
@@ -76,11 +74,16 @@ const Inquire = ({ articles, getInquireList, user }) => {
       .catch((err) => console.error(err));
   };
 
+  const searchInputChangeHandler = (e) => {
+    setSearchInput(e.target.value);
+  };
+
   const onSearchHandler = () => {
-    if (!searchInputRef.current) {
+    console.log(searchInput);
+    if (!searchInput) {
       return;
     }
-    const query = searchInputRef.current.value;
+    const query = searchInput;
 
     if (query === "") {
       window.alert("검색어를 입력하세요");
@@ -90,6 +93,7 @@ const Inquire = ({ articles, getInquireList, user }) => {
       return;
     }
     searchInputRef.current.value = "";
+    setSearchInput("");
     history.push(`/customer/inquire/search/${query}`);
     getInquireList();
   };
@@ -105,11 +109,11 @@ const Inquire = ({ articles, getInquireList, user }) => {
     if (!user) {
       return;
     }
-    window.addEventListener("keydown", keyHandler);
+    window.addEventListener("keypress", keyHandler);
     return () => {
-      window.removeEventListener("keydown", keyHandler);
+      window.removeEventListener("keypress", keyHandler);
     };
-  }, []);
+  }, [keyHandler]);
 
   useEffect(() => {
     if (!user) {
@@ -143,9 +147,16 @@ const Inquire = ({ articles, getInquireList, user }) => {
   if (user) {
     return (
       <section className={styles.inquire}>
+        <HelmetComponent
+          title="문의게시판"
+          desc="모두락 문의게시판"
+          url="https://web.modoorock.com/modoorock/customer/inquire"
+        />
         <section className={styles.top}>
           <section className={styles.search}>
             <input
+              value={searchInput}
+              onChange={searchInputChangeHandler}
               ref={searchInputRef}
               type="text"
               className={styles.search_text_input}

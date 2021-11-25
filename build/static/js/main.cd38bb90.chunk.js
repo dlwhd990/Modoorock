@@ -6296,9 +6296,9 @@
           Object(n.useEffect)(function () {
             if (c)
               return (
-                window.addEventListener("keydown", E),
+                window.addEventListener("keypress", E),
                 function () {
-                  window.removeEventListener("keydown", E);
+                  window.removeEventListener("keypress", E);
                 }
               );
           }, []),
@@ -18470,9 +18470,9 @@
             };
           Object(n.useEffect)(function () {
             return (
-              window.addEventListener("keydown", T),
+              window.addEventListener("keypress", T),
               function () {
-                window.removeEventListener("keydown", T);
+                window.removeEventListener("keypress", T);
               }
             );
           }, []),
@@ -18774,9 +18774,9 @@
             };
           Object(n.useEffect)(function () {
             return (
-              window.addEventListener("keydown", T),
+              window.addEventListener("keypress", T),
               function () {
-                window.removeEventListener("keydown", T);
+                window.removeEventListener("keypress", T);
               }
             );
           }, []),

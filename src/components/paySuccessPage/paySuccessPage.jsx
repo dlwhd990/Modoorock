@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
+import HelmetComponent from "../../helmetComponent";
 import LoadingPage from "../loadingPage/loadingPage";
 import styles from "./paySuccessPage.module.css";
 
@@ -69,6 +70,11 @@ const PaySuccessPage = () => {
   }, []);
   return (
     <section className={styles.page}>
+      <HelmetComponent
+        title="결제 성공"
+        desc=""
+        url="https://web.modoorock.com/modoorock"
+      />
       {loadingOn ? (
         <LoadingPage />
       ) : (

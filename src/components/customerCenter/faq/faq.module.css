@@ -1,4 +1,4 @@
-.notice {
+.faq {
   min-height: 100vh;
   animation: appear 0.6s;
   display: flex;
@@ -190,7 +190,7 @@
 }
 
 @media screen and (max-width: 780px) {
-  .notice {
+  .faq {
     width: 95%;
   }
 

@@ -108,7 +108,7 @@
   border: none;
   background-color: #39a2e8;
   outline: none;
-  font-size: 14px;
+  font-size: var(--font-size-normal);
   color: white;
   cursor: pointer;
   transition: 150ms all ease-in;
@@ -265,6 +265,12 @@
   color: black;
 }
 
+.nothing {
+  margin-top: 50px;
+  font-size: 18px;
+  text-align: center;
+}
+
 @keyframes appear {
   0% {
     transform: translateY(-20px);
@@ -308,6 +314,7 @@
 
   .search_button {
     width: 17%;
+    font-size: 13px;
   }
 
   .header {

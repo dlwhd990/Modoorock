@@ -1,10 +1,10 @@
 import React from "react";
 import styles from "./myPagePointItem.module.css";
 
-const MyPagePointItem = ({ item, index, len }) => {
+const MyPagePointItem = ({ item, index }) => {
   return (
     <div className={styles.item}>
-      <div className={styles.num}>{len - index}</div>
+      <div className={styles.num}>{parseInt(index) + 1}</div>
       <div className={styles.date}>{`${item.date.slice(0, 4)}/${item.date.slice(
         5,
         7

@@ -1,11 +1,17 @@
 import React from "react";
 import { useHistory } from "react-router";
 import styles from "./contact.module.css";
+import HelmetComponent from "../../helmetComponent";
 
 const Contact = (props) => {
   const history = useHistory();
   return (
     <section className={styles.contact}>
+      <HelmetComponent
+        title="연락처"
+        desc="모두락은 여러분의 연락을 기다립니다."
+        url="https://web.modoorock.com/modoorock/contact"
+      />
       <section className={styles.contact_top_banner}></section>
       <section className={styles.select_bar_container}>
         <div className={`${styles.select_button} ${styles.on}`}>Contact</div>

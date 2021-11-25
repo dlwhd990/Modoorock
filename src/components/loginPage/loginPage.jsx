@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
+import HelmetComponent from "../../helmetComponent";
 import LoadingSpinnerWhite from "../loadingSpinner/loadingSpinnerWhite/loadingSpinnerWhite";
 import styles from "./loginPage.module.css";
 
@@ -151,6 +152,11 @@ const LoginPage = () => {
 
   return (
     <section className={styles.login_page}>
+      <HelmetComponent
+        title="로그인"
+        desc="모두락은 기존 관광지를 관광게이미피케이션을 결합하여 새 창조하는 미션 투어 전문기업입니다."
+        url="https://web.modoorock.com/modoorock/login"
+      />
       <section className={styles.container}>
         <p className={styles.title}>회원로그인</p>
         <form className={styles.main}>

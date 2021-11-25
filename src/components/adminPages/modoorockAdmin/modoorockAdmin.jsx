@@ -111,10 +111,13 @@ const ModoorockAdmin = (props) => {
 
   const loadExpList = () => {
     axios
-      .post(`${process.env.REACT_APP_BASEURL}/exp/getexpthemelist`, {
-        theme: "전체",
+      .post(`${process.env.REACT_APP_BASEURL}/userexp/getuserexplist`, {
+        userIdx: -1,
       })
-      .then((response) => setExpList(response.data))
+      .then((response) => {
+        console.log(response.data);
+        setExpList(response.data);
+      })
       .catch((err) => console.error(err));
   };
 

@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import NoticeArticle from "./noticeArticle/noticeArticle";
 import styles from "./notice.module.css";
 import axios from "axios";
+import HelmetComponent from "../../../helmetComponent";
 
 const Notice = ({ articles, getNoticeList }) => {
   const history = useHistory();
@@ -79,11 +80,6 @@ const Notice = ({ articles, getNoticeList }) => {
 
   const onSearchHandler = () => {
     if (searchInput === "") {
-      window.alert("검색어를 입력해주세요");
-      return;
-    }
-
-    if (searchInput === "") {
       window.alert("검색어를 입력하세요");
       return;
     } else if (searchInput === "?" || searchInput === "#") {
@@ -133,7 +129,12 @@ const Notice = ({ articles, getNoticeList }) => {
   };
 
   return (
-    <section className={styles.qna}>
+    <section className={styles.notice}>
+      <HelmetComponent
+        title="공지사항"
+        desc="모두락 공지사항"
+        url="https://web.modoorock.com/modoorock/customer/notice"
+      />
       <section className={styles.top}>
         <section className={styles.search}>
           <input

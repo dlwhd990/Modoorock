@@ -3,6 +3,7 @@ import { useHistory, useParams } from "react-router";
 import styles from "./noticeView.module.css";
 import axios from "axios";
 import LoadingPage from "../../../loadingPage/loadingPage";
+import HelmetComponent from "../../../../helmetComponent";
 
 const NoticeView = (props) => {
   const history = useHistory();
@@ -34,6 +35,13 @@ const NoticeView = (props) => {
 
   return (
     <section className={styles.notice_view}>
+      {article && (
+        <HelmetComponent
+          title={article.title}
+          desc={article.content}
+          url={`https://web.modoorock.com/modoorock/customer/notice/view/${article.idx}`}
+        />
+      )}
       <div className={styles.main}>
         <section className={styles.notice_view}>
           <section className={styles.customer_top_banner}></section>

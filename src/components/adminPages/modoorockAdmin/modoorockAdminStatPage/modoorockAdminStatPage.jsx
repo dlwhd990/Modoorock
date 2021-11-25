@@ -10,7 +10,7 @@ const ModoorockAdminStatPage = ({ expList, userList }) => {
       const tmp = {};
       const result = [];
       expList.forEach((exp) => {
-        const date = exp.date.slice(0, 7);
+        const date = exp.reservationDate.slice(0, 7);
         if (!tmp[date]) {
           tmp[date] = 1;
         } else {
@@ -50,35 +50,70 @@ const ModoorockAdminStatPage = ({ expList, userList }) => {
     <section className={styles.stat_page}>
       <div className={styles.container}>
         <div className={styles.part}>
-          <h3 className={styles.title}>체험상품</h3>
-          <div className={styles.top}>
-            <div className={styles.top_division}>날짜</div>
-            <div className={styles.top_division}>판매량</div>
+          <div className={styles.title_container}>
+            <h3 className={styles.title}>체험상품</h3>
           </div>
-          <div className={styles.list}>
-            {expStatList &&
-              expStatList.map((exp) => (
-                <div key={exp[0]} className={styles.item}>
-                  <div className={styles.item_part}>{exp[0]}</div>
-                  <div className={styles.item_part}>{`${exp[1]}개`}</div>
-                </div>
-              ))}
+          <div className={styles.section}>
+            <div className={styles.top}>
+              <div className={styles.top_division}>날짜</div>
+              <div className={styles.top_division}>판매량</div>
+            </div>
+            <div className={styles.list}>
+              {expStatList &&
+                expStatList.map((exp) => (
+                  <div key={exp[0]} className={styles.item}>
+                    <div className={styles.item_part}>{exp[0]}</div>
+                    <div className={styles.item_part}>{`${exp[1]}개`}</div>
+                  </div>
+                ))}
+            </div>
+            <div className={styles.bottom}>
+              <p className={styles.bottom_text}>{`누적: ${expList.length}`}</p>
+            </div>
+          </div>
+        </div>
+        <div className={styles.part}>
+          <div className={styles.title_container}>
+            <h3 className={styles.title}>체험상품</h3>
+          </div>
+          <div className={styles.section}>
+            <div className={styles.top}>
+              <div className={styles.top_division}>날짜</div>
+              <div className={styles.top_division}>판매량</div>
+            </div>
+            <div className={styles.list}>
+              {expStatList &&
+                expStatList.map((exp) => (
+                  <div key={exp[0]} className={styles.item}>
+                    <div className={styles.item_part}>{exp[0]}</div>
+                    <div className={styles.item_part}>{`${exp[1]}개`}</div>
+                  </div>
+                ))}
+            </div>
+            <div className={styles.bottom}>
+              <p className={styles.bottom_text}>{`누적: ${expList.length}`}</p>
+            </div>
           </div>
         </div>
         <div className={styles.part}>
           <h3 className={styles.title}>회원가입</h3>
-          <div className={styles.top}>
-            <div className={styles.top_division}>날짜</div>
-            <div className={styles.top_division}>가입자수</div>
-          </div>
-          <div className={styles.list}>
-            {userStatList &&
-              userStatList.map((user) => (
-                <div key={user[0]} className={styles.item}>
-                  <div className={styles.item_part}>{user[0]}</div>
-                  <div className={styles.item_part}>{`${user[1]}명`}</div>
-                </div>
-              ))}
+          <div className={styles.section}>
+            <div className={styles.top}>
+              <div className={styles.top_division}>날짜</div>
+              <div className={styles.top_division}>가입자수</div>
+            </div>
+            <div className={styles.list}>
+              {userStatList &&
+                userStatList.map((user) => (
+                  <div key={user[0]} className={styles.item}>
+                    <div className={styles.item_part}>{user[0]}</div>
+                    <div className={styles.item_part}>{`${user[1]}명`}</div>
+                  </div>
+                ))}
+            </div>
+            <div className={styles.bottom}>
+              <p className={styles.bottom_text}>{`누적: ${userList.length}`}</p>
+            </div>
           </div>
         </div>
       </div>

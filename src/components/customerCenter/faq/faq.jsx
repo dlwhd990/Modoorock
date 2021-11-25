@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import FaqArticle from "./faqArticle/faqArticle";
 import styles from "./faq.module.css";
 import axios from "axios";
+import HelmetComponent from "../../../helmetComponent";
 
 const Faq = ({ articles, getFaqList }) => {
   const [headerSelect, setHeaderSelect] = useState("All");
@@ -156,7 +157,12 @@ const Faq = ({ articles, getFaqList }) => {
   };
 
   return (
-    <section className={styles.notice}>
+    <section className={styles.faq}>
+      <HelmetComponent
+        title="FAQ"
+        desc="모두락 FAQ"
+        url="https://web.modoorock.com/modoorock/customer/faq"
+      />
       <section className={styles.header_top} onClick={headerSelectHandler}>
         <p
           className={`${

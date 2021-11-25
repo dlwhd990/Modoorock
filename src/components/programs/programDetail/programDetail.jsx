@@ -6,6 +6,7 @@ import ProgramReview from "./programReview/programReview";
 import ReactStars from "react-rating-stars-component";
 import axios from "axios";
 import LoadingPage from "../../loadingPage/loadingPage";
+import HelmetComponent from "../../../helmetComponent";
 
 const ProgramDetail = ({ getReviewList, toss }) => {
   const [program, setProgram] = useState(null);
@@ -257,6 +258,13 @@ const ProgramDetail = ({ getReviewList, toss }) => {
 
   return (
     <section className={styles.program_detail}>
+      {program && (
+        <HelmetComponent
+          title={program.title}
+          desc={program.content}
+          url={`https://web.modoorock.com/modoorock/programs/view/${program.idx}`}
+        />
+      )}
       <section className={styles.top_banner}></section>
       <section className={styles.select_bar_container}>
         <div

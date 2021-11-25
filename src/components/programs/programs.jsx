@@ -6,6 +6,7 @@ import AreaItem from "./areaItem/areaItem";
 import ProgramItem from "./programItem/programItem";
 import ProgramsButton from "./programsButton/programsButton";
 import axios from "axios";
+import HelmetComponent from "../../helmetComponent";
 
 const Programs = ({ areaList, programList, getReviewList }) => {
   const history = useHistory();
@@ -254,6 +255,11 @@ const Programs = ({ areaList, programList, getReviewList }) => {
 
   return (
     <section className={styles.programs}>
+      <HelmetComponent
+        title="체험 상품"
+        desc="모두락에는 다양한 체험 상품들이 준비되어 있습니다. 체험 상품과 함께 미션투어를 즐겨보세요."
+        url="https://web.modoorock.com/modoorock/programs/area"
+      />
       <section className={styles.programs_top_banner}></section>
       <section className={styles.select_bar_container}>
         <div

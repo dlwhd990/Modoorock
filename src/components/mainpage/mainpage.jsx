@@ -3,6 +3,7 @@ import { useHistory } from "react-router";
 import SimpleSliderThree from "../slick/three/slickThree";
 import styles from "./mainpage.module.css";
 import MainProgramItem from "./mainProgramItem/mainProgramItem";
+import { Helmet } from "react-helmet";
 
 const Mainpage = ({ programList, viewItems, getReviewList }) => {
   const history = useHistory();
@@ -36,6 +37,11 @@ const Mainpage = ({ programList, viewItems, getReviewList }) => {
 
   return (
     <section className={styles.mainpage}>
+      <Helmet
+        title="모두락"
+        desc="모두락은 기존 관광지를 관광게이미피케이션을 결합하여 새 창조하는 미션 투어 전문기업입니다."
+        url="https://web.modoorock.com/modoorock"
+      />
       <div className={styles.about_filter}></div>
       <section className={styles.about}>
         <p className={styles.about_title}>

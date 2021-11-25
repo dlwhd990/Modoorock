@@ -3,11 +3,13 @@ import styles from "./searchResultPage.module.css";
 import { useHistory, useParams } from "react-router";
 import axios from "axios";
 import NoticeArticle from "../notice/noticeArticle/noticeArticle";
+import HelmetComponent from "../../../helmetComponent";
 
 const SearchResultPage = ({ noticeArticles, getNoticeList }) => {
   const history = useHistory();
   const { query } = useParams();
   const searchInputRef = useRef();
+  const [searchInput, setSearchInput] = useState("");
   const [pageList, setPageList] = useState([]);
   const [listList, setListList] = useState([]);
   const [numbering, setNumbering] = useState(1);
@@ -75,21 +77,22 @@ const SearchResultPage = ({ noticeArticles, getNoticeList }) => {
       .catch((err) => console.error(err));
   };
 
+  const searchInputChangeHandler = (e) => {
+    setSearchInput(e.target.value);
+  };
+
   const onSearchHandler = () => {
-    if (!searchInputRef.current) {
-      window.alert("검색어를 입력해주세요");
-      return;
-    }
-    const query = searchInputRef.current.value;
-    if (query === "") {
+    if (searchInput === "") {
       window.alert("검색어를 입력하세요");
       return;
-    } else if (query === "?" || query === "#") {
+    } else if (searchInput === "?" || searchInput === "#") {
       window.alert("?, #는 검색할 수 없습니다.");
       return;
     }
+
+    history.push(`/customer/notice/search/${searchInput}`);
     searchInputRef.current.value = "";
-    history.push(`/customer/notice/search/${query}`);
+    setSearchInput("");
     getNoticeList();
   };
 
@@ -101,11 +104,11 @@ const SearchResultPage = ({ noticeArticles, getNoticeList }) => {
   };
 
   useEffect(() => {
-    window.addEventListener("keydown", keyHandler);
+    window.addEventListener("keypress", keyHandler);
     return () => {
-      window.removeEventListener("keydown", keyHandler);
+      window.removeEventListener("keypress", keyHandler);
     };
-  }, []);
+  }, [keyHandler]);
 
   useEffect(() => {
     searchInputRef && searchInputRef.current.focus();
@@ -133,6 +136,13 @@ const SearchResultPage = ({ noticeArticles, getNoticeList }) => {
 
   return (
     <section className={styles.search_result}>
+      {query && (
+        <HelmetComponent
+          title="공지사항 검색결과"
+          desc={`공지사항 검색결과-${query}`}
+          url={`https://web.modoorock.com/modoorock/customer/notice/search/${query}`}
+        />
+      )}
       <section className={styles.customer_top_banner}></section>
       <section className={styles.select_bar_container}>
         <div className={styles.select_button}>검색결과</div>
@@ -174,6 +184,8 @@ const SearchResultPage = ({ noticeArticles, getNoticeList }) => {
         <section className={styles.top}>
           <section className={styles.search}>
             <input
+              onChange={searchInputChangeHandler}
+              value={searchInput}
               ref={searchInputRef}
               type="text"
               className={styles.search_text_input}
@@ -200,6 +212,9 @@ const SearchResultPage = ({ noticeArticles, getNoticeList }) => {
                 where="notice"
               />
             ))}
+          {pageList.length === 1 && (
+            <p className={styles.nothing}>검색 결과가 없습니다.</p>
+          )}
         </section>
         <section className={styles.bottom}>
           <ul className={styles.page_numbers}>

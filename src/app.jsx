@@ -25,7 +25,6 @@ import SearchResultPage from "./components/customerCenter/searchResultPage/searc
 import InquireSearchPage from "./components/customerCenter/inquire/inquireSearchPage/inquireSearchPage";
 import { loadTossPayments } from "@tosspayments/sdk";
 import PaySuccessPage from "./components/paySuccessPage/paySuccessPage";
-import KakaoRedirect from "./components/loginPage/kakaoRedirect/kakaoRedirect";
 
 axios.defaults.withCredentials = true;
 
@@ -303,9 +302,6 @@ const App = (props) => {
         </Route>
         <Route exact path="/success">
           <PaySuccessPage />
-        </Route>
-        <Route exact path="/kakaoredirect">
-          <KakaoRedirect />
         </Route>
       </BrowserRouter>
     </section>

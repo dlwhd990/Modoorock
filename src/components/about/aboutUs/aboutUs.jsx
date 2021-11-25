@@ -1,11 +1,17 @@
 import React from "react";
 import { useHistory } from "react-router";
+import HelmetComponent from "../../../helmetComponent";
 import styles from "./aboutUs.module.css";
 
 const AboutUs = (props) => {
   const history = useHistory();
   return (
     <section className={styles.about_us}>
+      <HelmetComponent
+        title="회사소개"
+        desc="모두락은 기존 관광지를 관광게이미피케이션을 결합하여 새 창조하는 미션 투어 전문기업입니다."
+        url="https://web.modoorock.com/modoorock/introduce/about/"
+      />
       <section className={styles.about_us_container}>
         <h1 className={styles.title}>회사 소개</h1>
         <div className={styles.route_button_container}>
