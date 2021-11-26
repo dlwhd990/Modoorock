@@ -218,7 +218,7 @@ const Inquire = ({ articles, getInquireList, user }) => {
     );
   } else {
     return (
-      <section className={styles.not_user}>로그인 후에 확인해주세요</section>
+      <section className={styles.not_user}>로그인 후에 사용 가능합니다</section>
     );
   }
 };

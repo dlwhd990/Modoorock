@@ -111,6 +111,7 @@ const FindPw = (props) => {
         <div className={styles.main_container}>
           <div className={styles.id_input_container}>
             <p className={styles.id_input_text}>아이디</p>
+
             <input
               name="id"
               onChange={inputValueChangeHandler}
@@ -124,46 +125,48 @@ const FindPw = (props) => {
 
           <div className={styles.phone_num_container}>
             <p className={styles.phone_num_text}>핸드폰번호</p>
-
-            <input
-              name="phone"
-              onChange={inputValueChangeHandler}
-              value={phone}
-              type="text"
-              className={styles.phone_num_input}
-              placeholder="핸드폰번호"
-              spellCheck="false"
-              disabled={disable}
-            />
-            <button
-              type="button"
-              className={styles.get_auth_num_button}
-              onClick={sendSmsHandler}
-            >
-              인증번호 받기
-            </button>
+            <div className={styles.input_and_button}>
+              <input
+                name="phone"
+                onChange={inputValueChangeHandler}
+                value={phone}
+                type="text"
+                className={styles.phone_num_input}
+                placeholder="핸드폰번호"
+                spellCheck="false"
+                disabled={disable}
+              />
+              <button
+                type="button"
+                className={styles.get_auth_num_button}
+                onClick={sendSmsHandler}
+              >
+                인증번호 받기
+              </button>
+            </div>
           </div>
 
           <div className={styles.auth_num_container}>
             <p className={styles.auth_num_text}>인증번호</p>
-
-            <input
-              name="authNum"
-              onChange={inputValueChangeHandler}
-              value={authNum}
-              type="text"
-              className={styles.auth_num_input}
-              placeholder="인증번호"
-              spellCheck="false"
-              disabled={disable}
-            />
-            <button
-              type="button"
-              className={styles.confirm_auth_num_button}
-              onClick={authNumCheckHandler}
-            >
-              확인
-            </button>
+            <div className={styles.input_and_button}>
+              <input
+                name="authNum"
+                onChange={inputValueChangeHandler}
+                value={authNum}
+                type="text"
+                className={styles.auth_num_input}
+                placeholder="인증번호"
+                spellCheck="false"
+                disabled={disable}
+              />
+              <button
+                type="button"
+                className={styles.confirm_auth_num_button}
+                onClick={authNumCheckHandler}
+              >
+                확인
+              </button>
+            </div>
           </div>
           {checkedPhone && (
             <div>

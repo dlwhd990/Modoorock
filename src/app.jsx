@@ -25,6 +25,7 @@ import SearchResultPage from "./components/customerCenter/searchResultPage/searc
 import InquireSearchPage from "./components/customerCenter/inquire/inquireSearchPage/inquireSearchPage";
 import { loadTossPayments } from "@tosspayments/sdk";
 import PaySuccessPage from "./components/paySuccessPage/paySuccessPage";
+import PayFailPage from "./components/payFailPage/payFailPage";
 
 axios.defaults.withCredentials = true;
 
@@ -302,6 +303,9 @@ const App = (props) => {
         </Route>
         <Route exact path="/success">
           <PaySuccessPage />
+        </Route>
+        <Route exact path="/fail">
+          <PayFailPage />
         </Route>
       </BrowserRouter>
     </section>

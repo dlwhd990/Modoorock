@@ -94,7 +94,7 @@
 }
 
 .search_input {
-  flex-basis: 95%;
+  width: 95%;
   border: none;
   outline: none;
   background-color: transparent;
@@ -103,7 +103,7 @@
 }
 
 .search_icon {
-  flex-basis: 5%;
+  width: 5%;
   font-size: 24px;
   transition: 100ms all ease-in;
   margin-left: 10px;

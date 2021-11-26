@@ -346,9 +346,10 @@
   }
 
   .write_button {
-    width: 4.5rem;
+    width: auto;
     height: 2rem;
-    font-size: var(--font-size-normal);
+    font-size: var(--font-size-small);
+    padding: 0 0.7rem;
     font-weight: 500;
     position: absolute;
     top: 60px;
