@@ -31,9 +31,22 @@
       content="모두락은 기존 관광지를 관광게이미피케이션을 결합하여 새 창조하는 미션 투어 전문기업입니다."
     />
     <meta property="twitter:image" content="./images/modoorock.png" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="upgrade-insecure-requests"
+    />
 
     <title>모두락</title>
     <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+    <script
+      type="text/javascript"
+      src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f5cf06eeeaf4ef802865607258107945"
+    ></script>
+    <script
+      type="text/javascript"
+      src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f5cf06eeeaf4ef802865607258107945&libraries=LIBRARY"
+    ></script>
+
     <script type="text/javascript">
       Kakao.init("%REACT_APP_KAKAO_JS_KEY%");
     </script>
