@@ -192,7 +192,7 @@
 
 .detail_content_text {
   width: 70%;
-  margin-top: 100px;
+  margin-top: 20px;
   white-space: pre-line;
   font-size: var(--font-size-normal);
 }

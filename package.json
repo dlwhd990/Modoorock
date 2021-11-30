@@ -17,7 +17,6 @@
     "axios": "^0.22.0",
     "brew": "0.0.8",
     "date-fns": "^2.25.0",
-    "jquery": "^3.6.0",
     "js-cookie": "^3.0.1",
     "lodash": "^4.17.21",
     "react": "^17.0.1",
@@ -35,7 +34,6 @@
     "react-star-ratings": "^2.3.0",
     "slick-carousel": "^1.8.1",
     "styled-components": "^5.3.1",
-    "universal-cookie": "^4.0.4",
     "web-vitals": "^0.2.4",
     "yarn": "^1.22.17"
   },
@@ -65,8 +63,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "https://web.modoorock.com/modoorock",
-  "devDependencies": {
-    "react-snap": "^1.23.0"
-  }
+  "proxy": "https://web.modoorock.com/modoorock"
 }

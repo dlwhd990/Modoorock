@@ -1,77 +1,189 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styles from "./map.module.css";
+
+let markers = [];
 
 const Map = (props) => {
   //test
-  const markerData = [
-    {
-      title: "콜드스퀘어",
-      lat: 37.62197524055062,
-      lng: 127.16017523675508,
-    },
-    {
-      title: "하남돼지집",
-      lat: 37.620842424005616,
-      lng: 127.1583774403176,
-    },
-    {
-      title: "수유리우동",
-      lat: 37.624915253753194,
-      lng: 127.15122688059974,
-    },
-    {
-      title: "맛닭꼬",
-      lat: 37.62456273069659,
-      lng: 127.15211256646381,
-    },
-  ];
-  const imageSrc = "/modoorock/images/map_marker_attraction.png";
-  const clickImageSrc = "/modoorock/images/map_marker_attraction_pick.png";
+  const [map, setMap] = useState(null);
+  const [userLat, setUserLat] = useState(null);
+  const [userLon, setUserLon] = useState(null);
+  const [placeData, setPlaceData] = useState(null);
+  const [detail, setDetail] = useState(false);
 
-  useEffect(() => {
-    const firstSetting = async () => {
-      const key =
-        "In8axo7mHXm%2FnoXZcwxqOrNJu8CpjzpOEhvGF8yqc6yhYtrXMZR6GuvmoZEGqH49uPEz7PtWM5dNgJ74x21yBQ%3D%3D";
-      const uri = `http://api.visitkorea.or.kr/openapi/service/rest/KorService/locationBasedList?ServiceKey=${key}&contentTypeId=12&mapX=126.981106&mapY=37.568477&radius=2000&listYN=Y&MobileOS=ETC&MobileApp=Modoorock&arrange=A&numOfRows=12&pageNo=1&_type=json`;
-      await fetch(uri)
-        .then((response) => console.log(response))
-        .catch((err) => console.error(err));
-    };
-    firstSetting();
-    mapStart();
-  }, []);
+  const titleRef = useRef();
+  const imageRef = useRef();
+  const addressRef = useRef();
+  const telRef = useRef();
+  let selectedMarker = null;
+  let imageSrc, clickImageSrc;
 
-  const mapStart = () => {
+  const deleteMarker = () => {
+    if (!markers) {
+      return;
+    }
+    markers.forEach((item) => {
+      item.setMap(null);
+    });
+    markers = [];
+  };
+
+  const setPlaceMarkerImage = (type) => {
+    if (type === 12) {
+      imageSrc = "/modoorock/images/map_marker_attraction.png";
+      clickImageSrc = "/modoorock/images/map_marker_attraction_pick.png";
+    } else if (type === 14) {
+      imageSrc = "/modoorock/images/map_marker_culture.png";
+      clickImageSrc = "/modoorock/images/map_marker_culture_pick.png";
+    } else if (type === 28) {
+      imageSrc = "/modoorock/images/map_marker_leisure.png";
+      clickImageSrc = "/modoorock/images/map_marker_leisure_pick.png";
+    } else if (type === 38) {
+      imageSrc = "/modoorock/images/map_marker_shopping.png";
+      clickImageSrc = "/modoorock/images/map_marker_shopping_pick.png";
+    } else if (type === 39) {
+      imageSrc = "/modoorock/images/map_marker_food.png";
+      clickImageSrc = "/modoorock/images/map_marker_food_pick.png";
+    } else if (type === 32) {
+      imageSrc = "/modoorock/images/map_marker_accommodation.png";
+      clickImageSrc = "/modoorock/images/map_marker_accommodation_pick.png";
+    } else if (type === 25) {
+      imageSrc = "/modoorock/images/map_marker_course.png";
+      clickImageSrc = "/modoorock/images/map_marker_course_pick.png";
+    } else if (type === 15) {
+      imageSrc = "/modoorock/images/map_marker_festival.png";
+      clickImageSrc = "/modoorock/images/map_marker_festival_pick.png";
+    }
+  };
+
+  const placeSetting = () => {
+    axios
+      .post(`${process.env.REACT_APP_BASEURL}/openapi/locationbasedlist`, {
+        mapX: userLon.toString(),
+        mapY: userLat.toString(),
+        radius: "2000",
+        listYN: "Y",
+        mobileOS: "ETC",
+        mobileApp: "modoorock",
+        arrange: "E",
+        numOfRows: "300",
+        pageNo: "1",
+      })
+      .then((response) => setPlaceData(response.data.data))
+      .catch((err) => console.error(err));
+  };
+
+  const loadPlace = () => {
+    if (map) {
+      var mapCenter = map.getCenter();
+      setUserLon(mapCenter.getLng());
+      setUserLat(mapCenter.getLat());
+    }
+  };
+  const mapStart = async () => {
+    //유저 위도 경도 받아오는 작업 필요
+
+    setUserLat(37.568477);
+    setUserLon(126.981106);
     const container = document.getElementById("map");
     const options = {
-      center: new window.kakao.maps.LatLng(37.6219, 127.1601),
+      center: new window.kakao.maps.LatLng(37.568477, 126.981106),
       level: 3,
     };
-    const map = new window.kakao.maps.Map(container, options);
+    setMap(new window.kakao.maps.Map(container, options));
+  };
 
-    var imageSize = new window.kakao.maps.Size(24, 35);
+  useEffect(() => {
+    if (!map) {
+      return;
+    }
+    window.kakao.maps.event.addListener(map, "dragend", function () {
+      loadPlace();
+    });
+    window.kakao.maps.event.addListener(map, "click", function () {
+      let imageSize = new window.kakao.maps.Size(24, 35);
+      let markerImage = new window.kakao.maps.MarkerImage(imageSrc, imageSize);
+      selectedMarker && selectedMarker.setImage(markerImage);
+      setDetail(false);
+    });
+  }, [map]);
 
-    // 마커 이미지 생성
-    let markerImage = new window.kakao.maps.MarkerImage(imageSrc, imageSize);
-    //let clickMarkerImage = new window.kakao.maps.MarkerImage(
-    //  clickImageSrc,
-    //  imageSize
-    //);
+  useEffect(() => {
+    if (!userLat || !userLon) {
+      return;
+    }
+    placeSetting();
+  }, [userLat]);
 
-    markerData.forEach((item) => {
-      new window.kakao.maps.Marker({
+  useEffect(() => {
+    placeData && displayMarkers();
+  }, [placeData]);
+
+  const displayMarkers = () => {
+    deleteMarker();
+    let imageSize = new window.kakao.maps.Size(24, 35);
+    placeData.forEach((item) => {
+      setPlaceMarkerImage(item.contenttypeid);
+
+      // 마커 이미지 생성
+      let markerImage = new window.kakao.maps.MarkerImage(imageSrc, imageSize);
+      let clickMarkerImage = new window.kakao.maps.MarkerImage(
+        clickImageSrc,
+        imageSize
+      );
+
+      const marker = new window.kakao.maps.Marker({
         map: map,
-        position: new window.kakao.maps.LatLng(item.lat, item.lng),
+        position: new window.kakao.maps.LatLng(item.mapy, item.mapx),
         title: item.title,
         image: markerImage,
       });
+      markers.push(marker);
+      window.kakao.maps.event.addListener(marker, "click", function () {
+        window.kakao.maps.event.addListener(map, "click", function () {
+          selectedMarker && selectedMarker.setImage(markerImage);
+        });
+        selectedMarker && selectedMarker.setImage(markerImage);
+        selectedMarker = marker;
+        selectedMarker.setImage(clickMarkerImage);
+        titleRef.current.innerText = item.title ? item.title : "코스 시작점";
+        imageRef.current.src = item.firstimage
+          ? item.firstimage
+          : "https://web.modoorock.com/modoorock-images/no_image.png";
+        addressRef.current.innerText = item.addr1;
+        telRef.current.innerText = item.tel ? item.tel : "";
+        setDetail(true);
+      });
     });
+    console.log(markers);
   };
+
+  useEffect(() => {
+    mapStart();
+  }, []);
 
   return (
     <div className="">
       <div id="map" className={styles.map}></div>
+      <div
+        className={`${
+          detail
+            ? `${styles.detail} ${styles.on}`
+            : `${styles.detail} ${styles.off}`
+        }`}
+      >
+        <div className={styles.title_container}>
+          <p ref={titleRef} className={styles.title}></p>
+        </div>
+        <div className={styles.body}>
+          <img ref={imageRef} alt="place" className={styles.image} />
+          <div className={styles.desc}>
+            <div ref={addressRef} className={styles.address}></div>
+            <div ref={telRef} className={styles.tel}></div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

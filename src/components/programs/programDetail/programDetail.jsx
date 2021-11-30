@@ -347,6 +347,7 @@ const ProgramDetail = ({ getReviewList, toss }) => {
               {imageList &&
                 imageList.map((image) => (
                   <img
+                    key={image}
                     src={`${process.env.REACT_APP_BASEURL}-images/Exp/${image}`}
                     alt="main_image"
                     className={styles.detail_content_main_image}
