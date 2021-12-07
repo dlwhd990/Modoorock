@@ -57,6 +57,8 @@
 .writer {
   flex-basis: 15%;
   text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .date {

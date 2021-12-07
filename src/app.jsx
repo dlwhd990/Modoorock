@@ -308,7 +308,7 @@ const App = (props) => {
         <Route exact path="/fail">
           <PayFailPage />
         </Route>
-        <Route exact path="/map">
+        <Route exact path="/map/:lat/:lng">
           <Map />
         </Route>
       </BrowserRouter>

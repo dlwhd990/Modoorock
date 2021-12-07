@@ -64,7 +64,7 @@ const Header = ({ user, userLogout }) => {
   }, [dropDownMouseEnter, navbarMouseEnter]);
 
   return (
-    <section className={styles.header}>
+    <header className={styles.header}>
       <div className={styles.toggle_container} onClick={onToggleHandler}>
         <i className={`${styles.toggle_button} fas fa-bars`}></i>
       </div>
@@ -334,7 +334,7 @@ const Header = ({ user, userLogout }) => {
           </span>
         </div>
       )}
-    </section>
+    </header>
   );
 };
 

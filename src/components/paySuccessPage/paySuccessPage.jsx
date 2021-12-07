@@ -63,7 +63,7 @@ const PaySuccessPage = () => {
       .then((response) => {
         if (response.status === 200) {
           const purchaseData = JSON.parse(sessionStorage.getItem(orderId));
-          saveUserExp(purchaseData[0], purchaseData[1], purchaseData[2]); //이거 실패하면 결제만되고 안올라감?
+          saveUserExp(purchaseData[0], purchaseData[1], purchaseData[2]);
           setLoadingOn(false);
         }
       });

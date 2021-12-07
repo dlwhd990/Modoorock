@@ -3,7 +3,7 @@ import styles from "./footer.module.css";
 
 const Footer = (props) => {
   return (
-    <section className={styles.footer}>
+    <footer className={styles.footer}>
       <div className={styles.company_information}>
         <div className={styles.logo_container}>
           <img
@@ -47,7 +47,7 @@ const Footer = (props) => {
           <i className={`${styles.icon} ${styles.youtube} fab fa-youtube`}></i>
         </a>
       </div>
-    </section>
+    </footer>
   );
 };
 

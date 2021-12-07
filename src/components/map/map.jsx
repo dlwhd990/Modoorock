@@ -1,11 +1,12 @@
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
+import { useParams } from "react-router";
 import styles from "./map.module.css";
 
 let markers = [];
 
 const Map = (props) => {
-  //test
+  const { lat, lng } = useParams();
   const [map, setMap] = useState(null);
   const [userLat, setUserLat] = useState(null);
   const [userLon, setUserLon] = useState(null);
@@ -16,7 +17,7 @@ const Map = (props) => {
   const imageRef = useRef();
   const addressRef = useRef();
   const telRef = useRef();
-  let selectedMarker = null;
+  let selectedMarker, selectedMarkerImage;
   let imageSrc, clickImageSrc;
 
   const deleteMarker = () => {
@@ -83,12 +84,14 @@ const Map = (props) => {
   };
   const mapStart = async () => {
     //유저 위도 경도 받아오는 작업 필요
+    const nowLat = parseFloat(lat) || 37.55523;
+    const nowLng = parseFloat(lng) || 126.97089;
 
-    setUserLat(37.568477);
-    setUserLon(126.981106);
+    setUserLat(nowLat);
+    setUserLon(nowLng);
     const container = document.getElementById("map");
     const options = {
-      center: new window.kakao.maps.LatLng(37.568477, 126.981106),
+      center: new window.kakao.maps.LatLng(nowLat, nowLng),
       level: 3,
     };
     setMap(new window.kakao.maps.Map(container, options));
@@ -142,21 +145,21 @@ const Map = (props) => {
       markers.push(marker);
       window.kakao.maps.event.addListener(marker, "click", function () {
         window.kakao.maps.event.addListener(map, "click", function () {
-          selectedMarker && selectedMarker.setImage(markerImage);
+          selectedMarker && selectedMarker.setImage(selectedMarkerImage);
         });
-        selectedMarker && selectedMarker.setImage(markerImage);
+        selectedMarker && selectedMarker.setImage(selectedMarkerImage);
         selectedMarker = marker;
+        selectedMarkerImage = markerImage;
         selectedMarker.setImage(clickMarkerImage);
         titleRef.current.innerText = item.title ? item.title : "코스 시작점";
         imageRef.current.src = item.firstimage
           ? item.firstimage
           : "https://web.modoorock.com/modoorock-images/no_image.png";
-        addressRef.current.innerText = item.addr1;
+        addressRef.current.innerText = item.addr1 ? item.addr1 : "";
         telRef.current.innerText = item.tel ? item.tel : "";
         setDetail(true);
       });
     });
-    console.log(markers);
   };
 
   useEffect(() => {
