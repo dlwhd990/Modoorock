@@ -56,7 +56,7 @@ const AdminProgramMissionUploadOx = ({
         formData.append("content", content);
         formData.append("answer", answer);
         formData.append("answerContent", answerContent);
-        formData.append("files", thumbnail);
+        thumbnail && formData.append("files", thumbnail);
 
         axios
           .post(
@@ -81,7 +81,7 @@ const AdminProgramMissionUploadOx = ({
   };
 
   return (
-    <form className={styles.form}>
+    <form className={styles.form} method="POST">
       <div className={`${styles.photo_container} ${styles.container}`}>
         <p className={styles.text}>미션 사진</p>
         <input

@@ -17,6 +17,10 @@ const Inquire = ({ articles, getInquireList, user }) => {
   const [cursor, setCursor] = useState(0);
 
   useEffect(() => {
+    getInquireList();
+  }, []);
+
+  useEffect(() => {
     if (!user) {
       return;
     }

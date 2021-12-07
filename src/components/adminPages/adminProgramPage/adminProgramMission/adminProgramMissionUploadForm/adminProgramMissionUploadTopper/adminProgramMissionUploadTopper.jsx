@@ -74,7 +74,8 @@ const AdminProgramMissionUploadTopper = ({
         formData.append("point", parseInt(point));
         formData.append("title", title);
         formData.append("content", content);
-        formData.append("files", thumbnail);
+        thumbnail && formData.append("files", thumbnail);
+        topperImage && formData.append("files", topperImage);
 
         axios
           .post(

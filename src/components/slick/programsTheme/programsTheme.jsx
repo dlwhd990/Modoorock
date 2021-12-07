@@ -8,12 +8,12 @@ import ThemeSlickItem from "./themeSlickItem/themeSlickItem";
 function NextArrow(props) {
   const { className, style, onClick } = props;
   const [arrowPosition, setArrowPosition] = useState(70);
-  const [arrowDisplay, setArrowDisplay] = useState("none");
+  const [arrowSize, setArrowSize] = useState(40);
   useEffect(() => {
     if (window.innerWidth > 500) {
-      setArrowDisplay("block");
+      setArrowSize(40);
     } else {
-      setArrowDisplay("none");
+      setArrowSize(20);
     }
   }, [window.innerWidth]);
   useEffect(() => {
@@ -22,7 +22,7 @@ function NextArrow(props) {
     } else if (window.innerWidth > 800) {
       setArrowPosition(40);
     } else {
-      setArrowPosition(0);
+      setArrowPosition(12);
     }
   }, [window.innerWidth]);
 
@@ -33,9 +33,9 @@ function NextArrow(props) {
       className={`${className} arrow`}
       style={{
         ...style,
-        display: arrowDisplay,
-        width: 40,
-        height: 40,
+        display: "block",
+        width: arrowSize,
+        height: arrowSize,
         top: 250,
         right: arrowPosition,
         zIndex: 2,
@@ -48,12 +48,12 @@ function NextArrow(props) {
 function PrevArrow(props) {
   const { className, style, onClick } = props;
   const [arrowPosition, setArrowPosition] = useState(70);
-  const [arrowDisplay, setArrowDisplay] = useState("none");
+  const [arrowSize, setArrowSize] = useState(40);
   useEffect(() => {
     if (window.innerWidth > 500) {
-      setArrowDisplay("block");
+      setArrowSize(40);
     } else {
-      setArrowDisplay("none");
+      setArrowSize(20);
     }
   }, [window.innerWidth]);
   useEffect(() => {
@@ -62,7 +62,7 @@ function PrevArrow(props) {
     } else if (window.innerWidth > 800) {
       setArrowPosition(60);
     } else {
-      setArrowPosition(0);
+      setArrowPosition(12);
     }
   }, [window.innerWidth]);
 
@@ -73,9 +73,9 @@ function PrevArrow(props) {
       className={`${className} arrow`}
       style={{
         ...style,
-        display: arrowDisplay,
-        width: 40,
-        height: 40,
+        display: "block",
+        width: arrowSize,
+        height: arrowSize,
         top: 250,
         left: arrowPosition,
         zIndex: 2,
@@ -99,16 +99,17 @@ export default class ProgramsThemeSlick extends Component {
   };
   render() {
     const { viewItems, areaList, getReviewList } = this.props;
+    console.log(viewItems);
 
     const settings = {
       //autoplaySpeed: 3500,
       //autoplay: true,
       pauseOnHover: true,
       dots: false,
-      infinite: true,
+      infinite: false,
       speed: 500,
       slidesToShow: this.state.slideNum,
-      slidesToScroll: 1,
+      slidesToScroll: this.state.slideNum,
       arrows: true,
       nextArrow: <NextArrow />,
       prevArrow: <PrevArrow />,

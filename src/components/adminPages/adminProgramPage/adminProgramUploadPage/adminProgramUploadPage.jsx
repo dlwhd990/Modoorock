@@ -88,7 +88,9 @@ const AdminProgramUploadPage = ({ user }) => {
   };
 
   const insertProgramHandler = (userIdx) => {
-    const files = [...subImages, previewImage.file];
+    const files = subImages
+      ? [...subImages, previewImage.file]
+      : [previewImage.file];
 
     const formData = new FormData();
     formData.append("userIdx", userIdx);
@@ -125,13 +127,12 @@ const AdminProgramUploadPage = ({ user }) => {
       !content ||
       !theme ||
       !detailContent ||
-      !files ||
-      files.length < 4
+      !previewImage
     ) {
       window.alert("모든 정보를 입력해주세요");
       return;
     }
-    if (files.length > 4) {
+    if (subImages && subImages.length > 3) {
       window.alert("서브 이미지는 3장까지만 첨부 가능합니다.");
       return;
     }

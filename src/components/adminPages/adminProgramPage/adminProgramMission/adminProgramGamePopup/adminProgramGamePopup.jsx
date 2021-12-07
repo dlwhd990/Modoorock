@@ -22,26 +22,22 @@ const AdminProgramGamePopup = ({
         password,
       })
       .then((response) => {
+        if (response.data === "failed") {
+          window.alert("게임 이름이 중복됩니다.");
+          return;
+        }
         window.alert("게임이 생성되었습니다.");
         loadGameList();
         closeGamePopupHandler();
       })
       .catch((err) => {
         console.error(err);
-        window.alert("중복된 번호입니다. 다른 번호를 사용해주세요");
+        window.alert("중복된 이름입니다. 다른 번호를 사용해주세요");
       });
   };
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    if (password.length !== 4) {
-      window.alert("게임 번호는 4자리 숫자여야 합니다.");
-      return;
-    }
-    if (parseInt(password).toString().length !== password.length) {
-      window.alert("숫자만 입력해주세요");
-      return;
-    }
     axios
       .post(`${process.env.REACT_APP_BASEURL}/user/session`)
       .then((response) => {
@@ -64,14 +60,13 @@ const AdminProgramGamePopup = ({
       </div>
 
       <form className={styles.form}>
-        <p className={styles.text}>게임 번호</p>
+        <p className={styles.text}>게임 이름</p>
         <input
           type="text"
           className={styles.input}
           onChange={passwordChangeHandler}
           spellCheck="false"
-          placeholder="게임 번호 (4자리 숫자)"
-          maxLength="4"
+          placeholder="게임 이름"
         />
         <button className={styles.submit_button} onClick={onSubmitHandler}>
           확인

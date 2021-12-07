@@ -8,64 +8,6 @@ import styles from "./loginPage.module.css";
 axios.defaults.withCredentials = true;
 const { Kakao } = window;
 
-const socialLogin = (id, name, email, sns) => {
-  axios
-    .post(`${process.env.REACT_APP_BASEURL}/user/loginsns`, {
-      id,
-      name,
-      email,
-      sns,
-    })
-    .then((response) => {
-      if (response.data === "success") {
-        window.alert("회원가입이 완료되었습니다. 다시 로그인 해주세요");
-        window.location.href = "/modoorock/login";
-      } else if (response.data === "loggedin") {
-        window.location.href = "/modoorock";
-      } else {
-        window.alert("에러가 발생했습니다. 새로고침 후에 다시 시도해주세요.");
-      }
-    })
-    .catch((err) => console.error(err));
-};
-
-const getUserData = async () => {
-  Kakao.API.request({
-    url: "/v2/user/me",
-    success: function (res) {
-      socialLogin(
-        res.id.toString(),
-        res.kakao_account.profile.nickname,
-        res.kakao_account.email,
-        2
-      );
-    },
-    fail: function (error) {
-      //
-      window.alert("에러 발생");
-    },
-  });
-};
-
-const loginWithKakao = () => {
-  if (!Kakao) {
-    return;
-  }
-  //Kakao.Auth.authorize({
-  //  redirectUri: "https://localhost:3000/modoorock/kakaoredirect",
-  //});
-  Kakao.Auth.login({
-    success: function (response) {
-      Kakao.Auth.setAccessToken(response.access_token);
-      getUserData();
-      console.log(response);
-    },
-    fail: function (response) {
-      console.log(response);
-    },
-  });
-};
-
 const LoginPage = () => {
   const history = useHistory();
   const [loadingOn, setLoadingOn] = useState(false);
@@ -75,6 +17,78 @@ const LoginPage = () => {
     }
     return false;
   });
+
+  const adminChecker = () => {
+    axios
+      .post(`${process.env.REACT_APP_BASEURL}/user/session`)
+      .then((response) => {
+        if (response.data.idType === 1) {
+          history.push("/admin/main");
+        } else if (response.data.idType === 2) {
+          history.push("/modoorockadmin");
+        } else {
+          history.push("/");
+        }
+      });
+  };
+
+  const socialLogin = (id, name, email, sns) => {
+    axios
+      .post(`${process.env.REACT_APP_BASEURL}/user/loginsns`, {
+        id,
+        name,
+        email,
+        sns,
+      })
+      .then((response) => {
+        if (response.data === "success") {
+          window.alert("회원가입이 완료되었습니다. 다시 로그인 해주세요");
+          window.location.href = "/modoorock/login";
+        } else if (response.data === "loggedin") {
+          adminChecker();
+        } else {
+          window.alert("에러가 발생했습니다. 새로고침 후에 다시 시도해주세요.");
+        }
+      })
+      .catch((err) => console.error(err));
+  };
+
+  const getUserData = async () => {
+    Kakao.API.request({
+      url: "/v2/user/me",
+      success: function (res) {
+        socialLogin(
+          res.id.toString(),
+          res.kakao_account.profile.nickname,
+          res.kakao_account.email,
+          2
+        );
+      },
+      fail: function (error) {
+        //
+        window.alert("에러 발생");
+      },
+    });
+  };
+
+  const loginWithKakao = () => {
+    if (!Kakao) {
+      return;
+    }
+    //Kakao.Auth.authorize({
+    //  redirectUri: "https://localhost:3000/modoorock/kakaoredirect",
+    //});
+    Kakao.Auth.login({
+      success: function (response) {
+        Kakao.Auth.setAccessToken(response.access_token);
+        getUserData();
+        console.log(response);
+      },
+      fail: function (response) {
+        console.log(response);
+      },
+    });
+  };
 
   useEffect(() => {
     const id = localStorage.getItem("id");
@@ -138,7 +152,7 @@ const LoginPage = () => {
           idSave && localStorage.setItem("id", id);
           !idSave && localStorage.removeItem("id");
           window.alert("로그인 되었습니다.");
-          refresh();
+          adminChecker();
         } else {
           window.alert("아이디와 비밀번호를 다시 확인해주세요");
         }

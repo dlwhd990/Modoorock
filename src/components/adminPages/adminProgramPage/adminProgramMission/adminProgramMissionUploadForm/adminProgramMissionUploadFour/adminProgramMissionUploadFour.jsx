@@ -74,7 +74,7 @@ const AdminProgramMissionUploadFour = ({
         formData.append("answer", answer);
         formData.append("answerContent", answerContent);
         formData.append("count", parseInt(count));
-        formData.append("files", thumbnail);
+        thumbnail && formData.append("files", thumbnail);
         formData.append("inputSelect", select_one);
         formData.append("inputSelect", select_two);
         formData.append("inputSelect", select_three);
@@ -185,7 +185,7 @@ const AdminProgramMissionUploadFour = ({
           type="text"
           className={styles.input}
           spellCheck="false"
-          placeholder="정답"
+          placeholder="정답 (1~4번 중 정답인 번호 입력)"
         />
       </div>
       <div className={`${styles.desc_container} ${styles.container_large}`}>

@@ -85,7 +85,7 @@ const AdminProgramMissionUploadShort = ({
         formData.append("answer", answer);
         formData.append("answerContent", answerContent);
         formData.append("count", parseInt(count));
-        formData.append("files", thumbnail);
+        thumbnail && formData.append("files", thumbnail);
         hint_one !== "" && formData.append("inputHint", hint_one);
         hint_two !== "" && formData.append("inputHint", hint_two);
         hint_three !== "" && formData.append("inputHint", hint_three);
@@ -115,7 +115,7 @@ const AdminProgramMissionUploadShort = ({
   };
 
   return (
-    <form className={styles.form}>
+    <form className={styles.form} method="POST">
       <div className={`${styles.photo_container} ${styles.container}`}>
         <p className={styles.text}>미션 사진</p>
         <input

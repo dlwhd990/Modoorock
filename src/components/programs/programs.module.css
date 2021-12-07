@@ -234,11 +234,6 @@
   height: 500px;
 }
 
-.slick_arrow_icon_left,
-.slick_arrow_icon_right {
-  display: none;
-}
-
 .no_attraction {
   font-size: var(--font-size-big);
   font-weight: 500;
@@ -407,6 +402,7 @@
 
   .theme_slick_container {
     position: relative;
+    margin-top: -30px;
   }
 
   .slick_arrow_icon_left,

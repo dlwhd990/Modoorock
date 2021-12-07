@@ -81,6 +81,7 @@ const ModoorockAdminAttractionItem = ({
           <p className={styles.content}>{item.content}</p>
           <p className={styles.user}>
             {user &&
+              user.phone &&
               `관리자: ${user.id} | 연락처: ${user.phone.slice(
                 0,
                 3

@@ -107,11 +107,10 @@ const FindPw = (props) => {
   return (
     <section className={styles.find_pw}>
       <form className={styles.find_pw_form}>
-        <p className={styles.find_pw_title}>비밀번호 찾기</p>
+        <p className={styles.find_pw_title}>비밀번호 재설정</p>
         <div className={styles.main_container}>
           <div className={styles.id_input_container}>
             <p className={styles.id_input_text}>아이디</p>
-
             <input
               name="id"
               onChange={inputValueChangeHandler}
@@ -202,7 +201,7 @@ const FindPw = (props) => {
 
         <div className={styles.submit_button_container}>
           <button className={styles.submit_button} onClick={findPwHandler}>
-            비밀번호 찾기
+            비밀번호 재설정
           </button>
         </div>
       </form>

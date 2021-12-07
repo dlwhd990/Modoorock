@@ -14,7 +14,7 @@ const ProgramReview = ({ review }) => {
         .then((response) => {
           const id = response.data.id;
           console.log(id.slice(0, 6));
-          if (id.slice(0, 6) !== "kakao_") {
+          if (id.slice(0, 6) !== "kakao_" && id.slice(0, 6) !== "apple_") {
             let tmp = id.slice(0, 3);
             for (let i = 0; i < id.length - 3; i++) {
               tmp += "*";

@@ -3,10 +3,10 @@ import { useHistory, useParams, useLocation } from "react-router-dom";
 import styles from "./programs.module.css";
 import { debounce } from "lodash";
 import AreaItem from "./areaItem/areaItem";
-import ProgramItem from "./programItem/programItem";
 import ProgramsButton from "./programsButton/programsButton";
 import axios from "axios";
 import HelmetComponent from "../../helmetComponent";
+import ProgramsThemeSlick from "../slick/programsTheme/programsTheme";
 
 const Programs = ({ areaList, programList, getReviewList }) => {
   const history = useHistory();
@@ -37,16 +37,68 @@ const Programs = ({ areaList, programList, getReviewList }) => {
   const [regionSelectOpen, setRegionSelectOpen] = useState(false);
   const [themeValue, setThemeValue] = useState("전체");
   const themeList = [
-    "전체",
-    "농촌체험",
-    "액티비티",
-    "단체",
-    "친구",
-    "가족",
-    "연인",
+    {
+      idx: 0,
+      title: "농촌체험",
+      subtitle: "농촌을 체험해보세요",
+    },
+    {
+      idx: 1,
+      title: "액티비티",
+      subtitle: "다양한 체험",
+    },
+    {
+      idx: 2,
+      title: "단체",
+      subtitle: "다함께 즐기기 좋은",
+    },
+    {
+      idx: 3,
+      title: "친구",
+      subtitle: "친구끼리 즐기기 좋은",
+    },
+    {
+      idx: 4,
+      title: "가족",
+      subtitle: "가족끼리 사이좋게",
+    },
+    {
+      idx: 5,
+      title: "연인",
+      subtitle: "연인을 위한 패키지",
+    },
   ];
   const [sortValue, setSortValue] = useState("최신순");
   const [allReviewList, setAllReviewList] = useState();
+
+  const [themeDivision, setThemeDivision] = useState(null);
+
+  useEffect(() => {
+    const tmp = {
+      rural: [],
+      activity: [],
+      group: [],
+      friend: [],
+      family: [],
+      lover: [],
+    };
+    programList.forEach((item) => {
+      if (item.theme === "농촌체험") {
+        tmp.rural.push(item);
+      } else if (item.theme === "액티비티") {
+        tmp.activity.push(item);
+      } else if (item.theme === "단체") {
+        tmp.group.push(item);
+      } else if (item.theme === "친구") {
+        tmp.friend.push(item);
+      } else if (item.theme === "가족") {
+        tmp.family.push(item);
+      } else if (item.theme === "연인") {
+        tmp.lover.push(item);
+      }
+    });
+    setThemeDivision(tmp);
+  }, []);
 
   const onSelectHandler = (e) => {
     if (e.currentTarget.innerText === "프로그램") {
@@ -378,74 +430,65 @@ const Programs = ({ areaList, programList, getReviewList }) => {
             </section>
           ) : (
             <section className={styles.theme_main}>
-              <button
-                className={styles.region_select_toggle}
-                onClick={regionSelectOpenHandler}
-              >
-                테마 선택
-              </button>
-              <section
-                className={
-                  regionSelectOpen
-                    ? `${styles.region_select_container} ${styles.region_select_on}`
-                    : `${styles.region_select_container} ${styles.region_select_off}`
-                }
-              >
-                {themeList.map((theme) => (
-                  <ProgramsButton
-                    key={theme}
-                    name={theme}
-                    value={themeValue}
-                    changeHandler={onThemeChangeHandler}
-                  />
-                ))}
-              </section>
-              <ul className={styles.sort_button_container}>
-                <li
-                  className={
-                    sortValue === "최신순"
-                      ? `${styles.sort_button} ${styles.sort_on}`
-                      : `${styles.sort_button}`
-                  }
-                  onClick={sortChangeHandler}
+              {themeList.map((theme) => (
+                <section
+                  key={theme.idx}
+                  className={styles.theme_content_container}
                 >
-                  최신순
-                </li>
-
-                <li
-                  className={
-                    sortValue === "평점높은순"
-                      ? `${styles.sort_button} ${styles.sort_on}`
-                      : `${styles.sort_button}`
-                  }
-                  onClick={sortChangeHandler}
-                >
-                  평점높은순
-                </li>
-                <li
-                  className={
-                    sortValue === "판매량"
-                      ? `${styles.sort_last_button} ${styles.sort_on}`
-                      : `${styles.sort_last_button}`
-                  }
-                  onClick={sortChangeHandler}
-                >
-                  판매량
-                </li>
-              </ul>
-              <section className={styles.program_list}>
-                {resultProgramList.length === 0 ? (
-                  <p className={styles.no_attraction}>체험상품이 없습니다.</p>
-                ) : (
-                  resultProgramList.map((item) => (
-                    <ProgramItem
-                      key={item.idx}
-                      item={item}
-                      getReviewList={getReviewList}
-                    />
-                  ))
-                )}
-              </section>
+                  <div className={styles.theme_content_top}>
+                    <div className={styles.theme_title_container}>
+                      <span className={styles.theme_title}>{theme.title}</span>
+                      <span className={styles.theme_subtitle}>
+                        {theme.subtitle}
+                      </span>
+                    </div>
+                  </div>
+                  <div className={styles.theme_slick_container}>
+                    {themeDivision && theme.title === "농촌체험" && (
+                      <ProgramsThemeSlick
+                        viewItems={themeDivision.rural}
+                        areaList={areaList}
+                        getReviewList={getReviewList}
+                      />
+                    )}
+                    {themeDivision && theme.title === "액티비티" && (
+                      <ProgramsThemeSlick
+                        viewItems={themeDivision.activity}
+                        areaList={areaList}
+                        getReviewList={getReviewList}
+                      />
+                    )}
+                    {themeDivision && theme.title === "단체" && (
+                      <ProgramsThemeSlick
+                        viewItems={themeDivision.group}
+                        areaList={areaList}
+                        getReviewList={getReviewList}
+                      />
+                    )}
+                    {themeDivision && theme.title === "친구" && (
+                      <ProgramsThemeSlick
+                        viewItems={themeDivision.friend}
+                        areaList={areaList}
+                        getReviewList={getReviewList}
+                      />
+                    )}
+                    {themeDivision && theme.title === "가족" && (
+                      <ProgramsThemeSlick
+                        viewItems={themeDivision.family}
+                        areaList={areaList}
+                        getReviewList={getReviewList}
+                      />
+                    )}
+                    {themeDivision && theme.title === "연인" && (
+                      <ProgramsThemeSlick
+                        viewItems={themeDivision.lover}
+                        areaList={areaList}
+                        getReviewList={getReviewList}
+                      />
+                    )}
+                  </div>
+                </section>
+              ))}
             </section>
           )}
         </section>

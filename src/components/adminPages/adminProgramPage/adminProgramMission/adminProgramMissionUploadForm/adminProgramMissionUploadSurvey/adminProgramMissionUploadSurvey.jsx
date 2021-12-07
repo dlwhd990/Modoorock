@@ -51,7 +51,7 @@ const AdminProgramMissionUploadSurvey = ({
         formData.append("point", 0);
         formData.append("title", title);
         formData.append("content", content);
-        formData.append("files", thumbnail);
+        thumbnail && formData.append("files", thumbnail);
 
         axios
           .post(

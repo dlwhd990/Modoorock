@@ -34,6 +34,8 @@ const ModoorockAdminUserPage = ({ userList, loadUserList }) => {
               onChange={onInputValueChangeHandler}
               type="text"
               className={styles.search_input}
+              spellCheck="false"
+              placeholder="아이디검색"
             />
             <i className={`${styles.search_icon} fas fa-search`}></i>
           </div>
