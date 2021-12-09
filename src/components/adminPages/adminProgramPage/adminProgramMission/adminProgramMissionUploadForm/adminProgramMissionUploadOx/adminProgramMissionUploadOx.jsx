@@ -12,7 +12,7 @@ const AdminProgramMissionUploadOx = ({
   const [inputValues, setInputValues] = useState({
     title: "",
     content: "",
-    answer: "",
+    answer: "O",
     answerContent: "",
     point: "",
   });
@@ -57,6 +57,7 @@ const AdminProgramMissionUploadOx = ({
         formData.append("answer", answer);
         formData.append("answerContent", answerContent);
         thumbnail && formData.append("files", thumbnail);
+        console.log(answer);
 
         axios
           .post(

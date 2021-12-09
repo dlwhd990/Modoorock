@@ -233,15 +233,6 @@ const Programs = ({ areaList, programList, getReviewList }) => {
   const onSearchHandler = () => {
     const result = [];
     if (path === "area") {
-      if (inputValue === "") {
-        for (let i = 0; i < areaList.length; i++) {
-          (regionValue === areaList[i].area || regionValue === "전체") &&
-            result.push(areaList[i]);
-        }
-        setResultAreaList(result);
-        return;
-      }
-
       for (let i = 0; i < areaList.length; i++) {
         if (
           areaList[i].name.includes(inputValue) &&
@@ -273,6 +264,20 @@ const Programs = ({ areaList, programList, getReviewList }) => {
     }
   };
 
+  const keyHandler = (e) => {
+    if (e.key !== "Enter" || path === "area") {
+      return;
+    }
+    history.push(`/programs/search/${inputValue}`);
+  };
+
+  useEffect(() => {
+    window.addEventListener("keypress", keyHandler);
+    return () => {
+      window.removeEventListener("keypress", keyHandler);
+    };
+  }, [keyHandler]);
+
   const regionSelectOpenHandler = () => {
     setRegionSelectOpen(!regionSelectOpen);
   };
@@ -291,7 +296,7 @@ const Programs = ({ areaList, programList, getReviewList }) => {
   useEffect(() => {
     if (switchValue === "지역별") {
       history.push("/programs/area");
-    } else if (switchValue === "전체상품") {
+    } else if (switchValue === "테마별") {
       history.push("/programs/theme");
     }
   }, [switchValue]);
@@ -301,7 +306,7 @@ const Programs = ({ areaList, programList, getReviewList }) => {
     if (path === "area") {
       setSwitchValue("지역별");
     } else if (path === "theme") {
-      setSwitchValue("전체상품");
+      setSwitchValue("테마별");
     }
   }, []);
 
@@ -369,13 +374,13 @@ const Programs = ({ areaList, programList, getReviewList }) => {
             </button>
             <button
               className={`${
-                switchValue === "전체상품"
+                switchValue === "테마별"
                   ? `${styles.switch_region_button} ${styles.switch_on}`
                   : `${styles.switch_region_button}`
               }`}
               onClick={onSwitchHandler}
             >
-              전체상품
+              테마별
             </button>
           </section>
           <section className={styles.search_container}>
@@ -384,7 +389,11 @@ const Programs = ({ areaList, programList, getReviewList }) => {
               value={inputValue}
               className={styles.search_input}
               onChange={inputChangeHandler}
-              placeholder="찾으시는 상품을 검색해보세요"
+              placeholder={
+                switchValue === "지역별"
+                  ? "찾으시는 지역을 검색해보세요"
+                  : "찾으시는 상품을 검색해보세요"
+              }
               spellCheck="false"
             />
             <i className={`${styles.search_icon} fas fa-search`}></i>
@@ -429,67 +438,71 @@ const Programs = ({ areaList, programList, getReviewList }) => {
               </section>
             </section>
           ) : (
-            <section className={styles.theme_main}>
-              {themeList.map((theme) => (
-                <section
-                  key={theme.idx}
-                  className={styles.theme_content_container}
-                >
-                  <div className={styles.theme_content_top}>
-                    <div className={styles.theme_title_container}>
-                      <span className={styles.theme_title}>{theme.title}</span>
-                      <span className={styles.theme_subtitle}>
-                        {theme.subtitle}
-                      </span>
+            path === "theme" && (
+              <section className={styles.theme_main}>
+                {themeList.map((theme) => (
+                  <section
+                    key={theme.idx}
+                    className={styles.theme_content_container}
+                  >
+                    <div className={styles.theme_content_top}>
+                      <div className={styles.theme_title_container}>
+                        <span className={styles.theme_title}>
+                          {theme.title}
+                        </span>
+                        <span className={styles.theme_subtitle}>
+                          {theme.subtitle}
+                        </span>
+                      </div>
                     </div>
-                  </div>
-                  <div className={styles.theme_slick_container}>
-                    {themeDivision && theme.title === "농촌체험" && (
-                      <ProgramsThemeSlick
-                        viewItems={themeDivision.rural}
-                        areaList={areaList}
-                        getReviewList={getReviewList}
-                      />
-                    )}
-                    {themeDivision && theme.title === "액티비티" && (
-                      <ProgramsThemeSlick
-                        viewItems={themeDivision.activity}
-                        areaList={areaList}
-                        getReviewList={getReviewList}
-                      />
-                    )}
-                    {themeDivision && theme.title === "단체" && (
-                      <ProgramsThemeSlick
-                        viewItems={themeDivision.group}
-                        areaList={areaList}
-                        getReviewList={getReviewList}
-                      />
-                    )}
-                    {themeDivision && theme.title === "친구" && (
-                      <ProgramsThemeSlick
-                        viewItems={themeDivision.friend}
-                        areaList={areaList}
-                        getReviewList={getReviewList}
-                      />
-                    )}
-                    {themeDivision && theme.title === "가족" && (
-                      <ProgramsThemeSlick
-                        viewItems={themeDivision.family}
-                        areaList={areaList}
-                        getReviewList={getReviewList}
-                      />
-                    )}
-                    {themeDivision && theme.title === "연인" && (
-                      <ProgramsThemeSlick
-                        viewItems={themeDivision.lover}
-                        areaList={areaList}
-                        getReviewList={getReviewList}
-                      />
-                    )}
-                  </div>
-                </section>
-              ))}
-            </section>
+                    <div className={styles.theme_slick_container}>
+                      {themeDivision && theme.title === "농촌체험" && (
+                        <ProgramsThemeSlick
+                          viewItems={themeDivision.rural}
+                          areaList={areaList}
+                          getReviewList={getReviewList}
+                        />
+                      )}
+                      {themeDivision && theme.title === "액티비티" && (
+                        <ProgramsThemeSlick
+                          viewItems={themeDivision.activity}
+                          areaList={areaList}
+                          getReviewList={getReviewList}
+                        />
+                      )}
+                      {themeDivision && theme.title === "단체" && (
+                        <ProgramsThemeSlick
+                          viewItems={themeDivision.group}
+                          areaList={areaList}
+                          getReviewList={getReviewList}
+                        />
+                      )}
+                      {themeDivision && theme.title === "친구" && (
+                        <ProgramsThemeSlick
+                          viewItems={themeDivision.friend}
+                          areaList={areaList}
+                          getReviewList={getReviewList}
+                        />
+                      )}
+                      {themeDivision && theme.title === "가족" && (
+                        <ProgramsThemeSlick
+                          viewItems={themeDivision.family}
+                          areaList={areaList}
+                          getReviewList={getReviewList}
+                        />
+                      )}
+                      {themeDivision && theme.title === "연인" && (
+                        <ProgramsThemeSlick
+                          viewItems={themeDivision.lover}
+                          areaList={areaList}
+                          getReviewList={getReviewList}
+                        />
+                      )}
+                    </div>
+                  </section>
+                ))}
+              </section>
+            )
           )}
         </section>
       </section>

@@ -22,7 +22,6 @@ const MypagePaymentItem = ({
         userExpIdx: item.purchaseData.idx,
       })
       .then((response) => {
-        console.log(response);
         if (response.data === "success") {
           window.alert("삭제되었습니다.");
           sessionCheckForLoadPurchaseList();

@@ -4,7 +4,6 @@ import styles from "./themeSlickItem.module.css";
 import StarRatingComponent from "react-star-rating-component";
 
 const ThemeSlickItem = ({ item, getReviewList }) => {
-  console.log(item);
   const [reviewCount, setReviewCount] = useState(0);
   const [reviewStarAvg, setReviewStarAvg] = useState((0).toFixed(1));
   const [mainImage, setMainImage] = useState(null);

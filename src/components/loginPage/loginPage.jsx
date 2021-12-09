@@ -82,10 +82,9 @@ const LoginPage = () => {
       success: function (response) {
         Kakao.Auth.setAccessToken(response.access_token);
         getUserData();
-        console.log(response);
       },
       fail: function (response) {
-        console.log(response);
+        console.log("fail");
       },
     });
   };
@@ -100,7 +99,6 @@ const LoginPage = () => {
     }
     if (!Kakao.isInitialized()) {
       Kakao.init(process.env.REACT_APP_KAKAO_JS_KEY);
-      console.log(Kakao.isInitialized());
     }
   }, []);
 

@@ -27,6 +27,7 @@ import { loadTossPayments } from "@tosspayments/sdk";
 import PaySuccessPage from "./components/paySuccessPage/paySuccessPage";
 import PayFailPage from "./components/payFailPage/payFailPage";
 import Map from "./components/map/map";
+import ProgramSearch from "./components/programs/programSearch/programSearch";
 
 axios.defaults.withCredentials = true;
 
@@ -195,6 +196,16 @@ const App = (props) => {
         <Route exact path="/programs/view/:path">
           <Header user={user} userLogout={userLogout} />
           <ProgramDetail getReviewList={getReviewList} toss={toss} />
+          <Footer />
+        </Route>
+        <Route exact path="/programs/search/:query">
+          <Header user={user} userLogout={userLogout} />
+          {programList && (
+            <ProgramSearch
+              programList={programList}
+              getReviewList={getReviewList}
+            />
+          )}
           <Footer />
         </Route>
         <Route exact path="/programs/:path">

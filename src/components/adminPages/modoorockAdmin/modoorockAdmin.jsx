@@ -114,10 +114,7 @@ const ModoorockAdmin = (props) => {
       .post(`${process.env.REACT_APP_BASEURL}/userexp/getuserexplist`, {
         userIdx: -1,
       })
-      .then((response) => {
-        console.log(response.data);
-        setExpList(response.data);
-      })
+      .then((response) => setExpList(response.data))
       .catch((err) => console.error(err));
   };
 

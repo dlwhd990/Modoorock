@@ -55,12 +55,6 @@ const MypagePayment = (props) => {
     setSliceList(list.slice(0, 5));
   }, [userExpList]);
 
-  useEffect(() => {
-    console.log(resultArticles);
-    console.log(pageList);
-    console.log(listList);
-  }, [resultArticles, pageList, listList]);
-
   const pageNumberClick = (e) => {
     setNumbering(parseInt(e.target.textContent));
   };

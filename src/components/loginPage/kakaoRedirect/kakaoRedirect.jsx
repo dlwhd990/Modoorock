@@ -12,7 +12,7 @@ const KakaoRedirect = (props) => {
     let sval = "";
 
     params = params.split("&");
-    console.log(params, "dasd");
+
     let temp;
 
     for (var i = 0; i < params.length; i++) {

@@ -99,7 +99,6 @@ export default class ProgramsThemeSlick extends Component {
   };
   render() {
     const { viewItems, areaList, getReviewList } = this.props;
-    console.log(viewItems);
 
     const settings = {
       //autoplaySpeed: 3500,

@@ -82,7 +82,6 @@ const InquireSearchPage = ({ inquireArticles, getInquireList }) => {
   };
 
   const onSearchHandler = () => {
-    console.log(searchInput);
     if (!searchInput) {
       window.alert("검색어를 입력해주세요");
       return;
@@ -98,7 +97,6 @@ const InquireSearchPage = ({ inquireArticles, getInquireList }) => {
   };
 
   const keyHandler = (e) => {
-    console.log(e.key);
     if (e.key !== "Enter") {
       return;
     }

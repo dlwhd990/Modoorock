@@ -17,8 +17,7 @@ const Mainpage = ({ programList, viewItems, getReviewList }) => {
   const onSearchHandler = () => {
     window.scrollTo({ top: 0 });
     history.push({
-      pathname: "/programs/theme",
-      state: { query: inputValue },
+      pathname: `/programs/search/${inputValue}`,
     });
   };
 
@@ -30,6 +29,20 @@ const Mainpage = ({ programList, viewItems, getReviewList }) => {
     window.location.href =
       "https://www.youtube.com/channel/UCdTY_FXXLbtdNXXN9H3pXrg";
   };
+
+  const keyHandler = (e) => {
+    if (e.key !== "Enter") {
+      return;
+    }
+    onSearchHandler();
+  };
+
+  useEffect(() => {
+    window.addEventListener("keypress", keyHandler);
+    return () => {
+      window.removeEventListener("keypress", keyHandler);
+    };
+  }, [keyHandler]);
 
   useEffect(() => {
     programList && setLatestSixProgramList(programList.slice(0, 6));

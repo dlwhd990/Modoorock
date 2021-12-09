@@ -83,7 +83,6 @@ const Inquire = ({ articles, getInquireList, user }) => {
   };
 
   const onSearchHandler = () => {
-    console.log(searchInput);
     if (!searchInput) {
       return;
     }

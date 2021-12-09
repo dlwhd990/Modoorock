@@ -31,7 +31,6 @@ const Attraction = ({ areaList, getReviewList }) => {
         attractionIdx: parseInt(path),
       })
       .then((response) => {
-        console.log(response.data);
         const reverseData = response.data.reverse();
         setAttractionProgramList(reverseData);
         setResultProgramList(reverseData);
