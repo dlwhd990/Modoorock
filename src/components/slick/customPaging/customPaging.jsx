@@ -82,6 +82,7 @@ export default class CustomPaging extends Component {
       //pauseOnHover: true,
       dots: true,
       dotsClass: "slick-dots slick-thumb",
+      fade: true,
       infinite: true,
       speed: 500,
       slidesToShow: 1,
