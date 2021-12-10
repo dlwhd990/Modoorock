@@ -5,15 +5,16 @@ import HelmetComponent from "../../../helmetComponent";
 
 const MypageMain = ({ user, sessionCheck, userLogout }) => {
   const [disabled, setDisabled] = useState(false);
+  const [withdrawalOn, setWithdrawalOn] = useState(false);
   const [inputValues, setInputValues] = useState({
     newPw: "",
     newPwConfirm: "",
-    name: "",
     phone: "",
     authNum: "",
+    withdrawalPw: "",
   });
 
-  const { newPw, newPwConfirm, name, phone, authNum } = inputValues;
+  const { newPw, newPwConfirm, phone, authNum, withdrawalPw } = inputValues;
 
   const inputValueChangeHandler = (e) => {
     const { name, value } = e.target;
@@ -144,6 +145,47 @@ const MypageMain = ({ user, sessionCheck, userLogout }) => {
       .catch((err) => console.error(err));
   };
 
+  const withdrawalViewHandler = () => {
+    setWithdrawalOn(!withdrawalOn);
+  };
+
+  const onWithdrawalHandler = () => {
+    const confirm = window.confirm(
+      "정말로 회원 탈퇴 하시겠습니까? 회원 탈퇴를 하게 되면 모든 정보는 사라지며 복구할 수 없습니다."
+    );
+    if (!confirm) {
+      return;
+    }
+    if (withdrawalPw !== "회원탈퇴") {
+      window.alert("'회원탈퇴'를 정확히 입력해주세요");
+      return;
+    }
+    axios
+      .post(`${process.env.REACT_APP_BASEURL}/user/session`)
+      .then((sessionUser) => {
+        if (!sessionUser) {
+          window.alert("로그인 후에 가능합니다.");
+          return;
+        }
+        axios
+          .post(`${process.env.REACT_APP_BASEURL}/user/deleteuser`, {
+            idx: sessionUser.data.idx,
+          })
+          .then((response) => {
+            if (response.data === "success") {
+              window.alert("회원 탈퇴가 완료되었습니다.");
+              userLogout(1);
+            } else {
+              window.alert(
+                "에러가 발생했습니다. 새로고침 후에 다시 시도해주세요"
+              );
+            }
+          })
+          .catch((err) => console.error(err));
+      })
+      .catch((err) => console.log(err));
+  };
+
   useEffect(() => {
     sessionCheck();
     setInputValues({
@@ -246,6 +288,32 @@ const MypageMain = ({ user, sessionCheck, userLogout }) => {
             </button>
           </div>
         </div>
+        <button className={styles.withdrawal} onClick={withdrawalViewHandler}>
+          회원탈퇴
+        </button>
+        {withdrawalOn && (
+          <div className={styles.withdrawal_container}>
+            <p className={styles.withdrawal_title}>회원탈퇴 확인</p>
+            <p className={styles.withdrawal_subtitle}>
+              하단에 '회원탈퇴'를 입력하신 후에 확인 버튼을 눌러주세요
+            </p>
+            <input
+              value={withdrawalPw}
+              onChange={inputValueChangeHandler}
+              name="withdrawalPw"
+              type="text"
+              className={styles.withdrawal_input}
+              spellCheck="false"
+              placeholder="회원탈퇴"
+            />
+            <button
+              className={styles.withdrawal_confirm}
+              onClick={onWithdrawalHandler}
+            >
+              확인
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );

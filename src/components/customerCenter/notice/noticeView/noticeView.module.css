@@ -158,6 +158,10 @@
   color: white;
 }
 
+.summer_image {
+  margin-left: 5%;
+}
+
 @media screen and (max-width: 780px) {
   .customer_center {
     width: 100%;
@@ -197,5 +201,8 @@
 
   .article_content {
     padding: 20px;
+  }
+  .article_content > img {
+    width: 90vw;
   }
 }

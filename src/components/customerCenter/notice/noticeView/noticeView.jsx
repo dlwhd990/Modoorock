@@ -120,7 +120,11 @@ const NoticeView = (props) => {
                   <p className={styles.date}>{article.date}</p>
                 </div>
               </div>
-              <div className={styles.article_content}>{article.content}</div>
+              <div className={styles.article_content}>
+                <div
+                  dangerouslySetInnerHTML={{ __html: article.content }}
+                ></div>
+              </div>
             </article>
             <div className={styles.go_to_list_button_container}>
               <button

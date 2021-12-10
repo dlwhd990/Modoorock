@@ -2,21 +2,20 @@ import { React, useState } from "react";
 import styles from "./noticeWrite.module.css";
 import axios from "axios";
 import { useHistory } from "react-router";
+import SummerNote from "../../../summerNote/summerNote";
 
 const NoticeWrite = () => {
   const history = useHistory();
-  const [inputValues, setInputValues] = useState({
-    title: "",
-    content: "",
-  });
-  const { title, content } = inputValues;
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
 
-  const inputValueChangeHandler = (e) => {
-    const { name, value } = e.target;
-    setInputValues({
-      ...inputValues,
-      [name]: value,
-    });
+  const onTitleChangeHandler = (e) => {
+    setTitle(e.target.value);
+  };
+
+  const onContentChangeHandler = (input) => {
+    console.log(input);
+    setContent(input);
   };
 
   const writeSubmitHandler = (e) => {
@@ -55,8 +54,7 @@ const NoticeWrite = () => {
         <div className={styles.title_input_container}>
           <p className={styles.title_text}>제목</p>
           <input
-            name="title"
-            onChange={inputValueChangeHandler}
+            onChange={onTitleChangeHandler}
             value={title}
             type="text"
             className={styles.title_input}
@@ -66,14 +64,10 @@ const NoticeWrite = () => {
         </div>
         <div className={styles.content_input_container}>
           <p className={styles.content_text}>내용</p>
-          <textarea
-            name="content"
-            onChange={inputValueChangeHandler}
-            value={content}
-            className={styles.content_input}
-            spellCheck="false"
-            placeholder="내용"
-          ></textarea>
+          <SummerNote
+            where="notice"
+            onContentChangeHandler={onContentChangeHandler}
+          />
         </div>
         <button className={styles.submit_button} onClick={writeSubmitHandler}>
           글작성
