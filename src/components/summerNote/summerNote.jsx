@@ -8,8 +8,9 @@ import "bootstrap/js/tooltip";
 import "./summerNote.css";
 import "bootstrap/dist/css/bootstrap.css";
 import axios from "axios";
+import { useEffect } from "react";
 
-const SummerNote = ({ where, onContentChangeHandler }) => {
+const SummerNote = ({ where, onContentChangeHandler, initial }) => {
   const onInputChange = (content) => {
     onContentChangeHandler(content);
   };
@@ -42,10 +43,11 @@ const SummerNote = ({ where, onContentChangeHandler }) => {
       reader.readAsDataURL(images[i]);
     }
   };
+
   return (
     <section className="summer">
       <ReactSummernote
-        value="Default value"
+        children={<div dangerouslySetInnerHTML={{ __html: initial }}></div>}
         options={{
           lang: "ko-KR",
           height: 350,

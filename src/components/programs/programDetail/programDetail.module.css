@@ -471,18 +471,7 @@
   }
 
   .detail_content_main {
-    padding: 0;
-  }
-
-  .detail_content_main_image {
-    width: 90%;
-    margin: auto;
-    margin-top: 50px;
-  }
-
-  .detail_content_text {
-    width: 90%;
-    margin-top: 40px;
+    padding: 20px 26px;
   }
 
   .review_container {

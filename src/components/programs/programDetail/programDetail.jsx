@@ -344,18 +344,9 @@ const ProgramDetail = ({ getReviewList, toss }) => {
           </section>
           <section className={styles.detail_content_container}>
             <section className={styles.detail_content_main}>
-              {imageList &&
-                imageList.map((image) => (
-                  <img
-                    key={image}
-                    src={`${process.env.REACT_APP_BASEURL}-images/Exp/${image}`}
-                    alt="main_image"
-                    className={styles.detail_content_main_image}
-                  />
-                ))}
-              <p className={styles.detail_content_text}>
-                {program.detailContent}
-              </p>
+              <div
+                dangerouslySetInnerHTML={{ __html: program.detailContent }}
+              ></div>
             </section>
           </section>
           <section className={styles.review_container}>

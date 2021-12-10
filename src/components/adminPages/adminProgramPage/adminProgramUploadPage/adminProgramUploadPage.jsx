@@ -3,28 +3,29 @@ import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router";
 import styles from "./adminProgramUploadPage.module.css";
 import StarRatingComponent from "react-star-rating-component";
+import SummerNote from "../../../summerNote/summerNote";
 
 const AdminProgramUploadPage = ({ user }) => {
   const history = useHistory();
   const params = useParams();
+  const [detailContent, setDetailContent] = useState("");
   const [inputValues, setInputValues] = useState({
     title: "",
     price: "",
     theme: "",
     content: "",
-    detailContent: "",
   });
 
-  const { title, price, theme, content, detailContent } = inputValues;
+  const { title, price, theme, content } = inputValues;
 
   const [previewImage, setPreviewImage] = useState(null);
   const [subImages, setSubImages] = useState(null);
-  //const countInputRef = useRef();
-  //const [startDate, setStartDate] = useState(new Date());
-  //const [time, setTime] = useState("");
-  //const [count, setCount] = useState("");
-  //const [dateDataList, setDateDataList] = useState([]);
   const [attractionInfo, setAttractionInfo] = useState(null);
+
+  const detailContentChangeHandler = (input) => {
+    console.log(input);
+    setDetailContent(input);
+  };
 
   const inputValueChangeHandler = (e) => {
     const { name, value } = e.target;
@@ -351,14 +352,10 @@ const AdminProgramUploadPage = ({ user }) => {
         </section>
         <div className={styles.detail_content_container}>
           <p className={styles.detail_content_text}>상품 상세 소개</p>
-          <textarea
-            name="detailContent"
-            onChange={inputValueChangeHandler}
-            value={detailContent}
-            className={styles.detail_content}
-            spellCheck="false"
-            placeholder="자세한 설명 및 주의사항을 적어주세요"
-          ></textarea>
+          <SummerNote
+            where="exp"
+            onContentChangeHandler={detailContentChangeHandler}
+          />
           <button
             className={styles.submit_button}
             onClick={submitButtonHandler}

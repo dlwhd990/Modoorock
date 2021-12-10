@@ -8,6 +8,7 @@ import ko from "date-fns/locale/ko";
 import "./datePicker.css";
 import "../../../../../node_modules/react-datepicker/dist/react-datepicker.css";
 import AdminProgramUploadTimeItem from "./adminProgramUploadTimeItem/adminProgramUploadTimeItem";
+import SummerNote from "../../../summerNote/summerNote";
 
 registerLocale("ko", ko);
 
@@ -15,15 +16,20 @@ const AdminProgramEdit = (props) => {
   const [item, setItem] = useState(null);
   const history = useHistory();
   const params = useParams();
+  const [detailContent, setDetailContent] = useState("");
   const [inputValues, setInputValues] = useState({
     title: "",
     price: "",
     theme: "",
     content: "",
-    detailContent: "",
   });
 
-  const { title, price, theme, content, detailContent } = inputValues;
+  const { title, price, theme, content } = inputValues;
+
+  const detailContentChangeHandler = (input) => {
+    console.log(input);
+    setDetailContent(input);
+  };
 
   const countInputRef = useRef();
   const [previewImage, setPreviewImage] = useState(null);
@@ -246,8 +252,6 @@ const AdminProgramEdit = (props) => {
     setCount(e.target.value);
   };
 
-  const timeTableUploadHandler = () => {};
-
   useEffect(() => {
     axios
       .post(`${process.env.REACT_APP_BASEURL}/exp/getexpinfo`, {
@@ -280,8 +284,8 @@ const AdminProgramEdit = (props) => {
               price,
               theme,
               content,
-              detailContent,
             });
+            setDetailContent(detailContent);
             setPreviewImage({
               file: "",
               previewURL: `${process.env.REACT_APP_BASEURL}-images/Exp/${mainImage}`,
@@ -433,14 +437,13 @@ const AdminProgramEdit = (props) => {
         </section>
         <div className={styles.detail_content_container}>
           <p className={styles.detail_content_text}>상품 상세 소개</p>
-          <textarea
-            name="detailContent"
-            onChange={inputValueChangeHandler}
-            value={detailContent}
-            className={styles.detail_content}
-            spellCheck="false"
-            placeholder="자세한 설명 및 주의사항을 적어주세요"
-          ></textarea>
+          {detailContent && (
+            <SummerNote
+              where="exp"
+              onContentChangeHandler={detailContentChangeHandler}
+              initial={detailContent}
+            />
+          )}
           <button
             className={styles.submit_button}
             onClick={submitButtonHandler}

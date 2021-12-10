@@ -186,7 +186,6 @@
   width: 100px;
   height: 40px;
   position: absolute;
-  bottom: -10px;
   right: 0;
   outline: none;
   border: none;
@@ -412,9 +411,8 @@
 }
 
 .detail_content_container {
-  margin-top: 80px;
+  margin: 80px 0;
   position: relative;
-  height: 480px;
 }
 
 .detail_content {
