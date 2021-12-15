@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router";
-import { debounce } from "lodash";
 import ProgramItem from "../programItem/programItem";
 import styles from "./attraction.module.css";
 import axios from "axios";
 import HelmetComponent from "../../../helmetComponent";
+import ProgramsButton from "../programsButton/programsButton";
 
 const Attraction = ({ areaList, getReviewList }) => {
   const history = useHistory();
@@ -14,7 +14,18 @@ const Attraction = ({ areaList, getReviewList }) => {
   const [resultProgramList, setResultProgramList] = useState([]);
   const [areaData, setAreaData] = useState(null);
   const [sortValue, setSortValue] = useState("최신순");
+  const [themeValue, setThemeValue] = useState("전체");
+  const [themeSelectOpen, setThemeSelectOpen] = useState(false);
   const [allReviewList, setAllReviewList] = useState();
+  const themeList = [
+    "전체",
+    "농촌체험",
+    "액티비티",
+    "단체",
+    "친구",
+    "가족",
+    "연인",
+  ];
 
   const loadAreaInfo = () => {
     axios
@@ -56,6 +67,14 @@ const Attraction = ({ areaList, getReviewList }) => {
   const sortChangeHandler = (e) => {
     const sortType = e.currentTarget.innerText;
     setSortValue(sortType);
+  };
+
+  const themeSelectOpenHandler = () => {
+    setThemeSelectOpen(!themeSelectOpen);
+  };
+
+  const themeChangeHandler = (e) => {
+    setThemeValue(e.target.innerText);
   };
 
   const sortWithStar = (result) => {
@@ -140,13 +159,15 @@ const Attraction = ({ areaList, getReviewList }) => {
   };
 
   const onSearchHandler = () => {
-    const result = [];
+    const tmp = [];
 
-    for (let i = 0; i < attractionProgramList.length; i++) {
-      if (attractionProgramList[i].title.includes(inputValue)) {
-        result.push(attractionProgramList[i]);
-      }
-    }
+    attractionProgramList.forEach((item) => {
+      (themeValue === "전체" || item.theme === themeValue) && tmp.push(item);
+    });
+
+    console.log(tmp);
+
+    const result = tmp.filter((item) => item.title.includes(inputValue));
     setResultProgramList(sortHandler(sortValue, result));
   };
 
@@ -168,7 +189,7 @@ const Attraction = ({ areaList, getReviewList }) => {
       return;
     }
     onSearchHandler();
-  }, [inputValue, sortValue]);
+  }, [inputValue, sortValue, themeValue]);
 
   return (
     <section className={styles.attraction}>
@@ -245,6 +266,28 @@ const Attraction = ({ areaList, getReviewList }) => {
           />
           <i className={`${styles.search_icon} fas fa-search`}></i>
         </section>
+        <button
+          className={styles.theme_select_toggle}
+          onClick={themeSelectOpenHandler}
+        >
+          테마 선택
+        </button>
+        <div
+          className={
+            themeSelectOpen
+              ? `${styles.theme_select_container} ${styles.theme_select_on}`
+              : `${styles.theme_select_container} ${styles.theme_select_off}`
+          }
+        >
+          {themeList.map((theme) => (
+            <ProgramsButton
+              key={theme}
+              name={theme}
+              value={themeValue}
+              changeHandler={themeChangeHandler}
+            />
+          ))}
+        </div>
         <ul className={styles.sort_button_container}>
           <li
             className={

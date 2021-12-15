@@ -8,7 +8,6 @@ import "bootstrap/js/tooltip";
 import "./summerNote.css";
 import "bootstrap/dist/css/bootstrap.css";
 import axios from "axios";
-import { useEffect } from "react";
 
 const SummerNote = ({ where, onContentChangeHandler, initial }) => {
   const onInputChange = (content) => {

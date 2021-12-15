@@ -80,7 +80,7 @@
   border: none;
   background-color: var(--color-theme);
   color: white;
-  font-size: 18px;
+  font-size: var(--font-size-normal);
   margin-right: 3%;
   border-radius: 4px;
   cursor: pointer;
@@ -332,10 +332,6 @@
     width: 85%;
   }
 
-  .region_select_container {
-    justify-content: flex-start;
-  }
-
   .region_select_toggle {
     margin: auto;
     display: block;
@@ -364,6 +360,7 @@
 
   .region_select_container {
     width: 85%;
+    justify-content: flex-start;
   }
 
   .region_select {

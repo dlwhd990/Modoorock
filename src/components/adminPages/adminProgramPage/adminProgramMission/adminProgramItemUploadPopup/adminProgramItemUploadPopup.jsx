@@ -168,7 +168,9 @@ const AdminProgramItemUploadPopup = ({
       </div>
 
       <p className={styles.qr_link}>
-        <a href="https://ko.online-qrcode-generator.com/">QR코드 생성 링크</a>
+        <a href="https://ko.online-qrcode-generator.com/" target="_blank">
+          QR코드 생성 링크
+        </a>
         (아이템에 기재 되어있는 'QR코드번호'를 입력해서 생성해주세요)
       </p>
     </section>

@@ -42,10 +42,7 @@ const AdminProgramMissionUploadTopper = ({
       type: "image",
     });
     reader.onloadend = () => {
-      setTopperImage({
-        file: newFile,
-        previewURL: reader.result,
-      });
+      setTopperImage(newFile);
     };
     file && reader.readAsDataURL(file);
   };

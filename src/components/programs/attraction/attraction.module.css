@@ -110,6 +110,20 @@
   color: #2e9bd3;
 }
 
+.theme_select_toggle {
+  display: none;
+}
+
+.theme_select_container {
+  width: 60%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: auto;
+  margin-bottom: 50px;
+}
+
 .sort_button_container {
   width: 100%;
   display: flex;
@@ -168,6 +182,37 @@
 
   .search_input {
     font-size: var(--font-size-normal);
+  }
+
+  .theme_select_toggle {
+    margin: auto;
+    display: block;
+    margin-bottom: 30px;
+    outline: none;
+    border: none;
+    background-color: var(--color-light-blue);
+    color: white;
+    width: 80%;
+    height: 40px;
+    font-size: 18px;
+    font-weight: 500;
+    border-radius: 4px;
+    box-shadow: 1px 3px 3px 1px lightgray;
+  }
+
+  .theme_select_container {
+    width: 85%;
+    justify-content: flex-start;
+  }
+
+  .theme_select_on {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .theme_select_off {
+    display: none;
   }
 
   .attraction_list_container {

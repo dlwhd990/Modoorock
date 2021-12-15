@@ -294,9 +294,9 @@ const Programs = ({ areaList, programList, getReviewList }) => {
   );
 
   useEffect(() => {
-    if (switchValue === "지역별") {
+    if (switchValue === "관광지역별") {
       history.push("/programs/area");
-    } else if (switchValue === "테마별") {
+    } else if (switchValue === "상품테마별") {
       history.push("/programs/theme");
     }
   }, [switchValue]);
@@ -304,9 +304,9 @@ const Programs = ({ areaList, programList, getReviewList }) => {
   useEffect(() => {
     loadAllReviewList();
     if (path === "area") {
-      setSwitchValue("지역별");
+      setSwitchValue("관광지역별");
     } else if (path === "theme") {
-      setSwitchValue("테마별");
+      setSwitchValue("상품테마별");
     }
   }, []);
 
@@ -364,23 +364,23 @@ const Programs = ({ areaList, programList, getReviewList }) => {
           <section className={styles.switch_button_container}>
             <button
               className={`${
-                switchValue === "지역별"
+                switchValue === "관광지역별"
                   ? `${styles.switch_region_button} ${styles.switch_on}`
                   : `${styles.switch_region_button}`
               }`}
               onClick={onSwitchHandler}
             >
-              지역별
+              관광지역별
             </button>
             <button
               className={`${
-                switchValue === "테마별"
+                switchValue === "상품테마별"
                   ? `${styles.switch_region_button} ${styles.switch_on}`
                   : `${styles.switch_region_button}`
               }`}
               onClick={onSwitchHandler}
             >
-              테마별
+              상품테마별
             </button>
           </section>
           <section className={styles.search_container}>
@@ -390,7 +390,7 @@ const Programs = ({ areaList, programList, getReviewList }) => {
               className={styles.search_input}
               onChange={inputChangeHandler}
               placeholder={
-                switchValue === "지역별"
+                switchValue === "관광지역별"
                   ? "찾으시는 지역을 검색해보세요"
                   : "찾으시는 상품을 검색해보세요"
               }

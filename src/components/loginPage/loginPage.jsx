@@ -27,7 +27,7 @@ const LoginPage = () => {
         } else if (response.data.idType === 2) {
           history.push("/modoorockadmin");
         } else {
-          history.push("/");
+          window.location.href = "/";
         }
       });
   };
