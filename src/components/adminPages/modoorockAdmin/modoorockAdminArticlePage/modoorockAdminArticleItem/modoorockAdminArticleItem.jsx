@@ -54,7 +54,7 @@ const ModoorockAdminArticleItem = ({
           viewDetail ? `${styles.content} ${styles.on}` : `${styles.content}`
         }`}
       >
-        {item.content}
+        <div dangerouslySetInnerHTML={{ __html: item.content }}></div>
       </div>
     </div>
   );

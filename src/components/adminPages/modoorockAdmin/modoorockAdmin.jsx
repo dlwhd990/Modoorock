@@ -7,6 +7,7 @@ import ModoorockAdminArticlePage from "./modoorockAdminArticlePage/modoorockAdmi
 import ModoorockAdminAttractionPage from "./modoorockAdminAttractionPage/modoorockAdminAttractionPage";
 import ModoorockAdminBackgroundUploadPage from "./modoorockAdminBackgroundUploadPage/modoorockAdminBackgroundUploadPage";
 import ModoorockAdminInquirePage from "./modoorockAdminInquirePage/modoorockAdminInquirePage";
+import ModoorockAdminReportPage from "./modoorockAdminReportPage/modoorockAdminReportPage";
 import ModoorockAdminStatPage from "./modoorockAdminStatPage/modoorockAdminStatPage";
 import ModoorockAdminUserPage from "./modoorockAdminUserPage/modoorockAdminUserPage";
 
@@ -22,6 +23,7 @@ const ModoorockAdmin = (props) => {
   const [advertiseList, setAdvertiseList] = useState(null);
   const [userList, setUserList] = useState(null);
   const [expList, setExpList] = useState(null);
+  const [reportList, setReportList] = useState(null);
 
   const modoorockAdminCheck = () => {
     axios
@@ -39,6 +41,7 @@ const ModoorockAdmin = (props) => {
           loadAdvertiseList();
           loadNoticeList();
           loadFaqList();
+          loadReportList();
         }
       })
       .catch((err) => console.error(err));
@@ -115,6 +118,13 @@ const ModoorockAdmin = (props) => {
         userIdx: -1,
       })
       .then((response) => setExpList(response.data))
+      .catch((err) => console.error(err));
+  };
+
+  const loadReportList = () => {
+    axios
+      .post(`${process.env.REACT_APP_BASEURL}/report/getreportlist`)
+      .then((response) => setReportList(response.data.reverse()))
       .catch((err) => console.error(err));
   };
 
@@ -205,6 +215,17 @@ const ModoorockAdmin = (props) => {
             </li>
             <li
               className={`${
+                selected === "신고 관리"
+                  ? `${styles.menu_item} ${styles.selected}`
+                  : `${styles.menu_item} ${styles.not_selected}`
+              }`}
+              onClick={onSelectHandler}
+              data-param="report"
+            >
+              신고 관리
+            </li>
+            <li
+              className={`${
                 selected === "통계"
                   ? `${styles.menu_item} ${styles.selected}`
                   : `${styles.menu_item} ${styles.not_selected}`
@@ -270,6 +291,13 @@ const ModoorockAdmin = (props) => {
             inquireList={inquireList}
             loadNoticeList={loadNoticeList}
             loadFaqList={loadFaqList}
+          />
+        )
+      ) : path === "report" ? (
+        reportList && (
+          <ModoorockAdminReportPage
+            reportList={reportList}
+            loadReportList={loadReportList}
           />
         )
       ) : path === "stat" ? (

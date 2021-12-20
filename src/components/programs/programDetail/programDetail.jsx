@@ -17,6 +17,8 @@ const ProgramDetail = ({ getReviewList, toss }) => {
   const [reviewAvg, setReviewAvg] = useState(null);
   const [expTimeTableList, setExpTimeTableList] = useState(null);
   const [selectedTime, setSelectedTime] = useState("");
+  const [reportPopupOn, setReportPopupOn] = useState(false);
+  const [reportValue, setReportValue] = useState("");
   const [starSize, setStarSize] = useState(() => {
     const width = window.innerWidth;
     if (width > 1250) {
@@ -247,6 +249,61 @@ const ProgramDetail = ({ getReviewList, toss }) => {
     } else {
       setStarSize(18);
     }
+  };
+
+  const reportPopupHandler = (review) => {
+    setReportPopupOn(review);
+  };
+
+  const reportCloseHandler = () => {
+    setReportPopupOn(false);
+    setReportValue("");
+  };
+
+  const onReportValueChangeHandler = (e) => {
+    setReportValue(e.target.value);
+  };
+
+  const reportSubmitHandler = () => {
+    if (reportValue === "") {
+      alert("신고 사유를 작성해주세요.");
+      return;
+    }
+
+    const confirm = window.confirm(
+      "정말로 신고하시겠습니까? 허위 신고일 경우 불이익이 발생할 수 있습니다."
+    );
+
+    if (!confirm) {
+      return;
+    }
+
+    axios //
+      .post(`${process.env.REACT_APP_BASEURL}/user/session`) //
+      .then((res) => {
+        if (res.data === "") {
+          window.alert("로그인 후에 신고가 가능합니다.");
+          return;
+        }
+        axios
+          .post(`${process.env.REACT_APP_BASEURL}/report/insertreport`, {
+            userIdx: res.data.idx,
+            reviewIdx: reportPopupOn.idx,
+            reason: reportValue,
+          })
+          .then((response) => {
+            if (response.data === "success") {
+              window.alert("신고가 완료되었습니다.");
+              setReportPopupOn(false);
+              return;
+            }
+            window.alert(
+              "에러가 발생했습니다. 새로고침 후에 다시 시도해주세요."
+            );
+          })
+          .catch((err) => console.error(err));
+      })
+      .catch((err) => console.error(err));
   };
 
   useEffect(() => {
@@ -522,7 +579,11 @@ const ProgramDetail = ({ getReviewList, toss }) => {
                   <p className={styles.no_review}>리뷰가 없습니다.</p>
                 ) : (
                   review.map((item) => (
-                    <ProgramReview key={item.idx} review={item} />
+                    <ProgramReview
+                      key={item.idx}
+                      review={item}
+                      reportPopupHandler={reportPopupHandler}
+                    />
                   ))
                 )}
               </div>
@@ -567,6 +628,38 @@ const ProgramDetail = ({ getReviewList, toss }) => {
         </section>
       ) : (
         <LoadingPage />
+      )}
+      {reportPopupOn && (
+        <div className={styles.report_popup_filter}>
+          <div className={styles.report_popup}>
+            <div
+              className={styles.report_close_icon_container}
+              onClick={reportCloseHandler}
+            >
+              <i className={`${styles.report_close_icon} fas fa-times`}></i>
+            </div>
+            <p className={styles.report_title}>신고</p>
+            <p className={styles.report_comment}>
+              {`신고 리뷰: ${reportPopupOn.comment}`}
+            </p>
+            <div className={styles.report_input_container}>
+              <p className={styles.report_text}>신고사유</p>
+              <textarea
+                value={reportValue}
+                onChange={onReportValueChangeHandler}
+                className={styles.report_input}
+                placeholder="신고사유"
+                spellCheck="false"
+              />
+            </div>
+            <button
+              className={styles.report_button}
+              onClick={reportSubmitHandler}
+            >
+              신고하기
+            </button>
+          </div>
+        </div>
       )}
     </section>
   );

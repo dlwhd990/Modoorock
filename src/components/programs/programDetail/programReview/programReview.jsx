@@ -3,8 +3,9 @@ import React, { useEffect, useState } from "react";
 import StarRatingComponent from "react-star-rating-component";
 import styles from "./programReview.module.css";
 
-const ProgramReview = ({ review }) => {
+const ProgramReview = ({ review, reportPopupHandler }) => {
   const [user, setUser] = useState(null);
+
   useEffect(() => {
     const findUserId = () => {
       axios
@@ -41,10 +42,18 @@ const ProgramReview = ({ review }) => {
           />
         </div>
 
-        <p className={styles.date}>{`${review.date.slice(
-          0,
-          4
-        )}/${review.date.slice(5, 7)}/${review.date.slice(8, 10)}`}</p>
+        <div className={styles.date_and_report}>
+          <p className={styles.date}>{`${review.date.slice(
+            0,
+            4
+          )}/${review.date.slice(5, 7)}/${review.date.slice(8, 10)}`}</p>
+          <p
+            className={styles.report}
+            onClick={() => reportPopupHandler(review)}
+          >
+            신고
+          </p>
+        </div>
       </div>
       <div className={styles.content_container}>
         <p className={styles.content}>{review.comment}</p>

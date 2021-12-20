@@ -1,0 +1,39 @@
+.item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid var(--color-light-divide-line);
+  margin-top: -1px;
+  background-color: white;
+  padding: 4px 0;
+}
+.idx {
+  width: 10%;
+  text-align: center;
+}
+
+.report_user {
+  width: 15%;
+  text-align: center;
+}
+
+.reason_container {
+  width: 45%;
+}
+
+.reason,
+.comment {
+  background-color: var(--color-smoke-white);
+  padding: 8px 12px;
+  border-radius: 4px;
+}
+
+.review_user {
+  width: 15%;
+  text-align: center;
+}
+
+.button_container {
+  width: 10%;
+}

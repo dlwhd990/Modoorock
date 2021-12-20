@@ -26,6 +26,21 @@
   margin-right: 10px;
 }
 
+.date_and_report {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.report {
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.report:hover {
+  color: red;
+}
+
 @media screen and (max-width: 500px) {
   .review {
     font-size: var(--font-size-small);
@@ -38,5 +53,9 @@
 
   .id {
     margin-right: 12px;
+  }
+  .report {
+    margin-left: 0;
+    color: red;
   }
 }

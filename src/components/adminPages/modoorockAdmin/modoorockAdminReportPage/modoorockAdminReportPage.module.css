@@ -1,0 +1,95 @@
+.report_page {
+  min-height: 100vh;
+  padding: 150px 0;
+  background-color: var(--color-smoke-white);
+}
+
+.main {
+  width: 70%;
+  min-width: 1000px;
+  margin: auto;
+  animation: appear 0.6s;
+}
+
+.top {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.search_container {
+  background-color: white;
+  width: 250px;
+  border: 1px solid var(--color-light-divide-line);
+  box-shadow: 1px 2px 3px lightgray;
+  border-radius: 4px;
+}
+
+.search_input {
+  width: 89%;
+  height: 40px;
+  outline: none;
+  border: none;
+  border-radius: 4px;
+  padding: 0 6px;
+  font-size: var(--font-size-normal);
+}
+
+.search_icon {
+  font-size: 18px;
+}
+
+.title {
+  font-size: var(--font-size-title);
+  font-weight: 500;
+}
+
+.header {
+  width: 100%;
+  display: flex;
+  margin: 0;
+  flex-direction: row;
+  justify-content: space-between;
+  border: 1px solid var(--color-light-divide-line);
+  background-color: white;
+}
+
+.idx {
+  width: 10%;
+  text-align: center;
+}
+
+.report_id {
+  width: 15%;
+  text-align: center;
+}
+
+.content {
+  width: 45%;
+  text-align: center;
+}
+
+.id {
+  width: 15%;
+  text-align: center;
+}
+
+.buttons {
+  width: 10%;
+}
+
+.nothing {
+  text-align: center;
+}
+
+@keyframes appear {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

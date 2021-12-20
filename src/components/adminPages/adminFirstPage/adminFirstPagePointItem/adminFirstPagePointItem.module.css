@@ -62,11 +62,13 @@
 }
 
 .give_point {
+  min-width: 50px;
+  padding: 4px 0;
   color: var(--color-desc);
   outline: none;
   background-color: var(--color-admin-theme);
   border: none;
   color: white;
-  padding: 4px 10px;
+
   border-radius: 4px;
 }
