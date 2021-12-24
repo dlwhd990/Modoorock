@@ -6,6 +6,10 @@ const AdminProgramMissionItem = ({
   item,
   setMissionLoaderHandler,
   openAddItemPopupHandler,
+  onDragOver,
+  onDragStart,
+  onDrop,
+  position,
 }) => {
   const [data, setData] = useState(null);
   const [typeName, setTypeName] = useState(null);
@@ -83,7 +87,14 @@ const AdminProgramMissionItem = ({
   }, []);
 
   return (
-    <div className={styles.mission_item}>
+    <div
+      className={styles.mission_item}
+      data-position={position}
+      draggable="true"
+      onDragStart={onDragStart}
+      onDragOver={onDragOver}
+      onDrop={onDrop}
+    >
       <div className={styles.mission_top}>
         <div className={styles.division}>미션</div>
         <p className={styles.mission_type_and_name}>

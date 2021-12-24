@@ -90,6 +90,11 @@
   flex-direction: column;
 }
 
+.alert {
+  margin-top: 0;
+  font-size: var(--font-size-small);
+}
+
 @keyframes appear {
   0% {
     opacity: 0;

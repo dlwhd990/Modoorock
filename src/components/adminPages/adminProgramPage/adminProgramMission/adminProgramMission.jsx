@@ -117,6 +117,10 @@ const AdminProgramMission = ({ user }) => {
           게임 추가
         </button>
       </section>
+      <p className={styles.alert}>
+        미션을 드래그하여 순서 변경이 가능합니다. (게임 실행 시 지정된 순서대로
+        미션이 실행됩니다.)
+      </p>
       <section className={styles.game_list}>
         {gameList &&
           gameList.map((item) => (
